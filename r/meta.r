@@ -17,8 +17,7 @@ lnORMH<-function(tpos, tneg, cpos, cneg){
   
 }
 
-
-ext<-read.csv("orzMeta-analysis_ marine selectivity 11-18.csv", skip=1, na.strings=c("NA", "N/A", ".", ""))
+ext<-read.csv("../data/orzMeta-analysis_ marine selectivity 11-18.csv", skip=1, na.strings=c("NA", "N/A", ".", ""))
 
 #ext<-cbind(ext, with(ext, {lnORMH(X..Surv, X..Ext, Total...Surv, Total...Ext)}))
 ext<-cbind(ext, with(ext, {lnORMH(X..Surv, X..Ext, Total...Surv-X..Surv, Total...Ext-X..Ext)}))
