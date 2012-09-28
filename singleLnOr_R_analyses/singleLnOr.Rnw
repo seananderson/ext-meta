@@ -1,0 +1,145 @@
+\documentclass{article}
+
+<<loadFiles, echo=FALSE>>=
+# smaller font size for chunks
+opts_chunk$set(size = 'footnotesize')
+options(width = 72)
+read_chunk("./singleClean.R")
+@
+<<prep, echo=FALSE, include=FALSE>>=
+@
+<<loadBroad, echo=FALSE, include=FALSE>>=
+@
+
+\begin{document}
+
+
+\section{Effect Sizes for Broad v. Narrow}
+
+
+%%%%%%%%%%%%%%%%%%%%% Catepillar plot of Broad v. Narrow partitioned
+\subsection{Effect Sizes for Broad v. Narrow: Taxonimic Group and Bivalve/Gastropod Split}
+
+First, is the general lnor different depending on taxonomic level of the study or bivalves v. gastropods?
+
+<<effect.Plot.Broad, echo=FALSE, fig.align="center", out.height="0.7\\textwidth", out.width="0.7\\textwidth", cache=TRUE>>=
+@
+
+They look very similar.  Let's do the analysis.
+
+%%%%%%%%%%%%%%%%%%%%% Meta-analysis of the average lnor looking for
+%% whether taxonomic group or bivalves v. gastropods matter
+
+<<BroadTaxaBGLMER, echo=FALSE>>=
+@
+
+From the confidence standard error of the coefficients it appears that they don't influence the log odds ratio.  To be sure, let's do two Chi-Square likelihood ratio tests looking at dropping either bivivalve/gastropod split, or the taxonomic level of organization?
+
+%%%%%%%%%%%%%%%%%%%%% 
+
+<<BroadTaxaBGAnova, echo=FALSE>>=
+@
+
+Indeed, no difference.  So, instead we can just use the grand mean.
+
+<<BroadTaxaBGMeansSame, echo=FALSE, fig.align="center", out.height="0.7\\textwidth", out.width="0.7\\textwidth", echo=FALSE, cache=TRUE, warning=FALSE>>=
+@
+
+%%%%%%%%%%%%%%%%%%%%% The Big Model
+
+
+\subsection{Model with Environmental Covariates}
+
+First, let's construct a model with several environmental covariates.
+<<bigBroadModel>>=
+@
+
+Now that we've fit it, it appears that OA and del.34S may be key.  Let's look at the coefficients and their CIs more formally and see if they overlap 0.
+
+Great.  As a final check, let's make sure the residuals are normally distributed
+
+<<bigBroadModelDiagnostics, echo=FALSE, fig.align="center", out.height="0.5\\textwidth", out.width="0.5\\textwidth">>=
+@
+
+OK, we're all good.  Let's look in more detail.
+
+\subsection{Coefficients from the fitted model with CIs}
+<<bigBroadModelCoefPlot, echo=FALSE, fig.align="center", out.height="0.8\\textwidth", out.width="0.8\\textwidth", cache=TRUE>>=
+@
+
+We see that the relationship is positive on average, but that some covariates are at play.  Intriguingly, neither extinction rate nor the residualized delta O18 have an effect.
+
+To make a cleaner comparison and look make effect sizes comparable, we'll look at the standardized regression coefficients for each.
+
+<<bigBroadModelCoefPlotSTD, echo=FALSE, fig.align="center", out.height="0.7\\textwidth", out.width="0.7\\textwidth", echo=FALSE, cache=TRUE, warning=FALSE>>=
+@
+
+So, it looks like OA has a positive effect and delta 24S has a negative effect.  What's that about?  Let's look at the marginal data to see.
+
+In the following plots, we've taken out the effect of all other predictors on the lnor ratios - so, these are residualizaed data points.  If the fit's 95\% CI falls over 0, then there is no selectivity.
+
+
+<<margOABroad, echo=FALSE, fig.align="center", out.height="0.7\\textwidth", out.width="0.7\\textwidth", cache=TRUE, warning=FALSE>>=
+@
+
+Looking here we see that selectivity for broad taxa is higher during an OA event.  However, even when in non-OA times, broad species still have an advantage.
+
+<<margdel.34SBroad, echo=FALSE, fig.align="center",  cache=TRUE, warning=FALSE>>=
+@
+
+So, here, we see that at lower values of delta 34S (i.e., more anoxia - right?) there is a greater advantage to being broad.  Again, within the range of observed values, the CI does not cross 0.  Still, the advantage diminishes.
+
+\subsection{General Conclusion fromt the Model}
+So, it allears to be that environmental drivers that alter selectivity regimes will more strongly favor broadly distributed taxa - or alternately penalize narrow taxa (we cannot distinguish between the two here).  The advantage to being broad never goes away, but it increases or decreases based on environmental conditions
+
+%%%%%%%%%%%%%%%%%%%%% Show the deltaO18 effect
+
+\section{Epifauna v. Infauna}
+
+\subsection{General Trend}
+First, we note that there are only 3 data points not at the species level, so we can pool the whole dataset.  It's all bivalves as well.  We fit a multilevel model to remove study level variation and find...
+<<loadEpifaunal, echo=FALSE>>=
+@
+
+<<Epifaunal_lmer, echo=FALSE, warning=FALSE,fig.align="center">>=
+@
+
+that there is a general advantage to being infaunal over epifaunal.  Intriguing.
+
+\subsection{The Model}
+I ran the same model on epifauna/infauna as I did for the range analysis.  Yes, we're slightly overparameterized given our sample size, but not by a HUGE amount.  Here's the model results.
+
+<<bigEpifaunaModel>>=
+@
+
+The diagnostics are...OK.  I'm a little worried about the shape of the fitted v. residuals curve.  But it's not too heinous.
+
+<<bigEpifaunaModelDiagnostics, echo=FALSE>>=
+@
+
+So, what does it mean?  Well, let's look at the coefs.
+
+<<plotBigEpifaunaModel, echo=FALSE>>=
+@
+
+OK, so, interesting stuff.  After removing the effects of environmental predictors, it's actual advantage epifauna.  But this is only if all other predictors are set to 0.  On the other hand, we see some effects, which clear up when we look at the standardized coefficients.
+
+<<plotBigEpifaunaModel_STD, echo=FALSE>>=
+@
+Huh.  So, positive effect of delta18O - even though we're looking at the residual here.  And negative effect of delta 34S.    Wild.  What does it all mean?  Let's look at the curves themselves.
+
+<<margO18Epifauna, echo=FALSE, warning=FALSE>>=
+@
+
+Wild.  The CI on this effect is pretty large relative to its size.  But, there's a trend there that the CI is different from 0.  It appears that as things warm (-del18O), no one has an advantage.  But, under cooler conditions, the advantage slips to epifauna.  So, epifauna are more affected by temperature effects than infauna.
+\hfill \\
+OK, what about the anoxia signal?
+
+<<marg34SEpifauna, echo=FALSE, warning=FALSE>>=
+@
+
+Huh.  So, here we see that under anoxic conditions (lower delta 34S, yes?  I hope I don't have this flipped), epifauna have a bigger advantage.  However, at low levels, this advantage is nullified.
+
+\subsection{General Conclusion fromt the Model}
+So, again, we see that environmental conditions can alter the outcome of extinction selectivity.  Interestingly, the reveal patterns that are otherwise obscured if we just look at selectivity in general (although the intercept flip is still something I'm puzzling over a bit).  But, same as before - different environmental stressors will alter selectivity in different ways.
+\end{document}
