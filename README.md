@@ -1,6 +1,6 @@
 The folder contains code for a meta-analysis looking at the ecological and 
 environmental determinants of extinction risk for bivalves and gastropods in
-the fossil record.
+the fossil record. The code was largely written by Jarrett Byrnes.
 
 The analysis scripts call some R files in the "r" folder and some data from the
 "data" folder.
