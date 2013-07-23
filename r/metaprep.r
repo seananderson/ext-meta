@@ -286,6 +286,8 @@ ext$del.13C <- with(ext, detrend_ts(del.13C, endTime.Ma, "del.13C"))
 #j <- with(ext, detrend_ts(BC.extinction.ratePBDB, endTime.Ma, "BC.extinction.rate"))
 dev.off()
 
+ext$d18OresidualMean <- ext$del.18O
+
 ## add a few extra columns, and centered environmental predictors
 
 ext$MultipleStages <- as.factor(with(ext, as.character(ext$Start.stage) == as.character(ext$End.stage)))
