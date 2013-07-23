@@ -1,0 +1,106 @@
+\documentclass{article}
+
+<<loadFiles, echo=FALSE>>=
+# smaller font size for chunks
+#opts_chunk$set(size = 'tiny')
+#options(width = 60)
+read_chunk("./singleClean.R")
+@
+<<prep, echo=FALSE, include=FALSE>>=
+@
+<<loadBroad, echo=FALSE, include=FALSE>>=
+@
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%% Catepillar plot of Broad v. Narrow partitioned
+
+\section{Effect Sizes for Broad v. Narrow}
+\subsection{Can we pool?}
+We first run an analysis on the broad v. narrow to see if pooling by taxonomic level or taxonomic group makes a difference.
+
+<<effect.Plot.Broad, echo=FALSE, fig.align="center", out.height="0.7\\textwidth", out.width="0.7\\textwidth", cache=TRUE>>=
+@
+
+
+%%%%%%%%%%%%%%%%%%%%% Basic meta-analysis of the average lnor using the metafor package
+
+\section{Effect Sizes for Broad v. Narrow:metafor}
+<<Broad, echo=FALSE>>=
+@
+
+
+
+%%%%%%%%%%%%%%%%%%%%% Basic meta-analysis of the average lnor using the lmer package
+
+\section{Effect Sizes for Broad v. Narrow: mixed model with study}
+<<BroadLMER, echo=FALSE, cache=TRUE>>=
+@
+
+
+%%%%%%%%%%%%%%%%%%%%% Meta-analysis of the average lnor looking for
+%% whether taxonomic group or bivalves v. gastropods matter
+
+\section{Effect Sizes for Broad v. Narrow: Taxonimic Group and Bivalve/Gastropod Split}
+<<BroadTaxaBGLMER, echo=FALSE>>=
+@
+
+
+%%%%%%%%%%%%%%%%%%%%% 
+
+\section{Taxonimic Group and Bivalve/Gastropod Split Don't Influence Log Odds Ratio}
+<<BroadTaxaBGAnova, echo=FALSE>>=
+@
+
+
+%%%%%%%%%%%%%%%%%%%%%
+
+\section{Unpooled Data with the Means}
+<<BroadTaxaBGMeansDifferent, echo=FALSE, fig.align="center", out.height="0.7\\textwidth", out.width="0.7\\textwidth", echo=FALSE, cache=TRUE>>=
+@
+
+
+
+%%%%%%%%%%%%%%%%%%%%% Graph to show that the means don't really differ between groups
+
+\section{Pooled Data with the Mean}
+<<BroadTaxaBGMeansSame, echo=FALSE, fig.align="center", out.height="0.7\\textwidth", out.width="0.7\\textwidth", echo=FALSE, cache=TRUE, warning=FALSE>>=
+@
+
+
+%%%%%%%%%%%%%%%%%%%%% Graph to show the pooled mean and CI
+
+\section{Taxonimic Group and Bivalve/Gastropod Split Don't Influence Log Odds Ratio}
+<<BroadTaxaBGAnova, echo=FALSE>>=
+@
+
+
+%%%%%%%%%%%%%%%%%%%%% The Big Model
+
+\section{Model with Environmental Covariates}
+<<bigBroadModel>>=
+@
+
+
+%%%%%%%%%%%%%%%%%%%%% Graph to show that the means don't really differ between groups
+
+\section{Coefficients from the fitted model with CIs}
+<<bigBroadModelCoefPlot, echo=FALSE, fig.align="center", out.height="0.8\\textwidth", out.width="0.8\\textwidth", echo=FALSE, cache=TRUE>>=
+@
+
+
+%%%%%%%%%%%%%%%%%%%%% Show the deltaO18 effect
+
+\section{Positive Relationship Between Delta O18 and Selectivity for Broad v. Narrow}
+<<plotDel18OBroad, echo=FALSE, fig.align="center", out.height="0.7\\textwidth", out.width="0.7\\textwidth", echo=FALSE, cache=TRUE, warning=FALSE>>=
+@
+
+
+%%%%%%%%%%%%%%%%%%%%% Show the deltaO18 effect
+
+\huge \center{Epifauna v. Infauna}
+<<loadEpifaunal, echo=FALSE>>=
+@
+
+
+\end{document}

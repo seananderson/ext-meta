@@ -1,0 +1,563 @@
+#,Effect,In-text Citation,b/g,Tax,Type,Trait,Start,End,Location,Data.source,#Ext,#Sur,T.Ext,T.Sur,lnor,vlnor
+1,1,McRoberts&Newton 1995,b,sp,LH,Infaunal,Rhaetian,Rhaetian,global,NA,18,0,30,12,-3.188888889,0.620061728
+2,2,McRoberts&Newton 1995,b,sp,LH,Epifaunal,Rhaetian,Rhaetian,global,NA,12,12,30,12,1.79375,0.348784722
+3,3,McRoberts&Newton 1995,b,sp,LH,Infaunal,Rhaetian,Rhaetian,global,NA,16,0,45,5,-3.402777778,2.126736111
+4,4,McRoberts&Newton 1995,b,sp,LH,Epifaunal,Rhaetian,Rhaetian,global,NA,29,5,45,5,0.753556324,0.470972703
+5,5,McRoberts&Newton 1995,b,sp,LH,Infaunal,Rhaetian,Rhaetian,global,NA,12,1,23,4,-1.128762542,1.219063545
+6,6,McRoberts&Newton 1995,b,sp,LH,Epifaunal,Rhaetian,Rhaetian,global,NA,10,3,23,4,1.309364548,1.219063545
+7,1,Rivadeneira&Marquet 2007,b,sp,LH,Epifaunal,Serravallian,Calabrian,pacific coast South America,Rivandera/Marq database ,17,3,39,20,-2.445852564,0.647108974
+8,2,Rivadeneira&Marquet 2007,b,sp,LH,Infaunal,Serravallian,Calabrian,pacific coast South America,Rivandera/Marq database,22,17,39,20,0.643222239,0.170179875
+17,1,Jablonski&Raup 1995,b,gn,LH,Infaunal,Maastrichtian,Maastrichtian,global,Jablonski global database,114,84,167,130,-0.08180562,0.030677107
+18,2,Jablonski&Raup 1995,b,gn,LH,Epifaunal,Maastrichtian,Maastrichtian,global,Jablonski global database,53,46,167,130,0.327222478,0.122708429
+31,1,Jablonski 1986,b,gn,GR,Narrow,Maastrichtian,Maastrichtian,global,Jablonski global database,21,2,63,53,-7.45419743,0.876075888
+32,2,Jablonski 1986,b,gn,GR,Broad,Maastrichtian,Maastrichtian,global,Jablonski global database,42,51,63,53,0.455922123,0.053583552
+33,1,Jablonski 1986,g,gn,GR,Narrow,Maastrichtian,Maastrichtian,global,Jablonski global database,46,7,95,61,-3.180297767,0.231726507
+34,2,Jablonski 1986,g,gn,GR,Broad,Maastrichtian,Maastrichtian,global,Jablonski global database,49,54,95,61,0.842063948,0.06135543
+67,1,Knoll et al. 2007,b,gn,LH,Infaunal,Changhsingian,Changhsingian,global,"Sepkoski's genus database (R. K. Bambach, A.H. Knoll, J.J. Sepkoski Jr. 2002. Anamatomical and ecological constraints on Phanerozioc animal diversity in the marine realm, Proc. Natl. Acad. Sci. U.S.A. 99:6854-6859)",4,12,26,32,2.855994591,0.900259165
+68,2,Knoll et al. 2007,b,gn,LH,Epifaunal,Changhsingian,Changhsingian,global,"Sepkoski's genus database (R. K. Bambach, A.H. Knoll, J.J. Sepkoski Jr. 2002. Anamatomical and ecological constraints on Phanerozioc animal diversity in the marine realm, Proc. Natl. Acad. Sci. U.S.A. 99:6854-6859)",22,20,26,32,-0.414475406,0.130649856
+83,1,Bretsky 1973,b,gn,GR,Broad,Oxfordian,Tithonian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,14,75,57,146,1.387839528,0.126280334
+84,2,Bretsky 1973,b,gn,GR,Inter,Oxfordian,Tithonian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,13,28,57,146,-0.885235711,0.595042548
+85,3,Bretsky 1973,b,gn,GR,Narrow,Oxfordian,Tithonian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,30,44,57,146,-1.684465424,0.182663718
+86,1,Bretsky 1973,b,gn,GR,Broad,Aalenian,Callovian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,4,69,22,132,1.507318446,0.234471758
+87,2,Bretsky 1973,b,gn,GR,Inter,Aalenian,Callovian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,5,23,22,132,-1.59375,1.59375
+88,3,Bretsky 1973,b,gn,GR,Narrow,Aalenian,Callovian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,13,40,22,132,-2.414738341,0.444820221
+89,1,Bretsky 1973,b,gn,GR,Broad,Hettangian,Toarcian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,2,59,29,121,2.514526894,0.256759043
+90,2,Bretsky 1973,b,gn,GR,Inter,Hettangian,Toarcian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,5,20,29,121,-0.25477344,1.528640638
+91,3,Bretsky 1973,b,gn,GR,Narrow,Hettangian,Toarcian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,22,42,29,121,-2.24543974,0.233252051
+92,1,Bretsky 1973,b,gn,GR,Broad,Carnian,Rhaetian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,17,47,84,129,1.785515567,0.216703599
+93,2,Bretsky 1973,b,gn,GR,Inter,Carnian,Rhaetian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,16,25,84,129,0.089244458,0.528029709
+94,3,Bretsky 1973,b,gn,GR,Narrow,Carnian,Rhaetian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,51,57,84,129,-0.639874116,0.076098932
+95,1,Bretsky 1973,b,gn,GR,Broad,Anisian,Ladinian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,32,10,64,2.637695313,0.609967041
+96,2,Bretsky 1973,b,gn,GR,Inter,Anisian,Ladinian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,10,10,64,8.440625,6.2460625
+97,3,Bretsky 1973,b,gn,GR,Narrow,Anisian,Ladinian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,10,22,10,64,-3.461975098,0.609967041
+101,1,Bretsky 1973,b,gn,GR,Broad,Changhsingian,Changhsingian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,21,30,54,66,0.360467419,0.184855087
+102,2,Bretsky 1973,b,gn,GR,Inter,Changhsingian,Changhsingian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,13,16,54,66,0.028585498,0.571709965
+103,3,Bretsky 1973,b,gn,GR,Narrow,Changhsingian,Changhsingian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,20,66,54,66,1.215672135,0.065009205
+104,1,Bretsky 1973,b,gn,GR,Broad,Asselian,Kungurian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,4,34,24,85,1.902216066,0.435591494
+105,2,Bretsky 1973,b,gn,GR,Inter,Asselian,Kungurian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,5,18,24,85,0.076359391,1.189024797
+106,3,Bretsky 1973,b,gn,GR,Narrow,Asselian,Kungurian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,15,33,24,85,-1.209719669,0.273000919
+107,1,Bretsky 1973,b,gn,GR,Broad,Kasimovian,Gzhelian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,1,27,16,58,2.776912166,0.549442514
+108,2,Bretsky 1973,b,gn,GR,Inter,Kasimovian,Gzhelian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,6,19,16,58,-0.409806897,0.68922069
+109,3,Bretsky 1973,b,gn,GR,Narrow,Kasimovian,Gzhelian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,9,12,16,58,-4.355940652,0.976786692
+110,1,Bretsky 1973,b,gn,GR,Broad,Bashkirian,Bashkirian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,27,1,54,2.037037037,4.14951989
+111,2,Bretsky 1973,b,gn,GR,Inter,Bashkirian,Bashkirian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,19,1,54,2.894736842,8.379501385
+112,3,Bretsky 1973,b,gn,GR,Narrow,Bashkirian,Bashkirian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,1,8,1,54,-31.2345679,37.34567901
+113,1,Bretsky 1973,b,gn,GR,Broad,Serpukhovian,Serpukhovian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,26,6,50,2.369230769,0.850493097
+114,2,Bretsky 1973,b,gn,GR,Inter,Serpukhovian,Serpukhovian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,2,16,6,50,-0.126748971,1.774485597
+115,3,Bretsky 1973,b,gn,GR,Narrow,Serpukhovian,Serpukhovian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,4,8,6,50,-10.83703704,3.992592593
+116,1,Bretsky 1973,b,gn,GR,Broad,Tournaisian,Tournaisian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,25,3,46,2.045217391,1.336208696
+117,2,Bretsky 1973,b,gn,GR,Inter,Tournaisian,Tournaisian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,3,14,3,46,-5.661501429,2.889724688
+118,3,Bretsky 1973,b,gn,GR,Narrow,Tournaisian,Tournaisian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,7,3,46,7.304347826,17.04347826
+119,1,Bretsky 1973,b,gn,GR,Broad,Frasnian,Famennian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,5,17,30,52,2.199221233,0.721344565
+120,2,Bretsky 1973,b,gn,GR,Inter,Frasnian,Famennian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,8,16,30,52,0.473076923,0.606129808
+121,3,Bretsky 1973,b,gn,GR,Narrow,Frasnian,Famennian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,17,19,30,52,-1.031570513,0.269391026
+122,1,Bretsky 1973,b,gn,GR,Broad,Eifelian,Givetian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,16,19,62,6.532258065,1.740502971
+123,2,Bretsky 1973,b,gn,GR,Inter,Eifelian,Givetian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,7,21,19,62,-0.245573611,0.568327501
+124,3,Bretsky 1973,b,gn,GR,Narrow,Eifelian,Givetian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,12,25,19,62,-1.080882654,0.325470241
+125,1,Bretsky 1973,b,gn,GR,Broad,Lochkovian,Emsian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,1,17,17,65,4.155656109,1.521266968
+126,2,Bretsky 1973,b,gn,GR,Inter,Lochkovian,Emsian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,2,19,17,65,2.63060301,1.117665528
+127,3,Bretsky 1973,b,gn,GR,Narrow,Lochkovian,Emsian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,14,29,17,65,-1.355613038,0.266571389
+128,1,Bretsky 1973,b,gn,GR,Broad,Gorstian,unnamed Pridoli stage,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,10,14,44,7.513636364,3.112792208
+129,2,Bretsky 1973,b,gn,GR,Inter,Gorstian,unnamed Pridoli stage,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,4,15,14,44,0.505468216,0.86226931
+130,3,Bretsky 1973,b,gn,GR,Narrow,Gorstian,unnamed Pridoli stage,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,10,19,14,44,-1.11038961,0.37012987
+131,1,Bretsky 1973,b,gn,GR,Broad,Sheinwoodian,Homerian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,9,12,43,7.674418605,3.908268734
+132,2,Bretsky 1973,b,gn,GR,Inter,Sheinwoodian,Homerian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,3,12,12,43,0.38372093,1.406976744
+133,3,Bretsky 1973,b,gn,GR,Narrow,Sheinwoodian,Homerian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,9,22,12,43,-0.736696271,0.329417032
+134,1,Bretsky 1973,b,gn,GR,Broad,Rhuddanian,Telychian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,5,3,30,7.04,15.488
+135,2,Bretsky 1973,b,gn,GR,Inter,Rhuddanian,Telychian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,2,13,3,30,-1.095111111,1.720888889
+136,3,Bretsky 1973,b,gn,GR,Narrow,Rhuddanian,Telychian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,1,12,3,30,0.416568047,2.29112426
+137,1,Bretsky 1973,b,gn,GR,Broad,early Late Ordovician,Hirnantian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,1,5,33,53,13.00298583,9.98443555
+138,2,Bretsky 1973,b,gn,GR,Inter,early Late Ordovician,Hirnantian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,5,15,33,53,2.403230417,0.8985992
+139,3,Bretsky 1973,b,gn,GR,Narrow,early Late Ordovician,Hirnantian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,27,33,33,53,-0.39705546,0.099844356
+140,1,Bretsky 1973,b,gn,GR,Broad,early Middle Ordovician,Darriwilian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,4,15,42,19,18.05
+141,2,Bretsky 1973,b,gn,GR,Inter,early Middle Ordovician,Darriwilian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,10,15,42,7.6,2.888
+142,3,Bretsky 1973,b,gn,GR,Narrow,early Middle Ordovician,Darriwilian,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,15,28,15,42,-0.575446187,0.156192537
+143,1,Bretsky 1973,b,gn,GR,Broad,Tremadocian,late Early Ordovician,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,2,5,11,10.90909091,17.45454545
+144,2,Bretsky 1973,b,gn,GR,Inter,Tremadocian,late Early Ordovician,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,0,1,5,11,21.81818182,69.81818182
+145,3,Bretsky 1973,b,gn,GR,Narrow,Tremadocian,late Early Ordovician,global,Treatise on Ivertebrate Paleontology 1969 vol. 1 & 2,5,8,5,11,-0.387305003,0.413125336
+150,1,Elder 1989,b,sp,LH,Epifaunal,Cenomanian,Cenomanian,Western Interior U.S,NA,15,14,18,22,-0.365365906,0.187367131
+151,2,Elder 1989,b,sp,LH,Infaunal,Cenomanian,Cenomanian,Western Interior U.S,NA,3,8,18,22,2.539444027,1.302278988
+152,1,Elder 1989,b,sp,LH,Epifaunal,Turonian,Turonian,Western Interior U.S,NA,3,13,3,22,-0.958806818,0.887784091
+153,2,Elder 1989,b,sp,LH,Infaunal,Turonian,Turonian,Western Interior U.S,NA,0,9,3,22,3.03030303,2.805836139
+166,1,Vermeij&Petuch 1986,g,sp,GR,Narrow,Gelasian,Recent,Caloosahatchian,NA,25,25,50,102,-2.340203922,0.273623843
+167,2,Vermeij&Petuch 1986,g,sp,GR,Broad,Gelasian,Recent,Caloosahatchian,NA,25,77,50,102,0.562332738,0.065749674
+168,1,Vermeij&Petuch 1986,g,sp,GR,Narrow,Gelasian,Recent,Atlantic Gatunian,NA,19,15,40,96,-5.0625,0.5625
+169,2,Vermeij&Petuch 1986,g,sp,GR,Broad,Gelasian,Recent,Atlantic Gatunian,NA,21,81,40,96,0.5625,0.0625
+170,1,Vermeij&Petuch 1986,g,sp,GR,Narrow,Gelasian,Recent,Pacific Gatunian,NA,6,4,21,91,-30.05538462,7.286153846
+171,2,Vermeij&Petuch 1986,g,sp,GR,Broad,Gelasian,Recent,Pacific Gatunian,NA,15,87,21,91,0.288882974,0.070032236
+178,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Hettangian,Hettangian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",4,29,7,55,-0.153349314,0.559273968
+179,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Hettangian,Hettangian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",3,26,7,55,0.198570039,0.724196612
+180,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Hettangian,Hettangian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",6,8,7,55,-13.73267957,3.107394646
+181,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Hettangian,Hettangian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",1,47,7,55,1.168231421,0.264344336
+182,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Sinemurian,Sinemurian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",1,29,4,56,1.053571429,1.053571429
+183,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Sinemurian,Sinemurian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",3,27,4,56,-1.053571429,1.053571429
+184,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Sinemurian,Sinemurian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",2,9,4,56,-9.926210153,7.8364817
+185,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Sinemurian,Sinemurian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",2,47,4,56,0.500237996,0.394924734
+186,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Sinemurian,Sinemurian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",3,31,6,55,0.201478452,0.585246933
+187,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Sinemurian,Sinemurian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",3,24,6,55,-0.319491208,0.928045891
+188,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Sinemurian,Sinemurian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",4,10,6,55,-9.05380334,3.451762523
+189,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Sinemurian,Sinemurian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",2,45,6,55,0.80332524,0.306267748
+190,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Pliensbachian,Pliensbachian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",4,35,7,63,-0.050405435,0.50405435
+191,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Pliensbachian,Pliensbachian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",3,28,7,63,0.079778009,0.79778009
+192,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Pliensbachian,Pliensbachian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",2,15,7,63,-0.795847751,2.652825836
+193,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Pliensbachian,Pliensbachian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",5,48,7,63,0.081879672,0.272932242
+194,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Pliensbachian,Pliensbachian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",18,23,27,46,-0.521118382,0.183776048
+195,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Pliensbachian,Pliensbachian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",9,23,27,46,0.85546875,0.301687047
+196,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Pliensbachian,Pliensbachian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",9,10,27,46,-1.688064555,0.855754948
+197,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Pliensbachian,Pliensbachian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",18,36,27,46,0.208981929,0.105942228
+198,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Toarcian,Toarcian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",9,12,17,32,-0.823529412,0.480392157
+199,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Toarcian,Toarcian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",8,20,17,32,0.463235294,0.270220588
+200,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Toarcian,Toarcian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",9,4,17,32,-5.62826314,1.253567699
+201,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Toarcian,Toarcian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",8,28,17,32,0.733932462,0.163466776
+202,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Toarcian,Toarcian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",1,15,5,35,1.392857143,1.392857143
+203,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Toarcian,Toarcian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",4,20,5,35,-0.619047619,0.619047619
+204,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Toarcian,Toarcian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",2,5,5,35,-8.186588921,7.27696793
+205,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Toarcian,Toarcian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",3,30,5,35,0.368358914,0.327430146
+206,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Toarcian,Toarcian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",1,29,3,53,0.731795947,1.205310971
+207,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Toarcian,Toarcian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",2,24,3,53,-0.974284545,1.604703956
+208,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Toarcian,Toarcian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",2,10,3,53,-10.22361985,7.533193571
+209,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Toarcian,Toarcian,Northwest Europe,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",1,43,3,53,0.760434534,0.560320183
+214,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Hettangian,Hettangian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",4,3,7,14,-3.06122449,1.836734694
+215,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Hettangian,Hettangian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",3,11,7,14,0.765306122,0.459183673
+216,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Hettangian,Hettangian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",7,4,7,14,-2.479338843,0.743801653
+217,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Hettangian,Hettangian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",0,10,7,14,3,0.9
+218,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Sinemurian,Sinemurian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",1,2,2,12,-6.740740741,11.7962963
+219,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Sinemurian,Sinemurian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",1,10,2,12,0.50137741,0.877410468
+220,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Sinemurian,Sinemurian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",2,5,2,12,-2.166666667,2.166666667
+221,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Sinemurian,Sinemurian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",0,7,2,12,2.166666667,2.166666667
+222,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Sinemurian,Sinemurian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",5,26,9,55,-0.347516791,0.542465235
+223,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Sinemurian,Sinemurian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",4,29,9,55,0.306670006,0.478704399
+224,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Sinemurian,Sinemurian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",8,18,9,55,-3.349757934,0.771167294
+225,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Sinemurian,Sinemurian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",1,37,9,55,1.568169227,0.361017376
+226,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Pliensbachian,Pliensbachian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",2,42,4,75,0.190971074,0.838150826
+227,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Pliensbachian,Pliensbachian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",2,33,4,75,-0.301812245,1.324620408
+228,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Pliensbachian,Pliensbachian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",4,34,4,75,-2.332797784,1.123725762
+229,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Pliensbachian,Pliensbachian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",0,41,4,75,2.003902439,0.965294468
+230,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Pliensbachian,Pliensbachian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",23,28,32,61,-0.854394747,0.156723297
+231,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Pliensbachian,Pliensbachian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",9,33,32,61,1.259796337,0.231086902
+232,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Pliensbachian,Pliensbachian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",23,19,32,61,-1.975420291,0.231086902
+233,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Pliensbachian,Pliensbachian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",9,42,32,61,1.339731408,0.156723297
+234,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Toarcian,Toarcian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",12,17,24,36,-0.116924296,0.292310741
+235,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Toarcian,Toarcian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",12,19,24,36,0.102323968,0.25580992
+236,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Toarcian,Toarcian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",14,6,24,36,-3.6875,0.614583333
+237,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Toarcian,Toarcian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",10,30,24,36,0.921875,0.153645833
+238,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Toarcian,Toarcian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",3,16,6,34,-0.127097931,0.847319537
+239,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Toarcian,Toarcian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",3,18,6,34,0.104041617,0.693610778
+240,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Toarcian,Toarcian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",2,7,6,34,-2.454611474,3.776325345
+241,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Toarcian,Toarcian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",4,27,6,34,0.20689233,0.318295893
+242,1,Aberhan&Baumiller 2003,b,sp,LH,Infaunal,Toarcian,Toarcian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",4,14,6,32,-0.994470165,0.858860597
+243,2,Aberhan&Baumiller 2003,b,sp,LH,Epifaunal,Toarcian,Toarcian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",2,18,6,32,0.805520833,0.695677083
+244,3,Aberhan&Baumiller 2003,b,sp,GR,Narrow,Toarcian,Toarcian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",4,6,6,32,-6.737083333,2.782708333
+245,4,Aberhan&Baumiller 2003,b,sp,GR,Broad,Toarcian,Toarcian,South America,"data from Aberhan 2002 Aberhan, M., 2002, Opening of the Hispanic Corridor
+and Early Jurassic bivalve biodiversity,
+in Crame, J.A., and Owen, A.W., eds., Palaeobiogeography
+and biodiversity change: The
+Ordovician and Mesozoic–Cenozoic radiations:
+Geological Society [London] Special
+Publication 194, p. 127–139.",2,26,6,32,0.859321854,0.354937287
+254,1,Raffi et al. 1985,b,sp,GR,Narrow,Zanclean,Recent,Mediterranean and Northern Sea,NA,4,60,63,219,4.0719968,0.395421177
+255,2,Raffi et al. 1985,b,sp,GR,Broad,Zanclean,Recent,Mediterranean and Northern Sea,NA,59,159,63,219,-0.350957388,0.034080573
+274,1,Stanley 1986b,b,sp,LH,Infaunal,Piacenzian,Recent,California and Japan,NA,35,127,70,156,0.608600647,0.040100218
+275,2,Stanley 1986b,b,sp,LH,Epifaunal,Piacenzian,Recent,California and Japan,NA,35,29,70,156,-3.899442233,0.256931179
+285,2,Stanley 1986a,b,sp,LH,Infaunal,Zanclean,Recent,Western Atlantic,NA,195,64,255,74,0.161123956,0.028047504
+289,6,Stanley 1986a,b,sp,LH,Epifuanal,Zanclean,Recent,Western Atlantic,NA,60,10,255,70,-1.986451724,0.391270794
+296,1,Heinberg 1999,b,sp,LH,Epifaunal,Maastrichtian,Maastrichtian,"Stevns Klint, Denmark",NA,37,6,68,22,-1.175682476,0.260619268
+298,3,Heinberg 1999,b,sp,LH,Infaunal,Maastrichtian,Maastrichtian,"Stevns Klint, Denmark",NA,31,16,68,22,0.984081892,0.218146232
+299,1,Hautmann et al. 2008,b,sp,LH,Epifuanal,Rhaetian,Rhaetian,Tibet,NA,3,4,6,6,0.448979592,0.897959184
+300,2,Hautmann et al. 2008,b,sp,LH,Infaunal,Rhaetian,Rhaetian,Tibet,NA,3,2,6,6,-0.88,1.76
+303,1,Hautmann et al. 2008,b,sp,LH,Epifaunalcompetelyaragonitic,Rhaetian,Rhaetian,Tibet,NA,2,0,3,4,-7,6.125
+304,2,Hautmann et al. 2008,b,sp,LH,Epifaunalcalciticouterlayer,Rhaetian,Rhaetian,Tibet,NA,1,4,3,4,1.12,0.98
+383,1,Knoll et al. 1996,b,sp,LH,Infaunal,Wordian,Wordian,NA,NA,2,20,15,93,1.951159691,1.848467075
+384,1,Knoll et al. 1996,b,sp,LH,Infaunal,Capitanian,Capitanian,NA,NA,5,19,53,60,4.885019217,0.780773934
+385,1,Knoll et al. 1996,b,sp,LH,Infaunal,Wuchiapingian,Wuchiapingian,NA,NA,8,12,44,24,3.624090909,0.73344697
+386,1,Knoll et al. 1996,b,sp,LH,Infaunal,Changhsingian,Changhsingian,NA,NA,2,11,31,18,7.607049691,1.22211618
+387,1,Knoll et al. 1996,b,sp,LH,Epifaunal,Wordian,Wordian,NA,NA,13,73,15,93,-0.12768541,0.120965125
+388,1,Knoll et al. 1996,b,sp,LH,Epifaunal,Capitanian,Capitanian,NA,NA,48,41,53,60,-0.355229273,0.05677639
+389,1,Knoll et al. 1996,b,sp,LH,Epifaunal,Wuchiapingian,Wuchiapingian,NA,NA,16,32,44,24,1.917508418,0.127334543
+390,1,Knoll et al. 1996,b,sp,LH,Epifaunal,Changhsingian,Changhsingian,NA,NA,16,20,31,18,1.079782291,0.159365459
+397,1,Hansen et al. 1993a,b,sp,LH,Infaunal,Maastrichtian,Maastrichtian,"Brozos River, Texas",NA,42,8,76,18,-0.378308772,0.240277193
+398,2,Hansen et al. 1993a,b,sp,LH,Epifaunal,Maastrichtian,Maastrichtian,"Brozos River, Texas",NA,34,10,76,18,0.488518559,0.310275301
+469,1,Jablonski 2005,g,gn,GR,Narrow,Maastrichtian,Maastrichtian,Gulf and Atlantic Coastal Plain,NA,62,32,74,44,-0.172754857,0.056625203
+470,2,Jablonski 2005,g,gn,GR,Inter,Maastrichtian,Maastrichtian,Gulf and Atlantic Coastal Plain,NA,1,3,74,44,47.17191339,31.27126843
+471,3,Jablonski 2005,g,gn,GR,Broad,Maastrichtian,Maastrichtian,Gulf and Atlantic Coastal Plain,NA,11,9,74,44,1.929278256,1.250850737
+524,1,Jablonski 1986,b&g,gn,GR,Narrow,Maastrichtian,Maastrichtian,Gulf and Atlantic Coastal Plain,NA,436,336,830,528,0.343409412,0.009581484
+525,2,Jablonski 1986,b&g,gn,GR,Inter,Maastrichtian,Maastrichtian,Gulf and Atlantic Coastal Plain,NA,130,111,830,528,1.70065623,0.098318057
+526,3,Jablonski 1986,b&g,gn,GR,Broad,Maastrichtian,Maastrichtian,Gulf and Atlantic Coastal Plain,NA,53,81,830,528,9.190801903,0.318022448

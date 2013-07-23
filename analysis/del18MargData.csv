@@ -1,0 +1,47 @@
+predictor,margPoints,study.ID,Bivalve..Gastropod,Start.stage,End.stage,Taxon,Tax.level
+0.448362468,5.963727373,Aberhan 2003 SEA,Bivalve,Hettangian,Hettangian,bivalve,Species
+-0.20030692,5.842135003,Aberhan 2003 SEA,Bivalve,Sinemurian,Sinemurian,bivalve,Species
+-0.266021503,6.3316427,Aberhan 2003 SEA,Bivalve,Pliensbachian,Pliensbachian,bivalve,Species
+0.57099,5.346408724,Aberhan 2003 SEA,Bivalve,Toarcian,Toarcian,bivalve,Species
+0.448362468,7.26055697,Aberhan 2003 SEA,Bivalve,Hettangian,Hettangian,bivalve,Species
+-0.20030692,5.636861537,Aberhan 2003 SEA,Bivalve,Sinemurian,Sinemurian,bivalve,Species
+-0.266021503,7.344714149,Aberhan 2003 SEA,Bivalve,Pliensbachian,Pliensbachian,bivalve,Species
+0.57099,6.115763151,Aberhan 2003 SEA,Bivalve,Toarcian,Toarcian,bivalve,Species
+-1.216028413,5.022738966,Elder 1989 MEP,Bivalve,Cenomanian,Cenomanian,bivalve,Species
+-1.944876724,4.078428353,Elder 1989 MEP,Bivalve,Turonian,Turonian,bivalve,Species
+0.018592473,6.769080733,Hansen et al. 1993a,Bivalve,Maastrichtian,Maastrichtian,bivalve,Species
+0.175538333,6.211941712,Hautmann 2008 ERP,Bivalve,Rhaetian,Rhaetian,bivalve,Species
+0.018592473,5.250614599,Heinburg 1999 LDB,Bivalve,Maastrichtian,Maastrichtian,bivalve,Species
+0.018592473,6.512820835,Jablonski1995SEC,Bivalve,Maastrichtian,Maastrichtian,bivalve,Genera
+-0.812750243,4.742775257,Knoll 2007 PEP,Bivalve,Changhsingian,Changhsingian,bivalve,Genera
+-3.932830556,2.828771363,Knoll et al. 1996,Bivalve,Capitanian,Capitanian,bivalve,Species
+-0.812750243,4.548525129,Knoll et al. 1996,Bivalve,Changhsingian,Changhsingian,bivalve,Species
+-3.932830556,3.785132223,Knoll et al. 1996,Bivalve,Wordian,Wordian,bivalve,Species
+-2.3727904,4.682267649,Knoll et al. 1996,Bivalve,Wuchiapingian,Wuchiapingian,bivalve,Species
+0.018592473,6.406516203,Lockwood 2003 ANL,Bivalve,Maastrichtian,Maastrichtian,bivalve,Subgenera
+0.018592473,6.540282124,McClure 1995 NSE,Bivalve,Maastrichtian,Maastrichtian,bivalve,Genera
+0.175538333,9.235072959,McRoberts1995SEA,Bivalve,Rhaetian,Rhaetian,bivalve,Species
+0.175538333,7.441020437,McRoberts1995SEA,Bivalve,Rhaetian,Rhaetian,bivalve,Species
+0.175538333,6.645806294,McRoberts1995SEA,Bivalve,Rhaetian,Rhaetian,bivalve,Species
+0.500995595,7.854727227,Crampton 2010 BIS,Gastropod,Priabonian,Priabonian,gastropod,Species
+0.533495284,7.449929869,Crampton 2010 BIS,Gastropod,Rupelian,Rupelian,gastropod,Species
+0.480263679,6.249058057,Crampton 2010 BIS,Gastropod,Chattian,Chattian,gastropod,Species
+0.394532385,6.122511106,Crampton 2010 BIS,Gastropod,Aquitanian,Aquitanian,gastropod,Species
+0.437389047,5.918316324,Crampton 2010 BIS,Gastropod,Burdigalian,Burdigalian,gastropod,Species
+0.480245709,7.269770114,Crampton 2010 BIS,Gastropod,Langhian,Langhian,gastropod,Species
+0.480245709,6.000681231,Crampton 2010 BIS,Gastropod,Serravallian,Serravallian,gastropod,Species
+0.782629918,7.435152078,Crampton 2010 BIS,Gastropod,Tortonian,Tortonian,gastropod,Species
+1.085014126,7.597441373,Crampton 2010 BIS,Gastropod,Messinian,Messinian,gastropod,Species
+1.245282914,6.148248425,Crampton 2010 BIS,Gastropod,Zanclean,Zanclean,gastropod,Species
+1.405551702,7.225171719,Crampton 2010 BIS,Gastropod,Piacenzian,Piacenzian,gastropod,Species
+0.500995595,5.997858912,Crampton 2010 BIS,Bivalve,Priabonian,Priabonian,bivalve,Species
+0.533495284,5.395806135,Crampton 2010 BIS,Bivalve,Rupelian,Rupelian,bivalve,Species
+0.480263679,8.078557854,Crampton 2010 BIS,Bivalve,Chattian,Chattian,bivalve,Species
+0.394532385,6.553769209,Crampton 2010 BIS,Bivalve,Aquitanian,Aquitanian,bivalve,Species
+0.437389047,7.0375698,Crampton 2010 BIS,Bivalve,Burdigalian,Burdigalian,bivalve,Species
+0.480245709,5.143371589,Crampton 2010 BIS,Bivalve,Langhian,Langhian,bivalve,Species
+0.480245709,6.494727376,Crampton 2010 BIS,Bivalve,Serravallian,Serravallian,bivalve,Species
+0.782629918,6.00112036,Crampton 2010 BIS,Bivalve,Tortonian,Tortonian,bivalve,Species
+1.085014126,5.877721496,Crampton 2010 BIS,Bivalve,Messinian,Messinian,bivalve,Species
+1.245282914,7.333683108,Crampton 2010 BIS,Bivalve,Zanclean,Zanclean,bivalve,Species
+1.405551702,7.080317955,Crampton 2010 BIS,Bivalve,Piacenzian,Piacenzian,bivalve,Species

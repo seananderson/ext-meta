@@ -1,0 +1,111 @@
+RMA Outputs
+========================================================
+  
+  Here we go...
+
+
+```{r, echo=FALSE, include=FALSE}
+read_chunk("./final_for_paper.R")
+read_chunk("./plot_effect_sizes.R")
+```
+
+```{r prep, echo=FALSE, include=FALSE}
+```
+
+
+```{r loadData, echo=FALSE, include=FALSE}
+```
+
+```{r ploteffLoad, echo=FALSE, include=FALSE}
+```
+
+
+
+Broad v. Narrow Baseline
+========================================================
+
+First, we have to verify our assumptions about pooling all of the data.
+
+Does grouping matter?
+```{r BroadTaxaB}
+```
+
+
+Does Multistage matter?
+```{r BroadMultStages}
+```
+
+Does Global v. Regional matter?
+```{r BroadGlobalRegional}
+```
+
+Does Time Matter?
+```{r BroadTime}
+```
+
+If we pool everything, what is our grand mean Log Odds Ratio for Broad v. Narrow?
+```{r BroadMeanRma}
+```
+
+Figure 1
+========================================================
+```{r Fig1}
+```
+
+
+
+Epifauna v. Infauna Baseline
+========================================================
+  
+Are Bivalves or Gastropods Different?
+```{r bivalvesGastroHabit}
+```
+No - they are broadly the same.
+
+
+Does global v. regional extinction matter?
+```{r BroadGlobalRegionalHabit}
+```
+
+Does time matter?
+```{r epiTime}
+```
+
+If we pool everything, what is our grand mean Log Odds Ratio for Epifaunal v. Infaunal?
+```{r Epifaunal_rma}
+```
+
+Figure 2
+========================================================
+```{r Fig2}
+```
+
+
+Modeled Results
+========================================================
+The Fitted Model for Broad v. Narrow
+```{r bigBroadModelRMA}
+```
+
+The Fitted Model for Epifauna v. Infauna
+```{r epibigEpifaunaModel.RMA}
+```
+
+Figure 4
+========================================================
+```{r Fig4, fig.height=5, fig.width=9}
+```
+
+Figure 5
+========================================================
+```{r Fig5, fig.height=6, fig.width=15.5}
+```
+
+
+Appendix Jackknife Figures
+========================================================
+```{r jackknife.figs, echo=FALSE, warning=FALSE}
+```
+
+```{r funnelPlots, warning=FALSE}
+```

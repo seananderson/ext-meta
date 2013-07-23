@@ -1,0 +1,15 @@
+*.png
+*.pdf
+*.html
+*.gz
+*.Rhistory
+*.Rapp
+*.pptx
+*.ppt
+*.log
+*.rda
+*.lnk
+singleLnOr_R_analyses/
+*.xls
+*.xlsx
+*.DS_store
