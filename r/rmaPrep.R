@@ -15,11 +15,13 @@ coefPlot <- function(amod, adf, std=F, robust=T) {
   lab <- "\nCoefficient\n"
   if(std) {
     ctab <- ctab[-1,]
+    #ctab <- ctab[-1] # Sean was experimenting with this
     mult <- colwise(sd)(as.data.frame(amod$X[,-1])) / sd(amod$yi)
     lab <- "\nStandardized Coefficient\n"
   }
   
   ctab <- ctab*t(mult)
+  ctab <- ctab*mult # Sean was experimenting with this
   ctab$coef <- rownames(ctab)
   
   #return a graph

@@ -410,33 +410,33 @@ covModel.Broad.RMA
 ## 
 ## Mixed-Effects Model (k = 73; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.2179 (SE = 0.1081)
-## tau (square root of estimated tau^2 value):             0.4668
-## I^2 (residual heterogeneity / unaccounted variability): 35.24%
-## H^2 (unaccounted variability / sampling variability):   1.54
+## tau^2 (estimated amount of residual heterogeneity):     0.1884 (SE = 0.1013)
+## tau (square root of estimated tau^2 value):             0.4341
+## I^2 (residual heterogeneity / unaccounted variability): 31.96%
+## H^2 (unaccounted variability / sampling variability):   1.47
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 67) = 105.9153, p-val = 0.0017
+## QE(df = 67) = 102.2228, p-val = 0.0036
 ## 
 ## Test of Moderators (coefficient(s) 2,3,4,5,6): 
-## QM(df = 5) = 8.5172, p-val = 0.1299
+## QM(df = 5) = 10.8146, p-val = 0.0552
 ## 
 ## Model Results:
 ## 
 ##                         estimate      se     zval    pval    ci.lb   ci.ub
-## intrcpt                   2.5903  0.8527   3.0379  0.0024   0.9191  4.2615
-## OA                        0.2164  0.3104   0.6973  0.4856  -0.3919  0.8247
-## BC.extinction.ratePBDB   -0.0955  1.0194  -0.0937  0.9253  -2.0934  1.9024
-## d18OresidualMean         -0.0627  0.2042  -0.3068  0.7590  -0.4629  0.3376
-## del.34S                  -0.0663  0.0390  -1.7023  0.0887  -0.1426  0.0100
-## del.13C                  -0.1305  0.1035  -1.2608  0.2074  -0.3335  0.0724
-##                           
-## intrcpt                 **
-## OA                        
-## BC.extinction.ratePBDB    
-## d18OresidualMean          
-## del.34S                  .
-## del.13C                   
+## intrcpt                   0.9315  0.1224   7.6130  <.0001   0.6917  1.1713
+## OA                        0.1448  0.3119   0.4645  0.6423  -0.4664  0.7561
+## BC.extinction.ratePBDB    0.5815  0.9610   0.6050  0.5451  -1.3021  2.4650
+## d18OresidualMean          0.2812  0.1459   1.9267  0.0540  -0.0048  0.5672
+## del.34S                  -0.0238  0.0394  -0.6044  0.5456  -0.1011  0.0534
+## del.13C                  -0.0289  0.1136  -0.2548  0.7989  -0.2516  0.1937
+##                            
+## intrcpt                 ***
+## OA                         
+## BC.extinction.ratePBDB     
+## d18OresidualMean          .
+## del.34S                    
+## del.13C                    
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -475,31 +475,31 @@ covModel.Epifaunal.rma
 ## 
 ## Mixed-Effects Model (k = 46; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.3042 (SE = 0.1504)
-## tau (square root of estimated tau^2 value):             0.5516
-## I^2 (residual heterogeneity / unaccounted variability): 47.44%
-## H^2 (unaccounted variability / sampling variability):   1.90
+## tau^2 (estimated amount of residual heterogeneity):     0.2896 (SE = 0.1467)
+## tau (square root of estimated tau^2 value):             0.5381
+## I^2 (residual heterogeneity / unaccounted variability): 46.21%
+## H^2 (unaccounted variability / sampling variability):   1.86
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 41) = 74.7443, p-val = 0.0010
+## QE(df = 41) = 74.0733, p-val = 0.0012
 ## 
 ## Test of Moderators (coefficient(s) 2,3,4,5): 
-## QM(df = 4) = 10.8306, p-val = 0.0285
+## QM(df = 4) = 9.8089, p-val = 0.0438
 ## 
 ## Model Results:
 ## 
-##                         estimate      se     zval    pval    ci.lb
-## intrcpt                   6.1354  2.3497   2.6112  0.0090   1.5302
-## OA                       -0.3477  0.4210  -0.8259  0.4089  -1.1728
-## BC.extinction.ratePBDB   -0.6114  0.9894  -0.6179  0.5366  -2.5506
-## d18OresidualMean          0.7041  0.2358   2.9860  0.0028   0.2419
-## del.34S                  -0.3048  0.1165  -2.6154  0.0089  -0.5333
-##                           ci.ub    
-## intrcpt                 10.7406  **
-## OA                       0.4774    
-## BC.extinction.ratePBDB   1.3278    
-## d18OresidualMean         1.1663  **
-## del.34S                 -0.0764  **
+##                         estimate      se     zval    pval    ci.lb   ci.ub
+## intrcpt                  -0.0383  0.1661  -0.2307  0.8175  -0.3639  0.2872
+## OA                        0.0320  0.3654   0.0874  0.9303  -0.6843  0.7482
+## BC.extinction.ratePBDB    0.0733  1.0712   0.0684  0.9454  -2.0262  2.1728
+## d18OresidualMean          0.4772  0.1707   2.7952  0.0052   0.1426  0.8119
+## del.34S                   0.0665  0.0747   0.8901  0.3734  -0.0799  0.2128
+##                           
+## intrcpt                   
+## OA                        
+## BC.extinction.ratePBDB    
+## d18OresidualMean        **
+## del.34S                   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
