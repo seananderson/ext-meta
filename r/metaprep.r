@@ -267,6 +267,25 @@ ext$timeSpan <- ext$startTime.Ma - ext$endTime.Ma
 
 midpoint<-max(ext$startTime.Ma, na.rm=T)/2
 
+# add detrended environmental time series:
+
+detrend_ts <- function(y, x, label = "") {
+  par(mfrow = c(2, 1))
+  plot(x, y, main = label)
+  m <- lm(y ~ x)
+  res.m <- as.numeric(residuals(m))
+  plot(x, res.m, main = paste(label, "detrended"))
+  abline(h = 0)
+  res.m
+}
+
+pdf("detrending-plots.pdf")
+ext$del.34S <- with(ext, detrend_ts(del.34S, endTime.Ma, "del.34S"))
+ext$del.18O <- with(ext, detrend_ts(del.18O, endTime.Ma, "del.18O"))
+ext$del.13C <- with(ext, detrend_ts(del.13C, endTime.Ma, "del.13C"))
+#j <- with(ext, detrend_ts(BC.extinction.ratePBDB, endTime.Ma, "BC.extinction.rate"))
+dev.off()
+
 ## add a few extra columns, and centered environmental predictors
 
 ext$MultipleStages <- as.factor(with(ext, as.character(ext$Start.stage) == as.character(ext$End.stage)))
@@ -274,4 +293,7 @@ ext$Global.Regional <- as.factor(ext$Global.Regional)
 
 centExt<-colwise(function(x) x-mean(x, na.rm=T))(ext[,180:210])
 names(centExt)<-paste(names(centExt), ".cent", sep="")
+
 ext <- cbind(ext, centExt)
+
+
