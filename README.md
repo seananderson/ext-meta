@@ -17,7 +17,7 @@ line if you aren't sure.
 Then set your working directory to the "final_analysis_graphs_for_paper" folder.
 For example, on my computer:
 
-    setwd("~/Dropbox/NESCent-extinction/meta-analysis/extinction-meta-analysis/analysis")
+    setwd("~/src/ext-meta/analysis/")
 
 Then run these lines of code:
 
