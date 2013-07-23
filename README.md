@@ -2,19 +2,17 @@ The folder contains code for a meta-analysis looking at the ecological and
 environmental determinants of extinction risk for bivalves and gastropods in
 the fossil record. The code was largely written by Jarrett Byrnes.
 
-The analysis scripts call some R files in the "r" folder and some data from the
-"data" folder.
+The analysis scripts call some R files in the `r` folder and some data from the
+`data` folder.
 
 To re-run the analysis, run the following in an R console:
-[I (Sean) have tested this in 3.0.0 with current versions of the packages
-as of 2013-07-10.]
 
 First, install these packages if you don't have them. It's fine to re-run this 
 line if you aren't sure.
 
     install.packages(c("ggplot2", "gridExtra", "metafor", "RColorBrewer", "AICcmodavg", "knitr", "lme4", "plyr"))
 
-Then set your working directory to the "final_analysis_graphs_for_paper" folder.
+Then set your working directory to the `analysis` folder.
 For example, on my computer:
 
     setwd("~/src/ext-meta/analysis/")
@@ -25,3 +23,7 @@ Then run these lines of code:
     knit("final.Rmd")
     source("pretty_data_overview.R")
     source("plot_effect_sizes.R")
+
+To recreate the HTML file you'll need to run the file `final.md` through a Markdown interpreter. For example, using Pandoc:
+
+    pandoc final.md -o final.html
