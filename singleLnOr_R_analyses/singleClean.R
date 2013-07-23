@@ -7,6 +7,7 @@
 ## Last updated 20120921
 ##
 ## Changelog
+## 20121009 - 
 ##################################
 
 #####
@@ -15,6 +16,8 @@
 ## @knitr prep
 source("../r/metaprep.r")
 source("../r/lmerMetaPrep.R")
+
+
 
 ## @knitr loadBroad
 ## First, let's look at the broadly distributed data
@@ -41,7 +44,7 @@ ord<-sort(broadData$lnorReg, index.return=T)$ix #sorting for catepillar plotting
 catPlot.Broad<-ggplot(data=broadData[ord,], aes( y=lnorReg, x=1:nrow(broadData), 
                                            ymin=lnorReg-1.96*sqrt(vlnorReg), 
                                            ymax=lnorReg+1.96*sqrt(vlnorReg))) + 
-              geom_point() + 
+              geom_point(mapping=aes(color=study.ID)) + 
               geom_linerange()+ 
               theme_bw(base_size=18) + 
               xlab("") + 
@@ -74,6 +77,21 @@ anova(taxGenera.Broad, bgDrop)
 tDrop<-update(taxGenera.Broad, .~ . -Tax.level )
 anova(taxGenera.Broad, tDrop)
 
+## @knitr BroadMeanRma
+broad.rma <- rma(yi = lnorReg, vi = vlnorReg, data=broadData)
+
+## @knitr BroadMeanRma_blup_catepillar
+catValues <- as.data.frame(blup(broad.rma)[1:4])
+
+catValues$rank <- rank(catValues$pred)
+catValues$study.ID <- broadData$study.ID
+
+ggplot(data=catValues, aes(x=rank, y=pred, ymin=pi.lb, ymax=pi.ub)) +
+  geom_point(mapping=aes(color=study.ID), alpha=0.9, size=2) +
+  geom_linerange(color="grey") +
+  theme_bw() +
+  geom_hline(lty=2, lwd=2, h=0)
+
 
 #####
 ### As there was no tax level or bivalve/gastopod effect
@@ -82,13 +100,49 @@ anova(taxGenera.Broad, tDrop)
 ## @knitr BroadTaxaBGMeansSame
 catPlot.Broad+geom_hline(aes(yintercept=fixef(taxGenera.Broad)[1]), color="red", lwd=2) +
   geom_ribbon(aes( 
-                  ymin=rep(fixef(taxGenera.Broad)[1]-1.96*se.fixef(taxGenera.Broad)[1]), 
-                  ymax=rep(fixef(taxGenera.Broad)[1]+1.96*se.fixef(taxGenera.Broad)[1])), 
+                  ymin=rep(fixef(taxGenera.Broad)[1]-1.96*arm::se.fixef(taxGenera.Broad)[1]), 
+                  ymax=rep(fixef(taxGenera.Broad)[1]+1.96*arm::se.fixef(taxGenera.Broad)[1])), 
                                fill="pink", alpha=0.5) +
   annotate("text", x=5, y=4.5,label=paste("mean = ", round(fixef(taxGenera.Broad)[1], 2), sep=""))+
   annotate("text", x=65, y=-2.2, label = paste("n = ", nrow(broadData), sep=""))
 
 
+#####
+### Examine the effect of multiple stages on lnor
+### for log odds ratio of broad v. narrow using lmer
+#####
+## @knitr BroadMultStages
+multStage.Broad<-lmer(lnorReg ~ MultipleStages+ (1|study.ID), data=broadData, weights=1/vlnorReg)
+
+multStage.Broad.Drop<-update(multStage.Broad, .~ . -MultipleStages )
+anova(multStage.Broad, multStage.Broad.Drop)
+
+## @knitr blank1
+#####
+### Examine the effect of regional v. global studies
+### for log odds ratio of broad v. narrow using lmer
+#####
+## @knitr BroadGlobalRegional
+scale.Broad<-lmer(lnorReg ~ Global.Regional+ (1|study.ID), data=broadData, weights=1/vlnorReg)
+
+scale.Broad.Drop<-update(scale.Broad, .~ . -Global.Regional )
+anova(scale.Broad, scale.Broad.Drop)
+
+## @knitr blank2
+##########
+## Plot Time
+##########
+## @knitr broadTimePlot
+timePlotBroad <- ggplot(data=broadData, mapping=aes(  x=meanDate, y=lnorReg,
+                                        ymin=lnorReg-1.96*sqrt(vlnorReg), 
+                                        ymax=lnorReg+1.96*sqrt(vlnorReg))) + 
+                                          geom_point() + 
+                                          geom_linerange()+ 
+                                          theme_bw(base_size=18) + 
+                                          xlab("Midpoint of Sample Period (mya)") + 
+                                          geom_hline(y=0, lty=2, lwd=1)
+
+timePlotBroad
 
 ##########
 ### OK, so, we can pool.  Let's run a grand model!
@@ -99,28 +153,46 @@ catPlot.Broad+geom_hline(aes(yintercept=fixef(taxGenera.Broad)[1]), color="red",
 ##########
 
 ## @knitr bigBroadModel
-covModel.Broad<-lmer(lnorReg ~ OA  + BC.extinction.rate.PBDB + 
+covModel.Broad <- lmer(lnorReg ~ OA  + BC.extinction.ratePBDB + 
                     d18OresidualMean + del.34S + (1|study.ID),
                      data=broadData, weights=1/vlnorReg)
 
 covModel.Broad
 
+## @knitr bigBroadModel
+covModel.Broad.cent <- lmer(lnorReg ~ OA  + BC.extinction.ratePBDB.cent + 
+  d18OresidualMean.cent + del.34S.cent + (1|study.ID),
+                       data=broadData, weights=1/vlnorReg)
+
+covModel.Broad.cent
+
+
+## @knitr bigBroadModelRMA
+library(metafor)
+covModel.Broad.RMA <-rma(yi = lnorReg, vi = vlnorReg, data=broadData, mods=~OA  + BC.extinction.ratePBDB + 
+                    d18OresidualMean + del.34S)
+
+
+covModel.Broad.RMA
+
+
 ## @knitr bigBroadModelDiagnostics
 hist(residuals(covModel.Broad))
 plot(residuals(covModel.Broad) ~ fitted(covModel.Broad))
 
+## @knitr broadModelPredictors
+with(broadData, cor(cbind(OA, BC.extinction.ratePBDB,  
+                          d18OresidualMean,del.34S), use="complete.obs"))
 
 #####
 ### Let's plot the grand model!
 #####
 ## @knitr bigBroadModelCoefPlot
-covModelCoefPlot.Broad<-coefPlot(covModel.Broad)
-
-covModelCoefPlot.Broad 
+coefPlot(covModel.Broad)
 
 
 ## @knitr bigBroadModelCoefPlotSTD
-coefPlot(covModel.Broad, std=T)
+coefPlot(covModel.Broad, std=TRUE)
 
 
 
@@ -130,7 +202,10 @@ marginalLine(covModel.Broad, "OA", broadData)
 
 
 ## @knitr margdel.34SBroad
-marginalLine(covModel.Broad, "del.34S", broadData)
+marginalLine(covModel.Broad, "del.34S.cent", broadData)
+
+## @knitr marginal.Extinction
+marginalLine(covModel.Broad, "BC.extinction.ratePBDB", broadData) + xlim(c(-0.1,0.75))
 
 
 ## @knitr sectionbreak
@@ -143,18 +218,20 @@ marginalLine(covModel.Broad, "del.34S", broadData)
 ## and the difference between broad and narro
 ## So, subset the data down to broad being the grouping trait of interest
 habitData<-subset(ext, ext$Aggregate.Trait=="Life Habit")
-habitData$Trait.category[which(habitData$Traut.category=="Epifuanal")]<-"Epifaunal"
-habitData$Trait.category[which(habitData$Traut.category=="Epifauna")]<-"Epifaunal"
-habitData$Trait.category[which(habitData$Traut.category=="Epifuanl")]<-"Epifaunal"
-habitData$Trait.category[which(habitData$Traut.category=="Epifaunalcalciticouterlayer")]<-"Epifaunal"
-habitData$Trait.category[which(habitData$Traut.category=="Epifaunalcompetelyaragonitic")]<-"Epifaunal"
+habitData$Trait.category[which(habitData$Trait.category=="Epifuanal")]<-"Epifaunal"
+habitData$Trait.category[which(habitData$Trait.category=="Epifauna")]<-"Epifaunal"
+habitData$Trait.category[which(habitData$Trait.category=="Epifuanl")]<-"Epifaunal"
+habitData$Trait.category[which(habitData$Trait.category=="Epifaunalcalciticouterlayer")]<-"Epifaunal"
+habitData$Trait.category[which(habitData$Trait.category=="Epifaunalcompetelyaragonitic")]<-"Epifaunal"
 
 habitData<-subset(habitData, habitData$Trait.category == "Epifaunal")
 habitData$Trait.category<-factor(habitData$Trait.category)
 
 
 #subset down to bivalves
-bivalvesEpifaunal<-subset(habitData, habitData[["Bivalve..Gastropod"]]=="Bivalve")
+#subset down to bivalves
+bivalvesEpifaunal<-subset(habitData, habitData[["Bivalve..Gastropod"]]=="Bivalve") #for new analysis!
+#bivalvesEpifaunal<-habitData #for new analysis!
 bivalvesEpifaunal$Tax.level<-factor(bivalvesEpifaunal$Tax.level)
 
 #####
@@ -163,12 +240,16 @@ bivalvesEpifaunal$Tax.level<-factor(bivalvesEpifaunal$Tax.level)
 ### taxonomic grouping and bivalve/gastropod split
 #####
 
+## @knitr bivalvesGastroHabit
+bivalve.gastro.Epifaunal<-rma(yi=lnorReg, vi=vlnorReg, data=habitData, mod=~Bivalve..Gastropod)
+robustSE(bivalve.gastro.Epifaunal, habitData$study.ID)
 
 #####
 ### So, we pool.  Let's look at things, then
 #####
 
 ## @knitr Epifaunal_lmer
+bivalvesEpifaunal<-bivalvesEpifaunal[which(bivalvesEpifaunal$vlnorReg>0),]
 meanModel.Epifaunal<-lmer(lnorReg ~ 1 + (1|study.ID), data=bivalvesEpifaunal, weights=1/vlnorReg)
 summary(meanModel.Epifaunal)
 
@@ -191,11 +272,28 @@ catPlot.Epifaunal<-ggplot(data=bivalvesEpifaunal[ordE,], aes( y=lnorReg, x=1:len
 
 catPlot.Epifaunal +geom_hline(aes(yintercept=fixef(meanModel.Epifaunal)[1]), color="red", lwd=2) +
   geom_ribbon(aes( 
-    ymin=rep(fixef(meanModel.Epifaunal)[1]-1.96*se.fixef(meanModel.Epifaunal)[1]), 
-    ymax=rep(fixef(meanModel.Epifaunal)[1]+1.96*se.fixef(meanModel.Epifaunal)[1])), 
+    ymin=rep(fixef(meanModel.Epifaunal)[1]-1.96*arm::se.fixef(meanModel.Epifaunal)[1]), 
+    ymax=rep(fixef(meanModel.Epifaunal)[1]+1.96*arm::se.fixef(meanModel.Epifaunal)[1])), 
               fill="pink", alpha=0.5) +
-    annotate("text", x=5, y=4,label=paste("mean = ", round(fixef(meanModel.Epifaunal)[1], 2), sep="")) +
+    annotate("text", x=5.3, y=4,label=paste("mean = ", round(fixef(meanModel.Epifaunal)[1], 2), sep="")) +
     annotate("text", x=25, y=-2, label = paste("n = ", nrow(bivalvesEpifaunal), sep=""))
+
+
+
+##########
+## Plot Time
+##########
+## @knitr epiTimePlot
+epiPlotTime <- ggplot(data=bivalvesEpifaunal, aes( y=lnorReg, x=meanDate, 
+                                             ymin=lnorReg-1.96*sqrt(vlnorReg), 
+                                             ymax=lnorReg+1.96*sqrt(vlnorReg))) + 
+                                               geom_point() + 
+                                               geom_linerange()+ 
+                                               theme_bw(base_size=18) + 
+                                               xlab("Midpoint of Sample Period (mya)") + 
+                                               geom_hline(y=0, lty=2, lwd=1)
+
+epiPlotTime
 
 
 #####
@@ -203,15 +301,25 @@ catPlot.Epifaunal +geom_hline(aes(yintercept=fixef(meanModel.Epifaunal)[1]), col
 #####
 
 ## @knitr bigEpifaunaModel
-covModel.Epifaunal<-lmer(lnorReg ~ OA  + BC.extinction.rate.PBDB + 
+covModel.Epifaunal<-lmer(lnorReg ~ OA  + BC.extinction.ratePBDB + 
                          d18OresidualMean + del.34S + (1|study.ID),
                      data=bivalvesEpifaunal, weights=1/vlnorReg)
 
 covModel.Epifaunal
 
+
+
+## @knitr epibigEpifaunaModel.RMA
+covModel.Epifaunal.rma <-rma(yi = lnorReg, vi = vlnorReg,data=bivalvesEpifaunal,
+                             mods =~ OA  + BC.extinction.ratePBDB + d18OresidualMean + del.34S)
+
+covModel.Epifaunal.rma
+
 ## @knitr bigEpifaunaModelDiagnostics
 hist(residuals(covModel.Epifaunal))
 plot(residuals(covModel.Epifaunal) ~ fitted(covModel.Epifaunal))
+
+
 
 ## @knitr plotBigEpifaunaModel
 coefPlot(covModel.Epifaunal)

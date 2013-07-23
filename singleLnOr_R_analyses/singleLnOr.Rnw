@@ -1,5 +1,14 @@
 \documentclass{article}
 
+%%%%%%%%%%%%%%%%%%%%%
+%
+%
+% Last updated 20121005
+%
+% Changelog
+%
+% 20121005 - added multistage and global v. regional comparison
+%%%%%%%%%%%%%%%%%%%%%
 <<loadFiles, echo=FALSE>>=
 # smaller font size for chunks
 opts_chunk$set(size = 'footnotesize')
@@ -43,6 +52,25 @@ From the confidence standard error of the coefficients it appears that they don'
 Indeed, no difference.  So, instead we can just use the grand mean.
 
 <<BroadTaxaBGMeansSame, echo=FALSE, fig.align="center", out.height="0.7\\textwidth", out.width="0.7\\textwidth", echo=FALSE, cache=TRUE, warning=FALSE>>=
+@
+
+\subsection{Effect of Multiple Stages on the Log Odds Ratio}
+Is there an effect of using data points with 1 v. multiple stages?  We can compare the log odds ratios from those studies with single v. multiple points and then do a chisq test as above to assess if it matters.
+<<BroadMultStages>>=
+@
+
+Nope.  No difference.
+
+\subsection{Effect of Global v. Regional Studies on the Log Odds Ratio}
+Is there an effect of using data points from studies using global v. regional data sets?  We can compare the log odds ratios from those studies and then do a chisq test as above to assess if it matters.
+<<BroadGlobalRegional>>=
+@
+
+Nope.  No difference.  At all.  I mean, look how small a difference we get in terms of likelihood.
+
+\subsection{Log Odds Ratio over Time}
+Here's what the distribution of lnor values over time looks like for broad v. narrow
+<<broadTimePlot, echo=FALSE, fig.align="center", out.height="0.7\\textwidth", out.width="0.7\\textwidth", echo=FALSE, cache=TRUE, warning=FALSE>>=
 @
 
 %%%%%%%%%%%%%%%%%%%%% The Big Model
@@ -89,6 +117,9 @@ Looking here we see that selectivity for broad taxa is higher during an OA event
 
 So, here, we see that at lower values of delta 34S (i.e., more anoxia - right?) there is a greater advantage to being broad.  Again, within the range of observed values, the CI does not cross 0.  Still, the advantage diminishes.
 
+<<marginal.Extinction, echo=FALSE, fig.align="center",  cache=TRUE, warning=FALSE>>=
+@
+
 \subsection{General Conclusion fromt the Model}
 So, it allears to be that environmental drivers that alter selectivity regimes will more strongly favor broadly distributed taxa - or alternately penalize narrow taxa (we cannot distinguish between the two here).  The advantage to being broad never goes away, but it increases or decreases based on environmental conditions
 
@@ -105,6 +136,14 @@ First, we note that there are only 3 data points not at the species level, so we
 @
 
 that there is a general advantage to being infaunal over epifaunal.  Intriguing.
+
+\subsection{Effects of Multiple Stage v. Single Stage studies or global v. regional data}
+We do not have sufficient replication in either of these categories to test those effects.  Only 1 multistage study, and only 3 studies that are global (where global=1, yes?)
+
+\subsection{Log Odds Ratio over Time}
+Here's what the distribution of lnor values over time lokos like for epifauna v. infauna
+<<epiTimePlot, echo=FALSE, fig.align="center", out.height="0.7\\textwidth", out.width="0.7\\textwidth", echo=FALSE, cache=TRUE, warning=FALSE>>=
+@
 
 \subsection{The Model}
 I ran the same model on epifauna/infauna as I did for the range analysis.  Yes, we're slightly overparameterized given our sample size, but not by a HUGE amount.  Here's the model results.

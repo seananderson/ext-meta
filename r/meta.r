@@ -2,25 +2,60 @@
 library(metafor)
 library(plyr)
 library(lme4)
+library(ggplot2)
 
 
-#for calculating the lnor via the Mantel-Hazel method
-lnORMH<-function(tpos, tneg, cpos, cneg){
-  o <- tpos
-  ohat <- (tpos+cpos)*(tpos+tneg)/(tpos+tneg+cpos+cneg)
-  v <- ohat*((tpos+tneg)/(tpos+tneg+cpos+cneg))*((tneg+cneg)/(tpos+tneg+cpos+cneg-1))
+#read in a set of formulate for calculating effect sizes and variances
+source("./conversions.R")
+
+#read in the data
+ext<-read.csv("../data/extinctionMetaClean.csv")
+
+#######
+# helper functions
+#######
+
+#check the levels of a slice of a data set with a particular trait set
+checkLevels<-function(adf, trait) levels(factor(adf[which(adf$Trait==trait),]$Trait.category))
+
+####
+#functions  and class to take a trait and output a metafor object and subsetted data file for diagnosis
+#####
+traitMod<-function(adf, trait){
+	adf<-subset(adf, adf$Aggregate.Trait ==trait)
+	adf<-adf[-which(is.na(adf$Trait.category)),]
+
+	adf<-sort.data.frame(adf, ~Trait.category)
+	adf$Trait.category<-factor(adf$Trait.category)
+	adf <-adf[-which(is.infinite(adf$vlnor)),]
+
+	#adf<-adf[-which(is.infinite(adf$lnor)),]
 	
-	lnor <- (o-ohat)/v
-	vlnor <- 1/v
-  
-  return(data.frame(lnor=lnor, vlnor=vlnor))
-  
-}
+	res<-try(rma(yi=lnor, vi=vlnor, data=adf, mods=~Trait.category+0))
+	
+	ret<-list(model=res, data=adf)
+	
+	class(ret)<-"traitMeta"
 
-ext<-read.csv("../data/orzMeta-analysis_ marine selectivity 11-18.csv", skip=1, na.strings=c("NA", "N/A", ".", ""))
+	ret
+	
+	}
+	
+print.traitMeta<-function(obj) print(obj$model)
+	
+summary.traitMeta<-function(obj) summary(obj$model)
 
-#ext<-cbind(ext, with(ext, {lnORMH(X..Surv, X..Ext, Total...Surv, Total...Ext)}))
-ext<-cbind(ext, with(ext, {lnORMH(X..Surv, X..Ext, Total...Surv-X..Surv, Total...Ext-X..Ext)}))
+coef.traitMeta<-function(obj) coef(obj$model)
+
+plot.traitMeta<-function(obj) plot(obj$model)
+
+ggplotMetaforCoefs.traitMeta<-function(obj) ggplotMetaforCoefs(obj$model)
+
+#rangeFit<-traitMod(bivalves, "Geographic Range")
+#summary(rangeFit)
+
+
+######data analysis
 
 #subset down to bivalves
 bivalves<-subset(ext, ext[["Bivalve..Gastropod"]]=="Bivalve")
@@ -42,10 +77,15 @@ ddply(gastropods, .(Aggregate.Trait), function(adf) nrow(adf))
 
 #fit a model for range
 rngBV<-subset(bivalves, bivalves$Trait=="Geographic Range")
-rngBV$Trait.category<-purgef(rngBV$Trait.category)
+#clean the data
+rngBV<-rngBV[-which(is.na(rngBV$Trait.category)),]
+rngBV<-rngBV[-which(is.infinite(rngBV$vlnor)),]
+#rngBV<-rngBV[-which(is.na(rngBV$vlnor)),]
+rngBV$Trait.category<-factor(rngBV$Trait.category)
 rngBV<-sort.data.frame(rngBV, ~Trait.category)
 
 rng<-rma(yi=lnor, vi=vlnor, data=rngBV, mods=~Trait.category+0)
+rngTemp<-rma(yi=lnor, vi=vlnor, data=rngBV, mods=~Trait.category*del.18O+0)
 
 summary(rng)
 plot(rng)
@@ -54,6 +94,10 @@ plot(rng)
 rngMER<-lmer(lnor ~ Trait.category + 0+  (1+Trait.category|In.text.Citation), data=rngBV, weights=vlnor)
 summary(rngMER)
 
+rngMER2<-lmer(lnor ~ Trait.category + 0+  (1+Trait.category|In.text.Citation) + (0+Trait.category|Aggregate.Age..Event), data=rngBV, weights=vlnor)
+
+summary(rngMER2)
+ranef(rngMER2)
 
 ##Some plotting
 with(rngBV,{
@@ -81,12 +125,27 @@ summary(feed)
 feedMER<-lmer(lnor ~ Trait.category + 0+ (1|In.text.Citation), data=feedBV, weights=vlnor)
 summary(feedMER)
 
+##############
+#Gastropods
+###############
+#range
+
+#fit a model for range
+rngGP<-subset(gastropods, gastropods$Trait=="Geographic Range")
+#clean the data
+#rngGP <-rngGP[-which(is.na(rngGP$Trait.category)),]
+#rngGP <-rngGP[-which(is.infinite(rngGP$vlnor)),]
+rngGP$Trait.category<-purgef(rngGP$Trait.category)
+rngGP <-sort.data.frame(rngGP, ~Trait.category)
+
+rngG<-rma(yi=lnor, vi=vlnor, data= rngGP, mods=~Trait.category+0)
+
+
 
 ##Some plotting
 forest(feed, slab=paste(feedBV$Trait.category, feedBV$In.text.Citation,  feedBV$Location, feedBV$Age..Event, sep=" "))
 text(31, 50, "Log Odds Ratio [95% CI]", pos = 2)
 
-library(ggplot2)
 
 #plotting effect sizes using ggplot2
 ggplotMetaforCoefs<-function(obj){
@@ -100,11 +159,13 @@ ggplotMetaforCoefs<-function(obj){
   ggplot(data=oCoefs)+geom_pointrange(aes(x=categories, y=estimate, ymin=ci.lb, ymax=ci.ub), size=1.5) +
     geom_abline(aes(intercept=0, slope=0), size=2, linetype=2) +
     xlab("")+
-    ylab("Log Odds Ratio")
+    ylab("Extinction Selectivity\n(Log Odds Ratio)\n")
 }
 
+ggplotMetaforCoefs(rng)+theme_bw(base_size=24)
+
 ggplotMetaforCoefs(feed)+theme_bw(base_size=18)
-ggplotMetaforCoefs(rng)+theme_bw(base_size=18)
+ggplotMetaforCoefs(rngG)+theme_bw(base_size=18)
  
       
       

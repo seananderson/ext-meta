@@ -1,8 +1,16 @@
+############################
+# Prep data and functions for the meta-analysis
+#
+#
+# Changelog
+# 20121030 - added centered environmental variables to ext
+############################
+
+
 #library and data
 library(metafor)
 library(plyr)
 library(lme4)
-library(ggplot2)
 library(ggplot2)
 
 
@@ -259,3 +267,11 @@ ext$timeSpan <- ext$startTime.Ma - ext$endTime.Ma
 
 midpoint<-max(ext$startTime.Ma, na.rm=T)/2
 
+## add a few extra columns, and centered environmental predictors
+
+ext$MultipleStages <- as.factor(with(ext, as.character(ext$Start.stage) == as.character(ext$End.stage)))
+ext$Global.Regional <- as.factor(ext$Global.Regional)
+
+centExt<-colwise(function(x) x-mean(x, na.rm=T))(ext[,180:210])
+names(centExt)<-paste(names(centExt), ".cent", sep="")
+ext <- cbind(ext, centExt)
