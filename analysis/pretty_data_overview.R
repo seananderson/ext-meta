@@ -1,7 +1,7 @@
 # ====================================================================
 # Created by:    Sean Anderson, sean@seananderson.ca
 # Created:       Oct 30, 2012
-# Last modified: Jul 10, 2013
+# Last modified: Jul 25, 2013
 # Purpose:       Try plotting the effect sizes against the raw data.
 # ====================================================================
 
@@ -56,7 +56,7 @@ effect_d$study_col <- as.character(effect_d$study_col)
 #area = pi * r^2
 # r = sqrt(area / pi)
 
-pdf("selectivity-data-overview-fig-20130314.pdf", width = 7, height = 5.5)
+pdf("selectivity-data-overview.pdf", width = 7, height = 5.5)
 #l <- matrix(c(1, 1, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7))
 l <- matrix(c(1, 1, 2, 2, 3,  4, 5, 6, 7))
 layout(l)
