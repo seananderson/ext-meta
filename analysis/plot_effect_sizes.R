@@ -1,7 +1,7 @@
 # ====================================================================
 # Created by:    Sean Anderson, sean@seananderson.ca
 # Created:       Jan 16, 2012
-# Last modified: Jul 10, 2013
+# Last modified: Jul 25, 2013
 # Purpose:       plot the effect sizes with an overall mean rma
 # ====================================================================
 
@@ -53,13 +53,13 @@ plot_effect_sizes <- function(dat, rma.model) {
 }
 
 ## @knitr Fig1
-pdf("broad_narrow_rma.pdf", width = 3.7, height = 7.5)
+pdf("figure/broad_narrow_rma.pdf", width = 3.7, height = 7.5)
 plot_effect_sizes(broadData, rma.model = broad.rma)
 dev.off()
 plot_effect_sizes(broadData, rma.model = broad.rma)
 
 ## @knitr Fig2
-pdf("inf_epi_rma.pdf", width = 3.7, height = 6)
+pdf("figure/inf_epi_rma.pdf", width = 3.7, height = 6)
 plot_effect_sizes(habitData, meanModel.Epifaunal)
 dev.off()
 plot_effect_sizes(habitData, meanModel.Epifaunal)

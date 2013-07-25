@@ -279,7 +279,7 @@ detrend_ts <- function(y, x, label = "") {
   res.m
 }
 
-pdf("detrending-plots.pdf")
+pdf("figure/detrending-plots.pdf")
 ext$del.34S <- with(ext, detrend_ts(del.34S, endTime.Ma, "del.34S"))
 ext$del.18O <- with(ext, detrend_ts(del.18O, endTime.Ma, "del.18O"))
 ext$del.13C <- with(ext, detrend_ts(del.13C, endTime.Ma, "del.13C"))

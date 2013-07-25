@@ -202,7 +202,7 @@ Figure 1
 ========================================================
 
 ```r
-pdf("broad_narrow_rma.pdf", width = 3.7, height = 7.5)
+pdf("figure/broad_narrow_rma.pdf", width = 3.7, height = 7.5)
 plot_effect_sizes(broadData, rma.model = broad.rma)
 dev.off()
 ```
@@ -369,7 +369,7 @@ Figure 2
 ========================================================
 
 ```r
-pdf("inf_epi_rma.pdf", width = 3.7, height = 6)
+pdf("figure/inf_epi_rma.pdf", width = 3.7, height = 6)
 plot_effect_sizes(habitData, meanModel.Epifaunal)
 dev.off()
 ```
