@@ -1,47 +1,47 @@
-predictor,margPoints,study.ID,Bivalve..Gastropod,Start.stage,End.stage,Taxon,Tax.level
-0.448362468,5.963727373,Aberhan 2003 SEA,Bivalve,Hettangian,Hettangian,bivalve,Species
--0.20030692,5.842135003,Aberhan 2003 SEA,Bivalve,Sinemurian,Sinemurian,bivalve,Species
--0.266021503,6.3316427,Aberhan 2003 SEA,Bivalve,Pliensbachian,Pliensbachian,bivalve,Species
-0.57099,5.346408724,Aberhan 2003 SEA,Bivalve,Toarcian,Toarcian,bivalve,Species
-0.448362468,7.26055697,Aberhan 2003 SEA,Bivalve,Hettangian,Hettangian,bivalve,Species
--0.20030692,5.636861537,Aberhan 2003 SEA,Bivalve,Sinemurian,Sinemurian,bivalve,Species
--0.266021503,7.344714149,Aberhan 2003 SEA,Bivalve,Pliensbachian,Pliensbachian,bivalve,Species
-0.57099,6.115763151,Aberhan 2003 SEA,Bivalve,Toarcian,Toarcian,bivalve,Species
--1.216028413,5.022738966,Elder 1989 MEP,Bivalve,Cenomanian,Cenomanian,bivalve,Species
--1.944876724,4.078428353,Elder 1989 MEP,Bivalve,Turonian,Turonian,bivalve,Species
-0.018592473,6.769080733,Hansen et al. 1993a,Bivalve,Maastrichtian,Maastrichtian,bivalve,Species
-0.175538333,6.211941712,Hautmann 2008 ERP,Bivalve,Rhaetian,Rhaetian,bivalve,Species
-0.018592473,5.250614599,Heinburg 1999 LDB,Bivalve,Maastrichtian,Maastrichtian,bivalve,Species
-0.018592473,6.512820835,Jablonski1995SEC,Bivalve,Maastrichtian,Maastrichtian,bivalve,Genera
--0.812750243,4.742775257,Knoll 2007 PEP,Bivalve,Changhsingian,Changhsingian,bivalve,Genera
--3.932830556,2.828771363,Knoll et al. 1996,Bivalve,Capitanian,Capitanian,bivalve,Species
--0.812750243,4.548525129,Knoll et al. 1996,Bivalve,Changhsingian,Changhsingian,bivalve,Species
--3.932830556,3.785132223,Knoll et al. 1996,Bivalve,Wordian,Wordian,bivalve,Species
--2.3727904,4.682267649,Knoll et al. 1996,Bivalve,Wuchiapingian,Wuchiapingian,bivalve,Species
-0.018592473,6.406516203,Lockwood 2003 ANL,Bivalve,Maastrichtian,Maastrichtian,bivalve,Subgenera
-0.018592473,6.540282124,McClure 1995 NSE,Bivalve,Maastrichtian,Maastrichtian,bivalve,Genera
-0.175538333,9.235072959,McRoberts1995SEA,Bivalve,Rhaetian,Rhaetian,bivalve,Species
-0.175538333,7.441020437,McRoberts1995SEA,Bivalve,Rhaetian,Rhaetian,bivalve,Species
-0.175538333,6.645806294,McRoberts1995SEA,Bivalve,Rhaetian,Rhaetian,bivalve,Species
-0.500995595,7.854727227,Crampton 2010 BIS,Gastropod,Priabonian,Priabonian,gastropod,Species
-0.533495284,7.449929869,Crampton 2010 BIS,Gastropod,Rupelian,Rupelian,gastropod,Species
-0.480263679,6.249058057,Crampton 2010 BIS,Gastropod,Chattian,Chattian,gastropod,Species
-0.394532385,6.122511106,Crampton 2010 BIS,Gastropod,Aquitanian,Aquitanian,gastropod,Species
-0.437389047,5.918316324,Crampton 2010 BIS,Gastropod,Burdigalian,Burdigalian,gastropod,Species
-0.480245709,7.269770114,Crampton 2010 BIS,Gastropod,Langhian,Langhian,gastropod,Species
-0.480245709,6.000681231,Crampton 2010 BIS,Gastropod,Serravallian,Serravallian,gastropod,Species
-0.782629918,7.435152078,Crampton 2010 BIS,Gastropod,Tortonian,Tortonian,gastropod,Species
-1.085014126,7.597441373,Crampton 2010 BIS,Gastropod,Messinian,Messinian,gastropod,Species
-1.245282914,6.148248425,Crampton 2010 BIS,Gastropod,Zanclean,Zanclean,gastropod,Species
-1.405551702,7.225171719,Crampton 2010 BIS,Gastropod,Piacenzian,Piacenzian,gastropod,Species
-0.500995595,5.997858912,Crampton 2010 BIS,Bivalve,Priabonian,Priabonian,bivalve,Species
-0.533495284,5.395806135,Crampton 2010 BIS,Bivalve,Rupelian,Rupelian,bivalve,Species
-0.480263679,8.078557854,Crampton 2010 BIS,Bivalve,Chattian,Chattian,bivalve,Species
-0.394532385,6.553769209,Crampton 2010 BIS,Bivalve,Aquitanian,Aquitanian,bivalve,Species
-0.437389047,7.0375698,Crampton 2010 BIS,Bivalve,Burdigalian,Burdigalian,bivalve,Species
-0.480245709,5.143371589,Crampton 2010 BIS,Bivalve,Langhian,Langhian,bivalve,Species
-0.480245709,6.494727376,Crampton 2010 BIS,Bivalve,Serravallian,Serravallian,bivalve,Species
-0.782629918,6.00112036,Crampton 2010 BIS,Bivalve,Tortonian,Tortonian,bivalve,Species
-1.085014126,5.877721496,Crampton 2010 BIS,Bivalve,Messinian,Messinian,bivalve,Species
-1.245282914,7.333683108,Crampton 2010 BIS,Bivalve,Zanclean,Zanclean,bivalve,Species
-1.405551702,7.080317955,Crampton 2010 BIS,Bivalve,Piacenzian,Piacenzian,bivalve,Species
+"predictor","margPoints","study.ID","Bivalve..Gastropod","Start.stage","End.stage","Taxon","Tax.level"
+1.09146651638904,0.212687930341235,"Aberhan 2003 SEA","Bivalve","Hettangian","Hettangian","bivalve","Species"
+2.57293647520582,0.607078963737936,"Aberhan 2003 SEA","Bivalve","Sinemurian","Sinemurian","bivalve","Species"
+1.49946600103056,0.681905534310279,"Aberhan 2003 SEA","Bivalve","Pliensbachian","Pliensbachian","bivalve","Species"
+1.05015001483407,-0.32635170440092,"Aberhan 2003 SEA","Bivalve","Toarcian","Toarcian","bivalve","Species"
+1.09146651638904,1.50951752756867,"Aberhan 2003 SEA","Bivalve","Hettangian","Hettangian","bivalve","Species"
+2.57293647520582,0.401805498492814,"Aberhan 2003 SEA","Bivalve","Sinemurian","Sinemurian","bivalve","Species"
+1.49946600103056,1.69497698353881,"Aberhan 2003 SEA","Bivalve","Pliensbachian","Pliensbachian","bivalve","Species"
+1.05015001483407,0.44300272274948,"Aberhan 2003 SEA","Bivalve","Toarcian","Toarcian","bivalve","Species"
+-1.12381815634598,-0.874192039221184,"Elder 1989 MEP","Bivalve","Cenomanian","Cenomanian","bivalve","Species"
+-0.998902094457509,-1.49119757287981,"Elder 1989 MEP","Bivalve","Turonian","Turonian","bivalve","Species"
+-0.110911077089485,0.450718864032179,"Hansen et al. 1993a","Bivalve","Maastrichtian","Maastrichtian","bivalve","Species"
+0.735615375471353,0.666383426591324,"Hautmann 2008 ERP","Bivalve","Rhaetian","Rhaetian","bivalve","Species"
+-0.110911077089485,-1.0677472701962,"Heinburg 1999 LDB","Bivalve","Maastrichtian","Maastrichtian","bivalve","Species"
+-0.110911077089485,0.194458965794431,"Jablonski1995SEC","Bivalve","Maastrichtian","Maastrichtian","bivalve","Genera"
+-0.758645477163792,-1.04332007708757,"Knoll 2007 PEP","Bivalve","Changhsingian","Changhsingian","bivalve","Genera"
+-0.461692521911532,-1.07337748771936,"Knoll et al. 1996","Bivalve","Capitanian","Capitanian","bivalve","Species"
+-0.758645477163792,-1.2375702047468,"Knoll et al. 1996","Bivalve","Changhsingian","Changhsingian","bivalve","Species"
+-0.414299016792041,-0.0565592452315073,"Knoll et al. 1996","Bivalve","Wordian","Wordian","bivalve","Species"
+-0.368256185089441,0.611945292238447,"Knoll et al. 1996","Bivalve","Wuchiapingian","Wuchiapingian","bivalve","Species"
+-0.110911077089485,0.0881543343580493,"Lockwood 2003 ANL","Bivalve","Maastrichtian","Maastrichtian","bivalve","Subgenera"
+-0.110911077089485,0.221920255234624,"McClure 1995 NSE","Bivalve","Maastrichtian","Maastrichtian","bivalve","Genera"
+0.735615375471353,3.68951467433343,"McRoberts1995SEA","Bivalve","Rhaetian","Rhaetian","bivalve","Species"
+0.735615375471353,1.89546215204834,"McRoberts1995SEA","Bivalve","Rhaetian","Rhaetian","bivalve","Species"
+0.735615375471353,1.10024800922119,"McRoberts1995SEA","Bivalve","Rhaetian","Rhaetian","bivalve","Species"
+0.493421198071421,0.968040176145286,"Crampton 2010 BIS","Gastropod","Priabonian","Priabonian","gastropod","Species"
+0.449945802925376,0.700518804198901,"Crampton 2010 BIS","Gastropod","Rupelian","Rupelian","gastropod","Species"
+0.219019553482783,-0.458160694458516,"Crampton 2010 BIS","Gastropod","Chattian","Chattian","gastropod","Species"
+-0.102559317287053,-0.604562626797403,"Crampton 2010 BIS","Gastropod","Aquitanian","Aquitanian","gastropod","Species"
+-0.141815590104685,-0.838412540966653,"Crampton 2010 BIS","Gastropod","Burdigalian","Burdigalian","gastropod","Species"
+-0.345539791462306,0.490135375969269,"Crampton 2010 BIS","Gastropod","Langhian","Langhian","gastropod","Species"
+-0.419314630620459,-0.821191867934587,"Crampton 2010 BIS","Gastropod","Serravallian","Serravallian","gastropod","Species"
+-0.22470026563756,0.603327621987125,"Crampton 2010 BIS","Gastropod","Tortonian","Tortonian","gastropod","Species"
+-0.459534899987215,0.802251529888564,"Crampton 2010 BIS","Gastropod","Messinian","Messinian","gastropod","Species"
+-0.599045069733153,-0.656444896577,"Crampton 2010 BIS","Gastropod","Zanclean","Zanclean","gastropod","Species"
+-0.609576959759707,0.437322773363401,"Crampton 2010 BIS","Gastropod","Piacenzian","Piacenzian","gastropod","Species"
+0.493421198071421,-0.888828138370013,"Crampton 2010 BIS","Bivalve","Priabonian","Priabonian","bivalve","Species"
+0.449945802925376,-1.35360492949665,"Crampton 2010 BIS","Bivalve","Rupelian","Rupelian","bivalve","Species"
+0.219019553482783,1.37133910275239,"Crampton 2010 BIS","Bivalve","Chattian","Chattian","bivalve","Species"
+-0.102559317287053,-0.17330452363979,"Crampton 2010 BIS","Bivalve","Aquitanian","Aquitanian","bivalve","Species"
+-0.141815590104685,0.280840935446419,"Crampton 2010 BIS","Bivalve","Burdigalian","Burdigalian","bivalve","Species"
+-0.345539791462306,-1.63626314879833,"Crampton 2010 BIS","Bivalve","Langhian","Langhian","bivalve","Species"
+-0.419314630620459,-0.327145722523119,"Crampton 2010 BIS","Bivalve","Serravallian","Serravallian","bivalve","Species"
+-0.22470026563756,-0.830704096644307,"Crampton 2010 BIS","Bivalve","Tortonian","Tortonian","bivalve","Species"
+-0.459534899987215,-0.917468347701285,"Crampton 2010 BIS","Bivalve","Messinian","Messinian","bivalve","Species"
+-0.599045069733153,0.528989786750025,"Crampton 2010 BIS","Bivalve","Zanclean","Zanclean","bivalve","Species"
+-0.609576959759707,0.292469009105462,"Crampton 2010 BIS","Bivalve","Piacenzian","Piacenzian","bivalve","Species"

@@ -452,10 +452,6 @@ broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust = F, std = T) + scale_x_dis
     ylim(c(-0.5, 0.5)) + coord_flip()
 ```
 
-```
-## Error: incorrect number of dimensions
-```
-
 
 The Fitted Model for Epifauna v. Infauna
 
@@ -515,10 +511,6 @@ epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust = F, std =
     x = 4, y = -1.5, label = "B)") + ylim(c(-1.75, 1.75)) + coord_flip()
 ```
 
-```
-## Error: incorrect number of dimensions
-```
-
 
 Figure 4
 ========================================================
@@ -529,8 +521,14 @@ grid.arrange(broadCoefPlot + theme_bw(base_size = 18), epiCoefPlot + theme_bw(ba
 ```
 
 ```
-## Error: object 'broadCoefPlot' not found
+## Warning: is.na() applied to non-(list or vector) of type 'expression'
 ```
+
+```
+## Warning: is.na() applied to non-(list or vector) of type 'expression'
+```
+
+![plot of chunk Fig4](figure/Fig4.png) 
 
 
 Figure 5
@@ -542,58 +540,16 @@ del18marg <- marginalLine(covModel.Epifaunal.rma, "d18OresidualMean", habitDataG
     robust = F) + xlab("\n Detrended Delta O18") + ylab("Component + Residual + Intercept Log Odds\n Ratios for Detrended Delta O18\n") + 
     annotate("text", x = -4, y = 8.75, label = "A)") + scale_color_discrete(guide = "none") + 
     theme_bw(base_size = 18)
-```
-
-```
-## Error: incorrect number of dimensions
-```
-
-```r
 
 del18MargData <- marginalData(covModel.Epifaunal.rma, "d18OresidualMean", habitDataGood)
-```
-
-```
-## Error: incorrect number of dimensions
-```
-
-```r
 write.csv(del18MargData, "./del18MargData.csv", row.names = F)
-```
-
-```
-## Error: object 'del18MargData' not found
-```
-
-```r
 
 del34marg <- marginalLine(covModel.Epifaunal.rma, "del.34S", habitDataGood, 
     robust = F) + xlab("\n Delta S34") + ylab("Component + Residual + Intercept Log Odds\n Ratios for Delta 34S\n") + 
     annotate("text", x = 13.75, y = 3.375, label = "B)") + theme_bw(base_size = 18)
-```
-
-```
-## Error: incorrect number of dimensions
-```
-
-```r
 
 del34margData <- marginalData(covModel.Epifaunal.rma, "del.34S", habitDataGood)
-```
-
-```
-## Error: incorrect number of dimensions
-```
-
-```r
-write.csv(del34marg, "./del34margData.csv", row.names = F)
-```
-
-```
-## Error: object 'del34marg' not found
-```
-
-```r
+write.csv(del34margData, "./del34margData.csv", row.names = F)
 
 # Extract Legend
 g_legend <- function(a.gplot) {
@@ -605,22 +561,13 @@ g_legend <- function(a.gplot) {
 }
 
 legend <- g_legend(del34marg)
-```
-
-```
-## Error: object 'del34marg' not found
-```
-
-```r
 
 
 grid.arrange(del18marg, del34marg + scale_color_discrete(guide = "none"), legend, 
     widths = c(3, 3, 1), nrow = 1)
 ```
 
-```
-## Error: object 'del18marg' not found
-```
+![plot of chunk Fig5](figure/Fig5.png) 
 
 
 
