@@ -20,10 +20,7 @@ For example, on my computer:
 Then run these lines of code:
 
     library(knitr)
-    knit("final.Rmd")
+    knit2html("final.Rmd")
     source("pretty_data_overview.R")
     source("plot_effect_sizes.R")
 
-To recreate the HTML file you'll need to run the file `final.md` through a Markdown interpreter. For example, using Pandoc:
-
-    pandoc final.md -o final.html
