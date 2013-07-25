@@ -7,21 +7,18 @@
 ##########################################
 library(reshape)
 
-
 coefPlot <- function(amod, adf, std=F, robust=T) {
-  ctab <- coef(amod )
+  ctab <- coef(summary(amod))
   if(robust) ctab <- robustSE(amod, adf$study.ID)
   mult <-  1
   lab <- "\nCoefficient\n"
   if(std) {
     ctab <- ctab[-1,]
-    #ctab <- ctab[-1] # Sean was experimenting with this
     mult <- colwise(sd)(as.data.frame(amod$X[,-1])) / sd(amod$yi)
     lab <- "\nStandardized Coefficient\n"
   }
   
   ctab <- ctab*t(mult)
-  ctab <- ctab*mult # Sean was experimenting with this
   ctab$coef <- rownames(ctab)
   
   #return a graph
@@ -71,9 +68,9 @@ margAdjust <- function(coefs, X, y, variable){
 
 marginalPlot <- function(obj, variable, dataFrame){
   #for rma
-  coefs <- coef(obj)[,1]
+  coefs <- coef(summary(obj))[,1]
   X <- obj$X
-  predictor <- X[,which(rownames(coef(obj))==variable)]
+  predictor <- X[,which(rownames(coef(summary(obj)))==variable)]
   y <- as.numeric(obj$yi)
 
   margPoints <- y - margAdjust(coefs, X, y, variable)
@@ -86,10 +83,10 @@ marginalPlot <- function(obj, variable, dataFrame){
 
 marginalLine <- function(obj, variable, dataFrame, interval = "fit", robust=T){
   #for rma
-  coefs <- coef(obj)[,1]
-  se.coefs <- coef(obj)[,2]
+  coefs <- coef(summary(obj))[,1]
+  se.coefs <- coef(summary(obj))[,2]
   varCoefs <- vcov(obj)
-  idx <- which(rownames(coef(obj))==variable)
+  idx <- which(rownames(coef(summary(obj)))==variable)
   
   #some important values
   X <- obj$X
@@ -135,9 +132,9 @@ marginalLine <- function(obj, variable, dataFrame, interval = "fit", robust=T){
 
 marginalData <- function(obj, variable, dataFrame){
   #for rma
-  coefs <- coef(obj)[,1]
+  coefs <- coef(summary(obj))[,1]
   X <- obj$X
-  predictor <- X[,which(rownames(coef(obj))==variable)]
+  predictor <- X[,which(rownames(coef(summary(obj)))==variable)]
   y <- as.numeric(obj$yi)
   
   margPoints <- y - margAdjust(coefs, X, y, variable)
