@@ -298,4 +298,6 @@ names(centExt)<-paste(names(centExt), ".cent", sep="")
 
 ext <- cbind(ext, centExt)
 
+#ext <- subset(ext, endTime.Ma >= 23)
+
 
