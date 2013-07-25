@@ -575,18 +575,248 @@ Appendix Jackknife Figures
 ========================================================
 
 ```
-## Error: error in evaluating the argument 'x' in selecting a method for
-## function 'as.data.frame': Error in t(coefs$estimate) : error in evaluating
-## the argument 'x' in selecting a method for function 't': Error in
-## coefs$estimate : $ operator is invalid for atomic vectors
+## Using as id variables
 ```
 
 ```
-## Error: error in evaluating the argument 'x' in selecting a method for
-## function 'as.data.frame': Error in t(coefs$estimate) : error in evaluating
-## the argument 'x' in selecting a method for function 't': Error in
-## coefs$estimate : $ operator is invalid for atomic vectors
+## Using as id variables
 ```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+![plot of chunk jackknife.figs](figure/jackknife.figs1.png) 
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+![plot of chunk jackknife.figs](figure/jackknife.figs2.png) 
 
 
 
