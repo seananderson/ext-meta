@@ -5,7 +5,7 @@
 ## from NESCent Working Group for publication
 ##
 ## Created:       Jan 13, 2012
-## Last modified: Jan 21, 2013
+## Last modified: Jul 25, 2013
 ## Purpose:       Try plotting the effect sizes against the raw data.
 ## Additional description: More analyses can be found in singleLnOr_R_analyses/singleLnOr_rma.R
 ## Changelog
@@ -224,7 +224,7 @@ del34marg <- marginalLine(covModel.Epifaunal.rma, "del.34S", habitDataGood, robu
   theme_bw(base_size=18)
 
 del34margData<- marginalData(covModel.Epifaunal.rma, "del.34S", habitDataGood)
-write.csv(del34marg, "./del34margData.csv", row.names=F)
+write.csv(del34margData, "./del34margData.csv", row.names=F)
 
 #Extract Legend 
 g_legend<-function(a.gplot){ 
