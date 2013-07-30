@@ -321,7 +321,18 @@ for(i in 2:nrow(ext)){
 #checkme<-which(is.na(ext$lnor) & !is.na(ext$Trait.category))
 #ext[checkme,]
 
-
+# bring in new d18O and d13C data:
+gr <- read.csv("../data/Grossman_d18O.d13C_with_high.lat.csv")
+ext$Binned_Age <- round(ext$startTime.Ma, 2)
+gr$Binned_Age <- round(gr$Binned_Age, 2)
+#ext <- plyr::join(ext, gr[gr$data_subset == "All" ,c("Binned_Age", "mean_d18O")])
+#ext <- plyr::join(ext, gr[gr$data_subset == "Tropical" ,c("Binned_Age", "mean_d18O")])
+#ext <- plyr::join(ext, gr[gr$data_subset == "All" ,c("Binned_Age", "mean_d13C")])
+#ext <- plyr::join(ext, gr[gr$data_subset == "Tropical" ,c("Binned_Age", "mean_d13C")])
+#ext$del.18O <- ext$mean_d18O
+#ext$del.13C <- ext$mean_d13C
+#ext$mean_d18O <- NULL
+#ext$mean_d13C <- NULL
 
 ###################################
 ##### WRITE THE CLEAN DATA
