@@ -5,7 +5,7 @@
 ## from NESCent Working Group for publication
 ##
 ## Created:       Jan 13, 2012
-## Last modified: Jul 25, 2013
+## Last modified: Jul 31, 2013
 ## Purpose:       Try plotting the effect sizes against the raw data.
 ## Additional description: More analyses can be found in singleLnOr_R_analyses/singleLnOr_rma.R
 ## Changelog
@@ -150,7 +150,9 @@ broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust=F, std=T)+
   scale_x_discrete(labels=c("Extinction Rate", expression(delta^18*O~Residuals), expression(delta^13*C), expression(delta^34*S), "Acidification")) +
   annotate("text", x=5, y=-0.4, label="A)")+
   ylim(c(-0.5,0.5)) +
-  coord_flip()
+  coord_flip() +
+  annotate("text", x=5.5, y=-0.35, label="Favours narrow")+
+  annotate("text", x=5.5, y=0.35, label="Favours broad")
 
 ## @knitr sectionbreak
 ########################################
@@ -201,7 +203,9 @@ epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust=F, std=T)+
   scale_x_discrete(labels=c("Extinction Rate",  expression(delta^18*O~Residuals), expression(delta^34*S), "Acidification")) +
   annotate("text", x=4, y=-1.5, label="B)")+
   ylim(c(-1.75,1.75)) +
-  coord_flip()
+  coord_flip() + 
+  annotate("text", x=4.5, y=-.5, label="Favours\ninfauna")+
+  annotate("text", x=4.5, y=.5, label="Favours\nepifauna")
 
 ## @knitr Fig4
 grid.arrange(broadCoefPlot+theme_bw(base_size=18), epiCoefPlot+theme_bw(base_size=18), ncol=2)

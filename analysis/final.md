@@ -203,7 +203,7 @@ Figure 1
 
 ```r
 pdf("figure/broad_narrow_rma.pdf", width = 3.7, height = 7.5)
-plot_effect_sizes(broadData, rma.model = broad.rma)
+plot_effect_sizes(broadData, rma.model = broad.rma, lab = c("narrow", "broad"))
 dev.off()
 ```
 
@@ -213,7 +213,7 @@ dev.off()
 ```
 
 ```r
-plot_effect_sizes(broadData, rma.model = broad.rma)
+plot_effect_sizes(broadData, rma.model = broad.rma, lab = c("narrow", "broad"))
 ```
 
 ![plot of chunk Fig1](figure/Fig1.png) 
@@ -370,7 +370,7 @@ Figure 2
 
 ```r
 pdf("figure/inf_epi_rma.pdf", width = 3.7, height = 6)
-plot_effect_sizes(habitData, meanModel.Epifaunal)
+plot_effect_sizes(habitData, meanModel.Epifaunal, lab = c("infauna", "epifauna"))
 dev.off()
 ```
 
@@ -380,7 +380,7 @@ dev.off()
 ```
 
 ```r
-plot_effect_sizes(habitData, meanModel.Epifaunal)
+plot_effect_sizes(habitData, meanModel.Epifaunal, lab = c("infauna", "epifauna"))
 ```
 
 ![plot of chunk Fig2](figure/Fig2.png) 
@@ -449,7 +449,8 @@ write.csv(coef(covModel.Broad.RMA), "./broadCoefTable.csv", row.names = T)
 broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust = F, std = T) + scale_x_discrete(labels = c("Extinction Rate", 
     expression(delta^18 * O ~ Residuals), expression(delta^13 * C), expression(delta^34 * 
         S), "Acidification")) + annotate("text", x = 5, y = -0.4, label = "A)") + 
-    ylim(c(-0.5, 0.5)) + coord_flip()
+    ylim(c(-0.5, 0.5)) + coord_flip() + annotate("text", x = 5.5, y = -0.35, 
+    label = "Favours narrow") + annotate("text", x = 5.5, y = 0.35, label = "Favours broad")
 ```
 
 
@@ -508,7 +509,14 @@ write.csv(coef(covModel.Epifaunal.rma), "./epiCoefTable.csv", row.names = T)
 epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust = F, std = T) + 
     scale_x_discrete(labels = c("Extinction Rate", expression(delta^18 * O ~ 
         Residuals), expression(delta^34 * S), "Acidification")) + annotate("text", 
-    x = 4, y = -1.5, label = "B)") + ylim(c(-1.75, 1.75)) + coord_flip()
+    x = 4, y = -1.5, label = "B)") + ylim(c(-1.75, 1.75)) + xlim(c(1, 6)) + 
+    coord_flip() + annotate("text", x = 4.5, y = -0.5, label = "Favours\ninfXXna") + 
+    annotate("text", x = 4.5, y = 0.5, label = "Favours\nepifauna")
+```
+
+```
+## Scale for 'x' is already present. Adding another scale for 'x', which will
+## replace the existing scale.
 ```
 
 
@@ -525,10 +533,8 @@ grid.arrange(broadCoefPlot + theme_bw(base_size = 18), epiCoefPlot + theme_bw(ba
 ```
 
 ```
-## Warning: is.na() applied to non-(list or vector) of type 'expression'
+## Error: Discrete value supplied to continuous scale
 ```
-
-![plot of chunk Fig4](figure/Fig4.png) 
 
 
 Figure 5
