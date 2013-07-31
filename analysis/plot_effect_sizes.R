@@ -1,13 +1,13 @@
 # ====================================================================
 # Created by:    Sean Anderson, sean@seananderson.ca
 # Created:       Jan 16, 2012
-# Last modified: Jul 25, 2013
+# Last modified: Jul 31, 2013
 # Purpose:       plot the effect sizes with an overall mean rma
 # ====================================================================
 
 # first, run "final_for_paper.R"
 ## @knitr ploteffLoad
-plot_effect_sizes <- function(dat, rma.model) {
+plot_effect_sizes <- function(dat, rma.model, lab) {
   par(mar = c(3, 10.5, 1, 1), cex = 0.8)
   par(mgp = c(2, 0.5, 0))
   par(tck = -0.03)
@@ -50,19 +50,21 @@ plot_effect_sizes <- function(dat, rma.model) {
 
   polygon(c(est, est - 1.96*se, est, est + 1.96*se), -c(0.7, 1, 1.3, 1), col = "grey40")
   axis(2, at = -0.7, labels = "Meta-analytic mean", las = 1, tick = FALSE, cex.axis = 0.8)
+  mtext(paste("Favours", lab[1]), side = 3, line = 0.1, cex = 0.75, adj = 0)
+  mtext(paste("Favours", lab[2]), side = 3, line = 0.1, cex = 0.75, adj = 1)
 }
 
 ## @knitr Fig1
 pdf("figure/broad_narrow_rma.pdf", width = 3.7, height = 7.5)
-plot_effect_sizes(broadData, rma.model = broad.rma)
+plot_effect_sizes(broadData, rma.model = broad.rma, lab = c("narrow", "broad"))
 dev.off()
-plot_effect_sizes(broadData, rma.model = broad.rma)
+plot_effect_sizes(broadData, rma.model = broad.rma, lab = c("narrow", "broad"))
 
 ## @knitr Fig2
 pdf("figure/inf_epi_rma.pdf", width = 3.7, height = 6)
-plot_effect_sizes(habitData, meanModel.Epifaunal)
+plot_effect_sizes(habitData, meanModel.Epifaunal, lab = c("infauna", "epifauna"))
 dev.off()
-plot_effect_sizes(habitData, meanModel.Epifaunal)
+plot_effect_sizes(habitData, meanModel.Epifaunal, lab = c("infauna", "epifauna"))
 
 # now fix up the labels (spacing and the et al.s)
 
