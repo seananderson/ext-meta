@@ -127,7 +127,7 @@ names(extMag2)[6]<-paste(names(extMag2)[6], "PBDB", sep=".")
 proxy<-read.csv("../data/Hannisdal and Peters data with stage IDs.csv", na.strings="?")
 
 pdf("figure/detrending-plots.pdf")
-proxy$del.34S <- with(proxy, detrend_ts(top, del.34S, "Hannisdal and Peters d34S"))
+#proxy$del.34S <- with(proxy, detrend_ts(top, del.34S, "Hannisdal and Peters d34S"))
 
 
 ######new sealevel data
@@ -343,8 +343,8 @@ gr$Binned_Age <- round(gr$Binned_Age, 2)
 ext$Binned_Age <- round(ext$startTime.Ma, 2)
 d18Odat <- gr[gr$data_subset == "All" & gr$Binned_Age < 500,c("Binned_Age", "mean_d18O")]
 d13Cdat <- gr[gr$data_subset == "All" & gr$Binned_Age < 500,c("Binned_Age", "mean_d13C")]
-d18Odat$mean_d18O <- with(d18dat, detrend_ts(Binned_Age, mean_d18O, "Grossman d18O (All)"))
-d13Cdat$mean_d13C <- with(d13Cdat, detrend_ts(Binned_Age, mean_d13C, "Grossman d13C (All)"))
+d18Odat$mean_d18O <- with(d18Odat, detrend_ts(Binned_Age, mean_d18O, "Grossman d18O (All)"))
+#d13Cdat$mean_d13C <- with(d13Cdat, detrend_ts(Binned_Age, mean_d13C, "Grossman d13C (All)"))
 dev.off()
 
 ext <- plyr::join(ext, d18Odat)

@@ -216,8 +216,6 @@ dev.off()
 plot_effect_sizes(broadData, rma.model = broad.rma, lab = c("narrow", "broad"))
 ```
 
-![plot of chunk Fig1](figure/Fig1.png) 
-
 
 
 
@@ -381,11 +379,6 @@ dev.off()
 
 ```r
 plot_effect_sizes(habitData, meanModel.Epifaunal, lab = c("infauna", "epifauna"))
-```
-
-![plot of chunk Fig2](figure/Fig2.png) 
-
-```r
 
 # now fix up the labels (spacing and the et al.s)
 ```
@@ -416,33 +409,33 @@ covModel.Broad.RMA
 ## 
 ## Mixed-Effects Model (k = 70; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.1756 (SE = 0.1017)
-## tau (square root of estimated tau^2 value):             0.4190
-## I^2 (residual heterogeneity / unaccounted variability): 30.07%
-## H^2 (unaccounted variability / sampling variability):   1.43
+## tau^2 (estimated amount of residual heterogeneity):     0.1802 (SE = 0.1027)
+## tau (square root of estimated tau^2 value):             0.4245
+## I^2 (residual heterogeneity / unaccounted variability): 30.66%
+## H^2 (unaccounted variability / sampling variability):   1.44
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 64) = 95.9398, p-val = 0.0060
+## QE(df = 64) = 97.0330, p-val = 0.0049
 ## 
 ## Test of Moderators (coefficient(s) 2,3,4,5,6): 
-## QM(df = 5) = 8.5544, p-val = 0.1282
+## QM(df = 5) = 7.3846, p-val = 0.1936
 ## 
 ## Model Results:
 ## 
 ##                         estimate      se     zval    pval    ci.lb   ci.ub
-## intrcpt                   1.0250  0.1281   8.0027  <.0001   0.7739  1.2760
-## OA                        0.3907  0.2913   1.3413  0.1798  -0.1802  0.9615
-## BC.extinction.ratePBDB   -0.2911  1.1654  -0.2498  0.8027  -2.5753  1.9931
-## del.18O                  -0.0338  0.1102  -0.3070  0.7588  -0.2498  0.1821
-## del.34S                  -0.0554  0.0299  -1.8548  0.0636  -0.1139  0.0031
-## del.13C                   0.0064  0.1176   0.0547  0.9564  -0.2241  0.2369
-##                            
-## intrcpt                 ***
-## OA                         
-## BC.extinction.ratePBDB     
-## del.18O                    
-## del.34S                   .
-## del.13C                    
+## intrcpt                   2.2975  0.9128   2.5169  0.0118   0.5084  4.0866
+## OA                        0.3452  0.2996   1.1522  0.2492  -0.2420  0.9323
+## BC.extinction.ratePBDB   -0.1281  1.1695  -0.1096  0.9128  -2.4202  2.1640
+## del.18O                  -0.0360  0.1112  -0.3232  0.7465  -0.2539  0.1820
+## del.34S                  -0.0645  0.0381  -1.6932  0.0904  -0.1391  0.0102
+## del.13C                  -0.0174  0.1182  -0.1475  0.8828  -0.2490  0.2142
+##                          
+## intrcpt                 *
+## OA                       
+## BC.extinction.ratePBDB   
+## del.18O                  
+## del.34S                 .
+## del.13C                  
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -480,25 +473,25 @@ covModel.Epifaunal.rma
 ## 
 ## Mixed-Effects Model (k = 43; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.4031 (SE = 0.1837)
-## tau (square root of estimated tau^2 value):             0.6349
-## I^2 (residual heterogeneity / unaccounted variability): 54.31%
-## H^2 (unaccounted variability / sampling variability):   2.19
+## tau^2 (estimated amount of residual heterogeneity):     0.4001 (SE = 0.1829)
+## tau (square root of estimated tau^2 value):             0.6326
+## I^2 (residual heterogeneity / unaccounted variability): 54.12%
+## H^2 (unaccounted variability / sampling variability):   2.18
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 38) = 81.8940, p-val < .0001
+## QE(df = 38) = 81.6218, p-val < .0001
 ## 
 ## Test of Moderators (coefficient(s) 2,3,4,5): 
-## QM(df = 4) = 0.7055, p-val = 0.9506
+## QM(df = 4) = 0.8024, p-val = 0.9381
 ## 
 ## Model Results:
 ## 
 ##                         estimate      se     zval    pval    ci.lb   ci.ub
-## intrcpt                   0.0069  0.2555   0.0270  0.9785  -0.4938  0.5076
-## OA                        0.2631  0.4037   0.6518  0.5145  -0.5281  1.0544
-## BC.extinction.ratePBDB   -0.3165  1.2417  -0.2549  0.7988  -2.7502  2.1172
-## del.18O                   0.0253  0.1709   0.1482  0.8822  -0.3096  0.3603
-## del.34S                  -0.0046  0.0575  -0.0795  0.9367  -0.1173  0.1082
+## intrcpt                  -0.5741  1.8218  -0.3151  0.7527  -4.1449  2.9966
+## OA                        0.3267  0.4023   0.8120  0.4168  -0.4618  1.1152
+## BC.extinction.ratePBDB   -0.2027  1.2634  -0.1605  0.8725  -2.6790  2.2735
+## del.18O                   0.0661  0.1704   0.3877  0.6983  -0.2679  0.4000
+## del.34S                   0.0271  0.0866   0.3126  0.7546  -0.1426  0.1967
 ##                          
 ## intrcpt                  
 ## OA                       
