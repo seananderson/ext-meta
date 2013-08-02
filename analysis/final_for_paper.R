@@ -191,6 +191,8 @@ meanModel.Epifaunal
 habitDataGood <- habitData[which(!(is.na(habitData$BC.extinction.ratePBDB))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$lnorReg))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$del.34S))),]
+habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$del.18O))),]
+habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$del.13C))),]
 
 covModel.Epifaunal.rma <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
                              mods =~ OA  + BC.extinction.ratePBDB + del.18O + del.34S)
