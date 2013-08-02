@@ -5,7 +5,7 @@
 ## from NESCent Working Group for publication
 ##
 ## Created:       Jan 13, 2012
-## Last modified: Jul 31, 2013
+## Last modified: Aug 02, 2013
 ## Purpose:       Try plotting the effect sizes against the raw data.
 ## Additional description: More analyses can be found in singleLnOr_R_analyses/singleLnOr_rma.R
 ## Changelog
@@ -140,14 +140,14 @@ broad.rma
 broadDataExtinction <- broadData[which(!is.na(broadData$BC.extinction.ratePBDB)),]
 
 covModel.Broad.RMA <-rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~OA+ BC.extinction.ratePBDB + 
-                           d18OresidualMean + del.34S +del.13C)
+                           del.18O + del.34S +del.13C)
 
 covModel.Broad.RMA 
 
 write.csv(coef(covModel.Broad.RMA), "./broadCoefTable.csv", row.names=T)
 
 broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust=F, std=T)+
-  scale_x_discrete(labels=c("Extinction Rate", expression(delta^18*O~Residuals), expression(delta^13*C), expression(delta^34*S), "Acidification")) +
+  scale_x_discrete(labels=c("Extinction Rate", expression(delta^18*O), expression(delta^13*C), expression(delta^34*S), "Acidification")) +
   annotate("text", x=5, y=-0.4, label="A)")+
   ylim(c(-0.5,0.5)) +
   coord_flip() +
@@ -193,14 +193,14 @@ habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$lnorReg))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$del.34S))),]
 
 covModel.Epifaunal.rma <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
-                             mods =~ OA  + BC.extinction.ratePBDB + d18OresidualMean + del.34S)
+                             mods =~ OA  + BC.extinction.ratePBDB + del.18O + del.34S)
 
 covModel.Epifaunal.rma 
 write.csv(coef(covModel.Epifaunal.rma), "./epiCoefTable.csv", row.names=T)
 
 
 epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust=F, std=T)+
-  scale_x_discrete(labels=c("Extinction Rate",  expression(delta^18*O~Residuals), expression(delta^34*S), "Acidification")) +
+  scale_x_discrete(labels=c("Extinction Rate",  expression(delta^18*O), expression(delta^34*S), "Acidification")) +
   annotate("text", x=4, y=-1.5, label="B)")+
   ylim(c(-1.75,1.75)) +
   coord_flip() + 
@@ -213,13 +213,13 @@ grid.arrange(broadCoefPlot+theme_bw(base_size=18), epiCoefPlot+theme_bw(base_siz
 ## @knitr Fig5
 
 ####What are the marginal effects from the model
-del18marg <- marginalLine(covModel.Epifaunal.rma, "d18OresidualMean", habitDataGood, robust=F)+ 
+del18marg <- marginalLine(covModel.Epifaunal.rma, "del.18O", habitDataGood, robust=F)+ 
   xlab("\n Detrended Delta O18") + 
   ylab("Component + Residual + Intercept Log Odds\n Ratios for Detrended Delta O18\n") +
   annotate("text", x=-4, y=8.75, label="A)") + scale_color_discrete(guide="none") +
   theme_bw(base_size=18)
 
-del18MargData<- marginalData(covModel.Epifaunal.rma, "d18OresidualMean", habitDataGood)
+del18MargData<- marginalData(covModel.Epifaunal.rma, "del.18O", habitDataGood)
 write.csv(del18MargData, "./del18MargData.csv", row.names=F)
 
 del34marg <- marginalLine(covModel.Epifaunal.rma, "del.34S", habitDataGood, robust=F) + 

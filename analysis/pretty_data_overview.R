@@ -1,22 +1,9 @@
-# ====================================================================
-# Created by:    Sean Anderson, sean@seananderson.ca
-# Created:       Oct 30, 2012
-# Last modified: Jul 25, 2013
 # Purpose:       Try plotting the effect sizes against the raw data.
-# ====================================================================
-
-# need OA events
-# need del.34s
-# BC.extinction.ratePBDB
-# d18OresidualMean
-
-# effect sizes and variances
-# time period
 
 #Figure 2: Sean's summary graph of (A) log-adds geo range (i.e., GSA slide 10), (2) log-odds life habit (i.e., GSA slide 14), (3) ext rates, (4) del18O residuals, (5) del13C, (6) del34S, (7) OAE, and (8) predation through time
 
-#covModel.Broad.RMA <-rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~OA+ BC.extinction.ratePBDB + 
-  #d18OresidualMean + del.34S +del.13C)
+
+d18dat <- gr[gr$data_subset == "All" ,c("Binned_Age", "mean_d18O")]
 
 #####
 source("../r/data_clean_merge.r")
@@ -121,20 +108,19 @@ col.df <- col.df[!duplicated(col.df[,c("study.ID", "study_col", "effect_type")])
 with(volcbolide2, plot(Midpt, rep(1, nrow(volcbolide2)), pch = c(21, 19)[OA+1], xlim = xlim, axes = F, xlab = "", col = c("#00000020", "#00000080")[OA+1], cex = 1.5, ylab = ""))
 ylabel(expression((c)~OA~Event))
 
-#with(sealevel, plot(Time..my., del.18O, type = "l", xlim = xlim, axes = F, xlab = "", col = line_col))
-with(subset(veizer, StageMed <= 500), plot(StageMed, d18Oresidual, type = "l", xlim = xlim, axes = F, xlab = "", col = line_col, ylab = ""))
-ylabel(expression((d)~delta^18*O~residuals))
+with(d18Odat, plot(Binned_Age, mean_d18O, type = "l", xlim = xlim, axes = F, xlab = "", col = line_col, ylab = ""))
+ylabel(expression((d)~delta^18*O~residual))
 #ylabel("residuals")
-with(subset(veizer, StageMed <= 500), ann(StageMed, d18Oresidual))
+with(d18Odat, ann(Binned_Age, mean_d18O))
 
 
-with(sealevel, plot(Time..my., del.13C, type = "l", xlim = xlim, axes = F, xlab = "", col = line_col, ylab = ""))
-ylabel(expression((e)~delta^13*C))
-with(sealevel, ann(Time..my., del.13C))
+with(d13Cdat, plot(Binned_Age, mean_d13C, type = "l", xlim = xlim, axes = F, xlab = "", col = line_col, ylab = ""))
+ylabel(expression((e)~delta^13*C~residual))
+with(d13Cdat, ann(Binned_Age, mean_d13C))
 
-with(sealevel, plot(Time..my., del.34S, type = "l", xlim = xlim, axes = F, xlab = "", col = line_col, ylab = ""))
-ylabel(expression((f)~delta^34*S))
-with(sealevel, ann(Time..my., del.34S))
+with(na.omit(proxy[,c("top", "del.34S")]), plot(top, del.34S, type = "l", xlim = xlim, axes = F, xlab = "", col = line_col, ylab = ""))
+ylabel(expression((f)~delta^34*S~residual))
+with(proxy, ann(top, del.34S))
 
 
 with(extMag, plot(Midpoint..Ma., BC.extinction.rate, xlim = xlim, axes = F, type = "l", xlab = "", col = line_col, ylab = ""))

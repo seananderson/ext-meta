@@ -26,6 +26,19 @@ library(plyr)
 #read in a set of formulate for calculating effect sizes and variances
 source("../r/conversions.R")
 
+detrend_ts <- function(x, y, label = "") {
+  par(mfrow = c(2, 1))
+  d <- data.frame(x, y)
+  d <- na.omit(d)
+  plot(d, main = label, type = "o", xlim = c(500, 0), ylab = label, xlab = "Geologic Time (Ma)")
+  m <- lm(y ~ x, na.action = na.exclude)
+  res.m <- as.numeric(residuals(m, na.action = na.exclude))
+  plot(x, res.m, main = paste(label, "detrended"), type = "o", xlim = c(500, 0), ylab = "Residual", xlab = "Geologic Time (Ma)")
+  abline(h = 0)
+  res.m
+}
+
+
 #######
 
 #load in the dataext-meta-20121005.csv
@@ -112,6 +125,9 @@ names(extMag2)[6]<-paste(names(extMag2)[6], "PBDB", sep=".")
 ######proxy data
 #proxy<-read.csv("../data/180 13C Sr 34S sealevel.csv")
 proxy<-read.csv("../data/Hannisdal and Peters data with stage IDs.csv", na.strings="?")
+
+pdf("figure/detrending-plots.pdf")
+proxy$del.34S <- with(proxy, detrend_ts(top, del.34S, "Hannisdal and Peters d34S"))
 
 
 ######new sealevel data
@@ -323,16 +339,23 @@ for(i in 2:nrow(ext)){
 
 # bring in new d18O and d13C data:
 gr <- read.csv("../data/Grossman_d18O.d13C_with_high.lat.csv")
-ext$Binned_Age <- round(ext$startTime.Ma, 2)
 gr$Binned_Age <- round(gr$Binned_Age, 2)
-#ext <- plyr::join(ext, gr[gr$data_subset == "All" ,c("Binned_Age", "mean_d18O")])
-#ext <- plyr::join(ext, gr[gr$data_subset == "Tropical" ,c("Binned_Age", "mean_d18O")])
-#ext <- plyr::join(ext, gr[gr$data_subset == "All" ,c("Binned_Age", "mean_d13C")])
-#ext <- plyr::join(ext, gr[gr$data_subset == "Tropical" ,c("Binned_Age", "mean_d13C")])
-#ext$del.18O <- ext$mean_d18O
-#ext$del.13C <- ext$mean_d13C
-#ext$mean_d18O <- NULL
-#ext$mean_d13C <- NULL
+ext$Binned_Age <- round(ext$startTime.Ma, 2)
+d18Odat <- gr[gr$data_subset == "All" & gr$Binned_Age < 500,c("Binned_Age", "mean_d18O")]
+d13Cdat <- gr[gr$data_subset == "All" & gr$Binned_Age < 500,c("Binned_Age", "mean_d13C")]
+d18Odat$mean_d18O <- with(d18dat, detrend_ts(Binned_Age, mean_d18O, "Grossman d18O (All)"))
+d13Cdat$mean_d13C <- with(d13Cdat, detrend_ts(Binned_Age, mean_d13C, "Grossman d13C (All)"))
+dev.off()
+
+ext <- plyr::join(ext, d18Odat)
+ext <- plyr::join(ext, d13Cdat)
+
+ext$del.18O <- ext$mean_d18O
+ext$del.13C <- ext$mean_d13C
+ext$mean_d18O <- NULL # clean up
+ext$mean_d13C <- NULL # clean up        
+
+
 
 ###################################
 ##### WRITE THE CLEAN DATA
