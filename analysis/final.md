@@ -401,41 +401,48 @@ broadDataExtinction <- broadData[which(!is.na(broadData$BC.extinction.ratePBDB))
     ]
 
 covModel.Broad.RMA <- rma(yi = lnorReg, vi = vlnorReg, data = broadDataExtinction, 
-    mods = ~OA + BC.extinction.ratePBDB + d18OresidualMean + del.34S + del.13C)
+    mods = ~OA + BC.extinction.ratePBDB + del.18O + del.34S + del.13C)
+```
+
+```
+## Warning: Studies with NAs omitted from model fitting.
+```
+
+```r
 
 covModel.Broad.RMA
 ```
 
 ```
 ## 
-## Mixed-Effects Model (k = 73; tau^2 estimator: REML)
+## Mixed-Effects Model (k = 70; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.2267 (SE = 0.1100)
-## tau (square root of estimated tau^2 value):             0.4761
-## I^2 (residual heterogeneity / unaccounted variability): 36.20%
-## H^2 (unaccounted variability / sampling variability):   1.57
+## tau^2 (estimated amount of residual heterogeneity):     0.1756 (SE = 0.1017)
+## tau (square root of estimated tau^2 value):             0.4190
+## I^2 (residual heterogeneity / unaccounted variability): 30.07%
+## H^2 (unaccounted variability / sampling variability):   1.43
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 67) = 107.6431, p-val = 0.0012
+## QE(df = 64) = 95.9398, p-val = 0.0060
 ## 
 ## Test of Moderators (coefficient(s) 2,3,4,5,6): 
-## QM(df = 5) = 6.9505, p-val = 0.2243
+## QM(df = 5) = 8.5544, p-val = 0.1282
 ## 
 ## Model Results:
 ## 
 ##                         estimate      se     zval    pval    ci.lb   ci.ub
-## intrcpt                   1.0323  0.1557   6.6312  <.0001   0.7272  1.3374
-## OA                        0.2544  0.3187   0.7981  0.4248  -0.3703  0.8790
-## BC.extinction.ratePBDB   -0.1361  1.0567  -0.1287  0.8976  -2.2072  1.9351
-## d18OresidualMean         -0.1081  0.2033  -0.5317  0.5949  -0.5066  0.2904
-## del.34S                  -0.0507  0.0394  -1.2878  0.1978  -0.1279  0.0265
-## del.13C                  -0.1084  0.1092  -0.9926  0.3209  -0.3226  0.1057
+## intrcpt                   1.0250  0.1281   8.0027  <.0001   0.7739  1.2760
+## OA                        0.3907  0.2913   1.3413  0.1798  -0.1802  0.9615
+## BC.extinction.ratePBDB   -0.2911  1.1654  -0.2498  0.8027  -2.5753  1.9931
+## del.18O                  -0.0338  0.1102  -0.3070  0.7588  -0.2498  0.1821
+## del.34S                  -0.0554  0.0299  -1.8548  0.0636  -0.1139  0.0031
+## del.13C                   0.0064  0.1176   0.0547  0.9564  -0.2241  0.2369
 ##                            
 ## intrcpt                 ***
 ## OA                         
 ## BC.extinction.ratePBDB     
-## d18OresidualMean           
-## del.34S                    
+## del.18O                    
+## del.34S                   .
 ## del.13C                    
 ## 
 ## ---
@@ -447,7 +454,7 @@ covModel.Broad.RMA
 write.csv(coef(covModel.Broad.RMA), "./broadCoefTable.csv", row.names = T)
 
 broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust = F, std = T) + scale_x_discrete(labels = c("Extinction Rate", 
-    expression(delta^18 * O ~ Residuals), expression(delta^13 * C), expression(delta^34 * 
+    expression(delta^18 * O), expression(delta^13 * C), expression(delta^34 * 
         S), "Acidification")) + annotate("text", x = 5, y = -0.4, label = "A)") + 
     ylim(c(-0.5, 0.5)) + coord_flip() + annotate("text", x = 5.5, y = -0.35, 
     label = "Favours narrow") + annotate("text", x = 5.5, y = 0.35, label = "Favours broad")
@@ -463,40 +470,47 @@ habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$lnorReg))), ]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$del.34S))), ]
 
 covModel.Epifaunal.rma <- rma(yi = lnorReg, vi = vlnorReg, data = habitDataGood, 
-    mods = ~OA + BC.extinction.ratePBDB + d18OresidualMean + del.34S)
+    mods = ~OA + BC.extinction.ratePBDB + del.18O + del.34S)
+```
+
+```
+## Warning: Studies with NAs omitted from model fitting.
+```
+
+```r
 
 covModel.Epifaunal.rma
 ```
 
 ```
 ## 
-## Mixed-Effects Model (k = 46; tau^2 estimator: REML)
+## Mixed-Effects Model (k = 43; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.2996 (SE = 0.1493)
-## tau (square root of estimated tau^2 value):             0.5474
-## I^2 (residual heterogeneity / unaccounted variability): 47.05%
-## H^2 (unaccounted variability / sampling variability):   1.89
+## tau^2 (estimated amount of residual heterogeneity):     0.4031 (SE = 0.1837)
+## tau (square root of estimated tau^2 value):             0.6349
+## I^2 (residual heterogeneity / unaccounted variability): 54.31%
+## H^2 (unaccounted variability / sampling variability):   2.19
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 41) = 74.1871, p-val = 0.0011
+## QE(df = 38) = 81.8940, p-val < .0001
 ## 
 ## Test of Moderators (coefficient(s) 2,3,4,5): 
-## QM(df = 4) = 10.9774, p-val = 0.0268
+## QM(df = 4) = 0.7055, p-val = 0.9506
 ## 
 ## Model Results:
 ## 
-##                         estimate      se     zval    pval    ci.lb
-## intrcpt                  -0.0243  0.1664  -0.1459  0.8840  -0.3504
-## OA                       -0.3991  0.4310  -0.9258  0.3545  -1.2439
-## BC.extinction.ratePBDB   -0.7052  0.9818  -0.7183  0.4726  -2.6296
-## d18OresidualMean          0.7602  0.2530   3.0054  0.0027   0.2644
-## del.34S                  -0.4198  0.1592  -2.6376  0.0084  -0.7318
-##                           ci.ub    
-## intrcpt                  0.3019    
-## OA                       0.4458    
-## BC.extinction.ratePBDB   1.2192    
-## d18OresidualMean         1.2560  **
-## del.34S                 -0.1079  **
+##                         estimate      se     zval    pval    ci.lb   ci.ub
+## intrcpt                   0.0069  0.2555   0.0270  0.9785  -0.4938  0.5076
+## OA                        0.2631  0.4037   0.6518  0.5145  -0.5281  1.0544
+## BC.extinction.ratePBDB   -0.3165  1.2417  -0.2549  0.7988  -2.7502  2.1172
+## del.18O                   0.0253  0.1709   0.1482  0.8822  -0.3096  0.3603
+## del.34S                  -0.0046  0.0575  -0.0795  0.9367  -0.1173  0.1082
+##                          
+## intrcpt                  
+## OA                       
+## BC.extinction.ratePBDB   
+## del.18O                  
+## del.34S                  
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -507,16 +521,11 @@ write.csv(coef(covModel.Epifaunal.rma), "./epiCoefTable.csv", row.names = T)
 
 
 epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust = F, std = T) + 
-    scale_x_discrete(labels = c("Extinction Rate", expression(delta^18 * O ~ 
-        Residuals), expression(delta^34 * S), "Acidification")) + annotate("text", 
-    x = 4, y = -1.5, label = "B)") + ylim(c(-1.75, 1.75)) + xlim(c(1, 6)) + 
-    coord_flip() + annotate("text", x = 4.5, y = -0.5, label = "Favours\ninfXXna") + 
-    annotate("text", x = 4.5, y = 0.5, label = "Favours\nepifauna")
-```
-
-```
-## Scale for 'x' is already present. Adding another scale for 'x', which will
-## replace the existing scale.
+    scale_x_discrete(labels = c("Extinction Rate", expression(delta^18 * O), 
+        expression(delta^34 * S), "Acidification")) + annotate("text", x = 4, 
+    y = -1.5, label = "B)") + ylim(c(-1.75, 1.75)) + coord_flip() + annotate("text", 
+    x = 4.5, y = -0.5, label = "Favours\ninfauna") + annotate("text", x = 4.5, 
+    y = 0.5, label = "Favours\nepifauna")
 ```
 
 
@@ -533,8 +542,10 @@ grid.arrange(broadCoefPlot + theme_bw(base_size = 18), epiCoefPlot + theme_bw(ba
 ```
 
 ```
-## Error: Discrete value supplied to continuous scale
+## Warning: is.na() applied to non-(list or vector) of type 'expression'
 ```
+
+![plot of chunk Fig4](figure/Fig4.png) 
 
 
 Figure 5
@@ -542,19 +553,47 @@ Figure 5
 
 ```r
 #### What are the marginal effects from the model
-del18marg <- marginalLine(covModel.Epifaunal.rma, "d18OresidualMean", habitDataGood, 
+del18marg <- marginalLine(covModel.Epifaunal.rma, "del.18O", habitDataGood, 
     robust = F) + xlab("\n Detrended Delta O18") + ylab("Component + Residual + Intercept Log Odds\n Ratios for Detrended Delta O18\n") + 
     annotate("text", x = -4, y = 8.75, label = "A)") + scale_color_discrete(guide = "none") + 
     theme_bw(base_size = 18)
+```
 
-del18MargData <- marginalData(covModel.Epifaunal.rma, "d18OresidualMean", habitDataGood)
+```
+## Error: arguments imply differing number of rows: 43, 46
+```
+
+```r
+
+del18MargData <- marginalData(covModel.Epifaunal.rma, "del.18O", habitDataGood)
+```
+
+```
+## Error: arguments imply differing number of rows: 43, 46
+```
+
+```r
 write.csv(del18MargData, "./del18MargData.csv", row.names = F)
 
 del34marg <- marginalLine(covModel.Epifaunal.rma, "del.34S", habitDataGood, 
     robust = F) + xlab("\n Delta S34") + ylab("Component + Residual + Intercept Log Odds\n Ratios for Delta 34S\n") + 
     annotate("text", x = 13.75, y = 3.375, label = "B)") + theme_bw(base_size = 18)
+```
+
+```
+## Error: arguments imply differing number of rows: 43, 46
+```
+
+```r
 
 del34margData <- marginalData(covModel.Epifaunal.rma, "del.34S", habitDataGood)
+```
+
+```
+## Error: arguments imply differing number of rows: 43, 46
+```
+
+```r
 write.csv(del34margData, "./del34margData.csv", row.names = F)
 
 # Extract Legend
@@ -581,248 +620,12 @@ Appendix Jackknife Figures
 ========================================================
 
 ```
-## Using as id variables
+## Error: arguments imply differing number of rows: 70, 73
 ```
 
 ```
-## Using as id variables
+## Error: arguments imply differing number of rows: 43, 46
 ```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-![plot of chunk jackknife.figs](figure/jackknife.figs1.png) 
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-![plot of chunk jackknife.figs](figure/jackknife.figs2.png) 
 
 
 
