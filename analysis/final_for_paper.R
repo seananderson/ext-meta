@@ -150,12 +150,12 @@ covModel.Broad.RMA
 write.csv(coef(covModel.Broad.RMA), "./broadCoefTable.csv", row.names=T)
 
 broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust=F, std=T)+
-  scale_x_discrete(labels=c("Extinction Rate", expression(delta^18*O), expression(delta^13*C), expression(delta^34*S), "Acidification")) +
+  scale_x_discrete(labels=c("Extinction Rate", expression(delta^18*O), expression(delta^13*C), expression(delta^34*S), "Acidification"), expand = c(0.15, 0)) +
   annotate("text", x=5, y=-0.4, label="A)")+
   ylim(c(-0.5,0.5)) +
   coord_flip() +
-  annotate("text", x=5.5, y=-0.35, label="Favours narrow")+
-  annotate("text", x=5.5, y=0.35, label="Favours broad")
+  annotate("text", x=5.6, y=-0.35, label="Favours\nnarrow")+
+  annotate("text", x=5.6, y=0.35, label="Favours\nbroad")
 
 ## @knitr sectionbreak
 ########################################
@@ -204,12 +204,12 @@ write.csv(coef(covModel.Epifaunal.rma), "./epiCoefTable.csv", row.names=T)
 
 
 epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust=F, std=T)+
-  scale_x_discrete(labels=c("Extinction Rate",  expression(delta^18*O), expression(delta^34*S), "Acidification")) +
-  annotate("text", x=4, y=-1.5, label="B)")+
-  ylim(c(-1.75,1.75)) +
+  scale_x_discrete(labels=c("Extinction Rate",  expression(delta^18*O), expression(delta^34*S), "Acidification"), expand = c(0.15, 0)) +
+  annotate("text", x=4, y=-1.0, label="B)")+
+  ylim(c(-1.25,1.25)) +
   coord_flip() + 
-  annotate("text", x=4.5, y=-.5, label="Favours\ninfauna")+
-  annotate("text", x=4.5, y=.5, label="Favours\nepifauna")
+  annotate("text", x=4.6, y=-.7, label="Favours\ninfauna")+
+  annotate("text", x=4.6, y=.7, label="Favours\nepifauna")
 
 ## @knitr Fig4
 grid.arrange(broadCoefPlot+theme_bw(base_size=18), epiCoefPlot+theme_bw(base_size=18), ncol=2)
