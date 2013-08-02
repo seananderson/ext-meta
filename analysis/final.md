@@ -468,16 +468,11 @@ habitDataGood <- habitData[which(!(is.na(habitData$BC.extinction.ratePBDB))),
     ]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$lnorReg))), ]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$del.34S))), ]
+habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$del.18O))), ]
+habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$del.13C))), ]
 
 covModel.Epifaunal.rma <- rma(yi = lnorReg, vi = vlnorReg, data = habitDataGood, 
     mods = ~OA + BC.extinction.ratePBDB + del.18O + del.34S)
-```
-
-```
-## Warning: Studies with NAs omitted from model fitting.
-```
-
-```r
 
 covModel.Epifaunal.rma
 ```
@@ -557,43 +552,15 @@ del18marg <- marginalLine(covModel.Epifaunal.rma, "del.18O", habitDataGood,
     robust = F) + xlab("\n Detrended Delta O18") + ylab("Component + Residual + Intercept Log Odds\n Ratios for Detrended Delta O18\n") + 
     annotate("text", x = -4, y = 8.75, label = "A)") + scale_color_discrete(guide = "none") + 
     theme_bw(base_size = 18)
-```
-
-```
-## Error: arguments imply differing number of rows: 43, 46
-```
-
-```r
 
 del18MargData <- marginalData(covModel.Epifaunal.rma, "del.18O", habitDataGood)
-```
-
-```
-## Error: arguments imply differing number of rows: 43, 46
-```
-
-```r
 write.csv(del18MargData, "./del18MargData.csv", row.names = F)
 
 del34marg <- marginalLine(covModel.Epifaunal.rma, "del.34S", habitDataGood, 
     robust = F) + xlab("\n Delta S34") + ylab("Component + Residual + Intercept Log Odds\n Ratios for Delta 34S\n") + 
     annotate("text", x = 13.75, y = 3.375, label = "B)") + theme_bw(base_size = 18)
-```
-
-```
-## Error: arguments imply differing number of rows: 43, 46
-```
-
-```r
 
 del34margData <- marginalData(covModel.Epifaunal.rma, "del.34S", habitDataGood)
-```
-
-```
-## Error: arguments imply differing number of rows: 43, 46
-```
-
-```r
 write.csv(del34margData, "./del34margData.csv", row.names = F)
 
 # Extract Legend
@@ -624,8 +591,138 @@ Appendix Jackknife Figures
 ```
 
 ```
-## Error: arguments imply differing number of rows: 43, 46
+## Using as id variables
 ```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+```
+## Using as id variables
+```
+
+![plot of chunk jackknife.figs](figure/jackknife.figs.png) 
 
 
 
