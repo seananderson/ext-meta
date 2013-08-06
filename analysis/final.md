@@ -407,35 +407,35 @@ covModel.Broad.RMA
 
 ```
 ## 
-## Mixed-Effects Model (k = 70; tau^2 estimator: REML)
+## Mixed-Effects Model (k = 43; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.1756 (SE = 0.1017)
-## tau (square root of estimated tau^2 value):             0.4190
-## I^2 (residual heterogeneity / unaccounted variability): 30.07%
-## H^2 (unaccounted variability / sampling variability):   1.43
+## tau^2 (estimated amount of residual heterogeneity):     0.0766 (SE = 0.1078)
+## tau (square root of estimated tau^2 value):             0.2768
+## I^2 (residual heterogeneity / unaccounted variability): 14.76%
+## H^2 (unaccounted variability / sampling variability):   1.17
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 64) = 95.9398, p-val = 0.0060
+## QE(df = 37) = 47.6175, p-val = 0.1134
 ## 
 ## Test of Moderators (coefficient(s) 2,3,4,5,6): 
-## QM(df = 5) = 8.5544, p-val = 0.1282
+## QM(df = 5) = 10.7388, p-val = 0.0568
 ## 
 ## Model Results:
 ## 
-##                         estimate      se     zval    pval    ci.lb   ci.ub
-## intrcpt                   1.0250  0.1281   8.0027  <.0001   0.7739  1.2760
-## OA                        0.3907  0.2913   1.3413  0.1798  -0.1802  0.9615
-## BC.extinction.ratePBDB   -0.2911  1.1654  -0.2498  0.8027  -2.5753  1.9931
-## del.18O                  -0.0338  0.1102  -0.3070  0.7588  -0.2498  0.1821
-## del.34S                  -0.0554  0.0299  -1.8548  0.0636  -0.1139  0.0031
-## del.13C                   0.0064  0.1176   0.0547  0.9564  -0.2241  0.2369
-##                            
-## intrcpt                 ***
-## OA                         
-## BC.extinction.ratePBDB     
-## del.18O                    
-## del.34S                   .
-## del.13C                    
+##                         estimate      se     zval    pval    ci.lb
+## intrcpt                   1.1538  0.2113   5.4595  <.0001   0.7396
+## OA                        0.1191  0.3173   0.3752  0.7075  -0.5028
+## BC.extinction.ratePBDB   -0.1837  2.7645  -0.0665  0.9470  -5.6021
+## del.18O                  -0.1054  0.1938  -0.5439  0.5865  -0.4852
+## del.34S                  -0.1064  0.0473  -2.2486  0.0245  -0.1992
+## del.13C                  -0.2710  0.1498  -1.8087  0.0705  -0.5646
+##                           ci.ub     
+## intrcpt                  1.5680  ***
+## OA                       0.7409     
+## BC.extinction.ratePBDB   5.2346     
+## del.18O                  0.2744     
+## del.34S                 -0.0137    *
+## del.13C                  0.0227    .
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -471,33 +471,33 @@ covModel.Epifaunal.rma
 
 ```
 ## 
-## Mixed-Effects Model (k = 43; tau^2 estimator: REML)
+## Mixed-Effects Model (k = 23; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.4031 (SE = 0.1837)
-## tau (square root of estimated tau^2 value):             0.6349
-## I^2 (residual heterogeneity / unaccounted variability): 54.31%
-## H^2 (unaccounted variability / sampling variability):   2.19
+## tau^2 (estimated amount of residual heterogeneity):     0.4553 (SE = 0.2817)
+## tau (square root of estimated tau^2 value):             0.6748
+## I^2 (residual heterogeneity / unaccounted variability): 56.00%
+## H^2 (unaccounted variability / sampling variability):   2.27
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 38) = 81.8940, p-val < .0001
+## QE(df = 18) = 41.1549, p-val = 0.0014
 ## 
 ## Test of Moderators (coefficient(s) 2,3,4,5): 
-## QM(df = 4) = 0.7055, p-val = 0.9506
+## QM(df = 4) = 3.0546, p-val = 0.5487
 ## 
 ## Model Results:
 ## 
-##                         estimate      se     zval    pval    ci.lb   ci.ub
-## intrcpt                   0.0069  0.2555   0.0270  0.9785  -0.4938  0.5076
-## OA                        0.2631  0.4037   0.6518  0.5145  -0.5281  1.0544
-## BC.extinction.ratePBDB   -0.3165  1.2417  -0.2549  0.7988  -2.7502  2.1172
-## del.18O                   0.0253  0.1709   0.1482  0.8822  -0.3096  0.3603
-## del.34S                  -0.0046  0.0575  -0.0795  0.9367  -0.1173  0.1082
-##                          
-## intrcpt                  
-## OA                       
-## BC.extinction.ratePBDB   
-## del.18O                  
-## del.34S                  
+##                         estimate      se     zval    pval    ci.lb
+## intrcpt                   0.1056  0.5088   0.2075  0.8356  -0.8916
+## OA                       -0.4196  0.7752  -0.5412  0.5883  -1.9391
+## BC.extinction.ratePBDB    9.0415  9.2624   0.9762  0.3290  -9.1124
+## del.18O                   0.0543  0.3909   0.1388  0.8896  -0.7118
+## del.34S                  -0.1026  0.1077  -0.9527  0.3407  -0.3136
+##                           ci.ub   
+## intrcpt                  1.1028   
+## OA                       1.0999   
+## BC.extinction.ratePBDB  27.1954   
+## del.18O                  0.8203   
+## del.34S                  0.1084   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -526,6 +526,10 @@ grid.arrange(broadCoefPlot + theme_bw(base_size = 18), epiCoefPlot + theme_bw(ba
 
 ```
 ## Warning: is.na() applied to non-(list or vector) of type 'expression'
+```
+
+```
+## Warning: Removed 1 rows containing missing values (geom_segment).
 ```
 
 ```
@@ -638,139 +642,7 @@ Appendix Jackknife Figures
 ## Using as id variables
 ```
 
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
 ![plot of chunk jackknife.figs](figure/jackknife.figs1.png) 
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
-
-```
-## Using as id variables
-```
 
 ```
 ## Using as id variables
