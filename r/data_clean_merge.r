@@ -339,12 +339,12 @@ for(i in 2:nrow(ext)){
 
 # bring in new d18O and d13C data:
 gr <- read.csv("../data/Grossman_d18O.d13C_with_high.lat.csv")
-gr$Binned_Age <- round(gr$Binned_Age, 2)
-ext$Binned_Age <- round(ext$startTime.Ma, 2)
-d18Odat <- gr[gr$data_subset == "All" & gr$Binned_Age < 500,c("Binned_Age", "mean_d18O")]
-d13Cdat <- gr[gr$data_subset == "All" & gr$Binned_Age < 500,c("Binned_Age", "mean_d13C")]
-d18Odat$mean_d18O <- with(d18Odat, detrend_ts(Binned_Age, mean_d18O, "Grossman d18O (All)"))
-d13Cdat$mean_d13C <- with(d13Cdat, detrend_ts(Binned_Age, mean_d13C, "Grossman d13C (All)"))
+gr$Binned_top <- round(gr$Binned_top, 2)
+ext$Binned_top <- round(ext$startTime.Ma, 2)
+d18Odat <- gr[gr$data_subset == "All" & gr$Binned_top < 500,c("Binned_top", "mean_d18O")]
+d13Cdat <- gr[gr$data_subset == "All" & gr$Binned_top < 500,c("Binned_top", "mean_d13C")]
+d18Odat$mean_d18O <- with(d18Odat, detrend_ts(Binned_top, mean_d18O, "Grossman d18O (All)"))
+d13Cdat$mean_d13C <- with(d13Cdat, detrend_ts(Binned_top, mean_d13C, "Grossman d13C (All)"))
 dev.off()
 
 ext <- plyr::join(ext, d18Odat)
