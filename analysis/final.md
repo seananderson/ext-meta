@@ -216,6 +216,8 @@ dev.off()
 plot_effect_sizes(broadData, rma.model = broad.rma, lab = c("narrow", "broad"))
 ```
 
+![plot of chunk Fig1](figure/Fig1.png) 
+
 
 
 
@@ -379,6 +381,11 @@ dev.off()
 
 ```r
 plot_effect_sizes(habitData, meanModel.Epifaunal, lab = c("infauna", "epifauna"))
+```
+
+![plot of chunk Fig2](figure/Fig2.png) 
+
+```r
 
 # now fix up the labels (spacing and the et al.s)
 ```
