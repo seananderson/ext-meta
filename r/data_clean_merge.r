@@ -114,13 +114,6 @@ getTimeRange<-function(startStage, endStage){
   return(c(startTime.Ma=startTime.Ma, endTime.Ma=endTime.Ma))
 }
 
-# Proxy data:
-# [pr]oxy [d]ata
-prd <- read.csv("../data/Prokoph_data_9.2013.csv")
-prd <- subset(prd, data_subset == "All")
-
-# Sean stopped working here on 2013-09-21 
-
 
 #####volvacanism and bollide impacts
 #first, pull in volcanism and bolides
@@ -136,7 +129,12 @@ names(extMag2)[6]<-paste(names(extMag2)[6], "PBDB", sep=".")
 
 ######proxy data
 #proxy<-read.csv("../data/180 13C Sr 34S sealevel.csv")
-proxy<-read.csv("../data/Hannisdal and Peters data with stage IDs.csv", na.strings="?")
+#proxy<-read.csv("../data/Hannisdal and Peters data with stage IDs.csv", na.strings="?")
+
+proxy <- read.csv("../data/Prokoph_data_9.2013.csv")
+proxy <- subset(proxy, data_subset == "All")
+proxy <- rename(proxy, c("mean_d34S" = "del.34S", "Binned_top" = "top"))
+proxy <- proxy[order(proxy$top), ]
 
 pdf("figure/detrending-plots.pdf")
 proxy$del.34S <- with(proxy, detrend_ts(top, del.34S, "Hannisdal and Peters d34S"))
