@@ -42,7 +42,8 @@ detrend_ts <- function(x, y, label = "") {
 #######
 
 #load in the dataext-meta-20121005.csv
-ext<-read.csv("../data/ext-meta-20121030.csv", skip=1, na.strings=c("NA", "N/A", ".", ""))
+#ext<-read.csv("../data/ext-meta-20121030.csv", skip=1, na.strings=c("NA", "N/A", ".", ""))
+ext<-read.csv("../data/Meta-analysis-selectivity-data-2004-timescale.csv", skip=1, na.strings=c("NA", "N/A", ".", ""))
 
 #some problems with extra spaces
 ext$Trait.category<-gsub(" ", "", ext$Trait.category)
@@ -90,13 +91,17 @@ ext$Tax.level<-factor(ext$Tax.level)
 stageIDX<-which(names(ext) %in% c("Start.stage", "End.stage"))
 
 #read in the data set with the conversions between stage and time
-stageTime<-read.csv("../data/Stage vs time.csv")
+#stageTime<-read.csv("../data/Stage vs time.csv")
+stageTime <- read.csv("../data/stage-v-time-gradstein-2004-ts.csv")
+names(stageTime)[1] <- "End..Ma."
+names(stageTime)[2] <- "Start..Ma."
+names(stageTime)[3] <- "Bin.name"
 
 #A function to take a lookup pair of stages and get the entire range of stages in between
 getStageRange<-function(startStage, endStage){
   #debug
   #print(paste(startStage, endStage, "\n", sep=" "))
-  as.character(stageTime[which(stageTime$Bin.name==startStage):which(stageTime$Bin.name==endStage),]$Bin.name)  
+  as.character(stageTime[which(stageTime$Bin.name==startStage):which(stageTime$Bin.name==endStage),]$Bin.name)
 }
 
 #A function to take a lookup pair of stages and get the entire range of stages in between
@@ -105,9 +110,16 @@ getTimeRange<-function(startStage, endStage){
   #print(paste(startStage, endStage, "\n", sep=" "))
   startTime.Ma<-stageTime[which(stageTime$Bin.name %in% startStage),]$Start..Ma.
   endTime.Ma<-stageTime[which(stageTime$Bin.name %in% endStage),]$End..Ma.
-  
+
   return(c(startTime.Ma=startTime.Ma, endTime.Ma=endTime.Ma))
 }
+
+# Proxy data:
+# [pr]oxy [d]ata
+prd <- read.csv("../data/Prokoph_data_9.2013.csv")
+prd <- subset(prd, data_subset == "All")
+
+# Sean stopped working here on 2013-09-21 
 
 
 #####volvacanism and bollide impacts
@@ -145,64 +157,64 @@ counter <<- 0
 envtCols <- t(apply(ext[,stageIDX], 1, function(arow){
   counter <<- counter+1
   print(paste("row:",counter))
-  
-  #check for NAs 
+
+  #check for NAs
   flag<-0
   if(sum(is.na(arow))>0){
     flag<-1
     arow<-c("Recent", "Recent")
   }
-  
+
   #debug
   print(arow)
-  
+
   #check and see whether there were any volcanism or bolide impacts during these stages
   stageRange<-getStageRange(arow[1], arow[2])
 
   times<-getTimeRange(arow[1], arow[2])
-  
+
   #based on the stages, get the row numbers of the volcanism bolid data file
   vbIDX <- which(volcbolide$State.stage %in% stageRange)
   exIDX <- which(extMag$Stage %in% stageRange)
   exIDX2 <- which(extMag2$Bin.name %in% stageRange)
-  
+
   proxyIDX<-c(which(proxy$bottom >= times[1])[1] : #first time within the stage
               which(proxy$top >= times[2])[1] #last time within the stage
     )
   print(proxyIDX)
 
-# when using original proxy file - but times were misaligned  
+# when using original proxy file - but times were misaligned
 #  proxyIDX<-c(which(proxy$Time..my. <= times[1])[1], #first time within the stage
 #              which(proxy$Time..my. < times[2])[1]-1 #last time within the stage
 #  )
-  
+
   #note, because of the orientation of the sealevel table, we need some error checking for recent
   sl2 <-  which(sealevel$Time..my. < times[2])[1]
   if(is.na(sl2)) sl2 <- nrow(sealevel)+1
   sealevelIDX<-c(which(sealevel$Time..my. <= times[1])[1] : #first time within the stage
              sl2-1 #last time within the stage
     )
-  
-  
+
+
   #get the row numbers from the veizer file
   veizerIDX<-c(which(veizer$StageBottom >= times[1])[1], #first time within the stage
               which(veizer$StageTop > times[2])[1]-1 #last time within the stage
     )
-  
+
   #get the means for each column of the environmental data
   #rgh - kludge to turn a df into a vector, as colwise turns
   #out data frames
 #  envt<-t(colwise(mean)(proxy[proxyIDX,2:ncol(proxy)]))[,1] #old proxy data
   envt<-t(colwise(function(x) mean(x, na.rm=T))(proxy[proxyIDX,13:17]))[,1]
-  
-  
+
+
   #query whether there were any events, and set the return value to 1 if so
   vb<-as.numeric(colSums(volcbolide[vbIDX,3:6])>0)
   names(vb)<-names(volcbolide[3:6])
-  
+
   ex<-c(BC.extinction.rate=mean(extMag$BC.extinction.rate[exIDX]))
   ex2<-c(BC.extinction.ratePBDB=mean(extMag2$BC.extinction.rate[exIDX2]))
-  
+
   vez<-t(colwise(function(x) mean(x, na.rm=T))(veizer[veizerIDX,4:10]))[,1]
 #  vexWeight<-
   vez<-with(veizer[veizerIDX,], {
@@ -219,19 +231,19 @@ envtCols <- t(apply(ext[,stageIDX], 1, function(arow){
                         d18O.meanObservedSD = sd(d18O.mean),
                         d18O.CV = sd(d18O.mean)/ mean(d18O.mean)
                         )})
-                        
+
     sea <- with(sealevel[sealevelIDX,], {
     	c(sea_level...first.diffs. = mean(sea_level...first.diffs.),
     	sea_level_residuals = mean(sea_level_residuals))
     }
     )
-    
-    
+
+
   ret<-c(times, vb, ex, envt, vez, ex2, sea)
   names(ret)<-names(ret)
-  
+
   if(flag==1) ret<-rep(NA, length(ret))
-  
+
   return(ret)
 }))
 
@@ -265,13 +277,13 @@ ext<-cbind(ext, reglnor)
 
 #can we get mh values from rma for comparison
 library(metafor)
-#extClean<-with(ext, ext[which(!is.na(X..Surv) & 
-#						!is.na(X..Ext) & 
-#						!is.na(Total...Surv) & 
+#extClean<-with(ext, ext[which(!is.na(X..Surv) &
+#						!is.na(X..Ext) &
+#						!is.na(Total...Surv) &
 #						!is.na(Total...Ext)),])
 
 
-#extClean<-with(extClean, extClean[which(!(X..Ext==0) & 
+#extClean<-with(extClean, extClean[which(!(X..Ext==0) &
 #								  !(Total...Ext==0)),])
 #nrow(extClean)
 
@@ -312,9 +324,9 @@ ext$vlnorReg[which(!is.na(ext$x.square))]  <- chisqlnorinfo$vlnor
 ext<-subset(ext, !is.na(ext$lnor) & !is.na(ext$vlnor))
 ext<-subset(ext, is.finite(ext$lnorReg))
 
-#ok, so, a tricky thing is that the observations - individual lines in the data - 
+#ok, so, a tricky thing is that the observations - individual lines in the data -
 #are from the same event over multiple different trait types.
-#We're going to need to account for this and determine what 'clusters' of 
+#We're going to need to account for this and determine what 'clusters' of
 #measurements using shared information exist for later analysis.
 #fortunately, there is a column that kind of gets at this - effect..
 #however, we need to purge out weird characters and NAs, as they are from studies where
@@ -353,7 +365,7 @@ ext <- plyr::join(ext, d13Cdat)
 ext$del.18O <- ext$mean_d18O
 ext$del.13C <- ext$mean_d13C
 ext$mean_d18O <- NULL # clean up
-ext$mean_d13C <- NULL # clean up        
+ext$mean_d13C <- NULL # clean up
 
 
 
