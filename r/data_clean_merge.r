@@ -383,6 +383,9 @@ for(i in 2:nrow(ext)){
 # ext$mean_d18O <- NULL # clean up
 # ext$mean_d13C <- NULL # clean up
 
+# rename proxy data to match old column names:
+plyr::rename(ext, c("mean_d18O" = "del.18O", "mean_d13C" = "del.13C"))
+
 
 ###################################
 ##### WRITE THE CLEAN DATA
