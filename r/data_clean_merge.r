@@ -140,7 +140,7 @@ proxy <- rename(proxy, c("mean_d34S" = "del.34S", "Binned_top" = "top"))
 proxy <- proxy[order(proxy$top), ]
 
 pdf("figure/detrending-plots.pdf")
-proxy$del.34S <- with(proxy, detrend_ts(top, del.34S, "Hannisdal and Peters d34S"))
+proxy$del.34S <- with(proxy, detrend_ts(top, del.34S, "Prokoph d34S"))
 
 
 ######new sealevel data
