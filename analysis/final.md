@@ -36,27 +36,27 @@ taxGenera.Broad
 ## 
 ## Mixed-Effects Model (k = 80; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.3553 (SE = 0.1245)
-## tau (square root of estimated tau^2 value):             0.5960
-## I^2 (residual heterogeneity / unaccounted variability): 49.52%
-## H^2 (unaccounted variability / sampling variability):   1.98
+## tau^2 (estimated amount of residual heterogeneity):     0.4671 (SE = 0.1465)
+## tau (square root of estimated tau^2 value):             0.6834
+## I^2 (residual heterogeneity / unaccounted variability): 56.53%
+## H^2 (unaccounted variability / sampling variability):   2.30
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 77) = 149.2280, p-val < .0001
+## QE(df = 77) = 175.9544, p-val < .0001
 ## 
 ## Test of Moderators (coefficient(s) 2,3): 
-## QM(df = 2) = 1.4411, p-val = 0.4865
+## QM(df = 2) = 0.8493, p-val = 0.6540
 ## 
 ## Model Results:
 ## 
 ##                              estimate      se     zval    pval    ci.lb
-## intrcpt                        1.1432  0.1731   6.6053  <.0001   0.8040
-## Bivalve..GastropodGastropod    0.1126  0.2180   0.5163  0.6057  -0.3147
-## Tax.levelSpecies              -0.2358  0.2104  -1.1204  0.2626  -0.6482
+## intrcpt                        1.0821  0.1866   5.7990  <.0001   0.7164
+## Bivalve..GastropodGastropod    0.1284  0.2346   0.5474  0.5841  -0.3314
+## Tax.levelSpecies              -0.1747  0.2261  -0.7726  0.4398  -0.6179
 ##                               ci.ub     
-## intrcpt                      1.4825  ***
-## Bivalve..GastropodGastropod  0.5399     
-## Tax.levelSpecies             0.1767     
+## intrcpt                      1.4478  ***
+## Bivalve..GastropodGastropod  0.5883     
+## Tax.levelSpecies             0.2685     
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -76,22 +76,22 @@ multStage.Broad
 ## 
 ## Mixed-Effects Model (k = 80; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.3658 (SE = 0.1255)
-## tau (square root of estimated tau^2 value):             0.6048
-## I^2 (residual heterogeneity / unaccounted variability): 50.45%
-## H^2 (unaccounted variability / sampling variability):   2.02
+## tau^2 (estimated amount of residual heterogeneity):     0.4736 (SE = 0.1465)
+## tau (square root of estimated tau^2 value):             0.6882
+## I^2 (residual heterogeneity / unaccounted variability): 57.07%
+## H^2 (unaccounted variability / sampling variability):   2.33
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 78) = 151.8594, p-val < .0001
+## QE(df = 78) = 178.8792, p-val < .0001
 ## 
 ## Test of Moderators (coefficient(s) 2): 
-## QM(df = 1) = 0.2337, p-val = 0.6288
+## QM(df = 1) = 0.2376, p-val = 0.6260
 ## 
 ## Model Results:
 ## 
 ##                     estimate      se    zval    pval    ci.lb   ci.ub     
-## intrcpt               0.9790  0.1741  5.6224  <.0001   0.6377  1.3203  ***
-## MultipleStagesTRUE    0.1052  0.2175  0.4835  0.6288  -0.3212  0.5315     
+## intrcpt               0.9538  0.1864  5.1168  <.0001   0.5885  1.3192  ***
+## MultipleStagesTRUE    0.1136  0.2332  0.4874  0.6260  -0.3433  0.5706     
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -109,22 +109,22 @@ scale.Broad
 ## 
 ## Mixed-Effects Model (k = 80; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.3622 (SE = 0.1247)
-## tau (square root of estimated tau^2 value):             0.6018
-## I^2 (residual heterogeneity / unaccounted variability): 50.25%
-## H^2 (unaccounted variability / sampling variability):   2.01
+## tau^2 (estimated amount of residual heterogeneity):     0.4715 (SE = 0.1460)
+## tau (square root of estimated tau^2 value):             0.6867
+## I^2 (residual heterogeneity / unaccounted variability): 56.99%
+## H^2 (unaccounted variability / sampling variability):   2.33
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 78) = 151.9811, p-val < .0001
+## QE(df = 78) = 178.5149, p-val < .0001
 ## 
 ## Test of Moderators (coefficient(s) 2): 
-## QM(df = 1) = 0.4515, p-val = 0.5016
+## QM(df = 1) = 0.1128, p-val = 0.7370
 ## 
 ## Model Results:
 ## 
 ##                   estimate      se    zval    pval    ci.lb   ci.ub     
-## intrcpt             0.9926  0.1311  7.5701  <.0001   0.7356  1.2495  ***
-## Global.Regional1    0.1449  0.2156  0.6719  0.5016  -0.2777  0.5674     
+## intrcpt             0.9973  0.1414  7.0545  <.0001   0.7202  1.2744  ***
+## Global.Regional1    0.0776  0.2311  0.3358  0.7370  -0.3753  0.5306     
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -142,22 +142,22 @@ time.Broad
 ## 
 ## Mixed-Effects Model (k = 80; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0 (SE = 1.0284)
+## tau^2 (estimated amount of residual heterogeneity):     0 (SE = 1.0229)
 ## tau (square root of estimated tau^2 value):             0
 ## I^2 (residual heterogeneity / unaccounted variability): 0.00%
 ## H^2 (unaccounted variability / sampling variability):   1.00
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 78) = 5.4225, p-val = 1.0000
+## QE(df = 78) = 5.4666, p-val = 1.0000
 ## 
 ## Test of Moderators (coefficient(s) 2): 
-## QM(df = 1) = 0.0066, p-val = 0.9351
+## QM(df = 1) = 0.0046, p-val = 0.9459
 ## 
 ## Model Results:
 ## 
 ##           estimate      se    zval    pval    ci.lb   ci.ub   
-## intrcpt     0.9550  0.4591  2.0802  0.0375   0.0552  1.8548  *
-## meanDate    0.0007  0.0091  0.0814  0.9351  -0.0172  0.0186   
+## intrcpt     0.9614  0.4576  2.1011  0.0356   0.0646  1.8583  *
+## meanDate    0.0006  0.0092  0.0679  0.9459  -0.0174  0.0187   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -175,18 +175,18 @@ broad.rma
 ## 
 ## Random-Effects Model (k = 80; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of total heterogeneity): 0.3534 (SE = 0.1217)
-## tau (square root of estimated tau^2 value):      0.5945
-## I^2 (total heterogeneity / total variability):   49.94%
-## H^2 (total variability / sampling variability):  2.00
+## tau^2 (estimated amount of total heterogeneity): 0.4587 (SE = 0.1422)
+## tau (square root of estimated tau^2 value):      0.6773
+## I^2 (total heterogeneity / total variability):   56.63%
+## H^2 (total variability / sampling variability):  2.31
 ## 
 ## Test for Heterogeneity: 
-## Q(df = 79) = 152.1462, p-val < .0001
+## Q(df = 79) = 178.8793, p-val < .0001
 ## 
 ## Model Results:
 ## 
 ## estimate       se     zval     pval    ci.lb    ci.ub          
-##   1.0456   0.1034  10.1103   <.0001   0.8429   1.2483      *** 
+##   1.0255   0.1110   9.2425   <.0001   0.8080   1.2430      *** 
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -314,22 +314,22 @@ time.Epifaunal
 ## 
 ## Mixed-Effects Model (k = 49; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.4313 (SE = 0.1653)
-## tau (square root of estimated tau^2 value):             0.6567
-## I^2 (residual heterogeneity / unaccounted variability): 58.85%
-## H^2 (unaccounted variability / sampling variability):   2.43
+## tau^2 (estimated amount of residual heterogeneity):     0.4289 (SE = 0.1648)
+## tau (square root of estimated tau^2 value):             0.6549
+## I^2 (residual heterogeneity / unaccounted variability): 58.69%
+## H^2 (unaccounted variability / sampling variability):   2.42
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 47) = 114.0778, p-val < .0001
+## QE(df = 47) = 113.5364, p-val < .0001
 ## 
 ## Test of Moderators (coefficient(s) 2): 
-## QM(df = 1) = 1.0288, p-val = 0.3104
+## QM(df = 1) = 1.1641, p-val = 0.2806
 ## 
 ## Model Results:
 ## 
 ##           estimate      se     zval    pval    ci.lb   ci.ub   
-## intrcpt    -0.2087  0.1821  -1.1460  0.2518  -0.5656  0.1482   
-## meanDate    0.0015  0.0014   1.0143  0.3104  -0.0014  0.0043   
+## intrcpt    -0.2352  0.1940  -1.2122  0.2254  -0.6156  0.1451   
+## meanDate    0.0032  0.0030   1.0789  0.2806  -0.0026  0.0091   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -414,35 +414,35 @@ covModel.Broad.RMA
 
 ```
 ## 
-## Mixed-Effects Model (k = 43; tau^2 estimator: REML)
+## Mixed-Effects Model (k = 63; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.0766 (SE = 0.1078)
-## tau (square root of estimated tau^2 value):             0.2768
-## I^2 (residual heterogeneity / unaccounted variability): 14.76%
-## H^2 (unaccounted variability / sampling variability):   1.17
+## tau^2 (estimated amount of residual heterogeneity):     0.1486 (SE = 0.0979)
+## tau (square root of estimated tau^2 value):             0.3855
+## I^2 (residual heterogeneity / unaccounted variability): 27.64%
+## H^2 (unaccounted variability / sampling variability):   1.38
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 37) = 47.6175, p-val = 0.1134
+## QE(df = 57) = 81.2599, p-val = 0.0191
 ## 
 ## Test of Moderators (coefficient(s) 2,3,4,5,6): 
-## QM(df = 5) = 10.7388, p-val = 0.0568
+## QM(df = 5) = 8.9953, p-val = 0.1093
 ## 
 ## Model Results:
 ## 
-##                         estimate      se     zval    pval    ci.lb
-## intrcpt                   1.1538  0.2113   5.4595  <.0001   0.7396
-## OA                        0.1191  0.3173   0.3752  0.7075  -0.5028
-## BC.extinction.ratePBDB   -0.1837  2.7645  -0.0665  0.9470  -5.6021
-## del.18O                  -0.1054  0.1938  -0.5439  0.5865  -0.4852
-## del.34S                  -0.1064  0.0473  -2.2486  0.0245  -0.1992
-## del.13C                  -0.2710  0.1498  -1.8087  0.0705  -0.5646
-##                           ci.ub     
-## intrcpt                  1.5680  ***
-## OA                       0.7409     
-## BC.extinction.ratePBDB   5.2346     
-## del.18O                  0.2744     
-## del.34S                 -0.0137    *
-## del.13C                  0.0227    .
+##                         estimate      se     zval    pval    ci.lb   ci.ub
+## intrcpt                   0.9919  0.1446   6.8592  <.0001   0.7085  1.2754
+## OA                        0.3257  0.2701   1.2059  0.2279  -0.2037  0.8551
+## BC.extinction.ratePBDB    0.2174  1.0608   0.2050  0.8376  -1.8618  2.2966
+## del.18O                   0.0615  0.1191   0.5169  0.6052  -0.1718  0.2949
+## del.34S                  -0.0370  0.0308  -1.2037  0.2287  -0.0973  0.0233
+## del.13C                   0.1569  0.1306   1.2018  0.2294  -0.0990  0.4129
+##                            
+## intrcpt                 ***
+## OA                         
+## BC.extinction.ratePBDB     
+## del.18O                    
+## del.34S                    
+## del.13C                    
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -470,41 +470,42 @@ habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$lnorReg))), ]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$del.34S))), ]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$del.18O))), ]
 
+
+# TODO WARNING Error in qr.solve(wX, diag(k)) : singular matrix 'a' in
+# solve TODO WARNING there are no OA events: they're all 0
 covModel.Epifaunal.rma <- rma(yi = lnorReg, vi = vlnorReg, data = habitDataGood, 
-    mods = ~OA + BC.extinction.ratePBDB + del.18O + del.34S)
+    mods = ~BC.extinction.ratePBDB + del.18O + del.34S)
 
 covModel.Epifaunal.rma
 ```
 
 ```
 ## 
-## Mixed-Effects Model (k = 23; tau^2 estimator: REML)
+## Mixed-Effects Model (k = 18; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.4553 (SE = 0.2817)
-## tau (square root of estimated tau^2 value):             0.6748
-## I^2 (residual heterogeneity / unaccounted variability): 56.00%
-## H^2 (unaccounted variability / sampling variability):   2.27
+## tau^2 (estimated amount of residual heterogeneity):     0.3993 (SE = 0.3273)
+## tau (square root of estimated tau^2 value):             0.6319
+## I^2 (residual heterogeneity / unaccounted variability): 47.20%
+## H^2 (unaccounted variability / sampling variability):   1.89
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 18) = 41.1549, p-val = 0.0014
+## QE(df = 14) = 26.1025, p-val = 0.0251
 ## 
-## Test of Moderators (coefficient(s) 2,3,4,5): 
-## QM(df = 4) = 3.0546, p-val = 0.5487
+## Test of Moderators (coefficient(s) 2,3,4): 
+## QM(df = 3) = 2.0942, p-val = 0.5531
 ## 
 ## Model Results:
 ## 
-##                         estimate      se     zval    pval    ci.lb
-## intrcpt                   0.1056  0.5088   0.2075  0.8356  -0.8916
-## OA                       -0.4196  0.7752  -0.5412  0.5883  -1.9391
-## BC.extinction.ratePBDB    9.0415  9.2624   0.9762  0.3290  -9.1124
-## del.18O                   0.0543  0.3909   0.1388  0.8896  -0.7118
-## del.34S                  -0.1026  0.1077  -0.9527  0.3407  -0.3136
+##                         estimate      se     zval    pval     ci.lb
+## intrcpt                   3.8197  4.8509   0.7874  0.4310   -5.6878
+## BC.extinction.ratePBDB    3.3828  7.1938   0.4702  0.6382  -10.7169
+## del.18O                   0.3815  0.5919   0.6447  0.5191   -0.7785
+## del.34S                  -1.0964  1.1872  -0.9235  0.3557   -3.4233
 ##                           ci.ub   
-## intrcpt                  1.1028   
-## OA                       1.0999   
-## BC.extinction.ratePBDB  27.1954   
-## del.18O                  0.8203   
-## del.34S                  0.1084   
+## intrcpt                 13.3272   
+## BC.extinction.ratePBDB  17.4825   
+## del.18O                  1.5416   
+## del.34S                  1.2305   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -516,8 +517,8 @@ write.csv(coef(covModel.Epifaunal.rma), "./epiCoefTable.csv", row.names = T)
 
 epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust = F, std = T) + 
     scale_x_discrete(labels = c("Extinction Rate", expression(delta^18 * O), 
-        expression(delta^34 * S), "Acidification"), expand = c(0.15, 0)) + annotate("text", 
-    x = 4, y = -1, label = "B)") + ylim(c(-1.25, 1.25)) + coord_flip() + annotate("text", 
+        expression(delta^34 * S)), expand = c(0.15, 0)) + annotate("text", x = 4, 
+    y = -1, label = "B)") + ylim(c(-1.25, 1.25)) + coord_flip() + annotate("text", 
     x = 4.6, y = -0.7, label = "Favours\ninfauna") + annotate("text", x = 4.6, 
     y = 0.7, label = "Favours\nepifauna")
 ```
@@ -533,10 +534,6 @@ grid.arrange(broadCoefPlot + theme_bw(base_size = 18), epiCoefPlot + theme_bw(ba
 
 ```
 ## Warning: is.na() applied to non-(list or vector) of type 'expression'
-```
-
-```
-## Warning: Removed 1 rows containing missing values (geom_segment).
 ```
 
 ```
@@ -649,8 +646,6 @@ Appendix Jackknife Figures
 ## Using as id variables
 ```
 
-![plot of chunk jackknife.figs](figure/jackknife.figs1.png) 
-
 ```
 ## Using as id variables
 ```
@@ -675,19 +670,11 @@ Appendix Jackknife Figures
 ## Using as id variables
 ```
 
-```
-## Using as id variables
-```
+![plot of chunk jackknife.figs](figure/jackknife.figs.png) 
 
 ```
-## Using as id variables
+## Error: Processing terminated since k = 0.
 ```
-
-```
-## Using as id variables
-```
-
-![plot of chunk jackknife.figs](figure/jackknife.figs2.png) 
 
 
 
