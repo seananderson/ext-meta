@@ -5,7 +5,7 @@
 ## from NESCent Working Group for publication
 ##
 ## Created:       Jan 13, 2012
-## Last modified: Aug 02, 2013
+## Last modified: Oct 05, 2013
 ## Purpose:       Try plotting the effect sizes against the raw data.
 ## Additional description: More analyses can be found in singleLnOr_R_analyses/singleLnOr_rma.R
 ## Changelog
@@ -196,15 +196,18 @@ habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$lnorReg))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$del.34S))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$del.18O))),]
 
+
+# TODO WARNING Error in qr.solve(wX, diag(k)) : singular matrix 'a' in solve
+# TODO WARNING there are no OA events: they're all 0
 covModel.Epifaunal.rma <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
-                             mods =~ OA  + BC.extinction.ratePBDB + del.18O + del.34S)
+                             mods =~  BC.extinction.ratePBDB + del.18O + del.34S)
 
 covModel.Epifaunal.rma 
 write.csv(coef(covModel.Epifaunal.rma), "./epiCoefTable.csv", row.names=T)
 
 
 epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust=F, std=T)+
-  scale_x_discrete(labels=c("Extinction Rate",  expression(delta^18*O), expression(delta^34*S), "Acidification"), expand = c(0.15, 0)) +
+  scale_x_discrete(labels=c("Extinction Rate",  expression(delta^18*O), expression(delta^34*S)), expand = c(0.15, 0)) +
   annotate("text", x=4, y=-1.0, label="B)")+
   ylim(c(-1.25,1.25)) +
   coord_flip() + 
@@ -258,6 +261,9 @@ jackknifed_coefs_fun(covModel.Broad.RMA, broadDataExtinction, robust=F) + theme_
   scale_colour_grey(name="Study Removed\n")
 
 
+# TODO WARNING
+# Error in rma(lnorReg, vi = vlnorReg, data = temp_dat, mods = temp_dat[,  : 
+# Processing terminated since k = 0.
 jackknifed_coefs_fun(covModel.Epifaunal.rma, habitDataGood, robust=F) +theme_bw()+
   scale_colour_grey(name="Study Removed\n")
 
