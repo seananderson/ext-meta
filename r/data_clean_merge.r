@@ -94,7 +94,7 @@ ext <- ext[, -grep("X.[0-9]+", names(ext))]
 stageIDX<-which(names(ext) %in% c("Start.stage", "End.stage"))
 
 #read in the data set with the conversions between stage and time
-stageTime1<-read.csv("../data/Stage vs time.csv")
+#stageTime1<-read.csv("../data/Stage vs time.csv")
 stageTime <- read.csv("../data/stage-v-time-gradstein-2004-ts.csv")
 names(stageTime)[1] <- "End..Ma."
 names(stageTime)[2] <- "Start..Ma."
@@ -137,10 +137,14 @@ volcbolide$State.stage<-gsub(" $", "", volcbolide$State.stage)
 
 
 ######extinction rate
-extMag<-read.csv("../data/Ext mag 3-15 Revised.csv")
-extMag2<-read.csv("../data/Biv BC ext PBDB 4-17-12.csv")
+#extMag<-read.csv("../data/Ext mag 3-15 Revised.csv")
+#extMag2.old<-read.csv("../data/Biv BC ext PBDB 4-17-12.csv")
+extMag2<-read.csv("../data/PaleoDB-BC-rate-genus-bivalve-gast-1.csv")
 
-names(extMag2)[6]<-paste(names(extMag2)[6], "PBDB", sep=".")
+#names(extMag2)[6]<-paste(names(extMag2)[6], "PBDB", sep=".")
+#extMag2 <- plyr::rename(extMag2, c("BC.extinction.rate" = "PBDB.BC.extinction.rate"))
+extMag2$Bin.name <- as.character(extMag2$Bin.name)
+extMag2$Bin.name[extMag2$Bin.name == "Sandbian"] <- "Sandblian" # replacing with a typo to match stageTime
 
 ######proxy data
 #proxy<-read.csv("../data/180 13C Sr 34S sealevel.csv")
@@ -171,7 +175,6 @@ envtCols <- t(apply(ext[,stageIDX], 1, function(arow){
   counter <<- counter+1
   print(paste("row:",counter))
 
-  
   #check for NAs
   flag<-0
   if(sum(is.na(arow))>0){
@@ -189,7 +192,7 @@ envtCols <- t(apply(ext[,stageIDX], 1, function(arow){
 
   #based on the stages, get the row numbers of the volcanism bolid data file
   vbIDX <- which(volcbolide$State.stage %in% stageRange)
-  exIDX <- which(extMag$Stage %in% stageRange)
+  #exIDX <- which(extMag$Stage %in% stageRange)
   exIDX2 <- which(extMag2$Bin.name %in% stageRange)
 
   proxyIDX<-c(which(proxy$bottom >= times[1])[1] : #first time within the stage
@@ -214,7 +217,7 @@ envtCols <- t(apply(ext[,stageIDX], 1, function(arow){
 #  veizerIDX<-c(which(veizer$StageBottom >= times[1])[1], #first time within the stage
 #             which(veizer$StageTop > times[2])[1]-1 #last time within the stage
 #  )
-  
+
   #get the means for each column of the environmental data
   #rgh - kludge to turn a df into a vector, as colwise turns
   #out data frames
@@ -226,7 +229,7 @@ envtCols <- t(apply(ext[,stageIDX], 1, function(arow){
   vb<-as.numeric(colSums(volcbolide[vbIDX,3:6])>0)
   names(vb)<-names(volcbolide[3:6])
 
-  ex<-c(BC.extinction.rate=mean(extMag$BC.extinction.rate[exIDX]))
+  #ex<-c(BC.extinction.rate=mean(extMag$BC.extinction.rate[exIDX]))
   ex2<-c(BC.extinction.ratePBDB=mean(extMag2$BC.extinction.rate[exIDX2]))
 
 #  vez<-t(colwise(function(x) mean(x, na.rm=T))(veizer[veizerIDX,4:10]))[,1]
@@ -253,10 +256,10 @@ envtCols <- t(apply(ext[,stageIDX], 1, function(arow){
     )
 
 
-  ret<-c(times, vb, ex, envt, ex2, sea)
+  ret<-c(times, vb, envt, ex2, sea)
   names(ret)<-names(ret)
-  colNames <<- c(names(times), names(vb), names(ex), names(envt), names(ex2), names(sea))
-  
+  colNames <<- c(names(times), names(vb), names(envt), names(ex2), names(sea))
+
   if(flag==1) ret<-rep(NA, length(ret))
 
   return(ret)
