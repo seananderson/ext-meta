@@ -275,10 +275,11 @@ midpoint<-max(ext$startTime.Ma, na.rm=T)/2
 ext$MultipleStages <- as.factor(with(ext, as.character(ext$Start.stage) == as.character(ext$End.stage)))
 ext$Global.Regional <- as.factor(ext$Global.Regional)
 
-centExt<-colwise(function(x) x-mean(x, na.rm=T))(ext[,180:210])
-names(centExt)<-paste(names(centExt), ".cent", sep="")
 
-ext <- cbind(ext, centExt)
+#centExt<-colwise(function(x) x-mean(x, na.rm=T))(ext[,180:210])
+#names(centExt)<-paste(names(centExt), ".cent", sep="")
+
+#ext <- cbind(ext, centExt)
 
 #ext <- subset(ext, endTime.Ma >= 23)
 
