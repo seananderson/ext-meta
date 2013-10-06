@@ -10,3 +10,4 @@ singleLnOr_R_analyses/
 *.xls
 *.xlsx
 *.DS_store
+R/.Rapp.history
