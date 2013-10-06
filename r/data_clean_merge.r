@@ -81,6 +81,9 @@ ext$Tax.level<-gsub("Genera", "genera", ext$Tax.level)
 ext$Tax.level<-gsub("Species", "species", ext$Tax.level)
 ext$Tax.level<-factor(ext$Tax.level)
 
+# delete blank columns:
+ext <- ext[, -grep("X.[0-9]+", names(ext))]
+
 ####################
 #
 # Pull in environmental covariates
