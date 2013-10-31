@@ -191,14 +191,12 @@ envtCols <- t(apply(ext[,stageIDX], 1, function(arow){
   vb<-as.numeric(colSums(volcbolide[vbIDX,3:6])>0)
   names(vb)<-names(volcbolide[3:6])
 
-  ex2<-c(BC.extinction.ratePBDB=mean(extMag2$BC.extinction.rate[exIDX2]))
+  ex2<-c(BC.extinction.ratePBDB=mean(extMag2$BC.extinction.rate[exIDX2], na.rm = TRUE))
 
     sea <- with(sealevel[sealevelIDX,], {
-    	c(sea_level...first.diffs. = mean(sea_level...first.diffs.),
-    	sea_level_residuals = mean(sea_level_residuals))
-    }
-    )
-
+    	c(sea_level...first.diffs. = mean(sea_level...first.diffs., na.rm = TRUE),
+    	sea_level_residuals = mean(sea_level_residuals, na.rm = TRUE))
+    })
 
   ret<-c(times, vb, envt, ex2, sea)
   names(ret)<-names(ret)
