@@ -173,6 +173,12 @@ envtCols <- t(apply(ext[,stageIDX], 1, function(arow){
   times<-getTimeRange(arow[1], arow[2])
 
   #based on the stages, get the row numbers of the volcanism bolid data file
+  missing <- stageRange[!stageRange %in% volcbolide$State.stage]
+  if(length(missing) > 0) message(paste("Not including volcanism/bolide data from", missing))
+
+  missing <- stageRange[!stageRange %in% extMag2$Bin.name]
+  if(length(missing) > 0) message(paste("Not including extinction magnitude data from", missing))
+
   vbIDX <- which(volcbolide$State.stage %in% stageRange)
   exIDX2 <- which(extMag2$Bin.name %in% stageRange)
 
