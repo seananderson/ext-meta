@@ -1,11 +1,11 @@
 ##################################
 ##
 ## Final code to analyze log-odds ratios
-## using only single response variables 
+## using only single response variables
 ## from NESCent Working Group for publication
 ##
 ## Created:       Jan 13, 2012
-## Last modified: Oct 05, 2013
+## Last modified: Oct 31, 2013
 ## Purpose:       Try plotting the effect sizes against the raw data.
 ## Additional description: More analyses can be found in singleLnOr_R_analyses/singleLnOr_rma.R
 ## Changelog
@@ -89,7 +89,7 @@ taxGenera.Broad
 
 ## @knitr BroadMeanRma
 broad.rma <- rma(yi = lnorReg, vi = vlnorReg, data=broadData)
-broad.rma 
+broad.rma
 
 ## @knitr blank1
 #####
@@ -126,7 +126,7 @@ time.Broad
 ##########
 ## @knitr BroadMeanRma
 broad.rma <- rma(yi = lnorReg, vi = vlnorReg, data=broadData)
-broad.rma 
+broad.rma
 
 #######
 #Fig 1
@@ -142,10 +142,10 @@ broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$del.
 broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$del.34S)),]
 broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$del.13C)),]
 
-covModel.Broad.RMA <-rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~OA+ BC.extinction.ratePBDB + 
+covModel.Broad.RMA <-rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~OA+ BC.extinction.ratePBDB +
                            del.18O + del.34S +del.13C)
 
-covModel.Broad.RMA 
+covModel.Broad.RMA
 
 write.csv(coef(covModel.Broad.RMA), "./broadCoefTable.csv", row.names=T)
 
@@ -202,7 +202,7 @@ habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$del.18O))),]
 covModel.Epifaunal.rma <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
                              mods =~  OA + BC.extinction.ratePBDB + del.18O + del.34S)
 
-covModel.Epifaunal.rma 
+covModel.Epifaunal.rma
 write.csv(coef(covModel.Epifaunal.rma), "./epiCoefTable.csv", row.names=T)
 
 
@@ -210,7 +210,7 @@ epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust=F, std=T)+
   scale_x_discrete(labels=c("Extinction Rate",  expression(delta^18*O), expression(delta^34*S), "Acidification"), expand = c(0.15, 0)) +
   annotate("text", x=4, y=-1.0, label="B)")+
   ylim(c(-1.25,1.25)) +
-  coord_flip() + 
+  coord_flip() +
   annotate("text", x=4.6, y=-.7, label="Favours\ninfauna")+
   annotate("text", x=4.6, y=.7, label="Favours\nepifauna")
 
@@ -220,8 +220,8 @@ grid.arrange(broadCoefPlot+theme_bw(base_size=18), epiCoefPlot+theme_bw(base_siz
 ## @knitr Fig5
 
 ####What are the marginal effects from the model
-del18marg <- marginalLine(covModel.Epifaunal.rma, "del.18O", habitDataGood, robust=F)+ 
-  xlab("\n Detrended Delta O18") + 
+del18marg <- marginalLine(covModel.Epifaunal.rma, "del.18O", habitDataGood, robust=F)+
+  xlab("\n Detrended Delta O18") +
   ylab("Component + Residual + Intercept Log Odds\n Ratios for Detrended Delta O18\n") +
   annotate("text", x=-4, y=8.75, label="A)") + scale_color_discrete(guide="none") +
   theme_bw(base_size=18)
@@ -229,7 +229,7 @@ del18marg <- marginalLine(covModel.Epifaunal.rma, "del.18O", habitDataGood, robu
 del18MargData<- marginalData(covModel.Epifaunal.rma, "del.18O", habitDataGood)
 write.csv(del18MargData, "./del18MargData.csv", row.names=F)
 
-del34marg <- marginalLine(covModel.Epifaunal.rma, "del.34S", habitDataGood, robust=F) + 
+del34marg <- marginalLine(covModel.Epifaunal.rma, "del.34S", habitDataGood, robust=F) +
   xlab("\n Delta S34") + ylab("Component + Residual + Intercept Log Odds\n Ratios for Delta 34S\n") +
   annotate("text", x=13.75, y=3.375, label="B)")+
   theme_bw(base_size=18)
@@ -237,24 +237,24 @@ del34marg <- marginalLine(covModel.Epifaunal.rma, "del.34S", habitDataGood, robu
 del34margData<- marginalData(covModel.Epifaunal.rma, "del.34S", habitDataGood)
 write.csv(del34margData, "./del34margData.csv", row.names=F)
 
-#Extract Legend 
-g_legend<-function(a.gplot){ 
+#Extract Legend
+g_legend<-function(a.gplot){
   a.gplot <- a.gplot+scale_color_discrete("Study")
-  tmp <- ggplot_gtable(ggplot_build(a.gplot)) 
-  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box") 
-  legend <- tmp$grobs[[leg]] 
-  return(legend)} 
+  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)}
 
-legend <- g_legend(del34marg) 
+legend <- g_legend(del34marg)
 
 
-grid.arrange(del18marg, del34marg+ scale_color_discrete(guide="none"), legend,  
+grid.arrange(del18marg, del34marg+ scale_color_discrete(guide="none"), legend,
              widths=c(3,3,1), nrow=1)
 
 ## @knitr appendix
-#### #### #### #### #### #### 
+#### #### #### #### #### ####
 #### Appendix Figures
-#### #### #### #### #### #### 
+#### #### #### #### #### ####
 
 ## @knitr  jackknife.figs
 jackknifed_coefs_fun(covModel.Broad.RMA, broadDataExtinction, robust=F) + theme_bw()+
@@ -262,7 +262,7 @@ jackknifed_coefs_fun(covModel.Broad.RMA, broadDataExtinction, robust=F) + theme_
 
 
 # TODO WARNING
-# Error in rma(lnorReg, vi = vlnorReg, data = temp_dat, mods = temp_dat[,  : 
+# Error in rma(lnorReg, vi = vlnorReg, data = temp_dat, mods = temp_dat[,  :
 # Processing terminated since k = 0.
 jackknifed_coefs_fun(covModel.Epifaunal.rma, habitDataGood, robust=F) +theme_bw()+
   scale_colour_grey(name="Study Removed\n")
