@@ -144,6 +144,7 @@ if(unique(unique(ext$End.stage) %in% unique(stageTime$Bin.name)) != TRUE)
 
 # Also check: volcbolide$State.stage in stageTime$Bin.name
 unique(ext$Start.stage)[!unique(ext$Start.stage) %in% volcbolide$State.stage]
+unique(ext$End.stage)[!unique(ext$Start.stage) %in% volcbolide$State.stage]
 # "Sandblian": Bretsky 1973 EPP
 # "Dapingian": Bretsky 1973 EPP
 
