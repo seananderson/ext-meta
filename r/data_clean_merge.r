@@ -71,6 +71,8 @@ ext$Tax.level<-factor(ext$Tax.level)
 # delete blank columns:
 ext <- ext[, -grep("X.[0-9]+", names(ext))]
 
+# delete blank rows:
+ext <- ext[-which(is.na(ext$study.ID)), ]
 
 # Pull in environmental covariates
 # Columns with start and end stages from the data file
