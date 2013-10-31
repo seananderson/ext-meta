@@ -62,6 +62,7 @@ ext$End.stage<-gsub("Albnian", "Albian", ext$End.stage)
 ext$Start.stage<-gsub("Burdiganian", "Burdigalian", ext$Start.stage)
 ext$End.stage<-gsub("Burdiganian", "Burdigalian", ext$End.stage)
 ext$Start.stage<-gsub("Sandbian","Sandblian", ext$Start.stage)
+ext$End.stage<-gsub("Pridolian", "Pridoli", ext$End.stage)
 
 # fix taxon levels
 ext$Tax.level<-gsub("Genera", "genera", ext$Tax.level)
@@ -91,6 +92,7 @@ stageTime$Bin.name[stageTime$Bin.name == "Fammenian"] <- "Famennian"
 stageTime$Bin.name[stageTime$Bin.name == "Pridoli"] <- "Pridolian"
 stageTime$Bin.name[stageTime$Bin.name == "Sandbian"] <- "Sandblian" # replacing with typo
 stageTime$Bin.name[stageTime$Bin.name == "Darriwillian"] <- "Darriwilian"
+stageTime$Bin.name[stageTime$Bin.name == "Pridolian"] <- "Pridoli"
 
 # add a "recent" row:
 stageTime <- rbind(stageTime[1,], stageTime)
@@ -113,6 +115,7 @@ getTimeRange<-function(startStage, endStage){
 #first, pull in volcanism and bolides
 volcbolide<-read.csv("../data/Flood Basalt Bolide Ocean Acidification.csv")
 volcbolide$State.stage<-gsub(" $", "", volcbolide$State.stage)
+volcbolide$State.stage[volcbolide$State.stage == "unnamed Pridoli stage"] <- "Pridoli"
 
 ######extinction rate
 extMag2<-read.csv("../data/PaleoDB-BC-rate-genus-bivalve-gast-1.csv")
