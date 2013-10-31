@@ -135,9 +135,23 @@ dev.off()
 sealevel<-read.csv("../data/Sea level residuals after 2nd-order polynomial fit.csv")
 
 
-counter <<- 0
+#### Data matching checks:
+# Check: are all ext Start.stage and End.stage values in stageTime?
+if(unique(unique(ext$Start.stage) %in% unique(stageTime$Bin.name)) != TRUE)
+  stop("Not all starting stage names in ext match the stageTime dataset.")
+if(unique(unique(ext$End.stage) %in% unique(stageTime$Bin.name)) != TRUE)
+  stop("Not all ending stage names in ext match the stageTime dataset.")
 
-#iterate over the whole data set to get volcanism and bolide info
+# Also check: volcbolide$State.stage in stageTime$Bin.name
+unique(ext$Start.stage)[!unique(ext$Start.stage) %in% volcbolide$State.stage]
+# "Sandblian": Bretsky 1973 EPP
+# "Dapingian": Bretsky 1973 EPP
+
+unique(ext$Start.stage)[!unique(ext$Start.stage) %in% extMag2$Bin.name]
+# good
+
+counter <<- 0
+# iterate over the whole data set to get volcanism and bolide info
 envtCols <- t(apply(ext[,stageIDX], 1, function(arow){
   counter <<- counter+1
 
