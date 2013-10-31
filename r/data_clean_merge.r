@@ -137,22 +137,23 @@ dev.off()
 ######new sealevel data
 sealevel<-read.csv("../data/Sea level residuals after 2nd-order polynomial fit.csv")
 
-
 #### Data matching checks:
 # Check: are all ext Start.stage and End.stage values in stageTime?
-if(unique(unique(ext$Start.stage) %in% unique(stageTime$Bin.name)) != TRUE)
-  stop("Not all starting stage names in ext match the stageTime dataset.")
-if(unique(unique(ext$End.stage) %in% unique(stageTime$Bin.name)) != TRUE)
-  stop("Not all ending stage names in ext match the stageTime dataset.")
+# unique(ext$Start.stage) %in% unique(stageTime$Bin.name)
+# unique(ext$End.stage) %in% unique(stageTime$Bin.name)
 
 # Also check: volcbolide$State.stage in stageTime$Bin.name
-unique(ext$Start.stage)[!unique(ext$Start.stage) %in% volcbolide$State.stage]
-unique(ext$End.stage)[!unique(ext$Start.stage) %in% volcbolide$State.stage]
-# "Sandblian": Bretsky 1973 EPP
-# "Dapingian": Bretsky 1973 EPP
+# unique(ext$Start.stage)[!unique(ext$Start.stage) %in% volcbolide$State.stage]
+# unique(ext$End.stage)[!unique(ext$Start.stage) %in% volcbolide$State.stage]
 
-unique(ext$Start.stage)[!unique(ext$Start.stage) %in% extMag2$Bin.name]
-# good
+# unique(ext$Start.stage)[!unique(ext$Start.stage) %in% extMag2$Bin.name]
+
+# ext.start.names <- sort(as.character(unique(ext$End.stage)))
+# ext.end.names <- sort(as.character(unique(ext$Start.stage)))
+# mag.names <- sort(as.character(unique(extMag2$Bin.name)))
+# stage.time.names <- sort(as.character(unique(stageTime$Bin.name)))
+# proxy.names <- sort(as.character(unique(proxy$Binned_stage)))
+# volcbol.names <- sort(as.character(unique(volcbolide$State.stage)))
 
 counter <<- 0
 # iterate over the whole data set to get volcanism and bolide info
