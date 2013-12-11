@@ -10,6 +10,12 @@
 #
 # Changelog
 #
+# 20131211 - Cleaned odd 1st row issue
+# 20131211 - Fixed which sealevel columns we're using
+# 20131211 - Added max extinction rates
+# 20131211 - Fixed Prokoph stage names
+# 20131211 - Using time for volcanism/bolide data
+# 20131211 - Added Prokoph data
 # 20131103 - using gradstein stage names as they better match data
 #########################################################################################################
 
@@ -30,6 +36,7 @@ detrend_ts <- function(x, y, label = "") {
   res.m <- as.numeric(residuals(m, na.action = na.exclude))
   plot(x, res.m, main = paste(label, "detrended"), type = "o", xlim = c(500, 0), ylab = "Residual", xlab = "Geologic Time (Ma)")
   abline(h = 0)
+  par(mfrow=c(1,1))
   res.m
 }
 
@@ -205,6 +212,10 @@ proxies <- sapply(1:nrow(stageTime),  function(x){
   #extinction rates
   ex<-c(BC.extinction.rate=mean(extMag$BC.extinction.rate[exIDX]))
   ex2<-c(BC.extinction.ratePBDB=mean(extMag2$BC.extinction.rate[exIDX2]))
+
+  ex<-c(BC.extinction.rate.max=max(extMag$BC.extinction.rate[exIDX], na.rm=T))
+  ex2<-c(BC.extinction.ratePBDB.max=mean(extMag2$BC.extinction.rate[exIDX2], na.rm=T))
+  
   
   #Data from Grossman
   gr <- colMeans(gr[grIDX,4:9])
@@ -214,7 +225,7 @@ proxies <- sapply(1:nrow(stageTime),  function(x){
   names(vb)<-names(volcbolide[3:6])
   
   #sealevel
-  sea <- with(sealevel[sealevelIDX,], {
+  sea <- with(sealevel[sealevelIDX,2:11], {
     c(sea_level...first.diffs. = mean(sea_level...first.diffs.),
       sea_level_residuals = mean(sea_level_residuals))
   })
@@ -228,6 +239,11 @@ proxies <- sapply(1:nrow(stageTime),  function(x){
 
 #blend the stageTime with the proxies, and write the definitive proxy file
 proxiesByStage <- cbind(stageTime, as.data.frame(t(proxies)))
+
+#fix first row and other errors
+proxiesByStage <- proxiesByStage[-1,]
+proxiesByStage$BC.extinction.rate.max[which(proxiesByStage$BC.extinction.rate.max==-Inf)] <- NA
+proxiesByStage$BC.extinction.ratePBDB.max[which(is.nan(proxiesByStage$BC.extinction.ratePBDB.max))] <- NA
 
 #write.csv(proxiesByStage, "../data/cleanProxiesByStage_20131027.csv", row.names=F)
 write.csv(proxiesByStage, "../data/cleanProxiesByStage_20131210.csv", row.names=F)

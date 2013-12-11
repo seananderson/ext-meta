@@ -52,6 +52,8 @@ ext$End.stage<-gsub("Albnian", "Albian", ext$End.stage)
 ext$Start.stage<-gsub("Burdiganian", "Burdigalian", ext$Start.stage)
 ext$End.stage<-gsub("Burdiganian", "Burdigalian", ext$End.stage)
 ext$Start.stage<-gsub("Sandbian","Sandblian", ext$Start.stage)
+ext$Start.stage<-gsub("Recent","Pleistocene", ext$Start.stage)
+ext$End.stage<-gsub("Recent","Pleistocene", ext$End.stage)
 #ext$End.stage<-gsub("Pridolian", "Pridoli", ext$End.stage)
 
 # fix taxon levels
@@ -71,8 +73,7 @@ stageIDX<-which(names(ext) %in% c("Start.stage", "End.stage"))
 
 # read in the data set with the conversions between stage and time
 # and proxy data
-#stageTime <- read.csv("../data/stage-v-time-gradstein-2004-ts.csv")
-stageTime <- read.csv("../data/cleanProxiesByStage_20131203.csv")
+stageTime <- read.csv("../data/cleanProxiesByStage_20131210.csv")
 stageTime$Bin.name <- as.character(stageTime$Bin.name)
 
 # A function to take a lookup pair of stages and get the entire range of stages in between
@@ -186,7 +187,7 @@ for(i in 2:nrow(ext)){
 }
 
 # rename some proxy data to match old column names:
-ext <- plyr::rename(ext, c("mean_d18O" = "del.18O", "mean_d13C" = "del.13C"))
+#ext <- plyr::rename(ext, c("mean_d18O" = "del.18O", "mean_d13C" = "del.13C"))
 
 ###################################
 ##### WRITE THE CLEAN DATA
