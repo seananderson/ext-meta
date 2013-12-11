@@ -4,6 +4,8 @@
 #
 # Changelog
 #
+# 20131202 - removed detrend function, as it was not being used
+# 20131202 - now using cleaned proxy data file
 # 20121101 - changed proxy data file to new Hannisdal & Peters with corresponding change to choosing rows by time
 # 20121030 - new input data file with cleaned Bretsky data
 # 20121005 - new data file 20121005 with additional columns
@@ -25,18 +27,6 @@ library(plyr)
 
 #read in a set of formulate for calculating effect sizes and variances
 source("../r/conversions.R")
-
-detrend_ts <- function(x, y, label = "") {
-  par(mfrow = c(2, 1))
-  d <- data.frame(x, y)
-  d <- na.omit(d)
-  plot(d, main = label, type = "o", xlim = c(500, 0), ylab = label, xlab = "Geologic Time (Ma)")
-  m <- lm(y ~ x, na.action = na.exclude)
-  res.m <- as.numeric(residuals(m, na.action = na.exclude))
-  plot(x, res.m, main = paste(label, "detrended"), type = "o", xlim = c(500, 0), ylab = "Residual", xlab = "Geologic Time (Ma)")
-  abline(h = 0)
-  res.m
-}
 
 
 #######
@@ -62,7 +52,7 @@ ext$End.stage<-gsub("Albnian", "Albian", ext$End.stage)
 ext$Start.stage<-gsub("Burdiganian", "Burdigalian", ext$Start.stage)
 ext$End.stage<-gsub("Burdiganian", "Burdigalian", ext$End.stage)
 ext$Start.stage<-gsub("Sandbian","Sandblian", ext$Start.stage)
-ext$End.stage<-gsub("Pridolian", "Pridoli", ext$End.stage)
+#ext$End.stage<-gsub("Pridolian", "Pridoli", ext$End.stage)
 
 # fix taxon levels
 ext$Tax.level<-gsub("Genera", "genera", ext$Tax.level)
@@ -80,29 +70,20 @@ ext <- ext[-which(is.na(ext$study.ID)), ]
 stageIDX<-which(names(ext) %in% c("Start.stage", "End.stage"))
 
 # read in the data set with the conversions between stage and time
-stageTime <- read.csv("../data/stage-v-time-gradstein-2004-ts.csv")
-names(stageTime)[1] <- "End..Ma."
-names(stageTime)[2] <- "Start..Ma."
-names(stageTime)[3] <- "Bin.name"
+# and proxy data
+#stageTime <- read.csv("../data/stage-v-time-gradstein-2004-ts.csv")
+stageTime <- read.csv("../data/cleanProxiesByStage_20131203.csv")
 stageTime$Bin.name <- as.character(stageTime$Bin.name)
-# Fix some typos:
-stageTime$Bin.name[stageTime$Bin.name == "Olenikian"] <- "Olenekian"
-stageTime$Bin.name[stageTime$Bin.name == "Gzelian"] <- "Gzhelian"
-stageTime$Bin.name[stageTime$Bin.name == "Fammenian"] <- "Famennian"
-stageTime$Bin.name[stageTime$Bin.name == "Pridoli"] <- "Pridolian"
-stageTime$Bin.name[stageTime$Bin.name == "Sandbian"] <- "Sandblian" # replacing with typo
-stageTime$Bin.name[stageTime$Bin.name == "Darriwillian"] <- "Darriwilian"
-stageTime$Bin.name[stageTime$Bin.name == "Pridolian"] <- "Pridoli"
-
-# add a "recent" row:
-stageTime <- rbind(stageTime[1,], stageTime)
-stageTime[1, "Bin.name"] <- "Recent"
-
 
 # A function to take a lookup pair of stages and get the entire range of stages in between
 getStageRange<-function(startStage, endStage){
   as.character(stageTime[which(stageTime$Bin.name==startStage):which(stageTime$Bin.name==endStage),]$Bin.name)
 }
+
+getStageRangeIDX<-function(startStage, endStage){
+  which(stageTime$Bin.name==startStage):which(stageTime$Bin.name==endStage)
+}
+
 
 #A function to take a lookup pair of stages and get the entire range of stages in between
 getTimeRange<-function(startStage, endStage){
@@ -111,55 +92,15 @@ getTimeRange<-function(startStage, endStage){
   return(c(startTime.Ma=startTime.Ma, endTime.Ma=endTime.Ma))
 }
 
-#####volvacanism and bollide impacts
-#first, pull in volcanism and bolides
-volcbolide<-read.csv("../data/Flood Basalt Bolide Ocean Acidification.csv")
-volcbolide$State.stage<-gsub(" $", "", volcbolide$State.stage)
-volcbolide$State.stage[volcbolide$State.stage == "unnamed Pridoli stage"] <- "Pridoli"
-
-######extinction rate
-extMag2<-read.csv("../data/PaleoDB-BC-rate-genus-bivalve-gast-1.csv")
-extMag2$Bin.name <- as.character(extMag2$Bin.name)
-extMag2$Bin.name[extMag2$Bin.name == "Sandbian"] <- "Sandblian" # replacing with a typo to match stageTime
-
-######proxy data
-proxy <- read.csv("../data/Prokoph_data_9.2013.csv")
-proxy <- subset(proxy, data_subset == "All")
-proxy <- rename(proxy, c("mean_d34S" = "del.34S", "Binned_top" = "top", "Binned_bottom" = "bottom"))
-proxy <- proxy[order(proxy$top), ]
-
-pdf("detrending-plots-prokoph.pdf")
-proxy$del.34S <- with(proxy, detrend_ts(top, del.34S, "Prokoph d34S"))
-proxy$mean_d18O <- with(proxy, detrend_ts(top, mean_d18O, "Prokoph d18O"))
-proxy$mean_d13C <- with(proxy, detrend_ts(top, mean_d13C, "Prokoph d13C"))
-dev.off()
-
-######new sealevel data
-sealevel<-read.csv("../data/Sea level residuals after 2nd-order polynomial fit.csv")
-
 #### Data matching checks:
 # Check: are all ext Start.stage and End.stage values in stageTime?
 # unique(ext$Start.stage) %in% unique(stageTime$Bin.name)
 # unique(ext$End.stage) %in% unique(stageTime$Bin.name)
 
-# Also check: volcbolide$State.stage in stageTime$Bin.name
-# unique(ext$Start.stage)[!unique(ext$Start.stage) %in% volcbolide$State.stage]
-# unique(ext$End.stage)[!unique(ext$Start.stage) %in% volcbolide$State.stage]
-
-# unique(ext$Start.stage)[!unique(ext$Start.stage) %in% extMag2$Bin.name]
-
-# ext.start.names <- sort(as.character(unique(ext$End.stage)))
-# ext.end.names <- sort(as.character(unique(ext$Start.stage)))
-# mag.names <- sort(as.character(unique(extMag2$Bin.name)))
-# stage.time.names <- sort(as.character(unique(stageTime$Bin.name)))
-# proxy.names <- sort(as.character(unique(proxy$Binned_stage)))
-# volcbol.names <- sort(as.character(unique(volcbolide$State.stage)))
-
-counter <<- 0
 # iterate over the whole data set to get volcanism and bolide info
-envtCols <- t(apply(ext[,stageIDX], 1, function(arow){
-  counter <<- counter+1
-
+envtCols <- t(sapply(1:nrow(ext), function(i){
+  arow <- ext[i,stageIDX]
+  
   #check for NAs
   flag<-0
   if(sum(is.na(arow))>0){
@@ -167,59 +108,20 @@ envtCols <- t(apply(ext[,stageIDX], 1, function(arow){
     arow<-c("Recent", "Recent")
   }
 
-  #check and see whether there were any volcanism or bolide impacts during these stages
-  stageRange<-getStageRange(arow[1], arow[2])
+  #get the row numbers of the relevant stages
+  stageRange<-getStageRange(arow[1,1], arow[1,2])
+  stageRangeIDX<-getStageRangeIDX(arow[1,1], arow[1,2])
+  
 
-  times<-getTimeRange(arow[1], arow[2])
-
-  #based on the stages, get the row numbers of the volcanism bolid data file
-  missing <- stageRange[!stageRange %in% volcbolide$State.stage]
-  if(length(missing) > 0) message(paste("Not including volcanism/bolide data from", missing))
-
-  missing <- stageRange[!stageRange %in% extMag2$Bin.name]
-  if(length(missing) > 0) message(paste("Not including extinction magnitude data from", missing))
-
-  vbIDX <- which(volcbolide$State.stage %in% stageRange)
-  exIDX2 <- which(extMag2$Bin.name %in% stageRange)
-
-  proxyIDX<-c(which(proxy$bottom >= times[1])[1] : #first time within the stage
-              which(proxy$top >= times[2])[1] #last time within the stage
-    )
-
-  #note, because of the orientation of the sealevel table, we need some error checking for recent
-  sl2 <-  which(sealevel$Time..my. < times[2])[1]
-  if(is.na(sl2)) sl2 <- nrow(sealevel)+1
-  sealevelIDX<-c(which(sealevel$Time..my. <= times[1])[1] : #first time within the stage
-             sl2-1 #last time within the stage
-    )
-
-  #get the means for each column of the environmental data
+  #get the means for each column of the proxy data
   #rgh - kludge to turn a df into a vector, as colwise turns
   #out data frames
-  envt<-t(colwise(function(x) mean(x, na.rm=T))(proxy[proxyIDX,c(9,6,12)]))[,1] # 9, 6, 12: d18O, d13C, d34S
-
-  #query whether there were any events, and set the return value to 1 if so
-  vb<-as.numeric(colSums(volcbolide[vbIDX,3:6])>0)
-  names(vb)<-names(volcbolide[3:6])
-
-  ex2<-c(BC.extinction.ratePBDB=mean(extMag2$BC.extinction.rate[exIDX2], na.rm = TRUE))
-
-    sea <- with(sealevel[sealevelIDX,], {
-    	c(sea_level...first.diffs. = mean(sea_level...first.diffs., na.rm = TRUE),
-    	sea_level_residuals = mean(sea_level_residuals, na.rm = TRUE))
-    })
-
-  ret<-c(times, vb, envt, ex2, sea)
-  names(ret)<-names(ret)
-  colNames <<- c(names(times), names(vb), names(envt), names(ex2), names(sea))
-
-  if(flag==1) ret<-rep(NA, length(ret))
-
+  ret<-colMeans(stageTime[stageRangeIDX,7:20], na.rm=T)
   return(ret)
 }))
 
 envtCols<-as.data.frame(envtCols)
-names(envtCols) <- colNames
+#names(envtCols) <- colNames
 
 #debug
 #plot(del.18O ~ d18O.observations, data= envtCols)
@@ -283,7 +185,7 @@ for(i in 2:nrow(ext)){
 	ext$cluster[i] <- ifelse(ext$effect..[i]<ext$effect..[i-1],ext$cluster[i-1]+1,ext$cluster[i-1])
 }
 
-# rename proxy data to match old column names:
+# rename some proxy data to match old column names:
 ext <- plyr::rename(ext, c("mean_d18O" = "del.18O", "mean_d13C" = "del.13C"))
 
 ###################################
