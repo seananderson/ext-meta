@@ -10,8 +10,8 @@ There will be some jiggling due to dates being a little different from file to f
 
 ```{r}
 library(scales)
-stageTime <- read.csv("../data/cleanProxiesByStage_20131203.csv")
-#stageTime <- read.csv("../data/cleanProxiesByStage_20131210.csv")
+#stageTime <- read.csv("../data/cleanProxiesByStage_20131203.csv")
+stageTime <- read.csv("../data/cleanProxiesByStage_20131210.csv")
 
 
 #check against Hannisdal and Peters
@@ -25,61 +25,6 @@ for(prox in names(proxy)[14:17]){
 ```
 
 H&P: Mostly good.
-
-```{r}
-#check against Grossman
-
-#Grossman Data
-gr <- read.csv("../data/Grossman_d18O.d13C_with_high.lat.csv")
-gr <- gr[which(gr$data_subset=="All"),]
-names(gr)[4:9] <- paste(names(gr)[4:9], "gr", sep=".")
-
-for(prox in names(gr)[4:9]){
-  plot(gr$Binned_bottom, gr[[prox]], pch=19, col=alpha("red", 0.5), ylab=prox)
-  matplot(stageTime$Start..Ma., stageTime[[prox]], pch=19, col=alpha("blue", 0.5), add=T)
-}
-
-```
-
-Grossman: There's some jiggling here I'm uncomfortable with, and I'm not sure why.  I dug into it.  I think it's due to the dates in the stage time file and in the gr file just not lining up well.  I'm a bit worried that this is going to really lower the power of the analysis.  For example, here's one set of points from grossman and how they match with our stage-times.
-
-```{r eval=FALSE}
-#get the indices in a data frame given the timing of a stage
-getIdx <- function(stage_bottom, stage_top, bottom_vec, top_vec){
-  idx <- which(bottom_vec>=stage_bottom & top_vec<=stage_top)
-  
-  #if nada, that means we're inside of a period
-  if(length(idx)==0) {
-    idx <- which(bottom_vec>=stage_bottom)[1]
-  }
-  
-  return(idx)
-}
-
-
-> x <- 45
-> arow <- stageTime[x,]
-> arow
-   End..Ma. Start..Ma. Bin.name         epoch   period Collections  del.18O del.13C X87Sr.86Sr del.34S
-45    203.6      216.5   Norian Late Triassic Triassic         286 -2.16445 2.38095   0.707755  18.538
-   BC.extinction.rate BC.extinction.ratePBDB mean_d13C.gr stdev_d13C.gr d13C_N.gr mean_d18O.gr stdev_d18O.gr
-45              0.136                  0.105     2.577683            NA        21    -1.889756            NA
-   d18O_N.gr sea_level...first.diffs. sea_level_residuals
-45        21                  -1.2035           -21.04951
-
-> grIDX <- getIdx(arow$End..Ma., arow$Start..Ma., gr$Binned_bottom, gr$Binned_top)
-> gr[grIDX,]
-   Binned_top Binned_bottom    Binned_stage mean_d13C.gr stdev_d13C.gr d13C_N.gr mean_d18O.gr stdev_d18O.gr
-40      199.6         216.5 Norian-Rhaetian     1.675366     0.5752004        41    -1.779512     0.5883364
-41      216.5         228.7         Carnian     3.480000            NA         1    -2.000000            NA
-   d18O_N.gr data_subset
-40        41         All
-41         1         All
-```
-
-
-This is not good.  We're picking up 5 extra million years here due to the difference in binning.  This might really affect power later on.
-
 
 How about extinction rates?
 
@@ -134,10 +79,23 @@ Onto the Prokoph proxies.
 
 proxyProk<-read.csv("../data/Prokoph_data_9.2013.csv")
 proxyProk <- subset(proxyProk, proxyProk$data_subset=="tropical no benthics")
-
+names(proxyProk)[6:17] <- paste(names(proxyProk)[6:17], "prok", sep=".")
 
 for(prox in names(proxyProk)[6:17]){
   plot(proxyProk$Binned_bottom, proxyProk[[prox]], pch=19, col=alpha("red", 0.5), ylab=prox)
+  matplot(stageTime$Start..Ma., stageTime[[prox]], pch=19, col=alpha("blue", 0.5), add=T)
+}
+
+```
+
+We're so on here that the points are PURPLE.  That's because the Prokoph data uses stage names.
+
+Last, sealevel variables
+```{r}
+sealevel<-read.csv("../data/Sea level residuals after 2nd-order polynomial fit.csv")
+
+for(prox in names(sealevel)[2:11]){
+  plot(sealevel$Time..my., sealevel[[prox]], pch=19, col=alpha("red", 0.5), ylab=prox)
   matplot(stageTime$Start..Ma., stageTime[[prox]], pch=19, col=alpha("blue", 0.5), add=T)
 }
 

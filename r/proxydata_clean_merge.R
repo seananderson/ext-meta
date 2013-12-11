@@ -233,6 +233,8 @@ proxies <- sapply(1:nrow(stageTime),  function(x){
   #Data from Prokoph
   prok <- colMeans(proxyProk[proxyProkIDX, 6:17])
   
+  names(prok) <- paste(names(prok), "prok", sep=".")
+  
   return(c(envt, ex, ex2, gr, sea, prok, vb))
 })
 
