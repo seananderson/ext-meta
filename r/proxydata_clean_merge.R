@@ -7,10 +7,16 @@
 #
 # coded by Jarrett Byrnes
 #
-# Last change: 10/28/2013
 #
 # Changelog
 #
+# 20131211 - Cleaned odd 1st row issue
+# 20131211 - Fixed which sealevel columns we're using
+# 20131211 - Added max extinction rates
+# 20131211 - Fixed Prokoph stage names
+# 20131211 - Using time for volcanism/bolide data
+# 20131211 - Added Prokoph data
+# 20131103 - using gradstein stage names as they better match data
 #########################################################################################################
 
 #library and data
@@ -30,50 +36,9 @@ detrend_ts <- function(x, y, label = "") {
   res.m <- as.numeric(residuals(m, na.action = na.exclude))
   plot(x, res.m, main = paste(label, "detrended"), type = "o", xlim = c(500, 0), ylab = "Residual", xlab = "Geologic Time (Ma)")
   abline(h = 0)
+  par(mfrow=c(1,1))
   res.m
 }
-
-
-#######
-
-#load in the dataext-meta-20121005.csv
-ext<-read.csv("../data/ext-meta-20121030.csv", skip=1, na.strings=c("NA", "N/A", ".", ""))
-
-#some problems with extra spaces
-ext$Trait.category<-gsub(" ", "", ext$Trait.category)
-
-#fix some typos
-ext$Start.stage<-gsub("Serravalian","Serravallian", ext$Start.stage)
-ext$End.stage<-gsub("Serravalian","Serravallian", ext$End.stage)
-ext$Start.stage<-gsub("Pridolian","unnamed Pridoli stage", ext$Start.stage)
-ext$Start.stage<-gsub("Rhuddian","Rhuddanian", ext$Start.stage)
-ext$Start.stage<-gsub("Barriasian", "Barremian", ext$Start.stage)#?
-ext$End.stage<-gsub("Barriasian", "Barremian", ext$End.stage)#?
-ext$Start.stage<-gsub("Barremanian", "Barremian", ext$Start.stage)
-ext$End.stage<-gsub("Barremanian", "Barremian", ext$End.stage)
-ext$Start.stage<-gsub("Albnian", "Albian", ext$Start.stage)
-ext$End.stage<-gsub("Albnian", "Albian", ext$End.stage)
-ext$End.stage<-gsub("Albnian", "Albian", ext$End.stage)
-ext$Start.stage<-gsub("Burdiganian", "Burdigalian", ext$Start.stage)
-ext$End.stage<-gsub("Burdiganian", "Burdigalian", ext$End.stage)
-ext$Start.stage<-gsub("Sandbian","Sandblian", ext$Start.stage)
-
-#unnamed stages referenced back to the stage that they are unnamed for
-#ext$End.stage<-gsub("unnamed Pridoli stage", "Pridolian", ext$End.stage)
-#ext$Start.stage<-gsub("Sandbian","early Late Ordovician", ext$Start.stage)
-#ext$Start.stage<-gsub("Dapingian","early Middle Ordovician", ext$Start.stage)
-#ext$End.stage<-gsub("Floian","late Early Ordovician", ext$End.stage)
-#ext$End.stage<-gsub("Floian","Floian", ext$End.stage)
-#ext$End.stage<-gsub("Pridolian","unnamed Pridoli stage", ext$End.stage)
-#ext$Start.stage<-gsub("early Late Ordovician", "Hirnantian", ext$Start.stage) #fix? ask emily
-#ext$Start.stage<-gsub("early Middle Ordovician", "Sandblian", ext$Start.stage) #fix? ask emily
-#ext$Start.stage<-gsub("late Early Ordovician", "Floian", ext$Start.stage) #fix? ask emily
-#ext$End.stage<-gsub("late Early Ordovician", "Floian", ext$End.stage) #fix? ask emily
-
-#fix taxon levels
-ext$Tax.level<-gsub("Genera", "genera", ext$Tax.level)
-ext$Tax.level<-gsub("Species", "species", ext$Tax.level)
-ext$Tax.level<-factor(ext$Tax.level)
 
 ####################
 #
@@ -85,7 +50,23 @@ ext$Tax.level<-factor(ext$Tax.level)
 stageIDX<-which(names(ext) %in% c("Start.stage", "End.stage"))
 
 #read in the data set with the conversions between stage and time
-stageTime<-read.csv("../data/Stage vs time.csv")
+#stageTime<-read.csv("../data/Stage vs time.csv")
+stageTime <- read.csv("../data/stage-v-time-gradstein-2004-ts.csv")
+names(stageTime)[1] <- "End..Ma."
+names(stageTime)[2] <- "Start..Ma."
+names(stageTime)[3] <- "Bin.name"
+stageTime$Bin.name <- as.character(stageTime$Bin.name)
+# Fix some typos:
+stageTime$Bin.name[stageTime$Bin.name == "Olenikian"] <- "Olenekian"
+stageTime$Bin.name[stageTime$Bin.name == "Gzelian"] <- "Gzhelian"
+stageTime$Bin.name[stageTime$Bin.name == "Fammenian"] <- "Famennian"
+stageTime$Bin.name[stageTime$Bin.name == "Pridoli"] <- "Pridolian"
+stageTime$Bin.name[stageTime$Bin.name == "Sandbian"] <- "Sandblian" # replacing with typo
+stageTime$Bin.name[stageTime$Bin.name == "Darriwillian"] <- "Darriwilian"
+
+# add a "recent" row:
+stageTime <- rbind(stageTime[1,], stageTime)
+stageTime[1, "Bin.name"] <- "Recent"
 
 #A function to take a lookup pair of stages and get the entire range of stages in between
 getStageRange<-function(startStage, endStage){
@@ -112,18 +93,6 @@ getStage <- function(aTime){
   as.character(stageTime$Bin.name[idx])
 }
 
-#####volvacanism and bollide impacts
-#first, pull in volcanism and bolides
-volcbolide<-read.csv("../data/Flood Basalt Bolide Ocean Acidification.csv")
-volcbolide$State.stage<-gsub(" $", "", volcbolide$State.stage)
-
-
-#add times
-volcbolide <- cbind(volcbolide, t(sapply(volcbolide$State.stage, function(x) getTimeRange(x,x))))
-
-#fix errors in time due to bad stage names
-volcbolide[which(volcbolide$State.stage=="unnamed Pridoli stage"),7:8] <- c(418.8, 418.1)
-
 
 ######extinction rate
 extMag<-read.csv("../data/Ext mag 3-15 Revised.csv")
@@ -139,6 +108,19 @@ extMag2$Base_bottom..Ma. <- c(0,extMag2$Base..Ma.[-nrow(extMag2)])
 #proxy<-read.csv("../data/180 13C Sr 34S sealevel.csv")
 proxy<-read.csv("../data/Hannisdal and Peters data with stage IDs.csv", na.strings="?")
 
+#The Prokoph data
+proxyProk<-read.csv("../data/Prokoph_data_9.2013.csv")
+proxyProk <- subset(proxyProk, proxyProk$data_subset=="tropical no benthics")
+
+#make stages match for easy processing
+proxyProk$Binned_stage<-gsub("Sandbian", "Sandblian", proxyProk$Binned_stage)
+proxyProk$Binned_stage<-gsub("Darriwillian", "Darriwilian", proxyProk$Binned_stage)
+proxyProk$Binned_stage<-gsub("Fammenian", "Famennian", proxyProk$Binned_stage)
+proxyProk$Binned_stage<-gsub("Gzelian", "Gzhelian", proxyProk$Binned_stage)
+proxyProk$Binned_stage<-gsub("Olenikian", "Olenekian", proxyProk$Binned_stage)
+proxyProk$Binned_stage<-gsub("Pridoli", "Pridolian", proxyProk$Binned_stage)
+proxyProk$Binned_stage<-gsub("Pleistocene-Holocene", "Pleistocene", proxyProk$Binned_stage)
+
 #pdf("figure/detrending-plots.pdf")
 #detrend the delta 34S
 proxy$del.34S.detrended <- with(proxy, detrend_ts(top, del.34S, "Hannisdal and Peters d34S"))
@@ -153,7 +135,6 @@ sealevel<-read.csv("../data/Sea level residuals after 2nd-order polynomial fit.c
 veizer<-read.csv("../data/veizer_d18O.csv")
 veizer$Length<-veizer$StageBottom-veizer$StageTop
 
-counter <<- 0
 
 
 #Grossman Data
@@ -172,8 +153,39 @@ getIdx <- function(stage_bottom, stage_top, bottom_vec, top_vec){
   return(idx)
 }
 
+#####volvacanism and bollide impacts
+#first, pull in volcanism and bolides
+#volcbolide<-read.csv("../data/Flood Basalt Bolide Ocean Acidification.csv")
+volcbolide<-read.csv("../data/Flood Basalt Bolide Ocean Acidification_2.0.csv")
+volcbolide$State.stage<-gsub(" $", "", volcbolide$State.stage)
+
+#fix errors in time due to bad stage names
+volcbolide[which(volcbolide$State.stage=="unnamed Pridoli stage"),7:8] <- c(418.8, 418.1)
+
+
+
+#fix stage names
+volcbolide$State.stage<-gsub("Sandbian", "Sandblian", volcbolide$State.stage)
+volcbolide$State.stage<-gsub("unnamed Pridoli stage", "Pridolian", volcbolide$State.stage)
+#volcbolide$State.stage<-gsub("middle Late Ordovician", "..", volcbolide$State.stage)
+#volcbolide$State.stage<-gsub("early Late Ordovician", "..", volcbolide$State.stage)
+#volcbolide$State.stage<-gsub("early Middle Ordovician", "Dapingian", volcbolide$State.stage)
+#volcbolide$State.stage<-gsub("late Early Ordovician", "Floian", volcbolide$State.stage)
+#volcbolide$State.stage<-gsub("Cambrian stage 4", "Furongian", volcbolide$State.stage)
+#volcbolide$State.stage<-gsub("Cambrian stage 3", "..", volcbolide$State.stage)
+volcbolide$State.stage<-gsub("Calabrian", "Pleistocene", volcbolide$State.stage)
+
+#volcbolide[,2] -> vb.bins
+#vb.bins[which(!(vb.bins %in% bins))]
+
+#add times
+volcbolide <- cbind(volcbolide, t(sapply(volcbolide$State.stage, function(x) getTimeRange(x,x))))
+
+
+##OK, time to combine them all
 proxies <- sapply(1:nrow(stageTime),  function(x){
   arow <- stageTime[x,]
+  
   veizerIDX <- which(veizer$StageBottom>=arow$End..Ma. & veizer$StageTop<=arow$Start..Ma.)
   grIDX <- getIdx(arow$End..Ma., arow$Start..Ma., gr$Binned_bottom, gr$Binned_top)
   volcbolideIDX <- getIdx(arow$End..Ma., arow$Start..Ma., volcbolide$endTime.Ma, volcbolide$startTime.Ma)
@@ -181,6 +193,10 @@ proxies <- sapply(1:nrow(stageTime),  function(x){
   exIDX2 <- getIdx(arow$End..Ma., arow$Start..Ma., extMag2$Base_bottom..Ma., extMag2$Base..Ma.)
   sealevelIDX <- which(sealevel$Time..my. <= arow$End..Ma.)[1]
   proxyIDX <- getIdx(arow$End..Ma., arow$Start..Ma., proxy$bottom, proxy$top)
+  vbIDX <- getIdx(arow$End..Ma., arow$Start..Ma., volcbolide$endTime.Ma, volcbolide$startTime.Ma)
+  
+  proxyProkIDX <- which(proxyProk$Binned_stage==arow$Bin.name)
+  
   
   #Now that we have indices for each data file, create a new data frame that 
   #extracts the proxy data we want from each one
@@ -190,27 +206,46 @@ proxies <- sapply(1:nrow(stageTime),  function(x){
   envt<-t(colwise(function(x) mean(x, na.rm=T))(proxy[proxyIDX,13:17]))[,1]
 
   #query whether there were any events, and set the return value to 1 if so
-  vb<-as.numeric(colSums(volcbolide[vbIDX,3:6])>0)
-  names(vb)<-names(volcbolide[3:6])
+#  vb<-as.numeric(colSums(volcbolide[vbIDX,3:6])>0)
+#  names(vb)<-names(volcbolide[3:6])
   
   #extinction rates
   ex<-c(BC.extinction.rate=mean(extMag$BC.extinction.rate[exIDX]))
   ex2<-c(BC.extinction.ratePBDB=mean(extMag2$BC.extinction.rate[exIDX2]))
+
+  exMax<-c(BC.extinction.rate.max=max(extMag$BC.extinction.rate[exIDX], na.rm=T))
+  ex2Max<-c(BC.extinction.ratePBDB.max=mean(extMag2$BC.extinction.rate[exIDX2], na.rm=T))
+  
   
   #Data from Grossman
   gr <- colMeans(gr[grIDX,4:9])
   
+  #query whether there were any events, and set the return value to 1 if so
+  vb<-as.numeric(colSums(volcbolide[vbIDX,3:6])>0)
+  names(vb)<-names(volcbolide[3:6])
+  
   #sealevel
-  sea <- with(sealevel[sealevelIDX,], {
+  sea <- with(sealevel[sealevelIDX,2:11], {
     c(sea_level...first.diffs. = mean(sea_level...first.diffs.),
       sea_level_residuals = mean(sea_level_residuals))
   })
   
-  return(c(envt, vb, ex, ex2, gr, sea))
+  #Data from Prokoph
+  prok <- colMeans(proxyProk[proxyProkIDX, 6:17])
+  
+  names(prok) <- paste(names(prok), "prok", sep=".")
+  
+  return(c(envt, ex, ex2,exMax, ex2Max, gr, sea, prok, vb))
 })
 
 
 #blend the stageTime with the proxies, and write the definitive proxy file
 proxiesByStage <- cbind(stageTime, as.data.frame(t(proxies)))
 
-write.csv(proxiesByStage, "../data/cleanProxiesByStage_20131027.csv", row.names=F)
+#fix first row and other errors
+proxiesByStage <- proxiesByStage[-1,]
+proxiesByStage$BC.extinction.rate.max[which(proxiesByStage$BC.extinction.rate.max==-Inf)] <- NA
+proxiesByStage$BC.extinction.ratePBDB.max[which(is.nan(proxiesByStage$BC.extinction.ratePBDB.max))] <- NA
+
+#write.csv(proxiesByStage, "../data/cleanProxiesByStage_20131027.csv", row.names=F)
+write.csv(proxiesByStage, "../data/cleanProxiesByStage_20131210.csv", row.names=F)
