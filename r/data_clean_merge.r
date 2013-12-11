@@ -117,11 +117,14 @@ envtCols <- t(sapply(1:nrow(ext), function(i){
   #get the means for each column of the proxy data
   #rgh - kludge to turn a df into a vector, as colwise turns
   #out data frames
-  ret<-colMeans(stageTime[stageRangeIDX,7:20], na.rm=T)
+  ret<-colMeans(stageTime[stageRangeIDX,7:38], na.rm=T)
   return(ret)
 }))
 
 envtCols<-as.data.frame(envtCols)
+envtCols$OA[which(envtCols$OA>0)]<-1
+envtCols$Flood_basalt[which(envtCols$Flood_basalt>0)]<-1
+envtCols$Bolide[which(envtCols$Bolide>0)]<-1
 #names(envtCols) <- colNames
 
 #debug

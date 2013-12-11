@@ -213,8 +213,8 @@ proxies <- sapply(1:nrow(stageTime),  function(x){
   ex<-c(BC.extinction.rate=mean(extMag$BC.extinction.rate[exIDX]))
   ex2<-c(BC.extinction.ratePBDB=mean(extMag2$BC.extinction.rate[exIDX2]))
 
-  ex<-c(BC.extinction.rate.max=max(extMag$BC.extinction.rate[exIDX], na.rm=T))
-  ex2<-c(BC.extinction.ratePBDB.max=mean(extMag2$BC.extinction.rate[exIDX2], na.rm=T))
+  exMax<-c(BC.extinction.rate.max=max(extMag$BC.extinction.rate[exIDX], na.rm=T))
+  ex2Max<-c(BC.extinction.ratePBDB.max=mean(extMag2$BC.extinction.rate[exIDX2], na.rm=T))
   
   
   #Data from Grossman
@@ -235,7 +235,7 @@ proxies <- sapply(1:nrow(stageTime),  function(x){
   
   names(prok) <- paste(names(prok), "prok", sep=".")
   
-  return(c(envt, ex, ex2, gr, sea, prok, vb))
+  return(c(envt, ex, ex2,exMax, ex2Max, gr, sea, prok, vb))
 })
 
 
