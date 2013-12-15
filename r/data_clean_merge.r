@@ -4,6 +4,7 @@
 #
 # Changelog
 #
+# 20131211 - Added start and end stages and meanDate
 # 20131202 - removed detrend function, as it was not being used
 # 20131202 - now using cleaned proxy data file
 # 20121101 - changed proxy data file to new Hannisdal & Peters with corresponding change to choosing rows by time
@@ -118,6 +119,7 @@ envtCols <- t(sapply(1:nrow(ext), function(i){
   #rgh - kludge to turn a df into a vector, as colwise turns
   #out data frames
   ret<-colMeans(stageTime[stageRangeIDX,7:38], na.rm=T)
+  ret <- c(ret, Start..Ma.=stageTime$Start..Ma.[stageRangeIDX[1]], End..Ma.=stageTime$End..Ma.[stageRangeIDX[length(stageRangeIDX)]])
   return(ret)
 }))
 
@@ -191,6 +193,14 @@ for(i in 2:nrow(ext)){
 
 # rename some proxy data to match old column names:
 #ext <- plyr::rename(ext, c("mean_d18O" = "del.18O", "mean_d13C" = "del.13C"))
+
+#A few last descriptive columns
+ext$meanDate <- rowSums(cbind(ext$Start..Ma., ext$End..Ma.))/2
+ext$timeSpan <- ext$Start..Ma. - ext$End..Ma.
+
+ext$MultipleStages <- as.factor(with(ext, as.character(ext$Start.stage) == as.character(ext$End.stage)))
+ext$Global.Regional <- as.factor(ext$Global.Regional)
+
 
 ###################################
 ##### WRITE THE CLEAN DATA
