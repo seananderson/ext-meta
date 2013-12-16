@@ -10,6 +10,7 @@
 #
 # Changelog
 #
+# 20131212 - Added some detrendended Prokoph data
 # 20131211 - Cleaned odd 1st row issue
 # 20131211 - Fixed which sealevel columns we're using
 # 20131211 - Added max extinction rates
@@ -124,6 +125,9 @@ proxyProk$Binned_stage<-gsub("Pleistocene-Holocene", "Pleistocene", proxyProk$Bi
 #pdf("figure/detrending-plots.pdf")
 #detrend the delta 34S
 proxy$del.34S.detrended <- with(proxy, detrend_ts(top, del.34S, "Hannisdal and Peters d34S"))
+proxyProk$mean_d13C.detrended <- with(proxyProk, detrend_ts(Binned_top, mean_d13C, "Prokoph d13C"))
+proxyProk$mean_d18O.detrended <- with(proxyProk, detrend_ts(Binned_top, mean_d18O, "Prokoph d18O"))
+proxyProk$mean_d34S.detrended <- with(proxyProk, detrend_ts(Binned_top, mean_d34S, "Prokoph d34S"))
 
 
 ######new sealevel data
@@ -231,7 +235,7 @@ proxies <- sapply(1:nrow(stageTime),  function(x){
   })
   
   #Data from Prokoph
-  prok <- colMeans(proxyProk[proxyProkIDX, 6:17])
+  prok <- colMeans(proxyProk[proxyProkIDX, c(6:17, 19:21)])
   
   names(prok) <- paste(names(prok), "prok", sep=".")
   
@@ -248,4 +252,5 @@ proxiesByStage$BC.extinction.rate.max[which(proxiesByStage$BC.extinction.rate.ma
 proxiesByStage$BC.extinction.ratePBDB.max[which(is.nan(proxiesByStage$BC.extinction.ratePBDB.max))] <- NA
 
 #write.csv(proxiesByStage, "../data/cleanProxiesByStage_20131027.csv", row.names=F)
-write.csv(proxiesByStage, "../data/cleanProxiesByStage_20131210.csv", row.names=F)
+#write.csv(proxiesByStage, "../data/cleanProxiesByStage_20131210.csv", row.names=F)
+write.csv(proxiesByStage, "../data/cleanProxiesByStage_20131212.csv", row.names=F)

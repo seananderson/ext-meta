@@ -1,0 +1,43 @@
+Comparing different Proxies
+========================================================
+
+A brief comparison of the H&P proxies versus the Prokoph proxies with a few different models.
+
+```{r, echo=FALSE, include=FALSE}
+read_chunk("./model_compare_proxies.R")
+read_chunk("./plot_effect_sizes.R")
+```
+
+```{r prep, echo=FALSE}
+```
+
+
+```{r loadData, echo=FALSE, include=FALSE}
+```
+
+```{r bigBroadModelRMAPrep, echo=FALSE, include=FALSE}
+```
+
+Here are four models, all using the form effect ~ BC.extinction.ratePBDB + OA + del.18O + del.34S + del.13C. Model 1 is H&P, model 2 is Prokoph, model 3 is Prokoph but will also use meanDate as a covariate, and model 4 will use the detrended proxies
+
+```{r bigBroadModelRMA}
+```
+
+In all models, broad v. narrow is the only thing that maters.  The H&P dataset has some hints that maybe there's an effect of two proxies. But that goes away with the Prokoph dataset.
+
+Let's visualize this.
+
+```{r coefCompareBroad, fig.width=12, fig.height=12}
+```
+
+Nope, all the same.  What about for life habit?
+
+```{r epibigEpifaunaModel.RMA}
+```
+
+Here we see that only in the detrended data does the effect go away.  Given that it was fine, even when we included in meanDate, and I'm not so certain about averaging detrended data versus including a meanDate covariate, and that the trends are the same, I'm inclined to again go with the Prokoph model in #2.  Here we again see opposing trends of d18O and d38S, same as in H&P.  
+
+```{r epibigEpifaunaModel.RMA.Plot, fig.width=12, fig.height=12}
+```
+
+

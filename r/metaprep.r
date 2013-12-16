@@ -262,25 +262,13 @@ ext<-read.csv("../data/extinctionMetaClean.csv")
 #clean out continuous studies
 contExt<-ext[which(!is.na(ext$Trait.category)),]
 #ext<-ext[-which(is.na(ext$Trait.category)),]
-ext$meanDate <- rowSums(cbind(ext$startTime.Ma, ext$endTime.Ma))/2
-ext$timeSpan <- ext$startTime.Ma - ext$endTime.Ma
-
-midpoint<-max(ext$startTime.Ma, na.rm=T)/2
-
-# add detrended environmental time series:
-#ext$d18OresidualMean <- ext$del.18O
 
 ## add a few extra columns, and centered environmental predictors
-
 ext$MultipleStages <- as.factor(with(ext, as.character(ext$Start.stage) == as.character(ext$End.stage)))
 ext$Global.Regional <- as.factor(ext$Global.Regional)
 
 
-#centExt<-colwise(function(x) x-mean(x, na.rm=T))(ext[,180:210])
-#names(centExt)<-paste(names(centExt), ".cent", sep="")
-
-#ext <- cbind(ext, centExt)
-
-#ext <- subset(ext, endTime.Ma >= 23)
-
+centExt<-colwise(function(x) x-mean(x, na.rm=T))(ext[,60:94])
+names(centExt)<-paste(names(centExt), ".cent", sep="")
+ext <- cbind(ext, centExt)
 

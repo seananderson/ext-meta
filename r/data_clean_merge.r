@@ -4,6 +4,7 @@
 #
 # Changelog
 #
+# 20131212 - Updated to Dec. 12th clean proxy data
 # 20131211 - Added start and end stages and meanDate
 # 20131202 - removed detrend function, as it was not being used
 # 20131202 - now using cleaned proxy data file
@@ -74,7 +75,7 @@ stageIDX<-which(names(ext) %in% c("Start.stage", "End.stage"))
 
 # read in the data set with the conversions between stage and time
 # and proxy data
-stageTime <- read.csv("../data/cleanProxiesByStage_20131210.csv")
+stageTime <- read.csv("../data/cleanProxiesByStage_20131212.csv")
 stageTime$Bin.name <- as.character(stageTime$Bin.name)
 
 # A function to take a lookup pair of stages and get the entire range of stages in between
@@ -118,7 +119,7 @@ envtCols <- t(sapply(1:nrow(ext), function(i){
   #get the means for each column of the proxy data
   #rgh - kludge to turn a df into a vector, as colwise turns
   #out data frames
-  ret<-colMeans(stageTime[stageRangeIDX,7:38], na.rm=T)
+  ret<-colMeans(stageTime[stageRangeIDX,7:41], na.rm=T)
   ret <- c(ret, Start..Ma.=stageTime$Start..Ma.[stageRangeIDX[1]], End..Ma.=stageTime$End..Ma.[stageRangeIDX[length(stageRangeIDX)]])
   return(ret)
 }))
