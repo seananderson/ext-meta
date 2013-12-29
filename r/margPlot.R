@@ -1,12 +1,13 @@
 ######
 ## plots a variable after
 ## detrending from a lmer object
-marginalPlot<-function(object, variable, dataFrame){
+marginalPlot<-function(object, variable, dataFrame, xAdd=0){
 
   Marg<-cbind(dataFrame, getMarginal(object, dataFrame))
   varName<-paste(variable, "Marginal", sep="")
   Marg$cilnorhi = Marg[[varName]] + 1.96*Marg$sdlnorReg
   Marg$cilnorlo = Marg[[varName]] - 1.96*Marg$sdlnorReg
+  Marg$variable = Marg$variable+xAdd
   
   marginal.data.plot<-ggplot(data=Marg, aes_string(y=varName, x=variable,
                                                ymin="cilnorlo", 
@@ -34,11 +35,11 @@ marginalPlot<-function(object, variable, dataFrame){
 #marginalPlot(covModel.Broad, "d18OresidualMean", broadData)
 #marginalPlot(covModel.Broad, "BC.extinction.rate.PBDB", broadData)
 
-names(cars)
-afun<-function(z){
+#names(cars)
+#afun<-function(z){
   #ggplot(data=cars, aes(x=dist, y=z))+ geom_point()
-  ggplot(data=cars, aes_string(x="dist", y=z))+ geom_point()
+#  ggplot(data=cars, aes_string(x="dist", y=z))+ geom_point()
   #ggplot(data=cars, aes(x=dist, y=get(z)))+ geom_point()
-}
+#}
 
-afun("speed")
+#afun("speed")

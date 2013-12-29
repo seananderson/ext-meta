@@ -1,6 +1,6 @@
 
-marginalLine<-function(object, variable, dataFrame, nsamp=50){
-  margPlot<-marginalPlot(object, variable, dataFrame)
+marginalLine<-function(object, variable, dataFrame, nsamp=50, xAdd=0){
+  margPlot<-marginalPlot(object, variable, dataFrame, xAdd=xAdd)
   
   blankMat<-data.frame(matrix(rep(0, nsamp * length(fixef(object)[-1])), nrow=nsamp))
 
@@ -19,6 +19,8 @@ marginalLine<-function(object, variable, dataFrame, nsamp=50){
   
   predictFitDF$cilnorlo<-predictFitDF$cilo.fr
   predictFitDF$cilnorhi<-predictFitDF$cihi.fr
+  
+  predictFitDF$variable <- predictFitDF$variable+xAdd
   
   margPlot+geom_ribbon(data=predictFitDF, aes_string(x=variable, 
                                                        y="fit",
