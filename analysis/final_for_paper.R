@@ -176,6 +176,11 @@ broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust=F, std=T)+
   annotate("text", x=5.6, y=-0.35, label="Favours\nnarrow")+
   annotate("text", x=5.6, y=0.35, label="Favours\nbroad")
 
+## @knitr broadModelWithTime
+broadDataExtinction$cent.meanDate <- cent(broadDataExtinction$meanDate)
+rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~BC.extinction.ratePBDB +
+      cent.OA + cent.d18O + cent.d34S + cent.d13C+cent.meanDate)
+
 ## @knitr sectionbreak
 ########################################
 ## Epifauna v. Infauna
@@ -224,11 +229,8 @@ habitDataGood <- within(habitDataGood, {
   cent.OA <- cent(OA)
   cent.d18O <- cent(mean_d18O.prok)
   cent.d34S <- cent(mean_d34S.prok)
+  cent.meanDate <- cent(meanDate)
 })
-
-
-# TODO WARNING Error in qr.solve(wX, diag(k)) : singular matrix 'a' in solve
-# TODO WARNING there are no OA events: they're all 0
 
 covModel.Epifaunal.rma <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
                               mods =~ cent.OA + cent.extinction + cent.d18O + cent.d34S)
@@ -245,6 +247,11 @@ epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust=F, std=T)+
   ylim(c(-1.3,1.3)) +
   annotate("text", x=4.6, y=-.7, label="Favours\ninfauna")+
   annotate("text", x=4.6, y=.7, label="Favours\nepifauna")
+
+## @knitr epibigEpifaunaModel.RMA.checktime
+rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
+    mods =~ cent.OA + cent.extinction + cent.d18O + cent.d34S + cent.meanDate)
+
 
 ## @knitr Fig4
 grid.arrange(broadCoefPlot+theme_bw(base_size=18), epiCoefPlot+theme_bw(base_size=18), ncol=2)

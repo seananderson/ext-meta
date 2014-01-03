@@ -95,6 +95,13 @@ The Fitted Model for Epifauna v. Infauna
 ```{r epibigEpifaunaModel.RMA}
 ```
 
+Does adding Time change things?
+```{r broadModelWithTime}
+```
+
+```{r epibigEpifaunaModel.RMA.checktime}
+```
+
 Figure 4
 ========================================================
 ```{r Fig4, fig.height=5, fig.width=12}
