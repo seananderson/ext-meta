@@ -1,0 +1,95 @@
+Order,State stage,Volcanism,Flood_basalt,Bolide,OA,Redundant.stage
+-1,Recent,0,0,0,0,0
+0,Calabrian,0,0,0,0,0
+1,Gelasian,0,0,0,0,0
+2,Piacenzian,0,0,0,0,0
+3,Zanclean,0,0,0,0,0
+4,Messinian,0,0,0,0,0
+5,Tortonian,0,0,0,0,0
+6,Serravallian,0,0,0,0,0
+7,Langhian,0,0,0,0,0
+8,Burdigalian,1,1,0,0,0
+9,Aquitanian,0,0,0,0,0
+10,Chattian,0,0,0,0,0
+11,Rupelian,1,1,0,0,0
+12,Priabonian,0,0,1,0,0
+13,Bartonian,0,0,0,0,0
+14,Lutetian,1,0,0,0,0
+15,Ypresian,0,0,0,1,0
+16,Thanetian,0,0,0,0,0
+17,Selandian,0,0,0,0,0
+18,Danian,1,1,0,0,0
+19,Maastrichtian,1,1,1,1,0
+20,Campanian,1,0,1,0,0
+21,Santonian,0,0,0,0,0
+22,Coniacian,0,0,0,0,0
+23,Turonian,1,1,0,0,0
+24,Cenomanian,1,1,0,1,0
+25,Albian,1,0,0,0,0
+26,Aptian,1,1,0,1,0
+27,Barremian,0,0,0,0,0
+28,Hauterivian,1,0,0,0,0
+29,Valanginian,1,1,0,1,0
+30,Berriasian,1,0,0,0,0
+31,Tithonian,1,1,1,0,0
+32,Kimmeridgian,1,0,0,0,0
+33,Oxfordian,0,0,0,0,0
+34,Callovian,0,0,0,0,0
+35,Bathonian,0,0,0,0,0
+36,Bajocian,0,0,0,0,0
+37,Aalenian,0,0,0,0,0
+38,Toarcian,0,0,0,1,0
+39,Pliensbachian,1,1,0,1,0
+40,Sinemurian,0,0,0,0,0
+41,Hettangian,0,0,0,1,0
+42,Rhaetian,1,1,0,0,0
+43,Norian,1,0,1,0,0
+44,Carnian,0,0,0,0,0
+45,Ladinian,1,1,0,0,0
+46,Anisian,0,0,0,0,0
+47,Olenekian,0,0,0,0,0
+48,Changhsingian,1,1,0,1,0
+49,Induan,0,0,0,0,0
+50,Wuchiapingian,1,1,0,0,0
+51,Capitanian,1,0,0,0,0
+52,Wordian,0,0,0,0,0
+53,Roadian,0,0,0,0,0
+54,Kungurian,1,0,0,0,0
+55,Artinskian,0,0,0,0,0
+56,Sakmarian,0,0,0,0,0
+57,Asselian,1,1,0,0,0
+58,Gzhelian,0,0,0,0,0
+59,Kasimovian,0,0,0,0,0
+60,Moscovian,0,0,0,0,0
+61,Bashkirian,0,0,0,0,0
+62,Serpukhovian,0,0,0,0,0
+63,Visean,0,0,0,0,0
+64,Tournaisian,0,0,0,0,0
+65,Famennian,1,1,0,0,0
+66,Frasnian,1,1,0,0,0
+67,Givetian,0,0,0,0,0
+68,Eifelian,0,0,0,0,0
+69,Emsian,0,0,0,0,0
+70,Pragian,0,0,0,0,0
+71,Lochkovian,0,0,0,0,0
+72,unnamed Pridoli stage,0,0,0,0,0
+73,Ludfordian,0,0,0,0,0
+74,Gorstian,0,0,0,0,0
+75,Homerian,0,0,0,0,0
+76,Sheinwoodian,0,0,0,0,0
+77,Telychian,0,0,0,0,0
+78,Aeronian,0,0,0,0,0
+79,Rhuddanian,0,0,0,0,0
+80,Hirnantian,0,0,0,0,0
+81,middle Late Ordovician,0,0,0,0,1
+81,Katian,0,0,0,0,0
+82,early Late Ordovician,0,0,0,0,1
+82,Sandbian,0,0,0,0,0
+83,Darriwilian,0,0,0,0,0
+84,early Middle Ordovician,0,0,0,0,1
+84,Dapingian,0,0,0,0,0
+85,late Early Ordovician,0,0,0,0,1
+85,Floian,0,0,0,0,0
+86,Tremadocian,0,0,0,0,0
+87,Cambrian stage 4,1,1,0,0,0
+88,Cambrian stage 3,1,0,0,0,0
