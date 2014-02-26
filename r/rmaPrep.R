@@ -66,7 +66,7 @@ margAdjust <- function(coefs, X, y, variable){
 }
 
 
-marginalPlot <- function(obj, variable, dataFrame){
+marginalPlot <- function(obj, variable, dataFrame,xAdd=0){
   #for rma
   coefs <- coef(summary(obj))[,1]
   X <- obj$X
@@ -75,13 +75,15 @@ marginalPlot <- function(obj, variable, dataFrame){
 
   margPoints <- y - margAdjust(coefs, X, y, variable)
   
-  subdf <- data.frame(predictor = predictor, margPoints = margPoints, study.ID = dataFrame$study.ID)
+  subdf <- data.frame(predictor = predictor+xAdd, margPoints = margPoints, study.ID = dataFrame$study.ID)
+  
+  
   ggplot() + geom_point(data = subdf, mapping=aes(x=predictor, y=margPoints, color=study.ID)) +
     xlab(variable) + ylab(paste("Marginal Values for ", variable, sep="")) +
     theme_bw()
 }
 
-marginalLine <- function(obj, variable, dataFrame, interval = "fit", robust=T){
+marginalLine <- function(obj, variable, dataFrame, interval = "fit", robust=T, xAdd=0){
   #for rma
   coefs <- coef(summary(obj))[,1]
   se.coefs <- coef(summary(obj))[,2]
@@ -93,7 +95,7 @@ marginalLine <- function(obj, variable, dataFrame, interval = "fit", robust=T){
   predictor <- X[,idx]
   y <- as.numeric(obj$yi)
   
-  marPlot <- marginalPlot(obj, variable, dataFrame)
+  marPlot <- marginalPlot(obj, variable, dataFrame, xAdd=xAdd)
   #pred <- data.frame(predict(obj)[1:6])
   #pred$X <- predictor
   
@@ -115,12 +117,14 @@ marginalLine <- function(obj, variable, dataFrame, interval = "fit", robust=T){
   
   
   pred[,1:3] <-  pred[,1:3] - margAdjust(coefs, predMat, pred[,1], variable)
+
+  pred$X <- pred$X + xAdd #in case of centering adjustment
   
   if(interval=="fit")  marPlot <- marPlot + geom_ribbon(data=pred, mapping=aes(x=X, ymin=ci.lb, ymax=ci.ub), fill="lightgrey", alpha=0.5)
  # if(interval=="prediction")  marPlot <- marPlot + geom_ribbon(data=pred, mapping=aes(x=X, ymin=cr.lb, ymax=cr.ub), fill="lightgrey", alpha=0.5)
 
   marPlot <- marPlot +
-    geom_abline(intercept=coefs[1], slope=coefs[idx], size=1.5, col="red") +
+    geom_abline(intercept=coefs[1] - coefs[idx]*xAdd, slope=coefs[idx], size=1.5, col="red") +
     geom_hline(y=0, lty=2, lwd=1.5)
   
   marPlot

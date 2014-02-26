@@ -83,6 +83,10 @@ Figure 2
 
 Modeled Results
 ========================================================
+
+Note, for both models, we fit using centered predictors. Doesn't make a difference to coefficient results, but by making the intercept 0, we get easier to interpret marginal plots
+later on.
+
 The Fitted Model for Broad v. Narrow
 ```{r bigBroadModelRMA}
 ```
@@ -91,9 +95,16 @@ The Fitted Model for Epifauna v. Infauna
 ```{r epibigEpifaunaModel.RMA}
 ```
 
+Does adding Time change things?
+```{r broadModelWithTime}
+```
+
+```{r epibigEpifaunaModel.RMA.checktime}
+```
+
 Figure 4
 ========================================================
-```{r Fig4, fig.height=5, fig.width=9}
+```{r Fig4, fig.height=5, fig.width=12}
 ```
 
 Figure 5
