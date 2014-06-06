@@ -73,7 +73,7 @@ stageTime[1, "Bin.name"] <- "Recent"
 getStageRange<-function(startStage, endStage){
   #debug
   #print(paste(startStage, endStage, "\n", sep=" "))
-  as.character(stageTime[which(stageTime$Bin.name==startStage):which(stageTime$Bin.name==endStage),]$Bin.name)  
+  as.character(stageTime[which(stageTime$Bin.name==startStage):which(stageTime$Bin.name==endStage),]$Bin.name)
 }
 
 #A function to take a lookup pair of stages and get the entire range of stages in between
@@ -148,12 +148,12 @@ names(gr)[4:9] <- paste(names(gr)[4:9], "gr", sep=".")
 #get the indices in a data frame given the timing of a stage
 getIdx <- function(stage_bottom, stage_top, bottom_vec, top_vec){
   idx <- which(bottom_vec>=stage_bottom & top_vec<=stage_top)
-  
+
   #if nada, that means we're inside of a period
   if(length(idx)==0) {
     idx <- which(bottom_vec>=stage_bottom)[1]
   }
-  
+
   return(idx)
 }
 
@@ -163,8 +163,6 @@ getIdx <- function(stage_bottom, stage_top, bottom_vec, top_vec){
 volcbolide<-read.csv("../data/Flood Basalt Bolide Ocean Acidification_2.0.csv")
 volcbolide$State.stage<-gsub(" $", "", volcbolide$State.stage)
 
-#fix errors in time due to bad stage names
-volcbolide[which(volcbolide$State.stage=="unnamed Pridoli stage"),7:8] <- c(418.8, 418.1)
 
 
 
@@ -185,11 +183,18 @@ volcbolide$State.stage<-gsub("Calabrian", "Pleistocene", volcbolide$State.stage)
 #add times
 volcbolide <- cbind(volcbolide, t(sapply(volcbolide$State.stage, function(x) getTimeRange(x,x))))
 
+#fix errors in time due to bad stage names
+# TODO NOTE THAT THERE AREN'T COLUMNS 7 and 8 IN THIS DATAFRAME IN THE LINE IT
+# WAS ON.
+# I have moved it down here to where I presume it should be and changed the
+# column numbers to 8 and 9:
+volcbolide[which(volcbolide$State.stage=="unnamed Pridoli stage"),8:9] <- c(418.8, 418.1)
+
 
 ##OK, time to combine them all
 proxies <- sapply(1:nrow(stageTime),  function(x){
   arow <- stageTime[x,]
-  
+
   veizerIDX <- which(veizer$StageBottom>=arow$End..Ma. & veizer$StageTop<=arow$Start..Ma.)
   grIDX <- getIdx(arow$End..Ma., arow$Start..Ma., gr$Binned_bottom, gr$Binned_top)
   volcbolideIDX <- getIdx(arow$End..Ma., arow$Start..Ma., volcbolide$endTime.Ma, volcbolide$startTime.Ma)
@@ -198,13 +203,13 @@ proxies <- sapply(1:nrow(stageTime),  function(x){
   sealevelIDX <- which(sealevel$Time..my. <= arow$End..Ma.)[1]
   proxyIDX <- getIdx(arow$End..Ma., arow$Start..Ma., proxy$bottom, proxy$top)
   vbIDX <- getIdx(arow$End..Ma., arow$Start..Ma., volcbolide$endTime.Ma, volcbolide$startTime.Ma)
-  
+
   proxyProkIDX <- which(proxyProk$Binned_stage==arow$Bin.name)
-  
-  
-  #Now that we have indices for each data file, create a new data frame that 
+
+
+  #Now that we have indices for each data file, create a new data frame that
   #extracts the proxy data we want from each one
-  
+
   #use colMeans unless otherwise appropriate to average over multiple
   #time periods
   envt<-t(colwise(function(x) mean(x, na.rm=T))(proxy[proxyIDX,13:17]))[,1]
@@ -212,33 +217,33 @@ proxies <- sapply(1:nrow(stageTime),  function(x){
   #query whether there were any events, and set the return value to 1 if so
 #  vb<-as.numeric(colSums(volcbolide[vbIDX,3:6])>0)
 #  names(vb)<-names(volcbolide[3:6])
-  
+
   #extinction rates
   ex<-c(BC.extinction.rate=mean(extMag$BC.extinction.rate[exIDX]))
   ex2<-c(BC.extinction.ratePBDB=mean(extMag2$BC.extinction.rate[exIDX2]))
 
   exMax<-c(BC.extinction.rate.max=max(extMag$BC.extinction.rate[exIDX], na.rm=T))
   ex2Max<-c(BC.extinction.ratePBDB.max=mean(extMag2$BC.extinction.rate[exIDX2], na.rm=T))
-  
-  
+
+
   #Data from Grossman
   gr <- colMeans(gr[grIDX,4:9])
-  
+
   #query whether there were any events, and set the return value to 1 if so
   vb<-as.numeric(colSums(volcbolide[vbIDX,3:6])>0)
   names(vb)<-names(volcbolide[3:6])
-  
+
   #sealevel
   sea <- with(sealevel[sealevelIDX,2:11], {
     c(sea_level...first.diffs. = mean(sea_level...first.diffs.),
       sea_level_residuals = mean(sea_level_residuals))
   })
-  
+
   #Data from Prokoph
   prok <- colMeans(proxyProk[proxyProkIDX, c(6:17, 19:21)])
-  
+
   names(prok) <- paste(names(prok), "prok", sep=".")
-  
+
   return(c(envt, ex, ex2,exMax, ex2Max, gr, sea, prok, vb))
 })
 
