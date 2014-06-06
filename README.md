@@ -19,6 +19,7 @@ For example, on my computer:
 
 Then run these lines of code:
 
+    source("../r/proxydata_clean_merge.R")
     source("../r/data_clean_merge.r")
     library(knitr)
     knit2html("final.Rmd")
