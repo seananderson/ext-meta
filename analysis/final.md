@@ -15,10 +15,6 @@ RMA Outputs
 
 
 
-
-
-
-
 Broad v. Narrow Baseline
 ========================================================
 
@@ -27,8 +23,7 @@ First, we have to verify our assumptions about pooling all of the data.
 Does grouping matter?
 
 ```r
-taxGenera.Broad <- rma(yi = lnorReg, vi = vlnorReg, mods = ~Bivalve..Gastropod + 
-    Tax.level, data = broadData)
+taxGenera.Broad<-rma(yi = lnorReg, vi = vlnorReg, mods= ~ Bivalve..Gastropod+Tax.level, data=broadData)
 taxGenera.Broad
 ```
 
@@ -36,40 +31,38 @@ taxGenera.Broad
 ## 
 ## Mixed-Effects Model (k = 80; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.4671 (SE = 0.1465)
-## tau (square root of estimated tau^2 value):             0.6834
-## I^2 (residual heterogeneity / unaccounted variability): 56.53%
-## H^2 (unaccounted variability / sampling variability):   2.30
+## tau^2 (estimated amount of residual heterogeneity):     0.3553 (SE = 0.1245)
+## tau (square root of estimated tau^2 value):             0.5960
+## I^2 (residual heterogeneity / unaccounted variability): 49.52%
+## H^2 (unaccounted variability / sampling variability):   1.98
 ## R^2 (amount of heterogeneity accounted for):            0.00%
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 77) = 175.9544, p-val < .0001
+## QE(df = 77) = 149.2280, p-val < .0001
 ## 
 ## Test of Moderators (coefficient(s) 2,3): 
-## QM(df = 2) = 0.8493, p-val = 0.6540
+## QM(df = 2) = 1.4411, p-val = 0.4865
 ## 
 ## Model Results:
 ## 
-##                              estimate      se     zval    pval    ci.lb
-## intrcpt                        1.0821  0.1866   5.7990  <.0001   0.7164
-## Bivalve..GastropodGastropod    0.1284  0.2346   0.5474  0.5841  -0.3314
-## Tax.levelSpecies              -0.1747  0.2261  -0.7726  0.4398  -0.6179
+##                                           se     zval    pval    ci.lb
+## intrcpt                       1.1432  0.1731   6.6053  <.0001   0.8040
+## Bivalve..GastropodGastropod   0.1126  0.2180   0.5163  0.6057  -0.3147
+## Tax.levelSpecies             -0.2358  0.2104  -1.1204  0.2626  -0.6482
 ##                               ci.ub     
-## intrcpt                      1.4478  ***
-## Bivalve..GastropodGastropod  0.5883     
-## Tax.levelSpecies             0.2685     
+## intrcpt                      1.4825  ***
+## Bivalve..GastropodGastropod  0.5399     
+## Tax.levelSpecies             0.1767     
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
-
 Does Multistage matter?
 
 ```r
-multStage.Broad <- rma(yi = lnorReg, vi = vlnorReg, mods = ~MultipleStages, 
-    data = broadData)
+multStage.Broad<-rma(yi = lnorReg, vi =vlnorReg,   mods=~ MultipleStages, data=broadData)
 multStage.Broad
 ```
 
@@ -77,33 +70,32 @@ multStage.Broad
 ## 
 ## Mixed-Effects Model (k = 80; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.4736 (SE = 0.1465)
-## tau (square root of estimated tau^2 value):             0.6882
-## I^2 (residual heterogeneity / unaccounted variability): 57.07%
-## H^2 (unaccounted variability / sampling variability):   2.33
+## tau^2 (estimated amount of residual heterogeneity):     0.3658 (SE = 0.1255)
+## tau (square root of estimated tau^2 value):             0.6048
+## I^2 (residual heterogeneity / unaccounted variability): 50.45%
+## H^2 (unaccounted variability / sampling variability):   2.02
 ## R^2 (amount of heterogeneity accounted for):            0.00%
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 78) = 178.8792, p-val < .0001
+## QE(df = 78) = 151.8594, p-val < .0001
 ## 
 ## Test of Moderators (coefficient(s) 2): 
-## QM(df = 1) = 0.2376, p-val = 0.6260
+## QM(df = 1) = 0.2337, p-val = 0.6288
 ## 
 ## Model Results:
 ## 
-##                     estimate      se    zval    pval    ci.lb   ci.ub     
-## intrcpt               0.9538  0.1864  5.1168  <.0001   0.5885  1.3192  ***
-## MultipleStagesTRUE    0.1136  0.2332  0.4874  0.6260  -0.3433  0.5706     
+##                                 se    zval    pval    ci.lb   ci.ub     
+## intrcpt             0.9790  0.1741  5.6224  <.0001   0.6377  1.3203  ***
+## MultipleStagesTRUE  0.1052  0.2175  0.4835  0.6288  -0.3212  0.5315     
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-
 Does Global v. Regional matter?
 
 ```r
-scale.Broad <- rma(yi = lnorReg, vi = vlnorReg, mods = ~Global.Regional, data = broadData)
+scale.Broad <- rma(yi = lnorReg, vi =vlnorReg,   mods=~ Global.Regional, data=broadData)
 scale.Broad
 ```
 
@@ -111,33 +103,32 @@ scale.Broad
 ## 
 ## Mixed-Effects Model (k = 80; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.4715 (SE = 0.1460)
-## tau (square root of estimated tau^2 value):             0.6867
-## I^2 (residual heterogeneity / unaccounted variability): 56.99%
-## H^2 (unaccounted variability / sampling variability):   2.33
+## tau^2 (estimated amount of residual heterogeneity):     0.3622 (SE = 0.1247)
+## tau (square root of estimated tau^2 value):             0.6018
+## I^2 (residual heterogeneity / unaccounted variability): 50.25%
+## H^2 (unaccounted variability / sampling variability):   2.01
 ## R^2 (amount of heterogeneity accounted for):            0.00%
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 78) = 178.5149, p-val < .0001
+## QE(df = 78) = 151.9811, p-val < .0001
 ## 
 ## Test of Moderators (coefficient(s) 2): 
-## QM(df = 1) = 0.1128, p-val = 0.7370
+## QM(df = 1) = 0.4515, p-val = 0.5016
 ## 
 ## Model Results:
 ## 
-##                   estimate      se    zval    pval    ci.lb   ci.ub     
-## intrcpt             0.9973  0.1414  7.0545  <.0001   0.7202  1.2744  ***
-## Global.Regional1    0.0776  0.2311  0.3358  0.7370  -0.3753  0.5306     
+##                               se    zval    pval    ci.lb   ci.ub     
+## intrcpt           0.9926  0.1311  7.5701  <.0001   0.7356  1.2495  ***
+## Global.Regional1  0.1449  0.2156  0.6719  0.5016  -0.2777  0.5674     
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-
 Does Time Matter?
 
 ```r
-time.Broad <- rma(yi = lnorReg, vi = meanDate, mods = ~meanDate, data = broadData)
+time.Broad<-rma(yi = lnorReg, vi =meanDate,   mods=~ meanDate, data=broadData)
 time.Broad
 ```
 
@@ -145,33 +136,32 @@ time.Broad
 ## 
 ## Mixed-Effects Model (k = 80; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0 (SE = 1.0229)
+## tau^2 (estimated amount of residual heterogeneity):     0 (SE = 1.0286)
 ## tau (square root of estimated tau^2 value):             0
 ## I^2 (residual heterogeneity / unaccounted variability): 0.00%
 ## H^2 (unaccounted variability / sampling variability):   1.00
 ## R^2 (amount of heterogeneity accounted for):            NA%
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 78) = 5.4666, p-val = 1.0000
+## QE(df = 78) = 5.4190, p-val = 1.0000
 ## 
 ## Test of Moderators (coefficient(s) 2): 
-## QM(df = 1) = 0.0046, p-val = 0.9459
+## QM(df = 1) = 0.0065, p-val = 0.9356
 ## 
 ## Model Results:
 ## 
-##           estimate      se    zval    pval    ci.lb   ci.ub   
-## intrcpt     0.9614  0.4576  2.1011  0.0356   0.0646  1.8583  *
-## meanDate    0.0006  0.0092  0.0679  0.9459  -0.0174  0.0187   
+##                       se    zval    pval    ci.lb   ci.ub   
+## intrcpt   0.9560  0.4591  2.0822  0.0373   0.0561  1.8558  *
+## meanDate  0.0007  0.0091  0.0808  0.9356  -0.0172  0.0186   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-
 If we pool everything, what is our grand mean Log Odds Ratio for Broad v. Narrow?
 
 ```r
-broad.rma <- rma(yi = lnorReg, vi = vlnorReg, data = broadData)
+broad.rma <- rma(yi = lnorReg, vi = vlnorReg, data=broadData)
 broad.rma
 ```
 
@@ -179,28 +169,28 @@ broad.rma
 ## 
 ## Random-Effects Model (k = 80; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of total heterogeneity): 0.4587 (SE = 0.1422)
-## tau (square root of estimated tau^2 value):      0.6773
-## I^2 (total heterogeneity / total variability):   56.63%
-## H^2 (total variability / sampling variability):  2.31
+## tau^2 (estimated amount of total heterogeneity): 0.3534 (SE = 0.1217)
+## tau (square root of estimated tau^2 value):      0.5945
+## I^2 (total heterogeneity / total variability):   49.94%
+## H^2 (total variability / sampling variability):  2.00
 ## 
 ## Test for Heterogeneity: 
-## Q(df = 79) = 178.8793, p-val < .0001
+## Q(df = 79) = 152.1462, p-val < .0001
 ## 
 ## Model Results:
 ## 
 ## estimate       se     zval     pval    ci.lb    ci.ub          
-##   1.0255   0.1110   9.2425   <.0001   0.8080   1.2430      *** 
+##   1.0456   0.1034  10.1103   <.0001   0.8429   1.2483      *** 
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 ```r
-
-####### Fig 1
+#######
+#Fig 1
+#######
 ```
-
 
 Figure 1
 ========================================================
@@ -224,15 +214,13 @@ plot_effect_sizes(broadData, rma.model = broad.rma, lab = c("narrow", "broad"))
 
 
 
-
 Epifauna v. Infauna Baseline
 ========================================================
   
 Are Bivalves or Gastropods Different?
 
 ```r
-bivalve.gastro.Epifaunal <- rma(yi = lnorReg, vi = vlnorReg, data = habitData, 
-    mod = ~Bivalve..Gastropod - 1)
+bivalve.gastro.Epifaunal<-rma(yi=lnorReg, vi=vlnorReg, data=habitData, mod=~Bivalve..Gastropod-1)
 bivalve.gastro.Epifaunal
 ```
 
@@ -253,9 +241,9 @@ bivalve.gastro.Epifaunal
 ## 
 ## Model Results:
 ## 
-##                              estimate      se     zval    pval    ci.lb
-## Bivalve..GastropodBivalve     -0.1248  0.1468  -0.8507  0.3950  -0.4125
-## Bivalve..GastropodGastropod    0.1098  0.3042   0.3609  0.7182  -0.4865
+##                                           se     zval    pval    ci.lb
+## Bivalve..GastropodBivalve    -0.1248  0.1468  -0.8507  0.3950  -0.4125
+## Bivalve..GastropodGastropod   0.1098  0.3042   0.3609  0.7182  -0.4865
 ##                               ci.ub   
 ## Bivalve..GastropodBivalve    0.1628   
 ## Bivalve..GastropodGastropod  0.7061   
@@ -265,17 +253,17 @@ bivalve.gastro.Epifaunal
 ```
 
 ```r
-
-##### So, we pool.  Let's look at things, then
+#####
+### So, we pool.  Let's look at things, then
+#####
 ```
-
 No - they are broadly the same.
 
 
 Does global v. regional extinction matter?
 
 ```r
-scale.habit <- rma(yi = lnorReg, vi = vlnorReg, mods = ~Global.Regional, data = habitData)
+scale.habit <- rma(yi = lnorReg, vi =vlnorReg,   mods=~ Global.Regional, data=habitData)
 scale.habit
 ```
 
@@ -297,21 +285,20 @@ scale.habit
 ## 
 ## Model Results:
 ## 
-##                   estimate      se     zval    pval    ci.lb   ci.ub   
-## intrcpt            -0.0067  0.1425  -0.0473  0.9622  -0.2861  0.2726   
-## Global.Regional1   -0.5303  0.3821  -1.3881  0.1651  -1.2791  0.2185   
+##                                se     zval    pval    ci.lb   ci.ub   
+## intrcpt           -0.0067  0.1425  -0.0473  0.9622  -0.2861  0.2726   
+## Global.Regional1  -0.5303  0.3821  -1.3881  0.1651  -1.2791  0.2185   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-
 Does time matter?
 
 ```r
-# SA 20130119: I changed bivalvesEpifaunal to habitatData. I believe this
-# was just a mistake when copying the code over
-time.Epifaunal <- rma(yi = lnorReg, vi = vlnorReg, data = habitData, mods = ~meanDate)
+# SA 20130119: I changed bivalvesEpifaunal to habitatData. I believe
+# this was just a mistake when copying the code over
+time.Epifaunal<-rma(yi=lnorReg, vi=vlnorReg, data= habitData, mods=~meanDate)
 time.Epifaunal
 ```
 
@@ -319,33 +306,32 @@ time.Epifaunal
 ## 
 ## Mixed-Effects Model (k = 49; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.4289 (SE = 0.1648)
-## tau (square root of estimated tau^2 value):             0.6549
-## I^2 (residual heterogeneity / unaccounted variability): 58.69%
-## H^2 (unaccounted variability / sampling variability):   2.42
-## R^2 (amount of heterogeneity accounted for):            1.17%
+## tau^2 (estimated amount of residual heterogeneity):     0.4312 (SE = 0.1653)
+## tau (square root of estimated tau^2 value):             0.6567
+## I^2 (residual heterogeneity / unaccounted variability): 58.85%
+## H^2 (unaccounted variability / sampling variability):   2.43
+## R^2 (amount of heterogeneity accounted for):            0.63%
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 47) = 113.5364, p-val < .0001
+## QE(df = 47) = 114.0683, p-val < .0001
 ## 
 ## Test of Moderators (coefficient(s) 2): 
-## QM(df = 1) = 1.1641, p-val = 0.2806
+## QM(df = 1) = 1.0323, p-val = 0.3096
 ## 
 ## Model Results:
 ## 
-##           estimate      se     zval    pval    ci.lb   ci.ub   
-## intrcpt    -0.2352  0.1940  -1.2122  0.2254  -0.6156  0.1451   
-## meanDate    0.0032  0.0030   1.0789  0.2806  -0.0026  0.0091   
+##                        se     zval    pval    ci.lb   ci.ub   
+## intrcpt   -0.2089  0.1821  -1.1473  0.2513  -0.5658  0.1480   
+## meanDate   0.0015  0.0014   1.0160  0.3096  -0.0014  0.0043   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-
 If we pool everything, what is our grand mean Log Odds Ratio for Epifaunal v. Infaunal?
 
 ```r
-meanModel.Epifaunal <- rma(yi = lnorReg, vi = vlnorReg, data = habitData)
+meanModel.Epifaunal<-rma(yi=lnorReg, vi=vlnorReg, data=habitData)
 meanModel.Epifaunal
 ```
 
@@ -370,7 +356,6 @@ meanModel.Epifaunal
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-
 Figure 2
 ========================================================
 
@@ -392,10 +377,8 @@ plot_effect_sizes(habitData, meanModel.Epifaunal, lab = c("infauna", "epifauna")
 ![plot of chunk Fig2](figure/Fig2.png) 
 
 ```r
-
 # now fix up the labels (spacing and the et al.s)
 ```
-
 
 
 Modeled Results
@@ -407,187 +390,264 @@ later on.
 The Fitted Model for Broad v. Narrow
 
 ```r
-broadDataExtinction <- broadData[which(!is.na(broadData$BC.extinction.ratePBDB)), 
-    ]
-broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d18O.prok)), 
-    ]
-broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d34S.prok)), 
-    ]
-broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d13C.prok)), 
-    ]
+broadDataExtinction <- broadData[which(!is.na(broadData$BC.extinction.ratePBDB)),]
+broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d18O.prok)),]
+broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d34S.prok)),]
+broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d13C.prok)),]
 
-# as we'll be using these predictors later
+#as we'll be using these predictors later
 broadDataExtinction <- within(broadDataExtinction, {
-    cent.extinction <- cent(BC.extinction.ratePBDB)
-    cent.OA <- cent(OA)
-    cent.d18O <- cent(mean_d18O.prok)
-    cent.d34S <- cent(mean_d34S.prok)
-    cent.d13C <- cent(mean_d13C.prok)
+  cent.extinction <- cent(BC.extinction.rate.PBDB3)
+  cent.OA <- cent(OA)
+  cent.d18O <- cent(mean_d18O.prok)
+  cent.d34S <- cent(mean_d34S.prok)
+  cent.d13C <- cent(mean_d13C.prok)
+  detrend.cent.d18O <- cent(mean_d18O.detrended.prok)
+  detrend.cent.d34S <- cent(mean_d34S.detrended.prok)
+  detrend.cent.d13C <- cent(mean_d13C.detrended.prok)
+  cent.meanDate <- cent(meanDate)
 })
 
-covModel.Broad.RMA <- rma(yi = lnorReg, vi = vlnorReg, data = broadDataExtinction, 
-    mods = ~BC.extinction.ratePBDB + cent.OA + cent.d18O + cent.d34S + cent.d13C)
+covModel.Broad.RMA <- rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~cent.extinction +
+      cent.OA + cent.d18O + cent.d34S + cent.d13C)
+```
 
+```
+## Warning: Studies with NAs omitted from model fitting.
+```
+
+```r
 covModel.Broad.RMA
 ```
 
 ```
 ## 
-## Mixed-Effects Model (k = 71; tau^2 estimator: REML)
+## Mixed-Effects Model (k = 68; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.2655 (SE = 0.1137)
-## tau (square root of estimated tau^2 value):             0.5152
-## I^2 (residual heterogeneity / unaccounted variability): 42.86%
-## H^2 (unaccounted variability / sampling variability):   1.75
-## R^2 (amount of heterogeneity accounted for):            2.53%
+## tau^2 (estimated amount of residual heterogeneity):     0.2717 (SE = 0.1202)
+## tau (square root of estimated tau^2 value):             0.5212
+## I^2 (residual heterogeneity / unaccounted variability): 42.69%
+## H^2 (unaccounted variability / sampling variability):   1.74
+## R^2 (amount of heterogeneity accounted for):            5.67%
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 65) = 112.8791, p-val = 0.0002
+## QE(df = 62) = 106.6651, p-val = 0.0004
 ## 
 ## Test of Moderators (coefficient(s) 2,3,4,5,6): 
-## QM(df = 5) = 4.7755, p-val = 0.4439
+## QM(df = 5) = 6.1964, p-val = 0.2876
 ## 
 ## Model Results:
 ## 
-##                         estimate      se     zval    pval    ci.lb   ci.ub
-## intrcpt                   1.1255  0.1788   6.2930  <.0001   0.7749  1.4760
-## BC.extinction.ratePBDB   -1.1950  2.7368  -0.4366  0.6624  -6.5591  4.1690
-## cent.OA                   0.1735  0.2850   0.6088  0.5427  -0.3851  0.7321
-## cent.d18O                -0.0018  0.0672  -0.0261  0.9792  -0.1335  0.1300
-## cent.d34S                -0.0566  0.0343  -1.6499  0.0990  -0.1237  0.0106
-## cent.d13C                -0.0783  0.1046  -0.7481  0.4544  -0.2833  0.1268
-##                            
-## intrcpt                 ***
-## BC.extinction.ratePBDB     
-## cent.OA                    
-## cent.d18O                  
-## cent.d34S                 .
-## cent.d13C                  
+##                               se     zval    pval    ci.lb   ci.ub     
+## intrcpt           1.0191  0.1073   9.4940  <.0001   0.8087  1.2295  ***
+## cent.extinction   0.8116  1.2736   0.6373  0.5239  -1.6845  3.3078     
+## cent.OA           0.0992  0.3068   0.3234  0.7464  -0.5022  0.7006     
+## cent.d18O         0.0160  0.0623   0.2574  0.7968  -0.1060  0.1380     
+## cent.d34S        -0.0669  0.0343  -1.9486  0.0513  -0.1341  0.0004    .
+## cent.d13C        -0.0685  0.1038  -0.6599  0.5093  -0.2720  0.1350     
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 ```r
-
-write.csv(coef(covModel.Broad.RMA), "./broadCoefTable.csv", row.names = T)
-
-broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust = F, std = T) + coord_flip() + 
-    scale_x_discrete(labels = c("Extinction Rate", expression(delta^13 * C), 
-        expression(delta^18 * O), expression(delta^34 * S), "Acidification"), 
-        expand = c(0.15, 0)) + annotate("text", x = 5, y = -0.5, label = "A)") + 
-    ylim(c(-0.55, 0.4)) + annotate("text", x = 5.6, y = -0.35, label = "Favours\nnarrow") + 
-    annotate("text", x = 5.6, y = 0.35, label = "Favours\nbroad")
+#Also, the model with predictors detrended
+covModel.Broad.RMA.detrended <- rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~cent.extinction +
+                            cent.OA + detrend.cent.d18O + detrend.cent.d34S + detrend.cent.d13C)
 ```
 
+```
+## Warning: Studies with NAs omitted from model fitting.
+```
+
+```r
+covModel.Broad.RMA.detrended
+```
+
+```
+## 
+## Mixed-Effects Model (k = 68; tau^2 estimator: REML)
+## 
+## tau^2 (estimated amount of residual heterogeneity):     0.2328 (SE = 0.1110)
+## tau (square root of estimated tau^2 value):             0.4825
+## I^2 (residual heterogeneity / unaccounted variability): 38.93%
+## H^2 (unaccounted variability / sampling variability):   1.64
+## R^2 (amount of heterogeneity accounted for):            19.18%
+## 
+## Test for Residual Heterogeneity: 
+## QE(df = 62) = 101.5340, p-val = 0.0011
+## 
+## Test of Moderators (coefficient(s) 2,3,4,5,6): 
+## QM(df = 5) = 10.4940, p-val = 0.0624
+## 
+## Model Results:
+## 
+##                                 se     zval    pval    ci.lb   ci.ub     
+## intrcpt             0.9923  0.1038   9.5618  <.0001   0.7889  1.1957  ***
+## cent.extinction     0.9131  1.2212   0.7477  0.4546  -1.4804  3.3067     
+## cent.OA             0.1129  0.2921   0.3864  0.6992  -0.4597  0.6854     
+## detrend.cent.d18O   0.2345  0.1258   1.8639  0.0623  -0.0121  0.4812    .
+## detrend.cent.d34S  -0.0264  0.0347  -0.7609  0.4467  -0.0945  0.0417     
+## detrend.cent.d13C   0.0229  0.1107   0.2073  0.8358  -0.1940  0.2398     
+## 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+write.csv(coef(covModel.Broad.RMA), "./broadCoefTable.csv", row.names=T)
+write.csv(coef(covModel.Broad.RMA.detrended), "./broadCoefDetrendedTable.csv", row.names=T)
+
+broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust=F, std=T)+
+  coord_flip() +
+  scale_x_discrete(labels=c(expression(delta^13*C), expression(delta^18*O), expression(delta^34*S), "Extinction Rate", "Acidification"), expand = c(0.15, 0)) +
+  annotate("text", x=5, y=-0.5, label="A)")+
+  ylim(c(-0.55,0.4)) +
+  annotate("text", x=5.6, y=-0.35, label="Favours\nnarrow")+
+  annotate("text", x=5.6, y=0.35, label="Favours\nbroad")
+```
 
 The Fitted Model for Epifauna v. Infauna
 
 ```r
-habitDataGood <- habitData[which(!(is.na(habitData$BC.extinction.ratePBDB))), 
-    ]
-habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$lnorReg))), ]
-habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d18O.prok))), 
-    ]
-habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d34S.prok))), 
-    ]
-habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$vlnorReg))), ]
-habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$BC.extinction.ratePBDB))), 
-    ]
+habitDataGood <- habitData[which(!(is.na(habitData$BC.extinction.rate.PBDB3))),]
+habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$lnorReg))),]
+habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d18O.prok))),]
+habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d34S.prok))),]
+habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$vlnorReg))),]
 
 
-# as we'll be using these predictors later
+#as we'll be using these predictors later
 habitDataGood <- within(habitDataGood, {
-    cent.extinction <- cent(BC.extinction.ratePBDB)
-    cent.OA <- cent(OA)
-    cent.d18O <- cent(mean_d18O.prok)
-    cent.d34S <- cent(mean_d34S.prok)
-    cent.meanDate <- cent(meanDate)
+  cent.extinction <- cent(BC.extinction.rate.PBDB3)
+  cent.OA <- cent(OA)
+  cent.d18O <- cent(mean_d18O.prok)
+  cent.d34S <- cent(mean_d34S.prok)
+  cent.meanDate <- cent(meanDate)
+  detrend.cent.d18O <- cent(mean_d18O.detrended.prok)
+  detrend.cent.d34S <- cent(mean_d34S.detrended.prok)
+  detrend.cent.d13C <- cent(mean_d13C.detrended.prok)
 })
 
-covModel.Epifaunal.rma <- rma(yi = lnorReg, vi = vlnorReg, data = habitDataGood, 
-    mods = ~cent.OA + cent.extinction + cent.d18O + cent.d34S)
-
+covModel.Epifaunal.rma <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
+                              mods =~ cent.OA+ cent.extinction + cent.d18O + cent.d34S)
 
 covModel.Epifaunal.rma
 ```
 
 ```
 ## 
-## Mixed-Effects Model (k = 47; tau^2 estimator: REML)
+## Mixed-Effects Model (k = 41; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.3284 (SE = 0.1513)
-## tau (square root of estimated tau^2 value):             0.5731
-## I^2 (residual heterogeneity / unaccounted variability): 50.81%
-## H^2 (unaccounted variability / sampling variability):   2.03
-## R^2 (amount of heterogeneity accounted for):            27.33%
+## tau^2 (estimated amount of residual heterogeneity):     0.3189 (SE = 0.1620)
+## tau (square root of estimated tau^2 value):             0.5647
+## I^2 (residual heterogeneity / unaccounted variability): 49.74%
+## H^2 (unaccounted variability / sampling variability):   1.99
+## R^2 (amount of heterogeneity accounted for):            19.26%
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 42) = 82.9187, p-val = 0.0002
+## QE(df = 36) = 70.2126, p-val = 0.0006
 ## 
 ## Test of Moderators (coefficient(s) 2,3,4,5): 
-## QM(df = 4) = 12.7301, p-val = 0.0127
+## QM(df = 4) = 6.0156, p-val = 0.1980
 ## 
 ## Model Results:
 ## 
-##                  estimate      se     zval    pval     ci.lb    ci.ub    
-## intrcpt           -0.0420  0.1272  -0.3302  0.7412   -0.2913   0.2073    
-## cent.OA           -0.1050  0.4805  -0.2186  0.8269   -1.0468   0.8367    
-## cent.extinction   -2.5942  9.1023  -0.2850  0.7756  -20.4344  15.2459    
-## cent.d18O          1.5914  0.5545   2.8699  0.0041    0.5046   2.6783  **
-## cent.d34S         -0.4570  0.2330  -1.9612  0.0499   -0.9138  -0.0003   *
+##                               se     zval    pval    ci.lb   ci.ub   
+## intrcpt          -0.0866  0.1357  -0.6380  0.5235  -0.3526  0.1794   
+## cent.OA           0.3370  0.3676   0.9168  0.3593  -0.3834  1.0574   
+## cent.extinction  -0.4786  1.2825  -0.3731  0.7090  -2.9922  2.0351   
+## cent.d18O         0.4175  0.1993   2.0947  0.0362   0.0269  0.8081  *
+## cent.d34S        -0.0700  0.0528  -1.3246  0.1853  -0.1735  0.0336   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 ```r
-write.csv(coef(covModel.Epifaunal.rma), "./epiCoefTable.csv", row.names = T)
+#And now detrended
+covModel.Epifaunal.rma.detrend <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
+                             mods =~ cent.OA+ cent.extinction + detrend.cent.d18O + detrend.cent.d34S)
 
-
-epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust = F, std = T) + 
-    coord_flip() + scale_x_discrete(labels = c(expression(delta^18 * O), expression(delta^34 * 
-    S), "Extinction Rate", "Acidification"), expand = c(0.15, 0)) + annotate("text", 
-    x = 4, y = -1, label = "B)") + ylim(c(-1.3, 1.3)) + annotate("text", x = 4.6, 
-    y = -0.7, label = "Favours\ninfauna") + annotate("text", x = 4.6, y = 0.7, 
-    label = "Favours\nepifauna")
+covModel.Epifaunal.rma.detrend
 ```
 
+```
+## 
+## Mixed-Effects Model (k = 41; tau^2 estimator: REML)
+## 
+## tau^2 (estimated amount of residual heterogeneity):     0.3078 (SE = 0.1588)
+## tau (square root of estimated tau^2 value):             0.5548
+## I^2 (residual heterogeneity / unaccounted variability): 48.85%
+## H^2 (unaccounted variability / sampling variability):   1.96
+## R^2 (amount of heterogeneity accounted for):            22.08%
+## 
+## Test for Residual Heterogeneity: 
+## QE(df = 36) = 67.7970, p-val = 0.0011
+## 
+## Test of Moderators (coefficient(s) 2,3,4,5): 
+## QM(df = 4) = 9.0577, p-val = 0.0597
+## 
+## Model Results:
+## 
+##                                 se     zval    pval    ci.lb   ci.ub    
+## intrcpt            -0.0588  0.1346  -0.4371  0.6621  -0.3226  0.2049    
+## cent.OA             0.0510  0.3819   0.1335  0.8938  -0.6975  0.7995    
+## cent.extinction     0.9303  1.3731   0.6775  0.4981  -1.7610  3.6216    
+## detrend.cent.d18O   0.5201  0.1937   2.6855  0.0072   0.1405  0.8996  **
+## detrend.cent.d34S   0.0550  0.0497   1.1048  0.2693  -0.0425  0.1525    
+## 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+write.csv(coef(covModel.Epifaunal.rma.detrend), "./epiCoefDetrendedTable.csv", row.names=T)
+write.csv(coef(covModel.Epifaunal.rma), "./epiCoefTable.csv", row.names=T)
+
+
+epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust=F, std=T)+
+  coord_flip() +
+  scale_x_discrete(labels=c(expression(delta^18*O), expression(delta^34*S), "Extinction Rate", "Acidification"), expand = c(0.15, 0)) +
+  annotate("text", x=4, y=-1.0, label="B)")+
+  ylim(c(-1,1)) +
+  annotate("text", x=4.6, y=-.7, label="Favours\ninfauna")+
+  annotate("text", x=4.6, y=.7, label="Favours\nepifauna")
+```
 
 Does adding Time change things?
 
 ```r
-broadDataExtinction$cent.meanDate <- cent(broadDataExtinction$meanDate)
-rma(yi = lnorReg, vi = vlnorReg, data = broadDataExtinction, mods = ~BC.extinction.ratePBDB + 
-    cent.OA + cent.d18O + cent.d34S + cent.d13C + cent.meanDate)
+rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~BC.extinction.ratePBDB +
+      cent.OA + cent.d18O + cent.d34S + cent.d13C+cent.meanDate)
 ```
 
 ```
 ## 
 ## Mixed-Effects Model (k = 71; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.2474 (SE = 0.1104)
-## tau (square root of estimated tau^2 value):             0.4974
-## I^2 (residual heterogeneity / unaccounted variability): 41.13%
-## H^2 (unaccounted variability / sampling variability):   1.70
-## R^2 (amount of heterogeneity accounted for):            9.17%
+## tau^2 (estimated amount of residual heterogeneity):     0.2554 (SE = 0.1122)
+## tau (square root of estimated tau^2 value):             0.5053
+## I^2 (residual heterogeneity / unaccounted variability): 42.08%
+## H^2 (unaccounted variability / sampling variability):   1.73
+## R^2 (amount of heterogeneity accounted for):            6.24%
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 64) = 108.4726, p-val = 0.0004
+## QE(df = 64) = 109.9242, p-val = 0.0003
 ## 
 ## Test of Moderators (coefficient(s) 2,3,4,5,6,7): 
-## QM(df = 6) = 7.6683, p-val = 0.2634
+## QM(df = 6) = 7.8779, p-val = 0.2472
 ## 
 ## Model Results:
 ## 
-##                         estimate      se     zval    pval    ci.lb   ci.ub
-## intrcpt                   1.2052  0.1829   6.5882  <.0001   0.8467  1.5638
-## BC.extinction.ratePBDB   -2.8560  2.8760  -0.9930  0.3207  -8.4928  2.7809
-## cent.OA                   0.1213  0.2825   0.4295  0.6676  -0.4324  0.6751
-## cent.d18O                 0.1815  0.1292   1.4050  0.1600  -0.0717  0.4347
-## cent.d34S                -0.0229  0.0394  -0.5821  0.5605  -0.1001  0.0543
-## cent.d13C                -0.0159  0.1100  -0.1442  0.8853  -0.2315  0.1997
-## cent.meanDate             0.0028  0.0017   1.6516  0.0986  -0.0005  0.0061
+##                                      se     zval    pval    ci.lb   ci.ub
+## intrcpt                  0.9971  0.1345   7.4148  <.0001   0.7335  1.2606
+## BC.extinction.ratePBDB   0.7317  1.2474   0.5866  0.5575  -1.7132  3.1766
+## cent.OA                  0.0471  0.3225   0.1461  0.8838  -0.5850  0.6793
+## cent.d18O                0.1945  0.1255   1.5498  0.1212  -0.0515  0.4405
+## cent.d34S               -0.0262  0.0400  -0.6542  0.5130  -0.1047  0.0523
+## cent.d13C                0.0048  0.1131   0.0423  0.9662  -0.2168  0.2264
+## cent.meanDate            0.0024  0.0016   1.4962  0.1346  -0.0007  0.0055
 ##                            
 ## intrcpt                 ***
 ## BC.extinction.ratePBDB     
@@ -595,56 +655,53 @@ rma(yi = lnorReg, vi = vlnorReg, data = broadDataExtinction, mods = ~BC.extincti
 ## cent.d18O                  
 ## cent.d34S                  
 ## cent.d13C                  
-## cent.meanDate             .
+## cent.meanDate              
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
 
 
 ```r
-rma(yi = lnorReg, vi = vlnorReg, data = habitDataGood, mods = ~cent.OA + cent.extinction + 
-    cent.d18O + cent.d34S + cent.meanDate)
+rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
+    mods =~ cent.OA + cent.extinction + cent.d18O + cent.d34S + cent.meanDate)
 ```
 
 ```
 ## 
-## Mixed-Effects Model (k = 47; tau^2 estimator: REML)
+## Mixed-Effects Model (k = 41; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.3222 (SE = 0.1521)
-## tau (square root of estimated tau^2 value):             0.5676
-## I^2 (residual heterogeneity / unaccounted variability): 50.11%
-## H^2 (unaccounted variability / sampling variability):   2.00
-## R^2 (amount of heterogeneity accounted for):            28.70%
+## tau^2 (estimated amount of residual heterogeneity):     0.3419 (SE = 0.1710)
+## tau (square root of estimated tau^2 value):             0.5847
+## I^2 (residual heterogeneity / unaccounted variability): 51.44%
+## H^2 (unaccounted variability / sampling variability):   2.06
+## R^2 (amount of heterogeneity accounted for):            13.45%
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 41) = 80.0486, p-val = 0.0003
+## QE(df = 35) = 67.7996, p-val = 0.0007
 ## 
 ## Test of Moderators (coefficient(s) 2,3,4,5,6): 
-## QM(df = 5) = 14.5430, p-val = 0.0125
+## QM(df = 5) = 8.8667, p-val = 0.1145
 ## 
 ## Model Results:
 ## 
-##                  estimate       se     zval    pval     ci.lb    ci.ub   
-## intrcpt           -0.0546   0.1270  -0.4297  0.6674   -0.3034   0.1943   
-## cent.OA           -0.1922   0.4825  -0.3983  0.6904   -1.1380   0.7535   
-## cent.extinction    5.4917  10.9779   0.5002  0.6169  -16.0247  27.0080   
-## cent.d18O          1.4096   0.5694   2.4756  0.0133    0.2936   2.5255  *
-## cent.d34S         -0.9140   0.4220  -2.1660  0.0303   -1.7410  -0.0869  *
-## cent.meanDate     -0.0152   0.0117  -1.2992  0.1939   -0.0381   0.0077   
+##                               se     zval    pval    ci.lb   ci.ub   
+## intrcpt          -0.0423  0.1401  -0.3019  0.7628  -0.3169  0.2323   
+## cent.OA          -0.0769  0.4388  -0.1753  0.8608  -0.9370  0.7832   
+## cent.extinction   1.5142  1.7207   0.8800  0.3789  -1.8584  4.8868   
+## cent.d18O         0.4808  0.2058   2.3359  0.0195   0.0774  0.8843  *
+## cent.d34S         0.1167  0.1181   0.9879  0.3232  -0.1148  0.3483   
+## cent.meanDate     0.0078  0.0044   1.7759  0.0758  -0.0008  0.0165  .
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
 
 Figure 4
 ========================================================
 
 ```r
-grid.arrange(broadCoefPlot + theme_bw(base_size = 18), epiCoefPlot + theme_bw(base_size = 18), 
-    ncol = 2)
+grid.arrange(broadCoefPlot+theme_bw(base_size=18), epiCoefPlot+theme_bw(base_size=18), ncol=2)
 ```
 
 ```
@@ -654,93 +711,59 @@ grid.arrange(broadCoefPlot + theme_bw(base_size = 18), epiCoefPlot + theme_bw(ba
 
 ![plot of chunk Fig4](figure/Fig4.png) 
 
-
 Figure 5
 ========================================================
 
 ```r
-#### What are the marginal effects from the model After adjusting for centering
-#### the predictor
-del18marg <- marginalLine(covModel.Epifaunal.rma, "cent.d18O", habitDataGood, 
-    robust = F, xAdd = mean(habitDataGood$mean_d18O.prok)) + xlab("\nDelta O18") + 
-    ylab("Component + Residual + Intercept Log Odds\n Ratios for Delta O18\n") + 
-    annotate("text", x = -0.6, y = 2.75, label = "A)") + scale_color_discrete(guide = "none") + 
-    theme_bw(base_size = 18)
+####What are the marginal effects from the model
+####After adjusting for centering the predictor
+del18marg <- marginalLine(covModel.Epifaunal.rma, "cent.d18O", 
+                          habitDataGood, robust=F, xAdd=mean(habitDataGood$mean_d18O.prok))+
+  xlab("\n Delta O18") +
+  ylab("Component + Residual + Intercept Log Odds\n Ratios for Delta O18\n") +
+  #annotate("text", x=-4, y=2.75, label="A)") + 
+  theme_bw(base_size=18)
 
 del18MargData <- marginalData(covModel.Epifaunal.rma, "cent.d18O", habitDataGood)
-write.csv(del18MargData, "./del18MargData.csv", row.names = F)
+write.csv(del18MargData, "./del18MargData.csv", row.names=F)
 
-del34marg <- marginalLine(covModel.Epifaunal.rma, "cent.d34S", habitDataGood, 
-    robust = F, xAdd = mean(habitDataGood$mean_d34S.prok)) + xlab("\nDelta S34") + 
-    ylab("Component + Residual + Intercept Log Odds\n Ratios for Delta 34S\n") + 
-    annotate("text", x = 18.75, y = 3.375, label = "B)") + theme_bw(base_size = 18)
+#Extract Legend
+#g_legend<-function(a.gplot){
+#  a.gplot <- a.gplot+scale_color_discrete("Study")
+#  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+#  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+#  legend <- tmp$grobs[[leg]]
+#  return(legend)}
 
-del34margData <- marginalData(covModel.Epifaunal.rma, "cent.d34S", habitDataGood)
-write.csv(del34margData, "./del34margData.csv", row.names = F)
+#legend <- g_legend(del34marg)
 
-# Extract Legend
-g_legend <- function(a.gplot) {
-    a.gplot <- a.gplot + scale_color_discrete("Study")
-    tmp <- ggplot_gtable(ggplot_build(a.gplot))
-    leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
-    legend <- tmp$grobs[[leg]]
-    return(legend)
-}
-
-legend <- g_legend(del34marg)
-
-
-grid.arrange(del18marg, del34marg + scale_color_discrete(guide = "none"), legend, 
-    widths = c(3, 3, 1), nrow = 1)
+#The Figure
+del18marg +scale_color_discrete("Study")
 ```
 
-![plot of chunk Fig5](figure/Fig5.png) 
+![plot of chunk Fig5](figure/Fig51.png) 
 
+```r
+#The Detrended Figure
+del18margDetrend <- marginalLine(covModel.Epifaunal.rma.detrend, "detrend.cent.d18O", 
+                          habitDataGood, robust=F, xAdd=mean(habitDataGood$mean_d18O.detrended.prok))+
+  xlab("\n Delta O18") +
+  ylab("Component + Residual + Intercept Log Odds\n Ratios for Detrended Delta O18\n") +
+  #annotate("text", x=-0.7, y=2.75, label="A)") + 
+  theme_bw(base_size=18)
+
+del18margDetrend +scale_color_discrete("Study")
+```
+
+![plot of chunk Fig5](figure/Fig52.png) 
 
 
 Appendix Jackknife Figures
 ========================================================
 
 ```
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
+## Error: arguments imply differing number of rows: 68, 71
 ```
-
-![plot of chunk jackknife.figs](figure/jackknife_figs1.png) 
 
 ```
 ## Using  as id variables
@@ -782,27 +805,19 @@ Appendix Jackknife Figures
 ## Using  as id variables
 ## Using  as id variables
 ## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
 ```
 
-![plot of chunk jackknife.figs](figure/jackknife_figs2.png) 
-
+![plot of chunk jackknife.figs](figure/jackknife.figs.png) 
 
 
 ```r
-funnel(broad.rma, main = "Funnel Plot for Broad v. Narrow Analysis")
+funnel(broad.rma, main="Funnel Plot for Broad v. Narrow Analysis")
 ```
 
 ![plot of chunk funnelPlots](figure/funnelPlots1.png) 
 
 ```r
-funnel(meanModel.Epifaunal, main = "Funnel Plot for Epifauna v. Infauna Analysis")
+funnel(meanModel.Epifaunal, main="Funnel Plot for Epifauna v. Infauna Analysis")
 ```
 
 ![plot of chunk funnelPlots](figure/funnelPlots2.png) 
-
