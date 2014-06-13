@@ -24,7 +24,7 @@
 
 #library and data
 library(plyr)
-
+library(gdata)
 
 
 #read in a set of formulate for calculating effect sizes and variances
@@ -33,8 +33,9 @@ source("../r/conversions.R")
 
 #######
 
-# load in the dataext-meta-20121005.csv
-ext<-read.csv("../data/Meta-analysis-selectivity-data-2004-timescale.csv", skip=1, na.strings=c("NA", "N/A", ".", ""))
+# load in the data ext-meta-20121005.csv
+ext<-read.csv("../data/ext-meta-20121030.csv", skip=1, na.strings=c("NA", "N/A", ".", ""))
+#ext<-read.xls("../data/Meta-analysis selectivity_Final.xls", skip=1, na.strings=c("NA", "N/A", ".", ""))
 
 # some problems with extra spaces
 ext$Trait.category<-gsub(" ", "", ext$Trait.category)
@@ -67,7 +68,7 @@ ext$Tax.level<-factor(ext$Tax.level)
 ext <- ext[, -grep("X.[0-9]+", names(ext))]
 
 # delete blank rows:
-ext <- ext[-which(is.na(ext$study.ID)), ]
+if(length(is.na(ext$study.ID))==0) ext <- ext[-which(is.na(ext$study.ID)), ]
 
 # Pull in environmental covariates
 # Columns with start and end stages from the data file
@@ -75,7 +76,7 @@ stageIDX<-which(names(ext) %in% c("Start.stage", "End.stage"))
 
 # read in the data set with the conversions between stage and time
 # and proxy data
-stageTime <- read.csv("../data/cleanProxiesByStage_20131212.csv")
+stageTime <- read.csv("../data/cleanProxiesByStage_20140612.csv")
 stageTime$Bin.name <- as.character(stageTime$Bin.name)
 
 # A function to take a lookup pair of stages and get the entire range of stages in between
@@ -95,15 +96,19 @@ getTimeRange<-function(startStage, endStage){
   return(c(startTime.Ma=startTime.Ma, endTime.Ma=endTime.Ma))
 }
 
+
 #### Data matching checks:
 # Check: are all ext Start.stage and End.stage values in stageTime?
-# unique(ext$Start.stage) %in% unique(stageTime$Bin.name)
-# unique(ext$End.stage) %in% unique(stageTime$Bin.name)
+ unique(ext$Start.stage) %in% unique(stageTime$Bin.name)
+ unique(ext$End.stage) %in% unique(stageTime$Bin.name)
+ext$End.stage<-gsub("Calabrian", "Pleistocene", ext$End.stage)
+
+
 
 # iterate over the whole data set to get volcanism and bolide info
 envtCols <- t(sapply(1:nrow(ext), function(i){
   arow <- ext[i,stageIDX]
-  
+  print(i) #debug
   #check for NAs
   flag<-0
   if(sum(is.na(arow))>0){
@@ -119,7 +124,7 @@ envtCols <- t(sapply(1:nrow(ext), function(i){
   #get the means for each column of the proxy data
   #rgh - kludge to turn a df into a vector, as colwise turns
   #out data frames
-  ret<-colMeans(stageTime[stageRangeIDX,7:41], na.rm=T)
+  ret<-colMeans(stageTime[stageRangeIDX,7:43], na.rm=T)
   ret <- c(ret, Start..Ma.=stageTime$Start..Ma.[stageRangeIDX[1]], End..Ma.=stageTime$End..Ma.[stageRangeIDX[length(stageRangeIDX)]])
   return(ret)
 }))
