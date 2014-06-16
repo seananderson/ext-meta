@@ -9,6 +9,8 @@ library(reshape)
 
 coefPlot <- function(amod, adf, std=F, robust=T) {
   ctab <- coef(summary(amod))
+  rownames(ctab) <- names(coef(amod))
+  
   if(robust) ctab <- robustSE(amod, adf$study.ID)
   mult <-  1
   lab <- "\nCoefficient\n"
@@ -70,7 +72,7 @@ marginalPlot <- function(obj, variable, dataFrame,xAdd=0){
   #for rma
   coefs <- coef(summary(obj))[,1]
   X <- obj$X
-  predictor <- X[,which(rownames(coef(summary(obj)))==variable)]
+  predictor <- X[,which(names(coef(obj))==variable)]
   y <- as.numeric(obj$yi)
 
   margPoints <- y - margAdjust(coefs, X, y, variable)
@@ -88,7 +90,7 @@ marginalLine <- function(obj, variable, dataFrame, interval = "fit", robust=T, x
   coefs <- coef(summary(obj))[,1]
   se.coefs <- coef(summary(obj))[,2]
   varCoefs <- vcov(obj)
-  idx <- which(rownames(coef(summary(obj)))==variable)
+  idx <- which(names(coef(obj))==variable)
   
   #some important values
   X <- obj$X

@@ -154,30 +154,40 @@ broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean
 
 #as we'll be using these predictors later
 broadDataExtinction <- within(broadDataExtinction, {
-  cent.extinction <- cent(BC.extinction.ratePBDB)
+  cent.extinction <- cent(BC.extinction.rate.PBDB3)
   cent.OA <- cent(OA)
   cent.d18O <- cent(mean_d18O.prok)
   cent.d34S <- cent(mean_d34S.prok)
   cent.d13C <- cent(mean_d13C.prok)
+  detrend.cent.d18O <- cent(mean_d18O.detrended.prok)
+  detrend.cent.d34S <- cent(mean_d34S.detrended.prok)
+  detrend.cent.d13C <- cent(mean_d13C.detrended.prok)
+  cent.meanDate <- cent(meanDate)
 })
 
-covModel.Broad.RMA <- rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~BC.extinction.ratePBDB +
+covModel.Broad.RMA <- rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~cent.extinction +
       cent.OA + cent.d18O + cent.d34S + cent.d13C)
 
 covModel.Broad.RMA
 
+#Also, the model with predictors detrended
+covModel.Broad.RMA.detrended <- rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~cent.extinction +
+                            cent.OA + detrend.cent.d18O + detrend.cent.d34S + detrend.cent.d13C)
+
+covModel.Broad.RMA.detrended
+
 write.csv(coef(covModel.Broad.RMA), "./broadCoefTable.csv", row.names=T)
+write.csv(coef(covModel.Broad.RMA.detrended), "./broadCoefDetrendedTable.csv", row.names=T)
 
 broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust=F, std=T)+
   coord_flip() +
-  scale_x_discrete(labels=c("Extinction Rate", expression(delta^13*C), expression(delta^18*O), expression(delta^34*S), "Acidification"), expand = c(0.15, 0)) +
+  scale_x_discrete(labels=c(expression(delta^13*C), expression(delta^18*O), expression(delta^34*S), "Extinction Rate", "Acidification"), expand = c(0.15, 0)) +
   annotate("text", x=5, y=-0.5, label="A)")+
   ylim(c(-0.55,0.4)) +
   annotate("text", x=5.6, y=-0.35, label="Favours\nnarrow")+
   annotate("text", x=5.6, y=0.35, label="Favours\nbroad")
 
 ## @knitr broadModelWithTime
-broadDataExtinction$cent.meanDate <- cent(broadDataExtinction$meanDate)
 rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~BC.extinction.ratePBDB +
       cent.OA + cent.d18O + cent.d34S + cent.d13C+cent.meanDate)
 
@@ -215,28 +225,37 @@ meanModel.Epifaunal
 
 
 ## @knitr epibigEpifaunaModel.RMA
-habitDataGood <- habitData[which(!(is.na(habitData$BC.extinction.ratePBDB))),]
+habitDataGood <- habitData[which(!(is.na(habitData$BC.extinction.rate.PBDB3))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$lnorReg))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d18O.prok))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d34S.prok))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$vlnorReg))),]
-habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$BC.extinction.ratePBDB))),]
 
 
 #as we'll be using these predictors later
 habitDataGood <- within(habitDataGood, {
-  cent.extinction <- cent(BC.extinction.ratePBDB)
+  cent.extinction <- cent(BC.extinction.rate.PBDB3)
   cent.OA <- cent(OA)
   cent.d18O <- cent(mean_d18O.prok)
   cent.d34S <- cent(mean_d34S.prok)
   cent.meanDate <- cent(meanDate)
+  detrend.cent.d18O <- cent(mean_d18O.detrended.prok)
+  detrend.cent.d34S <- cent(mean_d34S.detrended.prok)
+  detrend.cent.d13C <- cent(mean_d13C.detrended.prok)
 })
 
 covModel.Epifaunal.rma <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
-                              mods =~ cent.OA + cent.extinction + cent.d18O + cent.d34S)
-
+                              mods =~ cent.OA+ cent.extinction + cent.d18O + cent.d34S)
 
 covModel.Epifaunal.rma
+
+#And now detrended
+covModel.Epifaunal.rma.detrend <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
+                             mods =~ cent.OA+ cent.extinction + detrend.cent.d18O + detrend.cent.d34S)
+
+covModel.Epifaunal.rma.detrend
+
+write.csv(coef(covModel.Epifaunal.rma.detrend), "./epiCoefDetrendedTable.csv", row.names=T)
 write.csv(coef(covModel.Epifaunal.rma), "./epiCoefTable.csv", row.names=T)
 
 
@@ -244,7 +263,7 @@ epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust=F, std=T)+
   coord_flip() +
   scale_x_discrete(labels=c(expression(delta^18*O), expression(delta^34*S), "Extinction Rate", "Acidification"), expand = c(0.15, 0)) +
   annotate("text", x=4, y=-1.0, label="B)")+
-  ylim(c(-1.3,1.3)) +
+  ylim(c(-1,1)) +
   annotate("text", x=4.6, y=-.7, label="Favours\ninfauna")+
   annotate("text", x=4.6, y=.7, label="Favours\nepifauna")
 
@@ -262,36 +281,37 @@ grid.arrange(broadCoefPlot+theme_bw(base_size=18), epiCoefPlot+theme_bw(base_siz
 ####After adjusting for centering the predictor
 del18marg <- marginalLine(covModel.Epifaunal.rma, "cent.d18O", 
                           habitDataGood, robust=F, xAdd=mean(habitDataGood$mean_d18O.prok))+
-  xlab("\nDelta O18") +
+  xlab("\n Delta O18") +
   ylab("Component + Residual + Intercept Log Odds\n Ratios for Delta O18\n") +
-  annotate("text", x=-0.6, y=2.75, label="A)") + scale_color_discrete(guide="none") +
+  #annotate("text", x=-4, y=2.75, label="A)") + 
   theme_bw(base_size=18)
 
-del18MargData<- marginalData(covModel.Epifaunal.rma, "cent.d18O", habitDataGood)
+del18MargData <- marginalData(covModel.Epifaunal.rma, "cent.d18O", habitDataGood)
 write.csv(del18MargData, "./del18MargData.csv", row.names=F)
 
-del34marg <- marginalLine(covModel.Epifaunal.rma, "cent.d34S", 
-                          habitDataGood, robust=F,  xAdd=mean(habitDataGood$mean_d34S.prok)) +
-  xlab("\nDelta S34") + ylab("Component + Residual + Intercept Log Odds\n Ratios for Delta 34S\n") +
-  annotate("text", x=18.75, y=3.375, label="B)")+
+#Extract Legend
+#g_legend<-function(a.gplot){
+#  a.gplot <- a.gplot+scale_color_discrete("Study")
+#  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+#  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+#  legend <- tmp$grobs[[leg]]
+#  return(legend)}
+
+#legend <- g_legend(del34marg)
+
+#The Figure
+del18marg +scale_color_discrete("Study")
+
+#The Detrended Figure
+del18margDetrend <- marginalLine(covModel.Epifaunal.rma.detrend, "detrend.cent.d18O", 
+                          habitDataGood, robust=F, xAdd=mean(habitDataGood$mean_d18O.detrended.prok))+
+  xlab("\n Delta O18") +
+  ylab("Component + Residual + Intercept Log Odds\n Ratios for Detrended Delta O18\n") +
+  #annotate("text", x=-0.7, y=2.75, label="A)") + 
   theme_bw(base_size=18)
 
-del34margData<- marginalData(covModel.Epifaunal.rma, "cent.d34S", habitDataGood)
-write.csv(del34margData, "./del34margData.csv", row.names=F)
+del18margDetrend +scale_color_discrete("Study")
 
-#Extract Legend
-g_legend<-function(a.gplot){
-  a.gplot <- a.gplot+scale_color_discrete("Study")
-  tmp <- ggplot_gtable(ggplot_build(a.gplot))
-  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
-  legend <- tmp$grobs[[leg]]
-  return(legend)}
-
-legend <- g_legend(del34marg)
-
-
-grid.arrange(del18marg, del34marg+ scale_color_discrete(guide="none"), legend,
-             widths=c(3,3,1), nrow=1)
 
 ## @knitr appendix
 #### #### #### #### #### ####
