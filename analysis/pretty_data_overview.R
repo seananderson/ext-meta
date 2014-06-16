@@ -110,21 +110,21 @@ with(stageTime, plot(Midpt, rep(1, nrow(stageTime)), pch = c(21, 19)[OA+1], xlim
 ylabel(expression((c)~OA~Event))
 
 with(subset(stageTime, !is.na(mean_d18O.prok)), plot(Midpt, mean_d18O.prok, type = "l", xlim = xlim, axes = FALSE, xlab = "", col = line_col, ylab = ""))
-ylabel(expression((d)~delta^18*O~residual))
+ylabel(expression((d)~delta^18*O))
 #ylabel("residuals")
 with(stageTime, ann(Midpt, mean_d18O.prok))
 
 
 with(subset(stageTime, !is.na(mean_d13C.prok)), plot(Midpt, mean_d13C.prok, type = "l", xlim = xlim, axes = FALSE, xlab = "", col = line_col, ylab = ""))
-ylabel(expression((e)~delta^13*C~residual))
+ylabel(expression((e)~delta^13*C))
 with(stageTime, ann(Midpt, mean_d13C.prok))
 
 with(subset(stageTime, !is.na(mean_d34S.prok)), plot(Midpt, mean_d34S.prok, type = "l", xlim = xlim, axes = FALSE, xlab = "", col = line_col, ylab = ""))
-ylabel(expression((f)~delta^34*S~residual))
+ylabel(expression((f)~delta^34*S))
 with(stageTime, ann(Midpt, mean_d34S.prok))
 
 
-with(stageTime, plot(Midpt, BC.extinction.ratePBDB, xlim = xlim, axes = FALSE, type = "l", xlab = "", col = line_col, ylab = ""))
+with(stageTime, plot(Midpt, BC.extinction.rate.PBDB3, xlim = xlim, axes = FALSE, type = "l", xlab = "", col = line_col, ylab = ""))
 ylabel(expression((g)~Extinction~rate))
 with(stageTime, ann(Midpt, BC.extinction.ratePBDB, add.last = FALSE))
 
