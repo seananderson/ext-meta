@@ -1,7 +1,7 @@
 # ====================================================================
 # Created by:    Sean Anderson, sean@seananderson.ca
 # Created:       Jan 16, 2012
-# Last modified: Jul 31, 2013
+# Last modified: Jul 14, 2014
 # Purpose:       plot the effect sizes with an overall mean rma
 # ====================================================================
 
@@ -60,6 +60,9 @@ plot_effect_sizes(broadData, rma.model = broad.rma, lab = c("narrow", "broad"))
 dev.off()
 plot_effect_sizes(broadData, rma.model = broad.rma, lab = c("narrow", "broad"))
 
+habitData$In.text.Citation <- as.character(habitData$In.text.Citation)
+habitData$In.text.Citation <- sub("McClure and Bohank", 
+  "McClure and Bohonak 1995", habitData$In.text.Citation)
 ## @knitr Fig2
 pdf("figure/inf_epi_rma.pdf", width = 3.7, height = 6)
 plot_effect_sizes(habitData, meanModel.Epifaunal, lab = c("infauna", "epifauna"))
