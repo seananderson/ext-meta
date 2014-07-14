@@ -179,6 +179,8 @@ jackknifed_coefs_fun  <- function(obj, adf, robust=T){
     coef_df_out <- data.frame(coef_df, ci.lb = ci.lb_df[,2], ci.ub = ci.ub_df[,2])
     data.frame(study.ID.jackknifed = x, coef_df_out)
   })
+  jackknifed_coefs <- jackknifed_coefs[-which(jackknifed_coefs$variable == "intrcpt"), ]
+  jackknifed_coefs$variable <- as.factor(jackknifed_coefs$variable)
   p <- ggplot(jackknifed_coefs) + 
           geom_pointrange(aes(x = variable, y = coef, ymin = ci.lb, ymax = ci.ub, 
                         colour = study.ID.jackknifed), position = position_dodge(height = 0, width = -0.6)) + 
