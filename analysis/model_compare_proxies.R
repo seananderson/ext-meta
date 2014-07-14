@@ -5,7 +5,7 @@
 ## from NESCent Working Group for publication
 ##
 ## Created:       Jan 13, 2012
-## Last modified: Oct 31, 2013
+## Last modified: Jul 14, 2014
 ## Purpose:       Try plotting the effect sizes against the raw data.
 ## Additional description: More analyses can be found in singleLnOr_R_analyses/singleLnOr_rma.R
 ## Changelog
@@ -236,14 +236,43 @@ grid.arrange(epiCoefPlot, epiCoefPlot2, epiCoefPlot3, epiCoefPlot4, ncol=2)
 #### Appendix Figures
 #### #### #### #### #### ####
 
-## @knitr  jackknife.figs
-jackknifed_coefs_fun(covModel.Broad.RMA2, broadDataExtinctionProk, robust=F) + theme_bw()+
-  scale_colour_grey(name="Study Removed\n")
+# Run jackknifed model with scaled predictors
+# TODO: Jarrett: is this the correct model?
 
+scaledat <- function(x) {
+  x.scaled <- x / (2 * sd(x, na.rm = TRUE))
+  x.scaled
+}
+
+broadDataExtinctionScaled <- broadDataExtinction
+broadDataExtinctionScaled <- transform(broadDataExtinction, 
+  BC.extinction.ratePBDB = scaledat(BC.extinction.ratePBDB), 
+  mean_d18O.prok = scaledat(mean_d18O.prok), 
+  mean_d34S.prok = scaledat(mean_d34S.prok), 
+  mean_d13C.prok = scaledat(mean_d13C.prok))
+# sd of OA should already be ~0.5. (actually around 0.42)
+
+covModel.Broad.RMA2.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinctionScaled, mods=~BC.extinction.ratePBDB +
+                           OA + mean_d18O.prok + mean_d34S.prok + mean_d13C.prok)
+# Now for the habit model:
+habitDataGoodScaled <- habitDataGood
+habitDataGoodScaled <- transform(habitDataGood, 
+  BC.extinction.ratePBDB = scaledat(BC.extinction.ratePBDB), 
+  mean_d18O.prok = scaledat(mean_d18O.prok), 
+  mean_d34S.prok = scaledat(mean_d34S.prok), 
+  meanDate = scaledat(meanDate))
+
+covModel.Epifaunal.rma3.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGoodScaled,
+                              mods =~ OA + BC.extinction.ratePBDB + mean_d18O.prok + mean_d34S.prok + meanDate)
+
+
+## @knitr  jackknife.figs
+
+jackknifed_coefs_fun(covModel.Broad.RMA2.scaled, broadDataExtinctionProk, robust=F) + theme_bw()+
+  scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
 
 # TODO WARNING
 # Error in rma(lnorReg, vi = vlnorReg, data = temp_dat, mods = temp_dat[,  :
 # Processing terminated since k = 0.
-jackknifed_coefs_fun(covModel.Epifaunal.rma3, habitDataGood, robust=F) +theme_bw()+
-  scale_colour_grey(name="Study Removed\n")
-
+jackknifed_coefs_fun(covModel.Epifaunal.rma3.scaled, habitDataGood, robust=F) +theme_bw()+
+  scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
