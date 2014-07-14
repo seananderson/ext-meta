@@ -107,7 +107,7 @@ col.df <- col.df[!duplicated(col.df[,c("study.ID", "study_col", "effect_type")])
 #with(subset(col.df, effect_type == "range"), legend(x = 400, y = 4, legend = study.ID, col = "#00000030", pt.bg = study_col, bty = "n", pch = 21))
 
 with(stageTime, plot(Midpt, rep(1, nrow(stageTime)), pch = c(21, 19)[OA+1], xlim = xlim, axes = FALSE, xlab = "", col = c("#00000020", "#00000080")[OA+1], cex = 1.5, ylab = ""))
-ylabel(expression((c)~OA~Event))
+ylabel(expression((c)~OA~event))
 
 with(subset(stageTime, !is.na(mean_d18O.prok)), plot(Midpt, mean_d18O.prok, type = "l", xlim = xlim, axes = FALSE, xlab = "", col = line_col, ylab = ""))
 ylabel(expression((d)~delta^18*O))
