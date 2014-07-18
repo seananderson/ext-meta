@@ -5,7 +5,7 @@
 ## from NESCent Working Group for publication
 ##
 ## Created:       Jan 13, 2012
-## Last modified: Dec 28, 2013
+## Last modified: Jul 17, 2014
 ## Purpose:       Try plotting the effect sizes against the raw data.
 ## Additional description: More analyses can be found in singleLnOr_R_analyses/singleLnOr_rma.R
 ## Changelog
@@ -330,3 +330,46 @@ jackknifed_coefs_fun(covModel.Epifaunal.rma, habitDataGood, robust=F) +theme_bw(
 ## @knitr funnelPlots
 funnel(broad.rma, main="Funnel Plot for Broad v. Narrow Analysis")
 funnel(meanModel.Epifaunal, main="Funnel Plot for Epifauna v. Infauna Analysis")
+
+
+scaledat <- function(x) {
+  x.scaled <- x / (2 * sd(x, na.rm = TRUE))
+  x.scaled
+}
+
+broadDataExtinctionScaled <- broadDataExtinction
+broadDataExtinctionScaled <- transform(broadDataExtinction, 
+  BC.extinction.ratePBDB = scaledat(BC.extinction.ratePBDB), 
+  mean_d18O.prok = scaledat(mean_d18O.prok), 
+  mean_d34S.prok = scaledat(mean_d34S.prok), 
+  mean_d13C.prok = scaledat(mean_d13C.prok))
+# sd of OA should already be ~0.5. (actually around 0.42)
+
+covModel.Broad.RMA2.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinctionScaled, mods=~BC.extinction.ratePBDB +
+                           OA + mean_d18O.prok + mean_d34S.prok + mean_d13C.prok)
+# Now for the habit model:
+habitDataGoodScaled <- habitDataGood
+habitDataGoodScaled <- transform(habitDataGood, 
+  BC.extinction.ratePBDB = scaledat(BC.extinction.ratePBDB), 
+  mean_d18O.prok = scaledat(mean_d18O.prok), 
+  mean_d34S.prok = scaledat(mean_d34S.prok), 
+  meanDate = scaledat(meanDate))
+
+covModel.Epifaunal.rma3.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGoodScaled,
+                              mods =~ OA + BC.extinction.ratePBDB + mean_d18O.prok + mean_d34S.prok + meanDate)
+
+pdf("figure/broad-jackknife.pdf", width = 4, height = 8)
+jackknifed_coefs_fun(covModel.Broad.RMA2.scaled, broadDataExtinctionProk, robust=F) + theme_bw()+
+  scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
+dev.off()
+
+# TODO WARNING
+# Error in rma(lnorReg, vi = vlnorReg, data = temp_dat, mods = temp_dat[,  :
+# Processing terminated since k = 0.
+pdf("figure/habit-jackknife.pdf", width = 4, height = 8)
+jackknifed_coefs_fun(covModel.Epifaunal.rma3.scaled, habitDataGood, robust=F) +theme_bw()+
+  scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
+dev.off()
+
+
+

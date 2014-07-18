@@ -5,7 +5,7 @@
 ## from NESCent Working Group for publication
 ##
 ## Created:       Jan 13, 2012
-## Last modified: Jul 14, 2014
+## Last modified: Jul 17, 2014
 ## Purpose:       Try plotting the effect sizes against the raw data.
 ## Additional description: More analyses can be found in singleLnOr_R_analyses/singleLnOr_rma.R
 ## Changelog
@@ -268,11 +268,15 @@ covModel.Epifaunal.rma3.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=habitData
 
 ## @knitr  jackknife.figs
 
+pdf("figure/broad-jackknife.pdf", width = 4, height = 8)
 jackknifed_coefs_fun(covModel.Broad.RMA2.scaled, broadDataExtinctionProk, robust=F) + theme_bw()+
   scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
+dev.off()
 
 # TODO WARNING
 # Error in rma(lnorReg, vi = vlnorReg, data = temp_dat, mods = temp_dat[,  :
 # Processing terminated since k = 0.
+pdf("figure/habit-jackknife.pdf", width = 4, height = 8)
 jackknifed_coefs_fun(covModel.Epifaunal.rma3.scaled, habitDataGood, robust=F) +theme_bw()+
   scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
+dev.off()

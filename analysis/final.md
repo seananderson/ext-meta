@@ -45,10 +45,10 @@ taxGenera.Broad
 ## 
 ## Model Results:
 ## 
-##                                           se     zval    pval    ci.lb
-## intrcpt                       1.1432  0.1731   6.6053  <.0001   0.8040
-## Bivalve..GastropodGastropod   0.1126  0.2180   0.5163  0.6057  -0.3147
-## Tax.levelSpecies             -0.2358  0.2104  -1.1204  0.2626  -0.6482
+##                              estimate      se     zval    pval    ci.lb
+## intrcpt                        1.1432  0.1731   6.6053  <.0001   0.8040
+## Bivalve..GastropodGastropod    0.1126  0.2180   0.5163  0.6057  -0.3147
+## Tax.levelSpecies              -0.2358  0.2104  -1.1204  0.2626  -0.6482
 ##                               ci.ub     
 ## intrcpt                      1.4825  ***
 ## Bivalve..GastropodGastropod  0.5399     
@@ -84,9 +84,9 @@ multStage.Broad
 ## 
 ## Model Results:
 ## 
-##                                 se    zval    pval    ci.lb   ci.ub     
-## intrcpt             0.9790  0.1741  5.6224  <.0001   0.6377  1.3203  ***
-## MultipleStagesTRUE  0.1052  0.2175  0.4835  0.6288  -0.3212  0.5315     
+##                     estimate      se    zval    pval    ci.lb   ci.ub     
+## intrcpt               0.9790  0.1741  5.6224  <.0001   0.6377  1.3203  ***
+## MultipleStagesTRUE    0.1052  0.2175  0.4835  0.6288  -0.3212  0.5315     
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -117,9 +117,9 @@ scale.Broad
 ## 
 ## Model Results:
 ## 
-##                               se    zval    pval    ci.lb   ci.ub     
-## intrcpt           0.9926  0.1311  7.5701  <.0001   0.7356  1.2495  ***
-## Global.Regional1  0.1449  0.2156  0.6719  0.5016  -0.2777  0.5674     
+##                   estimate      se    zval    pval    ci.lb   ci.ub     
+## intrcpt             0.9926  0.1311  7.5701  <.0001   0.7356  1.2495  ***
+## Global.Regional1    0.1449  0.2156  0.6719  0.5016  -0.2777  0.5674     
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -150,9 +150,9 @@ time.Broad
 ## 
 ## Model Results:
 ## 
-##                       se    zval    pval    ci.lb   ci.ub   
-## intrcpt   0.9560  0.4591  2.0822  0.0373   0.0561  1.8558  *
-## meanDate  0.0007  0.0091  0.0808  0.9356  -0.0172  0.0186   
+##           estimate      se    zval    pval    ci.lb   ci.ub   
+## intrcpt     0.9560  0.4591  2.0822  0.0373   0.0561  1.8558  *
+## meanDate    0.0007  0.0091  0.0808  0.9356  -0.0172  0.0186   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -212,6 +212,12 @@ plot_effect_sizes(broadData, rma.model = broad.rma, lab = c("narrow", "broad"))
 
 ![plot of chunk Fig1](figure/Fig1.png) 
 
+```r
+habitData$In.text.Citation <- as.character(habitData$In.text.Citation)
+habitData$In.text.Citation <- sub("McClure and Bohank", 
+  "McClure and Bohonak 1995", habitData$In.text.Citation)
+```
+
 
 
 Epifauna v. Infauna Baseline
@@ -241,9 +247,9 @@ bivalve.gastro.Epifaunal
 ## 
 ## Model Results:
 ## 
-##                                           se     zval    pval    ci.lb
-## Bivalve..GastropodBivalve    -0.1248  0.1468  -0.8507  0.3950  -0.4125
-## Bivalve..GastropodGastropod   0.1098  0.3042   0.3609  0.7182  -0.4865
+##                              estimate      se     zval    pval    ci.lb
+## Bivalve..GastropodBivalve     -0.1248  0.1468  -0.8507  0.3950  -0.4125
+## Bivalve..GastropodGastropod    0.1098  0.3042   0.3609  0.7182  -0.4865
 ##                               ci.ub   
 ## Bivalve..GastropodBivalve    0.1628   
 ## Bivalve..GastropodGastropod  0.7061   
@@ -285,9 +291,9 @@ scale.habit
 ## 
 ## Model Results:
 ## 
-##                                se     zval    pval    ci.lb   ci.ub   
-## intrcpt           -0.0067  0.1425  -0.0473  0.9622  -0.2861  0.2726   
-## Global.Regional1  -0.5303  0.3821  -1.3881  0.1651  -1.2791  0.2185   
+##                   estimate      se     zval    pval    ci.lb   ci.ub   
+## intrcpt            -0.0067  0.1425  -0.0473  0.9622  -0.2861  0.2726   
+## Global.Regional1   -0.5303  0.3821  -1.3881  0.1651  -1.2791  0.2185   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -320,9 +326,9 @@ time.Epifaunal
 ## 
 ## Model Results:
 ## 
-##                        se     zval    pval    ci.lb   ci.ub   
-## intrcpt   -0.2089  0.1821  -1.1473  0.2513  -0.5658  0.1480   
-## meanDate   0.0015  0.0014   1.0160  0.3096  -0.0014  0.0043   
+##           estimate      se     zval    pval    ci.lb   ci.ub   
+## intrcpt    -0.2089  0.1821  -1.1473  0.2513  -0.5658  0.1480   
+## meanDate    0.0015  0.0014   1.0160  0.3096  -0.0014  0.0043   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -438,13 +444,13 @@ covModel.Broad.RMA
 ## 
 ## Model Results:
 ## 
-##                               se     zval    pval    ci.lb   ci.ub     
-## intrcpt           1.0191  0.1073   9.4940  <.0001   0.8087  1.2295  ***
-## cent.extinction   0.8116  1.2736   0.6373  0.5239  -1.6845  3.3078     
-## cent.OA           0.0992  0.3068   0.3234  0.7464  -0.5022  0.7006     
-## cent.d18O         0.0160  0.0623   0.2574  0.7968  -0.1060  0.1380     
-## cent.d34S        -0.0669  0.0343  -1.9486  0.0513  -0.1341  0.0004    .
-## cent.d13C        -0.0685  0.1038  -0.6599  0.5093  -0.2720  0.1350     
+##                  estimate      se     zval    pval    ci.lb   ci.ub     
+## intrcpt            1.0191  0.1073   9.4940  <.0001   0.8087  1.2295  ***
+## cent.extinction    0.8116  1.2736   0.6373  0.5239  -1.6845  3.3078     
+## cent.OA            0.0992  0.3068   0.3234  0.7464  -0.5022  0.7006     
+## cent.d18O          0.0160  0.0623   0.2574  0.7968  -0.1060  0.1380     
+## cent.d34S         -0.0669  0.0343  -1.9486  0.0513  -0.1341  0.0004    .
+## cent.d13C         -0.0685  0.1038  -0.6599  0.5093  -0.2720  0.1350     
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -482,13 +488,13 @@ covModel.Broad.RMA.detrended
 ## 
 ## Model Results:
 ## 
-##                                 se     zval    pval    ci.lb   ci.ub     
-## intrcpt             0.9923  0.1038   9.5618  <.0001   0.7889  1.1957  ***
-## cent.extinction     0.9131  1.2212   0.7477  0.4546  -1.4804  3.3067     
-## cent.OA             0.1129  0.2921   0.3864  0.6992  -0.4597  0.6854     
-## detrend.cent.d18O   0.2345  0.1258   1.8639  0.0623  -0.0121  0.4812    .
-## detrend.cent.d34S  -0.0264  0.0347  -0.7609  0.4467  -0.0945  0.0417     
-## detrend.cent.d13C   0.0229  0.1107   0.2073  0.8358  -0.1940  0.2398     
+##                    estimate      se     zval    pval    ci.lb   ci.ub     
+## intrcpt              0.9923  0.1038   9.5618  <.0001   0.7889  1.1957  ***
+## cent.extinction      0.9131  1.2212   0.7477  0.4546  -1.4804  3.3067     
+## cent.OA              0.1129  0.2921   0.3864  0.6992  -0.4597  0.6854     
+## detrend.cent.d18O    0.2345  0.1258   1.8639  0.0623  -0.0121  0.4812    .
+## detrend.cent.d34S   -0.0264  0.0347  -0.7609  0.4467  -0.0945  0.0417     
+## detrend.cent.d13C    0.0229  0.1107   0.2073  0.8358  -0.1940  0.2398     
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -553,12 +559,12 @@ covModel.Epifaunal.rma
 ## 
 ## Model Results:
 ## 
-##                               se     zval    pval    ci.lb   ci.ub   
-## intrcpt          -0.0866  0.1357  -0.6380  0.5235  -0.3526  0.1794   
-## cent.OA           0.3370  0.3676   0.9168  0.3593  -0.3834  1.0574   
-## cent.extinction  -0.4786  1.2825  -0.3731  0.7090  -2.9922  2.0351   
-## cent.d18O         0.4175  0.1993   2.0947  0.0362   0.0269  0.8081  *
-## cent.d34S        -0.0700  0.0528  -1.3246  0.1853  -0.1735  0.0336   
+##                  estimate      se     zval    pval    ci.lb   ci.ub   
+## intrcpt           -0.0866  0.1357  -0.6380  0.5235  -0.3526  0.1794   
+## cent.OA            0.3370  0.3676   0.9168  0.3593  -0.3834  1.0574   
+## cent.extinction   -0.4786  1.2825  -0.3731  0.7090  -2.9922  2.0351   
+## cent.d18O          0.4175  0.1993   2.0947  0.0362   0.0269  0.8081  *
+## cent.d34S         -0.0700  0.0528  -1.3246  0.1853  -0.1735  0.0336   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -590,12 +596,12 @@ covModel.Epifaunal.rma.detrend
 ## 
 ## Model Results:
 ## 
-##                                 se     zval    pval    ci.lb   ci.ub    
-## intrcpt            -0.0588  0.1346  -0.4371  0.6621  -0.3226  0.2049    
-## cent.OA             0.0510  0.3819   0.1335  0.8938  -0.6975  0.7995    
-## cent.extinction     0.9303  1.3731   0.6775  0.4981  -1.7610  3.6216    
-## detrend.cent.d18O   0.5201  0.1937   2.6855  0.0072   0.1405  0.8996  **
-## detrend.cent.d34S   0.0550  0.0497   1.1048  0.2693  -0.0425  0.1525    
+##                    estimate      se     zval    pval    ci.lb   ci.ub    
+## intrcpt             -0.0588  0.1346  -0.4371  0.6621  -0.3226  0.2049    
+## cent.OA              0.0510  0.3819   0.1335  0.8938  -0.6975  0.7995    
+## cent.extinction      0.9303  1.3731   0.6775  0.4981  -1.7610  3.6216    
+## detrend.cent.d18O    0.5201  0.1937   2.6855  0.0072   0.1405  0.8996  **
+## detrend.cent.d34S    0.0550  0.0497   1.1048  0.2693  -0.0425  0.1525    
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -640,14 +646,14 @@ rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~BC.extinction.r
 ## 
 ## Model Results:
 ## 
-##                                      se     zval    pval    ci.lb   ci.ub
-## intrcpt                  0.9971  0.1345   7.4148  <.0001   0.7335  1.2606
-## BC.extinction.ratePBDB   0.7317  1.2474   0.5866  0.5575  -1.7132  3.1766
-## cent.OA                  0.0471  0.3225   0.1461  0.8838  -0.5850  0.6793
-## cent.d18O                0.1945  0.1255   1.5498  0.1212  -0.0515  0.4405
-## cent.d34S               -0.0262  0.0400  -0.6542  0.5130  -0.1047  0.0523
-## cent.d13C                0.0048  0.1131   0.0423  0.9662  -0.2168  0.2264
-## cent.meanDate            0.0024  0.0016   1.4962  0.1346  -0.0007  0.0055
+##                         estimate      se     zval    pval    ci.lb   ci.ub
+## intrcpt                   0.9971  0.1345   7.4148  <.0001   0.7335  1.2606
+## BC.extinction.ratePBDB    0.7317  1.2474   0.5866  0.5575  -1.7132  3.1766
+## cent.OA                   0.0471  0.3225   0.1461  0.8838  -0.5850  0.6793
+## cent.d18O                 0.1945  0.1255   1.5498  0.1212  -0.0515  0.4405
+## cent.d34S                -0.0262  0.0400  -0.6542  0.5130  -0.1047  0.0523
+## cent.d13C                 0.0048  0.1131   0.0423  0.9662  -0.2168  0.2264
+## cent.meanDate             0.0024  0.0016   1.4962  0.1346  -0.0007  0.0055
 ##                            
 ## intrcpt                 ***
 ## BC.extinction.ratePBDB     
@@ -685,13 +691,13 @@ rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
 ## 
 ## Model Results:
 ## 
-##                               se     zval    pval    ci.lb   ci.ub   
-## intrcpt          -0.0423  0.1401  -0.3019  0.7628  -0.3169  0.2323   
-## cent.OA          -0.0769  0.4388  -0.1753  0.8608  -0.9370  0.7832   
-## cent.extinction   1.5142  1.7207   0.8800  0.3789  -1.8584  4.8868   
-## cent.d18O         0.4808  0.2058   2.3359  0.0195   0.0774  0.8843  *
-## cent.d34S         0.1167  0.1181   0.9879  0.3232  -0.1148  0.3483   
-## cent.meanDate     0.0078  0.0044   1.7759  0.0758  -0.0008  0.0165  .
+##                  estimate      se     zval    pval    ci.lb   ci.ub   
+## intrcpt           -0.0423  0.1401  -0.3019  0.7628  -0.3169  0.2323   
+## cent.OA           -0.0769  0.4388  -0.1753  0.8608  -0.9370  0.7832   
+## cent.extinction    1.5142  1.7207   0.8800  0.3789  -1.8584  4.8868   
+## cent.d18O          0.4808  0.2058   2.3359  0.0195   0.0774  0.8843  *
+## cent.d34S          0.1167  0.1181   0.9879  0.3232  -0.1148  0.3483   
+## cent.meanDate      0.0078  0.0044   1.7759  0.0758  -0.0008  0.0165  .
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -821,3 +827,108 @@ funnel(meanModel.Epifaunal, main="Funnel Plot for Epifauna v. Infauna Analysis")
 ```
 
 ![plot of chunk funnelPlots](figure/funnelPlots2.png) 
+
+```r
+scaledat <- function(x) {
+  x.scaled <- x / (2 * sd(x, na.rm = TRUE))
+  x.scaled
+}
+
+broadDataExtinctionScaled <- broadDataExtinction
+broadDataExtinctionScaled <- transform(broadDataExtinction, 
+  BC.extinction.ratePBDB = scaledat(BC.extinction.ratePBDB), 
+  mean_d18O.prok = scaledat(mean_d18O.prok), 
+  mean_d34S.prok = scaledat(mean_d34S.prok), 
+  mean_d13C.prok = scaledat(mean_d13C.prok))
+# sd of OA should already be ~0.5. (actually around 0.42)
+
+covModel.Broad.RMA2.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinctionScaled, mods=~BC.extinction.ratePBDB +
+                           OA + mean_d18O.prok + mean_d34S.prok + mean_d13C.prok)
+# Now for the habit model:
+habitDataGoodScaled <- habitDataGood
+habitDataGoodScaled <- transform(habitDataGood, 
+  BC.extinction.ratePBDB = scaledat(BC.extinction.ratePBDB), 
+  mean_d18O.prok = scaledat(mean_d18O.prok), 
+  mean_d34S.prok = scaledat(mean_d34S.prok), 
+  meanDate = scaledat(meanDate))
+
+covModel.Epifaunal.rma3.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGoodScaled,
+                              mods =~ OA + BC.extinction.ratePBDB + mean_d18O.prok + mean_d34S.prok + meanDate)
+
+pdf("figure/broad-jackknife.pdf", width = 4, height = 8)
+jackknifed_coefs_fun(covModel.Broad.RMA2.scaled, broadDataExtinctionProk, robust=F) + theme_bw()+
+  scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
+```
+
+```
+## Error: object 'broadDataExtinctionProk' not found
+```
+
+```r
+dev.off()
+```
+
+```
+## pdf 
+##   2
+```
+
+```r
+# TODO WARNING
+# Error in rma(lnorReg, vi = vlnorReg, data = temp_dat, mods = temp_dat[,  :
+# Processing terminated since k = 0.
+pdf("figure/habit-jackknife.pdf", width = 4, height = 8)
+jackknifed_coefs_fun(covModel.Epifaunal.rma3.scaled, habitDataGood, robust=F) +theme_bw()+
+  scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
+```
+
+```
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+```
+
+```r
+dev.off()
+```
+
+```
+## pdf 
+##   2
+```
