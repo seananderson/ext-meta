@@ -3,11 +3,12 @@
 # Methods for visualizing results from rma fits
 # from the metafor library
 #
-# Last Updated Oct 31, 2012
+# Last Updated July 23, 2012
+# Added num_sds to coefPlot for standardization
 ##########################################
 library(reshape)
 
-coefPlot <- function(amod, adf, std=F, robust=T) {
+coefPlot <- function(amod, adf, std=F, robust=T, num_sds=1) {
   ctab <- coef(summary(amod))
   rownames(ctab) <- names(coef(amod))
   
@@ -16,8 +17,8 @@ coefPlot <- function(amod, adf, std=F, robust=T) {
   lab <- "\nCoefficient\n"
   if(std) {
     ctab <- ctab[-1,]
-    mult <- colwise(sd)(as.data.frame(amod$X[,-1])) / sd(amod$yi)
-    lab <- "\nStandardized Coefficient\n"
+    mult <- colwise(sd)(as.data.frame(amod$X[,-1])) / (sd(amod$yi)*num_sds)
+    lab <- paste0("\nStandardized Coefficient (coef / ", num_sds, "sd)\n")
   }
   
   ctab <- ctab*t(mult)

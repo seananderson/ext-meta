@@ -5,11 +5,12 @@
 ## from NESCent Working Group for publication
 ##
 ## Created:       Jan 13, 2012
-## Last modified: Jul 17, 2014
+## Last modified: Jul 24, 2014
 ## Purpose:       Try plotting the effect sizes against the raw data.
 ## Additional description: More analyses can be found in singleLnOr_R_analyses/singleLnOr_rma.R
 ## Changelog
 ##
+## Jul 24, 2014 Made fig 2 2 panels, changed labels on Fig 4
 ## Dec 28,2013 - Added xAdd argumen to marginal plotting to allow for adjusting for 
 ##                offsets from centering predictors
 ##################################
@@ -179,13 +180,13 @@ covModel.Broad.RMA.detrended
 write.csv(coef(covModel.Broad.RMA), "./broadCoefTable.csv", row.names=T)
 write.csv(coef(covModel.Broad.RMA.detrended), "./broadCoefDetrendedTable.csv", row.names=T)
 
-broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust=F, std=T)+
+broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust=F, std=T, num_sds=2)+
   coord_flip() +
   scale_x_discrete(labels=c(expression(delta^13*C), expression(delta^18*O), expression(delta^34*S), "Extinction Rate", "Acidification"), expand = c(0.15, 0)) +
-  annotate("text", x=5, y=-0.5, label="A)")+
-  ylim(c(-0.55,0.4)) +
-  annotate("text", x=5.6, y=-0.35, label="Favours\nnarrow")+
-  annotate("text", x=5.6, y=0.35, label="Favours\nbroad")
+  annotate("text", x=5, y=-0.2, label="(a)")+
+  ylim(c(-0.25,0.25)) +
+  annotate("text", x=5.6, y = -0.15, label="Favours\nnarrow")+
+  annotate("text", x=5.6, y = 0.15, label="Favours\nbroad")
 
 ## @knitr broadModelWithTime
 rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~BC.extinction.ratePBDB +
@@ -231,6 +232,9 @@ habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d18O.prok))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d34S.prok))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$vlnorReg))),]
 
+#get rid of 
+levels(habitDataGood$study.ID) <- gsub(" [A-Z]{3}", "", levels(habitDataGood$study.ID))
+levels(habitDataGood$study.ID) <- gsub("[A-Z]{3}", "", levels(habitDataGood$study.ID))
 
 #as we'll be using these predictors later
 habitDataGood <- within(habitDataGood, {
@@ -259,13 +263,15 @@ write.csv(coef(covModel.Epifaunal.rma.detrend), "./epiCoefDetrendedTable.csv", r
 write.csv(coef(covModel.Epifaunal.rma), "./epiCoefTable.csv", row.names=T)
 
 
-epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust=F, std=T)+
+epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust=F, std=T, num_sds=2)+
   coord_flip() +
   scale_x_discrete(labels=c(expression(delta^18*O), expression(delta^34*S), "Extinction Rate", "Acidification"), expand = c(0.15, 0)) +
-  annotate("text", x=4, y=-1.0, label="B)")+
-  ylim(c(-1,1)) +
-  annotate("text", x=4.6, y=-.7, label="Favours\ninfauna")+
-  annotate("text", x=4.6, y=.7, label="Favours\nepifauna")
+  annotate("text", x=4, y=-0.4, label="(b)")+
+  ylim(c(-0.5,0.5)) +
+  annotate("text", x=4.6, y=-.25, label="Favours\ninfauna")+
+  annotate("text", x=4.6, y=.25, label="Favours\nepifauna")
+
+
 
 ## @knitr epibigEpifaunaModel.RMA.checktime
 rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
@@ -283,35 +289,43 @@ del18marg <- marginalLine(covModel.Epifaunal.rma, "cent.d18O",
                           habitDataGood, robust=F, xAdd=mean(habitDataGood$mean_d18O.prok))+
   xlab("\n Delta O18") +
   ylab("Component + Residual + Intercept Log Odds\n Ratios for Delta O18\n") +
-  #annotate("text", x=-4, y=2.75, label="A)") + 
-  theme_bw(base_size=18)
+  annotate("text", x=-4, y=2.75, label="(a)") + 
+  theme_bw(base_size=18)+
+  annotate("text", x=-1, y=-2, label="Favours\ninfauna")+
+  annotate("text", x=-3.5, y=2, label="Favours\nepifauna")
 
 del18MargData <- marginalData(covModel.Epifaunal.rma, "cent.d18O", habitDataGood)
 write.csv(del18MargData, "./del18MargData.csv", row.names=F)
 
 #Extract Legend
-#g_legend<-function(a.gplot){
-#  a.gplot <- a.gplot+scale_color_discrete("Study")
-#  tmp <- ggplot_gtable(ggplot_build(a.gplot))
-#  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
-#  legend <- tmp$grobs[[leg]]
-#  return(legend)}
+g_legend<-function(a.gplot){
+  a.gplot <- a.gplot+scale_color_discrete("Study")
+  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)}
 
-#legend <- g_legend(del34marg)
 
 #The Figure
-del18marg +scale_color_discrete("Study")
+fig5a <- del18marg +
+  scale_color_discrete(guide="none")
+
+legend <- g_legend(del18marg)
 
 #The Detrended Figure
 del18margDetrend <- marginalLine(covModel.Epifaunal.rma.detrend, "detrend.cent.d18O", 
                           habitDataGood, robust=F, xAdd=mean(habitDataGood$mean_d18O.detrended.prok))+
-  xlab("\n Delta O18") +
+  xlab("\n Detrended Delta O18") +
   ylab("Component + Residual + Intercept Log Odds\n Ratios for Detrended Delta O18\n") +
-  #annotate("text", x=-0.7, y=2.75, label="A)") + 
-  theme_bw(base_size=18)
+  annotate("text", x=-2.5, y=3, label="(b)") + 
+  theme_bw(base_size=18)+
+  annotate("text", x=2, y=-1.5, label="Favours\ninfauna")+
+  annotate("text", x=-1.5, y=2, label="Favours\nepifauna") 
 
-del18margDetrend +scale_color_discrete("Study")
+fig5b <- del18margDetrend +
+  scale_color_discrete(guide="none")
 
+grid.arrange(fig5a, fig5b, legend, widths=c(3,3,1), ncol=3)
 
 ## @knitr appendix
 #### #### #### #### #### ####

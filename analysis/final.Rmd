@@ -4,7 +4,7 @@ RMA Outputs
   Here we go...
 
 
-```{r, echo=FALSE, include=FALSE}
+```{r prep-0, echo=FALSE, include=FALSE}
 read_chunk("./final_for_paper.R")
 read_chunk("./plot_effect_sizes.R")
 ```
@@ -109,7 +109,7 @@ Figure 4
 
 Figure 5
 ========================================================
-```{r Fig5, fig.height=6, fig.width=11}
+```{r Fig5, fig.height=7, fig.width=15}
 ```
 
 
