@@ -148,10 +148,11 @@ broad.rma
 ## Grand Model
 ##########
 ## @knitr bigBroadModelRMA
-broadDataExtinction <- broadData[which(!is.na(broadData$BC.extinction.ratePBDB)),]
+broadDataExtinction <- broadData[which(!is.na(broadData$BC.extinction.rate.PBDB3)),]
 broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d18O.prok)),]
 broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d34S.prok)),]
 broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d13C.prok)),]
+broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$OA)),]
 
 #as we'll be using these predictors later
 broadDataExtinction <- within(broadDataExtinction, {
@@ -165,6 +166,10 @@ broadDataExtinction <- within(broadDataExtinction, {
   detrend.cent.d13C <- cent(mean_d13C.detrended.prok)
   cent.meanDate <- cent(meanDate)
 })
+
+levels(broadDataExtinction$study.ID) <- gsub(" [A-Z]{3}", "", levels(broadDataExtinction$study.ID))
+levels(broadDataExtinction$study.ID) <- gsub("[A-Z]{3}", "", levels(broadDataExtinction$study.ID))
+
 
 covModel.Broad.RMA <- rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~cent.extinction +
       cent.OA + cent.d18O + cent.d34S + cent.d13C)
@@ -232,7 +237,7 @@ habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d18O.prok))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d34S.prok))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$vlnorReg))),]
 
-#get rid of 
+#get rid of trailing letters
 levels(habitDataGood$study.ID) <- gsub(" [A-Z]{3}", "", levels(habitDataGood$study.ID))
 levels(habitDataGood$study.ID) <- gsub("[A-Z]{3}", "", levels(habitDataGood$study.ID))
 
@@ -337,53 +342,67 @@ jackknifed_coefs_fun(covModel.Broad.RMA, broadDataExtinction, robust=F) + theme_
   scale_colour_grey(name="Study Removed\n")
 
 
-# What is going on with that ONE point?
+# Life Habit Model
 jackknifed_coefs_fun(covModel.Epifaunal.rma, habitDataGood, robust=F) +theme_bw()+
+  scale_colour_grey(name="Study Removed\n")
+
+
+# Life Habit Model Detrended
+jackknifed_coefs_fun(covModel.Epifaunal.rma.detrend, habitDataGood, robust=F) +theme_bw()+
   scale_colour_grey(name="Study Removed\n")
 
 ## @knitr funnelPlots
 funnel(broad.rma, main="Funnel Plot for Broad v. Narrow Analysis")
 funnel(meanModel.Epifaunal, main="Funnel Plot for Epifauna v. Infauna Analysis")
 
-
+## @knitr scaledfunnelPlots
 scaledat <- function(x) {
   x.scaled <- x / (2 * sd(x, na.rm = TRUE))
   x.scaled
 }
 
+
 broadDataExtinctionScaled <- broadDataExtinction
 broadDataExtinctionScaled <- transform(broadDataExtinction, 
-  BC.extinction.ratePBDB = scaledat(BC.extinction.ratePBDB), 
+                                       BC.extinction.rate.PBDB3 = scaledat(BC.extinction.rate.PBDB3), 
   mean_d18O.prok = scaledat(mean_d18O.prok), 
   mean_d34S.prok = scaledat(mean_d34S.prok), 
   mean_d13C.prok = scaledat(mean_d13C.prok))
 # sd of OA should already be ~0.5. (actually around 0.42)
 
-covModel.Broad.RMA2.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinctionScaled, mods=~BC.extinction.ratePBDB +
+covModel.Broad.RMA2.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinctionScaled, mods=~BC.extinction.rate.PBDB3 +
                            OA + mean_d18O.prok + mean_d34S.prok + mean_d13C.prok)
 # Now for the habit model:
 habitDataGoodScaled <- habitDataGood
 habitDataGoodScaled <- transform(habitDataGood, 
-  BC.extinction.ratePBDB = scaledat(BC.extinction.ratePBDB), 
+   BC.extinction.rate.PBDB3 = scaledat(BC.extinction.rate.PBDB3), 
   mean_d18O.prok = scaledat(mean_d18O.prok), 
   mean_d34S.prok = scaledat(mean_d34S.prok), 
   meanDate = scaledat(meanDate))
 
 covModel.Epifaunal.rma3.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGoodScaled,
-                              mods =~ OA + BC.extinction.ratePBDB + mean_d18O.prok + mean_d34S.prok + meanDate)
+                                     mods =~ OA + BC.extinction.rate.PBDB3 + mean_d18O.prok + mean_d34S.prok)
+
+
+covModel.Epifaunal.rma.time.covarite.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGoodScaled,
+                              mods =~ OA + BC.extinction.rate.PBDB3 + mean_d18O.prok + mean_d34S.prok + meanDate)
 
 pdf("figure/broad-jackknife.pdf", width = 4, height = 8)
-jackknifed_coefs_fun(covModel.Broad.RMA2.scaled, broadDataExtinctionProk, robust=F) + theme_bw()+
+jackknifed_coefs_fun(covModel.Broad.RMA2.scaled, broadDataExtinctionScaled, robust=F) + theme_bw()+
   scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
 dev.off()
 
 # TODO WARNING
 # Error in rma(lnorReg, vi = vlnorReg, data = temp_dat, mods = temp_dat[,  :
 # Processing terminated since k = 0.
-pdf("figure/habit-jackknife.pdf", width = 4, height = 8)
+pdf("figure/habit-jackknife-detrended.pdf", width = 4, height = 8)
 jackknifed_coefs_fun(covModel.Epifaunal.rma3.scaled, habitDataGood, robust=F) +theme_bw()+
   scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
 dev.off()
 
+pdf("figure/habit-jackknife-time-covariate.pdf", width = 4, height = 8)
+jackknifed_coefs_fun(covModel.Epifaunal.rma.time.covarite.scaled, habitDataGood, robust=F) +theme_bw()+
+  scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
+dev.off()
 
 

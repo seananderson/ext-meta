@@ -166,6 +166,8 @@ jackknifed_coefs_fun  <- function(obj, adf, robust=T){
     temp_dat <- subset(ndf, !study.ID %in% x)
     broad_rma_jackknife <- rma(lnorReg, vi = vlnorReg, data = temp_dat, mods=temp_dat[,-(1:3)], method = "REML")
     coefs <- coef(summary(broad_rma_jackknife))
+    rownames(coefs) <- names(coef(broad_rma_jackknife))
+    
     if(robust) coefs <- robustSE(broad_rma_jackknife, cluster = temp_dat$study.ID)
     
     coef_df <- as.data.frame(t(coefs$estimate))

@@ -414,13 +414,15 @@ later on.
 The Fitted Model for Broad v. Narrow
 
 ```r
-broadDataExtinction <- broadData[which(!is.na(broadData$BC.extinction.ratePBDB)), 
+broadDataExtinction <- broadData[which(!is.na(broadData$BC.extinction.rate.PBDB3)), 
     ]
 broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d18O.prok)), 
     ]
 broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d34S.prok)), 
     ]
 broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d13C.prok)), 
+    ]
+broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$OA)), 
     ]
 
 # as we'll be using these predictors later
@@ -436,15 +438,12 @@ broadDataExtinction <- within(broadDataExtinction, {
     cent.meanDate <- cent(meanDate)
 })
 
+levels(broadDataExtinction$study.ID) <- gsub(" [A-Z]{3}", "", levels(broadDataExtinction$study.ID))
+levels(broadDataExtinction$study.ID) <- gsub("[A-Z]{3}", "", levels(broadDataExtinction$study.ID))
+
+
 covModel.Broad.RMA <- rma(yi = lnorReg, vi = vlnorReg, data = broadDataExtinction, 
     mods = ~cent.extinction + cent.OA + cent.d18O + cent.d34S + cent.d13C)
-```
-
-```
-## Warning: Studies with NAs omitted from model fitting.
-```
-
-```r
 
 covModel.Broad.RMA
 ```
@@ -468,7 +467,7 @@ covModel.Broad.RMA
 ## Model Results:
 ## 
 ##                               se     zval    pval    ci.lb   ci.ub     
-## intrcpt           1.0191  0.1073   9.4940  <.0001   0.8087  1.2295  ***
+## intrcpt           1.0243  0.1081   9.4736  <.0001   0.8124  1.2362  ***
 ## cent.extinction   0.8116  1.2736   0.6373  0.5239  -1.6845  3.3078     
 ## cent.OA           0.0992  0.3068   0.3234  0.7464  -0.5022  0.7006     
 ## cent.d18O         0.0160  0.0623   0.2574  0.7968  -0.1060  0.1380     
@@ -485,13 +484,6 @@ covModel.Broad.RMA
 covModel.Broad.RMA.detrended <- rma(yi = lnorReg, vi = vlnorReg, data = broadDataExtinction, 
     mods = ~cent.extinction + cent.OA + detrend.cent.d18O + detrend.cent.d34S + 
         detrend.cent.d13C)
-```
-
-```
-## Warning: Studies with NAs omitted from model fitting.
-```
-
-```r
 
 covModel.Broad.RMA.detrended
 ```
@@ -515,7 +507,7 @@ covModel.Broad.RMA.detrended
 ## Model Results:
 ## 
 ##                                 se     zval    pval    ci.lb   ci.ub     
-## intrcpt             0.9923  0.1038   9.5618  <.0001   0.7889  1.1957  ***
+## intrcpt             1.0042  0.1037   9.6833  <.0001   0.8010  1.2075  ***
 ## cent.extinction     0.9131  1.2212   0.7477  0.4546  -1.4804  3.3067     
 ## cent.OA             0.1129  0.2921   0.3864  0.6992  -0.4597  0.6854     
 ## detrend.cent.d18O   0.2345  0.1258   1.8639  0.0623  -0.0121  0.4812    .
@@ -553,7 +545,7 @@ habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d34S.prok))),
     ]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$vlnorReg))), ]
 
-# get rid of
+# get rid of trailing letters
 levels(habitDataGood$study.ID) <- gsub(" [A-Z]{3}", "", levels(habitDataGood$study.ID))
 levels(habitDataGood$study.ID) <- gsub("[A-Z]{3}", "", levels(habitDataGood$study.ID))
 
@@ -667,38 +659,38 @@ rma(yi = lnorReg, vi = vlnorReg, data = broadDataExtinction, mods = ~BC.extincti
 
 ```
 ## 
-## Mixed-Effects Model (k = 71; tau^2 estimator: REML)
+## Mixed-Effects Model (k = 68; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.2554 (SE = 0.1122)
-## tau (square root of estimated tau^2 value):             0.5053
-## I^2 (residual heterogeneity / unaccounted variability): 42.08%
-## H^2 (unaccounted variability / sampling variability):   1.73
-## R^2 (amount of heterogeneity accounted for):            6.24%
+## tau^2 (estimated amount of residual heterogeneity):     0.2419 (SE = 0.1143)
+## tau (square root of estimated tau^2 value):             0.4918
+## I^2 (residual heterogeneity / unaccounted variability): 39.75%
+## H^2 (unaccounted variability / sampling variability):   1.66
+## R^2 (amount of heterogeneity accounted for):            16.01%
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 64) = 109.9242, p-val = 0.0003
+## QE(df = 61) = 101.4424, p-val = 0.0009
 ## 
 ## Test of Moderators (coefficient(s) 2,3,4,5,6,7): 
-## QM(df = 6) = 7.8779, p-val = 0.2472
+## QM(df = 6) = 10.4505, p-val = 0.1069
 ## 
 ## Model Results:
 ## 
 ##                                      se     zval    pval    ci.lb   ci.ub
-## intrcpt                  0.9971  0.1345   7.4148  <.0001   0.7335  1.2606
-## BC.extinction.ratePBDB   0.7317  1.2474   0.5866  0.5575  -1.7132  3.1766
-## cent.OA                  0.0471  0.3225   0.1461  0.8838  -0.5850  0.6793
-## cent.d18O                0.1945  0.1255   1.5498  0.1212  -0.0515  0.4405
-## cent.d34S               -0.0262  0.0400  -0.6542  0.5130  -0.1047  0.0523
-## cent.d13C                0.0048  0.1131   0.0423  0.9662  -0.2168  0.2264
-## cent.meanDate            0.0024  0.0016   1.4962  0.1346  -0.0007  0.0055
+## intrcpt                  0.9442  0.1384   6.8201  <.0001   0.6729  1.2156
+## BC.extinction.ratePBDB   0.9546  1.2382   0.7710  0.4407  -1.4722  3.3815
+## cent.OA                  0.0755  0.3193   0.2365  0.8130  -0.5502  0.7013
+## cent.d18O                0.2274  0.1257   1.8097  0.0703  -0.0189  0.4737
+## cent.d34S               -0.0238  0.0397  -0.6007  0.5480  -0.1016  0.0539
+## cent.d13C                0.0212  0.1124   0.1887  0.8504  -0.1990  0.2414
+## cent.meanDate            0.0030  0.0016   1.9004  0.0574  -0.0001  0.0062
 ##                            
 ## intrcpt                 ***
 ## BC.extinction.ratePBDB     
 ## cent.OA                    
-## cent.d18O                  
+## cent.d18O                 .
 ## cent.d34S                  
 ## cent.d13C                  
-## cent.meanDate              
+## cent.meanDate             .
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -810,8 +802,42 @@ Appendix Jackknife Figures
 ========================================================
 
 ```
-## Error: arguments imply differing number of rows: 68, 71
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
 ```
+
+![plot of chunk jackknife.figs](figure/jackknife_figs1.png) 
 
 ```
 ## Using  as id variables
@@ -855,9 +881,51 @@ Appendix Jackknife Figures
 ## Using  as id variables
 ```
 
+![plot of chunk jackknife.figs](figure/jackknife_figs2.png) 
+
 ```
-## Error: 'data' must be of a vector type, was 'NULL'
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
+## Using  as id variables
 ```
+
+![plot of chunk jackknife.figs](figure/jackknife_figs3.png) 
 
 
 
@@ -872,113 +940,4 @@ funnel(meanModel.Epifaunal, main = "Funnel Plot for Epifauna v. Infauna Analysis
 ```
 
 ![plot of chunk funnelPlots](figure/funnelPlots2.png) 
-
-```r
-
-
-scaledat <- function(x) {
-    x.scaled <- x/(2 * sd(x, na.rm = TRUE))
-    x.scaled
-}
-
-broadDataExtinctionScaled <- broadDataExtinction
-broadDataExtinctionScaled <- transform(broadDataExtinction, BC.extinction.ratePBDB = scaledat(BC.extinction.ratePBDB), 
-    mean_d18O.prok = scaledat(mean_d18O.prok), mean_d34S.prok = scaledat(mean_d34S.prok), 
-    mean_d13C.prok = scaledat(mean_d13C.prok))
-# sd of OA should already be ~0.5. (actually around 0.42)
-
-covModel.Broad.RMA2.scaled <- rma(yi = lnorReg, vi = vlnorReg, data = broadDataExtinctionScaled, 
-    mods = ~BC.extinction.ratePBDB + OA + mean_d18O.prok + mean_d34S.prok + 
-        mean_d13C.prok)
-# Now for the habit model:
-habitDataGoodScaled <- habitDataGood
-habitDataGoodScaled <- transform(habitDataGood, BC.extinction.ratePBDB = scaledat(BC.extinction.ratePBDB), 
-    mean_d18O.prok = scaledat(mean_d18O.prok), mean_d34S.prok = scaledat(mean_d34S.prok), 
-    meanDate = scaledat(meanDate))
-
-covModel.Epifaunal.rma3.scaled <- rma(yi = lnorReg, vi = vlnorReg, data = habitDataGoodScaled, 
-    mods = ~OA + BC.extinction.ratePBDB + mean_d18O.prok + mean_d34S.prok + 
-        meanDate)
-
-pdf("figure/broad-jackknife.pdf", width = 4, height = 8)
-jackknifed_coefs_fun(covModel.Broad.RMA2.scaled, broadDataExtinctionProk, robust = F) + 
-    theme_bw() + scale_colour_grey(name = "Study Removed\n") + ylab("Scaled coefficient estimate")
-```
-
-```
-## Error: object 'broadDataExtinctionProk' not found
-```
-
-```r
-dev.off()
-```
-
-```
-## pdf 
-##   2
-```
-
-```r
-
-# TODO WARNING Error in rma(lnorReg, vi = vlnorReg, data = temp_dat, mods =
-# temp_dat[, : Processing terminated since k = 0.
-pdf("figure/habit-jackknife.pdf", width = 4, height = 8)
-jackknifed_coefs_fun(covModel.Epifaunal.rma3.scaled, habitDataGood, robust = F) + 
-    theme_bw() + scale_colour_grey(name = "Study Removed\n") + ylab("Scaled coefficient estimate")
-```
-
-```
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-## Using  as id variables
-```
-
-```
-## Error: 'data' must be of a vector type, was 'NULL'
-```
-
-```r
-dev.off()
-```
-
-```
-## pdf 
-##   2
-```
 
