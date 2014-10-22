@@ -10,6 +10,7 @@
 ## Additional description: More analyses can be found in singleLnOr_R_analyses/singleLnOr_rma.R
 ## Changelog
 ##
+## Oct 7, 2014 - Changed Knoll et al 1996 to 2007 as per Rowan's request
 ## Jul 24, 2014 Made fig 2 2 panels, changed labels on Fig 4
 ## Dec 28,2013 - Added xAdd argumen to marginal plotting to allow for adjusting for 
 ##                offsets from centering predictors
@@ -26,7 +27,6 @@ library(gridExtra)
 source("../r/metaprep.r")
 source("../r/rmaPrep.R")
 source("../r/catPlotFun.R")
-
 
 #for prettier printing in Figures
 levels(ext$Tax.level) <- c("Genera", "Species", "Subgenera")
@@ -303,19 +303,30 @@ del18MargData <- marginalData(covModel.Epifaunal.rma, "cent.d18O", habitDataGood
 write.csv(del18MargData, "./del18MargData.csv", row.names=F)
 
 #Extract Legend
+#del18marg <- a.gplot
 g_legend<-function(a.gplot){
-  a.gplot <- a.gplot+scale_color_discrete("Study")
+  a.gplot <- a.gplot+scale_color_discrete("Study") #+scale_color_manual("Study", values=subdf$color.ID)
   tmp <- ggplot_gtable(ggplot_build(a.gplot))
   leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
   legend <- tmp$grobs[[leg]]
   return(legend)}
 
+g_legend2<-function(p1){ 
+  require(gtable)
+  leg1 <- p1 + guides(linetype=FALSE, size=FALSE)
+  legend.colour <- gtable_filter(ggplot_gtable(ggplot_build(leg1)), "guide-box") 
+  return(legend.color)
+} 
 
 #The Figure
-fig5a <- del18marg +
-  scale_color_discrete(guide="none")
+colormatch <- sapply(levels(habitDataGood$study.ID), function(alev){
+  as.character(habitDataGood$color.ID[which(as.character(habitDataGood$study.ID)==alev)][1])
+})
 
-legend <- g_legend(del18marg)
+fig5a <- del18marg +
+  scale_color_manual(guide="none", values=colormatch)
+
+legend <- g_legend2(del18marg)
 
 #The Detrended Figure
 del18margDetrend <- marginalLine(covModel.Epifaunal.rma.detrend, "detrend.cent.d18O", 
@@ -328,7 +339,8 @@ del18margDetrend <- marginalLine(covModel.Epifaunal.rma.detrend, "detrend.cent.d
   annotate("text", x=-1.5, y=2, label="Favours\nepifauna") 
 
 fig5b <- del18margDetrend +
-  scale_color_discrete(guide="none")
+  scale_color_manual(guide="none", values=colormatch)
+
 
 grid.arrange(fig5a, fig5b, legend, widths=c(3,3,1), ncol=3)
 
@@ -352,8 +364,8 @@ jackknifed_coefs_fun(covModel.Epifaunal.rma.detrend, habitDataGood, robust=F) +t
   scale_colour_grey(name="Study Removed\n")
 
 ## @knitr funnelPlots
-funnel(broad.rma, main="Funnel Plot for Broad v. Narrow Analysis")
-funnel(meanModel.Epifaunal, main="Funnel Plot for Epifauna v. Infauna Analysis")
+funnel(broad.rma, main="Funnel Plot for Geographic Range (Broad to Narrow) Analysis")
+funnel(meanModel.Epifaunal, main="Funnel Plot for Life Habit (Epifauna v. Infauna) Analysis")
 
 ## @knitr scaledfunnelPlots
 scaledat <- function(x) {

@@ -78,12 +78,16 @@ marginalPlot <- function(obj, variable, dataFrame,xAdd=0){
 
   margPoints <- y - margAdjust(coefs, X, y, variable)
   
-  subdf <- data.frame(predictor = predictor+xAdd, margPoints = margPoints, study.ID = dataFrame$study.ID)
+  subdf <- data.frame(predictor = predictor+xAdd, margPoints = margPoints, study.ID = dataFrame$study.ID, color.ID=dataFrame$color.ID)
+  colormatch <- sapply(levels(subdf$study.ID), function(alev){
+    as.character(subdf$color.ID[which(as.character(subdf$study.ID)==alev)][1])
+  })
+      
   
-  
-  ggplot() + geom_point(data = subdf, mapping=aes(x=predictor, y=margPoints, color=study.ID)) +
+  ggplot() + geom_point(data = subdf, mapping=aes(x=predictor, y=margPoints, color=study.ID), size=4) +
     xlab(variable) + ylab(paste("Marginal Values for ", variable, sep="")) +
-    theme_bw()
+    theme_bw() +
+    scale_color_manual(name="Study", values=colormatch)
 }
 
 marginalLine <- function(obj, variable, dataFrame, interval = "fit", robust=T, xAdd=0){
