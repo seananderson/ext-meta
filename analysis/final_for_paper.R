@@ -23,6 +23,7 @@
 library(metafor)
 library(ggplot2)
 library(gridExtra)
+library(gtable)
 
 source("../r/metaprep.r")
 source("../r/rmaPrep.R")
@@ -302,21 +303,6 @@ del18marg <- marginalLine(covModel.Epifaunal.rma, "cent.d18O",
 del18MargData <- marginalData(covModel.Epifaunal.rma, "cent.d18O", habitDataGood)
 write.csv(del18MargData, "./del18MargData.csv", row.names=F)
 
-#Extract Legend
-#del18marg <- a.gplot
-g_legend<-function(a.gplot){
-  a.gplot <- a.gplot+scale_color_discrete("Study") #+scale_color_manual("Study", values=subdf$color.ID)
-  tmp <- ggplot_gtable(ggplot_build(a.gplot))
-  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
-  legend <- tmp$grobs[[leg]]
-  return(legend)}
-
-g_legend2<-function(p1){ 
-  require(gtable)
-  leg1 <- p1 + guides(linetype=FALSE, size=FALSE)
-  legend.colour <- gtable_filter(ggplot_gtable(ggplot_build(leg1)), "guide-box") 
-  return(legend.color)
-} 
 
 #The Figure
 colormatch <- sapply(levels(habitDataGood$study.ID), function(alev){
@@ -326,7 +312,10 @@ colormatch <- sapply(levels(habitDataGood$study.ID), function(alev){
 fig5a <- del18marg +
   scale_color_manual(guide="none", values=colormatch)
 
-legend <- g_legend2(del18marg)
+#make an extracted legend
+leg1 <- del18marg + guides(linetype=FALSE, size=FALSE)
+legend.colour <- gtable_filter(ggplot_gtable(ggplot_build(leg1)), "guide-box") 
+
 
 #The Detrended Figure
 del18margDetrend <- marginalLine(covModel.Epifaunal.rma.detrend, "detrend.cent.d18O", 
@@ -342,7 +331,7 @@ fig5b <- del18margDetrend +
   scale_color_manual(guide="none", values=colormatch)
 
 
-grid.arrange(fig5a, fig5b, legend, widths=c(3,3,1), ncol=3)
+grid.arrange(fig5a, fig5b, legend.colour, widths=c(3,3,1), ncol=3)
 
 ## @knitr appendix
 #### #### #### #### #### ####

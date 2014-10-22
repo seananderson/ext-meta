@@ -5,6 +5,7 @@ RMA Outputs
 
 
 ```{r prep-0, echo=FALSE, include=FALSE}
+library(knitr)
 read_chunk("./final_for_paper.R")
 read_chunk("./plot_effect_sizes.R")
 ```
