@@ -19,12 +19,12 @@ stageTime <- transform(stageTime, Midpt = Start..Ma. - (Start..Ma. - End..Ma.)/2
 #volcbolide2 <- merge(volcbolide, stageTime[,c("State.stage", "Start..Ma.", "Midpt", "End..Ma.")], all.x = TRUE)
 
 # get ORs in a nice format for plotting:
-broad_d <- subset(ext, Aggregate.Trait == "Geographic Range" & Trait.category == "Broad")[,c("study.ID", "lnorReg", "vlnorReg", "meanDate")]
+broad_d <- subset(ext, Aggregate.Trait == "Geographic Range" & Trait.category == "Broad")[,c("study.ID", "lnorReg", "vlnorReg", "meanDate", "color.ID")]
 broad_d$effect_type <- "range"
 broad_d$study.ID <- as.character(broad_d$study.ID)
 broad_d$study_num <- as.numeric(as.factor(broad_d$study.ID))
 
-epi_d <- subset(ext, Aggregate.Trait == "Life Habit" & Trait.category %in% c("Epifaunal", "Epifauna", "Epifuanl", "Epifaunalcalciticouterlayer", "Epifaunalcompetelyaragonitic"))[,c("study.ID", "lnorReg", "vlnorReg", "meanDate")]
+epi_d <- subset(ext, Aggregate.Trait == "Life Habit" & Trait.category %in% c("Epifaunal", "Epifauna", "Epifuanl", "Epifaunalcalciticouterlayer", "Epifaunalcompetelyaragonitic"))[,c("study.ID", "lnorReg", "vlnorReg", "meanDate", "color.ID")]
 epi_d$effect_type <- "habit"
 epi_d$study.ID <- as.character(epi_d$study.ID)
 epi_d$study_num <- as.numeric(as.factor(epi_d$study.ID))
@@ -41,6 +41,10 @@ pal <- paste(gg_color_hue(max(effect_d$study_num)), "80", sep = "")[sample(1:max
 
 effect_d <- transform(effect_d, u = lnorReg + 1.96*sqrt(vlnorReg), l = lnorReg - 1.96*sqrt(vlnorReg), circle_rad = 1/(sqrt(vlnorReg/pi)), study_col = pal[study_num])
 effect_d$study_col <- as.character(effect_d$study_col)
+
+############ FIX COLORS TO BE THE SAME AS OTHERS IN THE PAPER
+effect_d$study_col <- effect_d$color.ID 
+
 #area = pi * r^2
 # r = sqrt(area / pi)
 

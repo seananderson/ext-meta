@@ -3,11 +3,12 @@
 # Methods for visualizing results from rma fits
 # from the metafor library
 #
-# Last Updated Oct 31, 2012
+# Last Updated July 23, 2012
+# Added num_sds to coefPlot for standardization
 ##########################################
 library(reshape)
 
-coefPlot <- function(amod, adf, std=F, robust=T) {
+coefPlot <- function(amod, adf, std=F, robust=T, num_sds=1) {
   ctab <- coef(summary(amod))
   rownames(ctab) <- names(coef(amod))
   
@@ -16,8 +17,8 @@ coefPlot <- function(amod, adf, std=F, robust=T) {
   lab <- "\nCoefficient\n"
   if(std) {
     ctab <- ctab[-1,]
-    mult <- colwise(sd)(as.data.frame(amod$X[,-1])) / sd(amod$yi)
-    lab <- "\nStandardized Coefficient\n"
+    mult <- colwise(sd)(as.data.frame(amod$X[,-1])) / (sd(amod$yi)*num_sds)
+    lab <- paste0("\nStandardized Coefficient (coef / ", num_sds, "sd)\n")
   }
   
   ctab <- ctab*t(mult)
@@ -77,12 +78,16 @@ marginalPlot <- function(obj, variable, dataFrame,xAdd=0){
 
   margPoints <- y - margAdjust(coefs, X, y, variable)
   
-  subdf <- data.frame(predictor = predictor+xAdd, margPoints = margPoints, study.ID = dataFrame$study.ID)
+  subdf <- data.frame(predictor = predictor+xAdd, margPoints = margPoints, study.ID = dataFrame$study.ID, color.ID=dataFrame$color.ID)
+  colormatch <- sapply(levels(subdf$study.ID), function(alev){
+    as.character(subdf$color.ID[which(as.character(subdf$study.ID)==alev)][1])
+  })
+      
   
-  
-  ggplot() + geom_point(data = subdf, mapping=aes(x=predictor, y=margPoints, color=study.ID)) +
+  ggplot() + geom_point(data = subdf, mapping=aes(x=predictor, y=margPoints, color=study.ID), size=4) +
     xlab(variable) + ylab(paste("Marginal Values for ", variable, sep="")) +
-    theme_bw()
+    theme_bw() +
+    scale_color_manual(name="Study", values=colormatch)
 }
 
 marginalLine <- function(obj, variable, dataFrame, interval = "fit", robust=T, xAdd=0){
@@ -165,6 +170,8 @@ jackknifed_coefs_fun  <- function(obj, adf, robust=T){
     temp_dat <- subset(ndf, !study.ID %in% x)
     broad_rma_jackknife <- rma(lnorReg, vi = vlnorReg, data = temp_dat, mods=temp_dat[,-(1:3)], method = "REML")
     coefs <- coef(summary(broad_rma_jackknife))
+    rownames(coefs) <- names(coef(broad_rma_jackknife))
+    
     if(robust) coefs <- robustSE(broad_rma_jackknife, cluster = temp_dat$study.ID)
     
     coef_df <- as.data.frame(t(coefs$estimate))

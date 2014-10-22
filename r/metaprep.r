@@ -272,3 +272,35 @@ centExt<-colwise(function(x) x-mean(x, na.rm=T))(ext[,60:94])
 names(centExt)<-paste(names(centExt), ".cent", sep="")
 ext <- cbind(ext, centExt)
 
+
+#deal with repeat of Knoll data - 2007 study used same as 1996, but we harvested more from 1996
+knoll2007IDX <- grep("Knoll et al. 2007", as.character(ext$In.text.Citation))
+knoll1996IDX <- grep("Knoll et al. 1996", as.character(ext$In.text.Citation))
+levels(ext$study.ID) <- gsub("Knoll 2007 PEP", "Knoll et al. 2007", levels(ext$study.ID))
+ext$study.ID[knoll1996IDX] <- "Knoll et al. 2007"
+ext$study.ID <- factor(ext$study.ID)
+ext$In.text.Citation[knoll1996IDX] <- "Knoll et al. 2007"
+ext$Year[knoll1996IDX] <- "2007"
+ext <- ext[-knoll2007IDX,]
+
+
+
+#Make colors for printing
+library(RColorBrewer)
+
+
+#based on answer from http://stackoverflow.com/questions/6181653/creating-a-more-continuous-color-palette-in-r-ggplot2-lattice-or-latticeextra
+getBrewColors <- function(n, palette, range) 
+  colorRampPalette(brewer.pal(n, palette))(diff(range))
+
+#make colors for individual studies
+len <- length(levels(ext$study.ID))
+
+colorsForStudies <- getBrewColors(12, "Paired", c(0,len))
+
+ext$color.ID = NA
+for(i in 1:len){
+  study <- levels(ext$study.ID)[i]
+  ext$color.ID[which(as.character(ext$study.ID)==study)] <- colorsForStudies[i]
+}
+

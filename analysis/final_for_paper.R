@@ -5,11 +5,13 @@
 ## from NESCent Working Group for publication
 ##
 ## Created:       Jan 13, 2012
-## Last modified: Jul 17, 2014
+## Last modified: Jul 24, 2014
 ## Purpose:       Try plotting the effect sizes against the raw data.
 ## Additional description: More analyses can be found in singleLnOr_R_analyses/singleLnOr_rma.R
 ## Changelog
 ##
+## Oct 7, 2014 - Changed Knoll et al 1996 to 2007 as per Rowan's request
+## Jul 24, 2014 Made fig 2 2 panels, changed labels on Fig 4
 ## Dec 28,2013 - Added xAdd argumen to marginal plotting to allow for adjusting for 
 ##                offsets from centering predictors
 ##################################
@@ -21,11 +23,11 @@
 library(metafor)
 library(ggplot2)
 library(gridExtra)
+library(gtable)
 
 source("../r/metaprep.r")
 source("../r/rmaPrep.R")
 source("../r/catPlotFun.R")
-
 
 #for prettier printing in Figures
 levels(ext$Tax.level) <- c("Genera", "Species", "Subgenera")
@@ -147,10 +149,11 @@ broad.rma
 ## Grand Model
 ##########
 ## @knitr bigBroadModelRMA
-broadDataExtinction <- broadData[which(!is.na(broadData$BC.extinction.ratePBDB)),]
+broadDataExtinction <- broadData[which(!is.na(broadData$BC.extinction.rate.PBDB3)),]
 broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d18O.prok)),]
 broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d34S.prok)),]
 broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d13C.prok)),]
+broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$OA)),]
 
 #as we'll be using these predictors later
 broadDataExtinction <- within(broadDataExtinction, {
@@ -164,6 +167,10 @@ broadDataExtinction <- within(broadDataExtinction, {
   detrend.cent.d13C <- cent(mean_d13C.detrended.prok)
   cent.meanDate <- cent(meanDate)
 })
+
+levels(broadDataExtinction$study.ID) <- gsub(" [A-Z]{3}", "", levels(broadDataExtinction$study.ID))
+levels(broadDataExtinction$study.ID) <- gsub("[A-Z]{3}", "", levels(broadDataExtinction$study.ID))
+
 
 covModel.Broad.RMA <- rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~cent.extinction +
       cent.OA + cent.d18O + cent.d34S + cent.d13C)
@@ -179,13 +186,13 @@ covModel.Broad.RMA.detrended
 write.csv(coef(covModel.Broad.RMA), "./broadCoefTable.csv", row.names=T)
 write.csv(coef(covModel.Broad.RMA.detrended), "./broadCoefDetrendedTable.csv", row.names=T)
 
-broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust=F, std=T)+
+broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust=F, std=T, num_sds=2)+
   coord_flip() +
   scale_x_discrete(labels=c(expression(delta^13*C), expression(delta^18*O), expression(delta^34*S), "Extinction Rate", "Acidification"), expand = c(0.15, 0)) +
-  annotate("text", x=5, y=-0.5, label="A)")+
-  ylim(c(-0.55,0.4)) +
-  annotate("text", x=5.6, y=-0.35, label="Favours\nnarrow")+
-  annotate("text", x=5.6, y=0.35, label="Favours\nbroad")
+  annotate("text", x=5, y=-0.2, label="(a)")+
+  ylim(c(-0.25,0.25)) +
+  annotate("text", x=5.6, y = -0.15, label="Favours\nnarrow")+
+  annotate("text", x=5.6, y = 0.15, label="Favours\nbroad")
 
 ## @knitr broadModelWithTime
 rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~BC.extinction.ratePBDB +
@@ -231,6 +238,9 @@ habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d18O.prok))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d34S.prok))),]
 habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$vlnorReg))),]
 
+#get rid of trailing letters
+levels(habitDataGood$study.ID) <- gsub(" [A-Z]{3}", "", levels(habitDataGood$study.ID))
+levels(habitDataGood$study.ID) <- gsub("[A-Z]{3}", "", levels(habitDataGood$study.ID))
 
 #as we'll be using these predictors later
 habitDataGood <- within(habitDataGood, {
@@ -259,13 +269,15 @@ write.csv(coef(covModel.Epifaunal.rma.detrend), "./epiCoefDetrendedTable.csv", r
 write.csv(coef(covModel.Epifaunal.rma), "./epiCoefTable.csv", row.names=T)
 
 
-epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust=F, std=T)+
+epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust=F, std=T, num_sds=2)+
   coord_flip() +
   scale_x_discrete(labels=c(expression(delta^18*O), expression(delta^34*S), "Extinction Rate", "Acidification"), expand = c(0.15, 0)) +
-  annotate("text", x=4, y=-1.0, label="B)")+
-  ylim(c(-1,1)) +
-  annotate("text", x=4.6, y=-.7, label="Favours\ninfauna")+
-  annotate("text", x=4.6, y=.7, label="Favours\nepifauna")
+  annotate("text", x=4, y=-0.4, label="(b)")+
+  ylim(c(-0.5,0.5)) +
+  annotate("text", x=4.6, y=-.25, label="Favours\ninfauna")+
+  annotate("text", x=4.6, y=.25, label="Favours\nepifauna")
+
+
 
 ## @knitr epibigEpifaunaModel.RMA.checktime
 rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
@@ -283,35 +295,43 @@ del18marg <- marginalLine(covModel.Epifaunal.rma, "cent.d18O",
                           habitDataGood, robust=F, xAdd=mean(habitDataGood$mean_d18O.prok))+
   xlab("\n Delta O18") +
   ylab("Component + Residual + Intercept Log Odds\n Ratios for Delta O18\n") +
-  #annotate("text", x=-4, y=2.75, label="A)") + 
-  theme_bw(base_size=18)
+  annotate("text", x=-4, y=2.75, label="(a)") + 
+  theme_bw(base_size=18)+
+  annotate("text", x=-1, y=-2, label="Favours\ninfauna")+
+  annotate("text", x=-3.5, y=2, label="Favours\nepifauna")
 
 del18MargData <- marginalData(covModel.Epifaunal.rma, "cent.d18O", habitDataGood)
 write.csv(del18MargData, "./del18MargData.csv", row.names=F)
 
-#Extract Legend
-#g_legend<-function(a.gplot){
-#  a.gplot <- a.gplot+scale_color_discrete("Study")
-#  tmp <- ggplot_gtable(ggplot_build(a.gplot))
-#  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
-#  legend <- tmp$grobs[[leg]]
-#  return(legend)}
-
-#legend <- g_legend(del34marg)
 
 #The Figure
-del18marg +scale_color_discrete("Study")
+colormatch <- sapply(levels(habitDataGood$study.ID), function(alev){
+  as.character(habitDataGood$color.ID[which(as.character(habitDataGood$study.ID)==alev)][1])
+})
+
+fig5a <- del18marg +
+  scale_color_manual(guide="none", values=colormatch)
+
+#make an extracted legend
+leg1 <- del18marg + guides(linetype=FALSE, size=FALSE)
+legend.colour <- gtable_filter(ggplot_gtable(ggplot_build(leg1)), "guide-box") 
+
 
 #The Detrended Figure
 del18margDetrend <- marginalLine(covModel.Epifaunal.rma.detrend, "detrend.cent.d18O", 
                           habitDataGood, robust=F, xAdd=mean(habitDataGood$mean_d18O.detrended.prok))+
-  xlab("\n Delta O18") +
+  xlab("\n Detrended Delta O18") +
   ylab("Component + Residual + Intercept Log Odds\n Ratios for Detrended Delta O18\n") +
-  #annotate("text", x=-0.7, y=2.75, label="A)") + 
-  theme_bw(base_size=18)
+  annotate("text", x=-2.5, y=3, label="(b)") + 
+  theme_bw(base_size=18)+
+  annotate("text", x=2, y=-1.5, label="Favours\ninfauna")+
+  annotate("text", x=-1.5, y=2, label="Favours\nepifauna") 
 
-del18margDetrend +scale_color_discrete("Study")
+fig5b <- del18margDetrend +
+  scale_color_manual(guide="none", values=colormatch)
 
+
+grid.arrange(fig5a, fig5b, legend.colour, widths=c(3,3,1), ncol=3)
 
 ## @knitr appendix
 #### #### #### #### #### ####
@@ -323,53 +343,67 @@ jackknifed_coefs_fun(covModel.Broad.RMA, broadDataExtinction, robust=F) + theme_
   scale_colour_grey(name="Study Removed\n")
 
 
-# What is going on with that ONE point?
+# Life Habit Model
 jackknifed_coefs_fun(covModel.Epifaunal.rma, habitDataGood, robust=F) +theme_bw()+
   scale_colour_grey(name="Study Removed\n")
 
+
+# Life Habit Model Detrended
+jackknifed_coefs_fun(covModel.Epifaunal.rma.detrend, habitDataGood, robust=F) +theme_bw()+
+  scale_colour_grey(name="Study Removed\n")
+
 ## @knitr funnelPlots
-funnel(broad.rma, main="Funnel Plot for Broad v. Narrow Analysis")
-funnel(meanModel.Epifaunal, main="Funnel Plot for Epifauna v. Infauna Analysis")
+funnel(broad.rma, main="Funnel Plot for Geographic Range (Broad to Narrow) Analysis")
+funnel(meanModel.Epifaunal, main="Funnel Plot for Life Habit (Epifauna v. Infauna) Analysis")
 
-
+## @knitr scaledfunnelPlots
 scaledat <- function(x) {
   x.scaled <- x / (2 * sd(x, na.rm = TRUE))
   x.scaled
 }
 
+
 broadDataExtinctionScaled <- broadDataExtinction
 broadDataExtinctionScaled <- transform(broadDataExtinction, 
-  BC.extinction.ratePBDB = scaledat(BC.extinction.ratePBDB), 
+                                       BC.extinction.rate.PBDB3 = scaledat(BC.extinction.rate.PBDB3), 
   mean_d18O.prok = scaledat(mean_d18O.prok), 
   mean_d34S.prok = scaledat(mean_d34S.prok), 
   mean_d13C.prok = scaledat(mean_d13C.prok))
 # sd of OA should already be ~0.5. (actually around 0.42)
 
-covModel.Broad.RMA2.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinctionScaled, mods=~BC.extinction.ratePBDB +
+covModel.Broad.RMA2.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinctionScaled, mods=~BC.extinction.rate.PBDB3 +
                            OA + mean_d18O.prok + mean_d34S.prok + mean_d13C.prok)
 # Now for the habit model:
 habitDataGoodScaled <- habitDataGood
 habitDataGoodScaled <- transform(habitDataGood, 
-  BC.extinction.ratePBDB = scaledat(BC.extinction.ratePBDB), 
+   BC.extinction.rate.PBDB3 = scaledat(BC.extinction.rate.PBDB3), 
   mean_d18O.prok = scaledat(mean_d18O.prok), 
   mean_d34S.prok = scaledat(mean_d34S.prok), 
   meanDate = scaledat(meanDate))
 
 covModel.Epifaunal.rma3.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGoodScaled,
-                              mods =~ OA + BC.extinction.ratePBDB + mean_d18O.prok + mean_d34S.prok + meanDate)
+                                     mods =~ OA + BC.extinction.rate.PBDB3 + mean_d18O.prok + mean_d34S.prok)
+
+
+covModel.Epifaunal.rma.time.covarite.scaled <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGoodScaled,
+                              mods =~ OA + BC.extinction.rate.PBDB3 + mean_d18O.prok + mean_d34S.prok + meanDate)
 
 pdf("figure/broad-jackknife.pdf", width = 4, height = 8)
-jackknifed_coefs_fun(covModel.Broad.RMA2.scaled, broadDataExtinctionProk, robust=F) + theme_bw()+
+jackknifed_coefs_fun(covModel.Broad.RMA2.scaled, broadDataExtinctionScaled, robust=F) + theme_bw()+
   scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
 dev.off()
 
 # TODO WARNING
 # Error in rma(lnorReg, vi = vlnorReg, data = temp_dat, mods = temp_dat[,  :
 # Processing terminated since k = 0.
-pdf("figure/habit-jackknife.pdf", width = 4, height = 8)
+pdf("figure/habit-jackknife-detrended.pdf", width = 4, height = 8)
 jackknifed_coefs_fun(covModel.Epifaunal.rma3.scaled, habitDataGood, robust=F) +theme_bw()+
   scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
 dev.off()
 
+pdf("figure/habit-jackknife-time-covariate.pdf", width = 4, height = 8)
+jackknifed_coefs_fun(covModel.Epifaunal.rma.time.covarite.scaled, habitDataGood, robust=F) +theme_bw()+
+  scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
+dev.off()
 
 
