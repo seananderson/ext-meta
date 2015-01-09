@@ -15,10 +15,6 @@ RMA Outputs
 
 
 
-
-
-
-
 Broad v. Narrow Baseline
 ========================================================
 
@@ -27,8 +23,7 @@ First, we have to verify our assumptions about pooling all of the data.
 Does grouping matter?
 
 ```r
-taxGenera.Broad <- rma(yi = lnorReg, vi = vlnorReg, mods = ~Bivalve..Gastropod + 
-    Tax.level, data = broadData)
+taxGenera.Broad<-rma(yi = lnorReg, vi = vlnorReg, mods= ~ Bivalve..Gastropod+Tax.level, data=broadData)
 taxGenera.Broad
 ```
 
@@ -64,12 +59,10 @@ taxGenera.Broad
 ```
 
 
-
 Does Multistage matter?
 
 ```r
-multStage.Broad <- rma(yi = lnorReg, vi = vlnorReg, mods = ~MultipleStages, 
-    data = broadData)
+multStage.Broad<-rma(yi = lnorReg, vi =vlnorReg,   mods=~ MultipleStages, data=broadData)
 multStage.Broad
 ```
 
@@ -99,11 +92,10 @@ multStage.Broad
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-
 Does Global v. Regional matter?
 
 ```r
-scale.Broad <- rma(yi = lnorReg, vi = vlnorReg, mods = ~Global.Regional, data = broadData)
+scale.Broad <- rma(yi = lnorReg, vi =vlnorReg,   mods=~ Global.Regional, data=broadData)
 scale.Broad
 ```
 
@@ -133,11 +125,10 @@ scale.Broad
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-
 Does Time Matter?
 
 ```r
-time.Broad <- rma(yi = lnorReg, vi = meanDate, mods = ~meanDate, data = broadData)
+time.Broad<-rma(yi = lnorReg, vi =meanDate,   mods=~ meanDate, data=broadData)
 time.Broad
 ```
 
@@ -167,11 +158,10 @@ time.Broad
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-
 If we pool everything, what is our grand mean Log Odds Ratio for Broad v. Narrow?
 
 ```r
-broad.rma <- rma(yi = lnorReg, vi = vlnorReg, data = broadData)
+broad.rma <- rma(yi = lnorReg, vi = vlnorReg, data=broadData)
 broad.rma
 ```
 
@@ -197,10 +187,10 @@ broad.rma
 ```
 
 ```r
-
-####### Fig 1
+#######
+#Fig 1
+#######
 ```
-
 
 Figure 1
 ========================================================
@@ -220,15 +210,13 @@ dev.off()
 plot_effect_sizes(broadData, rma.model = broad.rma, lab = c("narrow", "broad"))
 ```
 
-![plot of chunk Fig1](figure/Fig1.png) 
+![plot of chunk Fig1](figure/Fig1-1.png) 
 
 ```r
-
 habitData$In.text.Citation <- as.character(habitData$In.text.Citation)
-habitData$In.text.Citation <- sub("McClure and Bohank", "McClure and Bohonak 1995", 
-    habitData$In.text.Citation)
+habitData$In.text.Citation <- sub("McClure and Bohank", 
+  "McClure and Bohonak 1995", habitData$In.text.Citation)
 ```
-
 
 
 
@@ -238,145 +226,141 @@ Epifauna v. Infauna Baseline
 Are Bivalves or Gastropods Different?
 
 ```r
-bivalve.gastro.Epifaunal <- rma(yi = lnorReg, vi = vlnorReg, data = habitData, 
-    mod = ~Bivalve..Gastropod - 1)
+bivalve.gastro.Epifaunal<-rma(yi=lnorReg, vi=vlnorReg, data=habitData, mod=~Bivalve..Gastropod-1)
 bivalve.gastro.Epifaunal
 ```
 
 ```
 ## 
-## Mixed-Effects Model (k = 49; tau^2 estimator: REML)
+## Mixed-Effects Model (k = 48; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.4387 (SE = 0.1667)
-## tau (square root of estimated tau^2 value):             0.6623
-## I^2 (residual heterogeneity / unaccounted variability): 59.42%
-## H^2 (unaccounted variability / sampling variability):   2.46
+## tau^2 (estimated amount of residual heterogeneity):     0.4373 (SE = 0.1680)
+## tau (square root of estimated tau^2 value):             0.6613
+## I^2 (residual heterogeneity / unaccounted variability): 59.46%
+## H^2 (unaccounted variability / sampling variability):   2.47
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 47) = 118.6184, p-val < .0001
+## QE(df = 46) = 116.2662, p-val < .0001
 ## 
 ## Test of Moderators (coefficient(s) 1,2): 
-## QM(df = 2) = 0.8539, p-val = 0.6525
+## QM(df = 2) = 0.5717, p-val = 0.7514
 ## 
 ## Model Results:
 ## 
 ##                                           se     zval    pval    ci.lb
-## Bivalve..GastropodBivalve    -0.1248  0.1468  -0.8507  0.3950  -0.4125
-## Bivalve..GastropodGastropod   0.1098  0.3042   0.3609  0.7182  -0.4865
+## Bivalve..GastropodBivalve    -0.0987  0.1486  -0.6643  0.5065  -0.3898
+## Bivalve..GastropodGastropod   0.1098  0.3040   0.3611  0.7180  -0.4861
 ##                               ci.ub   
-## Bivalve..GastropodBivalve    0.1628   
-## Bivalve..GastropodGastropod  0.7061   
+## Bivalve..GastropodBivalve    0.1925   
+## Bivalve..GastropodGastropod  0.7057   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 ```r
-
-##### So, we pool.  Let's look at things, then
+#####
+### So, we pool.  Let's look at things, then
+#####
 ```
-
 No - they are broadly the same.
 
 
 Does global v. regional extinction matter?
 
 ```r
-scale.habit <- rma(yi = lnorReg, vi = vlnorReg, mods = ~Global.Regional, data = habitData)
+scale.habit <- rma(yi = lnorReg, vi =vlnorReg,   mods=~ Global.Regional, data=habitData)
 scale.habit
 ```
 
 ```
 ## 
-## Mixed-Effects Model (k = 49; tau^2 estimator: REML)
+## Mixed-Effects Model (k = 48; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.4391 (SE = 0.1677)
-## tau (square root of estimated tau^2 value):             0.6626
-## I^2 (residual heterogeneity / unaccounted variability): 58.38%
-## H^2 (unaccounted variability / sampling variability):   2.40
+## tau^2 (estimated amount of residual heterogeneity):     0.4445 (SE = 0.1709)
+## tau (square root of estimated tau^2 value):             0.6667
+## I^2 (residual heterogeneity / unaccounted variability): 58.66%
+## H^2 (unaccounted variability / sampling variability):   2.42
 ## R^2 (amount of heterogeneity accounted for):            0.00%
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 47) = 119.4409, p-val < .0001
+## QE(df = 46) = 117.3399, p-val < .0001
 ## 
 ## Test of Moderators (coefficient(s) 2): 
-## QM(df = 1) = 1.9268, p-val = 0.1651
+## QM(df = 1) = 1.0865, p-val = 0.2973
 ## 
 ## Model Results:
 ## 
 ##                                se     zval    pval    ci.lb   ci.ub   
-## intrcpt           -0.0067  0.1425  -0.0473  0.9622  -0.2861  0.2726   
-## Global.Regional1  -0.5303  0.3821  -1.3881  0.1651  -1.2791  0.2185   
+## intrcpt           -0.0063  0.1430  -0.0441  0.9648  -0.2866  0.2740   
+## Global.Regional1  -0.4292  0.4118  -1.0423  0.2973  -1.2363  0.3778   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-
 Does time matter?
 
 ```r
-# SA 20130119: I changed bivalvesEpifaunal to habitatData. I believe this
-# was just a mistake when copying the code over
-time.Epifaunal <- rma(yi = lnorReg, vi = vlnorReg, data = habitData, mods = ~meanDate)
+# SA 20130119: I changed bivalvesEpifaunal to habitatData. I believe
+# this was just a mistake when copying the code over
+time.Epifaunal<-rma(yi=lnorReg, vi=vlnorReg, data= habitData, mods=~meanDate)
 time.Epifaunal
 ```
 
 ```
 ## 
-## Mixed-Effects Model (k = 49; tau^2 estimator: REML)
+## Mixed-Effects Model (k = 48; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of residual heterogeneity):     0.4312 (SE = 0.1653)
-## tau (square root of estimated tau^2 value):             0.6567
-## I^2 (residual heterogeneity / unaccounted variability): 58.85%
-## H^2 (unaccounted variability / sampling variability):   2.43
-## R^2 (amount of heterogeneity accounted for):            0.63%
+## tau^2 (estimated amount of residual heterogeneity):     0.4142 (SE = 0.1630)
+## tau (square root of estimated tau^2 value):             0.6436
+## I^2 (residual heterogeneity / unaccounted variability): 57.99%
+## H^2 (unaccounted variability / sampling variability):   2.38
+## R^2 (amount of heterogeneity accounted for):            3.90%
 ## 
 ## Test for Residual Heterogeneity: 
-## QE(df = 47) = 114.0683, p-val < .0001
+## QE(df = 46) = 108.8205, p-val < .0001
 ## 
 ## Test of Moderators (coefficient(s) 2): 
-## QM(df = 1) = 1.0323, p-val = 0.3096
+## QM(df = 1) = 1.9250, p-val = 0.1653
 ## 
 ## Model Results:
 ## 
 ##                        se     zval    pval    ci.lb   ci.ub   
-## intrcpt   -0.2089  0.1821  -1.1473  0.2513  -0.5658  0.1480   
-## meanDate   0.0015  0.0014   1.0160  0.3096  -0.0014  0.0043   
+## intrcpt   -0.2318  0.1806  -1.2833  0.1994  -0.5857  0.1222   
+## meanDate   0.0021  0.0015   1.3874  0.1653  -0.0009  0.0050   
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-
 If we pool everything, what is our grand mean Log Odds Ratio for Epifaunal v. Infaunal?
 
 ```r
-meanModel.Epifaunal <- rma(yi = lnorReg, vi = vlnorReg, data = habitData)
+meanModel.Epifaunal<-rma(yi=lnorReg, vi=vlnorReg, data=habitData)
 meanModel.Epifaunal
 ```
 
 ```
 ## 
-## Random-Effects Model (k = 49; tau^2 estimator: REML)
+## Random-Effects Model (k = 48; tau^2 estimator: REML)
 ## 
-## tau^2 (estimated amount of total heterogeneity): 0.4339 (SE = 0.1640)
-## tau (square root of estimated tau^2 value):      0.6587
-## I^2 (total heterogeneity / total variability):   59.09%
+## tau^2 (estimated amount of total heterogeneity): 0.4311 (SE = 0.1649)
+## tau (square root of estimated tau^2 value):      0.6566
+## I^2 (total heterogeneity / total variability):   59.04%
 ## H^2 (total variability / sampling variability):  2.44
 ## 
 ## Test for Heterogeneity: 
-## Q(df = 48) = 119.9424, p-val < .0001
+## Q(df = 47) = 117.4270, p-val < .0001
 ## 
 ## Model Results:
 ## 
 ## estimate       se     zval     pval    ci.lb    ci.ub          
-##  -0.0808   0.1318  -0.6133   0.5397  -0.3391   0.1775          
+##  -0.0589   0.1329  -0.4430   0.6578  -0.3194   0.2016          
 ## 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
 
 Figure 2
 ========================================================
@@ -396,13 +380,11 @@ dev.off()
 plot_effect_sizes(habitData, meanModel.Epifaunal, lab = c("infauna", "epifauna"))
 ```
 
-![plot of chunk Fig2](figure/Fig2.png) 
+![plot of chunk Fig2](figure/Fig2-1.png) 
 
 ```r
-
 # now fix up the labels (spacing and the et al.s)
 ```
-
 
 
 Modeled Results
@@ -414,36 +396,31 @@ later on.
 The Fitted Model for Broad v. Narrow
 
 ```r
-broadDataExtinction <- broadData[which(!is.na(broadData$BC.extinction.rate.PBDB3)), 
-    ]
-broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d18O.prok)), 
-    ]
-broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d34S.prok)), 
-    ]
-broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d13C.prok)), 
-    ]
-broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$OA)), 
-    ]
+broadDataExtinction <- broadData[which(!is.na(broadData$BC.extinction.rate.PBDB3)),]
+broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d18O.prok)),]
+broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d34S.prok)),]
+broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$mean_d13C.prok)),]
+broadDataExtinction <- broadDataExtinction[which(!is.na(broadDataExtinction$OA)),]
 
-# as we'll be using these predictors later
+#as we'll be using these predictors later
 broadDataExtinction <- within(broadDataExtinction, {
-    cent.extinction <- cent(BC.extinction.rate.PBDB3)
-    cent.OA <- cent(OA)
-    cent.d18O <- cent(mean_d18O.prok)
-    cent.d34S <- cent(mean_d34S.prok)
-    cent.d13C <- cent(mean_d13C.prok)
-    detrend.cent.d18O <- cent(mean_d18O.detrended.prok)
-    detrend.cent.d34S <- cent(mean_d34S.detrended.prok)
-    detrend.cent.d13C <- cent(mean_d13C.detrended.prok)
-    cent.meanDate <- cent(meanDate)
+  cent.extinction <- cent(BC.extinction.rate.PBDB3)
+  cent.OA <- cent(OA)
+  cent.d18O <- cent(mean_d18O.prok)
+  cent.d34S <- cent(mean_d34S.prok)
+  cent.d13C <- cent(mean_d13C.prok)
+  detrend.cent.d18O <- cent(mean_d18O.detrended.prok)
+  detrend.cent.d34S <- cent(mean_d34S.detrended.prok)
+  detrend.cent.d13C <- cent(mean_d13C.detrended.prok)
+  cent.meanDate <- cent(meanDate)
 })
 
 levels(broadDataExtinction$study.ID) <- gsub(" [A-Z]{3}", "", levels(broadDataExtinction$study.ID))
 levels(broadDataExtinction$study.ID) <- gsub("[A-Z]{3}", "", levels(broadDataExtinction$study.ID))
 
 
-covModel.Broad.RMA <- rma(yi = lnorReg, vi = vlnorReg, data = broadDataExtinction, 
-    mods = ~cent.extinction + cent.OA + cent.d18O + cent.d34S + cent.d13C)
+covModel.Broad.RMA <- rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~cent.extinction +
+      cent.OA + cent.d18O + cent.d34S + cent.d13C)
 
 covModel.Broad.RMA
 ```
@@ -479,11 +456,9 @@ covModel.Broad.RMA
 ```
 
 ```r
-
-# Also, the model with predictors detrended
-covModel.Broad.RMA.detrended <- rma(yi = lnorReg, vi = vlnorReg, data = broadDataExtinction, 
-    mods = ~cent.extinction + cent.OA + detrend.cent.d18O + detrend.cent.d34S + 
-        detrend.cent.d13C)
+#Also, the model with predictors detrended
+covModel.Broad.RMA.detrended <- rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~cent.extinction +
+                            cent.OA + detrend.cent.d18O + detrend.cent.d34S + detrend.cent.d13C)
 
 covModel.Broad.RMA.detrended
 ```
@@ -519,50 +494,45 @@ covModel.Broad.RMA.detrended
 ```
 
 ```r
+write.csv(coef(covModel.Broad.RMA), "./broadCoefTable.csv", row.names=T)
+write.csv(coef(covModel.Broad.RMA.detrended), "./broadCoefDetrendedTable.csv", row.names=T)
 
-write.csv(coef(covModel.Broad.RMA), "./broadCoefTable.csv", row.names = T)
-write.csv(coef(covModel.Broad.RMA.detrended), "./broadCoefDetrendedTable.csv", 
-    row.names = T)
-
-broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust = F, std = T, num_sds = 2) + 
-    coord_flip() + scale_x_discrete(labels = c(expression(delta^13 * C), expression(delta^18 * 
-    O), expression(delta^34 * S), "Extinction Rate", "Acidification"), expand = c(0.15, 
-    0)) + annotate("text", x = 5, y = -0.2, label = "(a)") + ylim(c(-0.25, 0.25)) + 
-    annotate("text", x = 5.6, y = -0.15, label = "Favours\nnarrow") + annotate("text", 
-    x = 5.6, y = 0.15, label = "Favours\nbroad")
+broadCoefPlot <- coefPlot(covModel.Broad.RMA, robust=F, std=T, num_sds=2)+
+  coord_flip() +
+  scale_x_discrete(labels=c(expression(delta^13*C), expression(delta^18*O), expression(delta^34*S), "Extinction Rate", "Acidification"), expand = c(0.15, 0)) +
+  annotate("text", x=5, y=-0.2, label="(a)")+
+  ylim(c(-0.25,0.25)) +
+  annotate("text", x=5.6, y = -0.15, label="Favours\nnarrow")+
+  annotate("text", x=5.6, y = 0.15, label="Favours\nbroad")
 ```
-
 
 The Fitted Model for Epifauna v. Infauna
 
 ```r
-habitDataGood <- habitData[which(!(is.na(habitData$BC.extinction.rate.PBDB3))), 
-    ]
-habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$lnorReg))), ]
-habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d18O.prok))), 
-    ]
-habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d34S.prok))), 
-    ]
-habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$vlnorReg))), ]
+habitDataGood <- habitData[which(!(is.na(habitData$BC.extinction.rate.PBDB3))),]
+habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$lnorReg))),]
+habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d18O.prok))),]
+habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$mean_d34S.prok))),]
+habitDataGood <- habitDataGood[which(!(is.na(habitDataGood$vlnorReg))),]
 
-# get rid of trailing letters
+#get rid of trailing letters
 levels(habitDataGood$study.ID) <- gsub(" [A-Z]{3}", "", levels(habitDataGood$study.ID))
 levels(habitDataGood$study.ID) <- gsub("[A-Z]{3}", "", levels(habitDataGood$study.ID))
 
-# as we'll be using these predictors later
+#as we'll be using these predictors later
 habitDataGood <- within(habitDataGood, {
-    cent.extinction <- cent(BC.extinction.rate.PBDB3)
-    cent.OA <- cent(OA)
-    cent.d18O <- cent(mean_d18O.prok)
-    cent.d34S <- cent(mean_d34S.prok)
-    cent.meanDate <- cent(meanDate)
-    detrend.cent.d18O <- cent(mean_d18O.detrended.prok)
-    detrend.cent.d34S <- cent(mean_d34S.detrended.prok)
-    detrend.cent.d13C <- cent(mean_d13C.detrended.prok)
+  cent.extinction <- cent(BC.extinction.rate.PBDB3)
+  cent.OA <- cent(OA)
+  cent.d18O <- cent(mean_d18O.prok)
+  cent.d34S <- cent(mean_d34S.prok)
+  cent.meanDate <- cent(meanDate)
+  detrend.cent.d18O <- cent(mean_d18O.detrended.prok)
+  detrend.cent.d34S <- cent(mean_d34S.detrended.prok)
+  detrend.cent.d13C <- cent(mean_d13C.detrended.prok)
 })
 
-covModel.Epifaunal.rma <- rma(yi = lnorReg, vi = vlnorReg, data = habitDataGood, 
-    mods = ~cent.OA + cent.extinction + cent.d18O + cent.d34S)
+covModel.Epifaunal.rma <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
+                              mods =~ cent.OA+ cent.extinction + cent.d18O + cent.d34S)
 
 covModel.Epifaunal.rma
 ```
@@ -597,10 +567,9 @@ covModel.Epifaunal.rma
 ```
 
 ```r
-
-# And now detrended
-covModel.Epifaunal.rma.detrend <- rma(yi = lnorReg, vi = vlnorReg, data = habitDataGood, 
-    mods = ~cent.OA + cent.extinction + detrend.cent.d18O + detrend.cent.d34S)
+#And now detrended
+covModel.Epifaunal.rma.detrend <-rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
+                             mods =~ cent.OA+ cent.extinction + detrend.cent.d18O + detrend.cent.d34S)
 
 covModel.Epifaunal.rma.detrend
 ```
@@ -635,26 +604,24 @@ covModel.Epifaunal.rma.detrend
 ```
 
 ```r
-
-write.csv(coef(covModel.Epifaunal.rma.detrend), "./epiCoefDetrendedTable.csv", 
-    row.names = T)
-write.csv(coef(covModel.Epifaunal.rma), "./epiCoefTable.csv", row.names = T)
+write.csv(coef(covModel.Epifaunal.rma.detrend), "./epiCoefDetrendedTable.csv", row.names=T)
+write.csv(coef(covModel.Epifaunal.rma), "./epiCoefTable.csv", row.names=T)
 
 
-epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust = F, std = T, 
-    num_sds = 2) + coord_flip() + scale_x_discrete(labels = c(expression(delta^18 * 
-    O), expression(delta^34 * S), "Extinction Rate", "Acidification"), expand = c(0.15, 
-    0)) + annotate("text", x = 4, y = -0.4, label = "(b)") + ylim(c(-0.5, 0.5)) + 
-    annotate("text", x = 4.6, y = -0.25, label = "Favours\ninfauna") + annotate("text", 
-    x = 4.6, y = 0.25, label = "Favours\nepifauna")
+epiCoefPlot <- coefPlot(covModel.Epifaunal.rma, habitDataGood, robust=F, std=T, num_sds=2)+
+  coord_flip() +
+  scale_x_discrete(labels=c(expression(delta^18*O), expression(delta^34*S), "Extinction Rate", "Acidification"), expand = c(0.15, 0)) +
+  annotate("text", x=4, y=-0.4, label="(b)")+
+  ylim(c(-0.5,0.5)) +
+  annotate("text", x=4.6, y=-.25, label="Favours\ninfauna")+
+  annotate("text", x=4.6, y=.25, label="Favours\nepifauna")
 ```
-
 
 Does adding Time change things?
 
 ```r
-rma(yi = lnorReg, vi = vlnorReg, data = broadDataExtinction, mods = ~BC.extinction.ratePBDB + 
-    cent.OA + cent.d18O + cent.d34S + cent.d13C + cent.meanDate)
+rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~BC.extinction.ratePBDB +
+      cent.OA + cent.d18O + cent.d34S + cent.d13C+cent.meanDate)
 ```
 
 ```
@@ -697,10 +664,9 @@ rma(yi = lnorReg, vi = vlnorReg, data = broadDataExtinction, mods = ~BC.extincti
 ```
 
 
-
 ```r
-rma(yi = lnorReg, vi = vlnorReg, data = habitDataGood, mods = ~cent.OA + cent.extinction + 
-    cent.d18O + cent.d34S + cent.meanDate)
+rma(yi = lnorReg, vi = vlnorReg, data=habitDataGood,
+    mods =~ cent.OA + cent.extinction + cent.d18O + cent.d34S + cent.meanDate)
 ```
 
 ```
@@ -733,69 +699,86 @@ rma(yi = lnorReg, vi = vlnorReg, data = habitDataGood, mods = ~cent.OA + cent.ex
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-
 Figure 4
 ========================================================
 
 ```r
-grid.arrange(broadCoefPlot + theme_bw(base_size = 18), epiCoefPlot + theme_bw(base_size = 18), 
-    ncol = 2)
+grid.arrange(broadCoefPlot+theme_bw(base_size=18), epiCoefPlot+theme_bw(base_size=18), ncol=2)
 ```
 
 ```
-## Warning: is.na() applied to non-(list or vector) of type 'expression'
-## Warning: is.na() applied to non-(list or vector) of type 'expression'
+## Warning in is.na(labels): is.na() applied to non-(list or vector) of type
+## 'expression'
 ```
 
-![plot of chunk Fig4](figure/Fig4.png) 
+```
+## Warning in is.na(labels): is.na() applied to non-(list or vector) of type
+## 'expression'
+```
 
+![plot of chunk Fig4](figure/Fig4-1.png) 
 
 Figure 5
 ========================================================
 
 ```r
-#### What are the marginal effects from the model After adjusting for centering
-#### the predictor
-del18marg <- marginalLine(covModel.Epifaunal.rma, "cent.d18O", habitDataGood, 
-    robust = F, xAdd = mean(habitDataGood$mean_d18O.prok)) + xlab("\n Delta O18") + 
-    ylab("Component + Residual + Intercept Log Odds\n Ratios for Delta O18\n") + 
-    annotate("text", x = -4, y = 2.75, label = "(a)") + theme_bw(base_size = 18) + 
-    annotate("text", x = -1, y = -2, label = "Favours\ninfauna") + annotate("text", 
-    x = -3.5, y = 2, label = "Favours\nepifauna")
+####What are the marginal effects from the model
+####After adjusting for centering the predictor
+del18marg <- marginalLine(covModel.Epifaunal.rma, "cent.d18O", 
+                          habitDataGood, robust=F, xAdd=mean(habitDataGood$mean_d18O.prok))+
+  xlab("\n Delta O18") +
+  ylab("Component + Residual + Intercept Log Odds\n Ratios for Delta O18\n") +
+  annotate("text", x=-4, y=2.75, label="(a)") + 
+  theme_bw(base_size=18)+
+  annotate("text", x=-1, y=-2, label="Favours\ninfauna")+
+  annotate("text", x=-3.5, y=2, label="Favours\nepifauna")
 
 del18MargData <- marginalData(covModel.Epifaunal.rma, "cent.d18O", habitDataGood)
-write.csv(del18MargData, "./del18MargData.csv", row.names = F)
-
-# Extract Legend
-g_legend <- function(a.gplot) {
-    a.gplot <- a.gplot + scale_color_discrete("Study")
-    tmp <- ggplot_gtable(ggplot_build(a.gplot))
-    leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
-    legend <- tmp$grobs[[leg]]
-    return(legend)
-}
+write.csv(del18MargData, "./del18MargData.csv", row.names=F)
 
 
-# The Figure
-fig5a <- del18marg + scale_color_discrete(guide = "none")
+#The Figure
+colormatch <- sapply(levels(habitDataGood$study.ID), function(alev){
+  as.character(habitDataGood$color.ID[which(as.character(habitDataGood$study.ID)==alev)][1])
+})
 
-legend <- g_legend(del18marg)
-
-# The Detrended Figure
-del18margDetrend <- marginalLine(covModel.Epifaunal.rma.detrend, "detrend.cent.d18O", 
-    habitDataGood, robust = F, xAdd = mean(habitDataGood$mean_d18O.detrended.prok)) + 
-    xlab("\n Detrended Delta O18") + ylab("Component + Residual + Intercept Log Odds\n Ratios for Detrended Delta O18\n") + 
-    annotate("text", x = -2.5, y = 3, label = "(b)") + theme_bw(base_size = 18) + 
-    annotate("text", x = 2, y = -1.5, label = "Favours\ninfauna") + annotate("text", 
-    x = -1.5, y = 2, label = "Favours\nepifauna")
-
-fig5b <- del18margDetrend + scale_color_discrete(guide = "none")
-
-grid.arrange(fig5a, fig5b, legend, widths = c(3, 3, 1), ncol = 3)
+fig5a <- del18marg +
+  scale_color_manual(guide="none", values=colormatch)
 ```
 
-![plot of chunk Fig5](figure/Fig5.png) 
+```
+## Scale for 'colour' is already present. Adding another scale for 'colour', which will replace the existing scale.
+```
 
+```r
+#make an extracted legend
+leg1 <- del18marg + guides(linetype=FALSE, size=FALSE)
+legend.colour <- gtable_filter(ggplot_gtable(ggplot_build(leg1)), "guide-box") 
+
+
+#The Detrended Figure
+del18margDetrend <- marginalLine(covModel.Epifaunal.rma.detrend, "detrend.cent.d18O", 
+                          habitDataGood, robust=F, xAdd=mean(habitDataGood$mean_d18O.detrended.prok))+
+  xlab("\n Detrended Delta O18") +
+  ylab("Component + Residual + Intercept Log Odds\n Ratios for Detrended Delta O18\n") +
+  annotate("text", x=-2.5, y=3, label="(b)") + 
+  theme_bw(base_size=18)+
+  annotate("text", x=2, y=-1.5, label="Favours\ninfauna")+
+  annotate("text", x=-1.5, y=2, label="Favours\nepifauna") 
+
+fig5b <- del18margDetrend +
+  scale_color_manual(guide="none", values=colormatch)
+```
+
+```
+## Scale for 'colour' is already present. Adding another scale for 'colour', which will replace the existing scale.
+```
+
+```r
+grid.arrange(fig5a, fig5b, legend.colour, widths=c(3,3,1), ncol=3)
+```
+
+![plot of chunk Fig5](figure/Fig5-1.png) 
 
 
 Appendix Jackknife Figures
@@ -837,7 +820,7 @@ Appendix Jackknife Figures
 ## Using  as id variables
 ```
 
-![plot of chunk jackknife.figs](figure/jackknife_figs1.png) 
+![plot of chunk jackknife.figs](figure/jackknife.figs-1.png) 
 
 ```
 ## Using  as id variables
@@ -881,7 +864,7 @@ Appendix Jackknife Figures
 ## Using  as id variables
 ```
 
-![plot of chunk jackknife.figs](figure/jackknife_figs2.png) 
+![plot of chunk jackknife.figs](figure/jackknife.figs-2.png) 
 
 ```
 ## Using  as id variables
@@ -925,19 +908,17 @@ Appendix Jackknife Figures
 ## Using  as id variables
 ```
 
-![plot of chunk jackknife.figs](figure/jackknife_figs3.png) 
-
+![plot of chunk jackknife.figs](figure/jackknife.figs-3.png) 
 
 
 ```r
-funnel(broad.rma, main = "Funnel Plot for Broad v. Narrow Analysis")
+funnel(broad.rma, main="Funnel Plot for Geographic Range (Broad to Narrow) Analysis")
 ```
 
-![plot of chunk funnelPlots](figure/funnelPlots1.png) 
+![plot of chunk funnelPlots](figure/funnelPlots-1.png) 
 
 ```r
-funnel(meanModel.Epifaunal, main = "Funnel Plot for Epifauna v. Infauna Analysis")
+funnel(meanModel.Epifaunal, main="Funnel Plot for Life Habit (Epifauna v. Infauna) Analysis")
 ```
 
-![plot of chunk funnelPlots](figure/funnelPlots2.png) 
-
+![plot of chunk funnelPlots](figure/funnelPlots-2.png) 
