@@ -11,3 +11,5 @@ singleLnOr_R_analyses/
 *.xlsx
 *.DS_store
 R/.Rapp.history
+*.aux
+*.log
