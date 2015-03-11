@@ -177,6 +177,33 @@ covModel.Broad.RMA <- rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction,
 
 covModel.Broad.RMA
 
+############## Sean testing 2015-03-10
+# m <- covModel.Broad.RMA
+#
+# # component line:
+# x <- seq(
+#   min(broadDataExtinction$cent.d34S),
+#   max(broadDataExtinction$cent.d34S),
+#   length.out = 10)
+# y <- coef(m)[["intrcpt"]] + coef(m)[["cent.d34S"]] * x
+#
+# # residuals around component:
+# xres <- broadDataExtinction$cent.d34S
+# yres <- coef(m)[["intrcpt"]] + coef(m)[["cent.d34S"]] * xres + residuals(m)
+#
+# plot(xres + mean(broadDataExtinction$mean_d34S.prok), yres,
+#   ylab = "Intercept + component + residual", xlab = "d34S")
+# lines(x + mean(broadDataExtinction$mean_d34S.prok), y)
+# abline(h = 0, lty = 3)
+
+# m <- covModel.Epifaunal.rma
+# x <- seq(min(habitDataGood$cent.d18O), max(habitDataGood$cent.d18O), length.out = 10)
+# y <- coef(m)[["intrcpt"]] + coef(m)[["cent.d18O"]] * x
+# plot(x + mean(habitDataGood$mean_d18O.prok), y)
+# abline(h = 0, lty = 3)
+
+##############
+
 #Also, the model with predictors detrended
 covModel.Broad.RMA.detrended <- rma(yi = lnorReg, vi = vlnorReg, data=broadDataExtinction, mods=~cent.extinction +
                             cent.OA + detrend.cent.d18O + detrend.cent.d34S + detrend.cent.d13C)
