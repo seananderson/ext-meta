@@ -13,3 +13,5 @@ singleLnOr_R_analyses/
 R/.Rapp.history
 *.aux
 *.log
+.Rproj.user
+.Rapp.history
