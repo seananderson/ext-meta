@@ -366,18 +366,37 @@ grid.arrange(fig5a, fig5b, legend.colour, widths=c(3,3,1), ncol=3)
 #### #### #### #### #### ####
 
 ## @knitr  jackknife.figs
-jackknifed_coefs_fun(covModel.Broad.RMA, broadDataExtinction, robust=F) + theme_bw()+
-  scale_colour_grey(name="Study Removed\n")
 
+scale_ <- function(x) x / (2 * sd(x, na.rm = TRUE))
+# make a scaled model that we'll use to plot the jackknife plot:
+broadDataExtinction <- transform(broadDataExtinction,
+  cent.extinction.scaled = scale_(cent.extinction),
+  cent.d18O.scaled = scale_(cent.d18O),
+  cent.d34S.scaled = scale_(cent.d34S),
+  cent.d13C.scaled = scale_(cent.d13C))
+covModel.Broad.RMA.scaled <- rma(yi = lnorReg, vi = vlnorReg,
+  data=broadDataExtinction, mods=~cent.extinction.scaled +
+      cent.OA + cent.d18O.scaled + cent.d34S.scaled + cent.d13C.scaled)
+p <- jackknifed_coefs_fun(covModel.Broad.RMA.scaled, broadDataExtinction, robust=FALSE) + theme_bw()+
+  scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
+ggsave("figure/jackknife-epi-broad.pdf", width = 6, height = 6)
 
+habitDataGood <- transform(habitDataGood,
+  cent.extinction.scaled = scale_(cent.extinction),
+  cent.d18O.scaled = scale_(cent.d18O),
+  cent.d34S.scaled = scale_(cent.d34S))
+covModel.Epifaunal.rma.scaled <- rma(yi = lnorReg, vi = vlnorReg,
+  data=habitDataGood, mods=~cent.extinction.scaled +
+      cent.OA + cent.d18O.scaled + cent.d34S.scaled)
 # Life Habit Model
-jackknifed_coefs_fun(covModel.Epifaunal.rma, habitDataGood, robust=F) +theme_bw()+
-  scale_colour_grey(name="Study Removed\n")
 
+p <- jackknifed_coefs_fun(covModel.Epifaunal.rma.scaled, habitDataGood, robust=FALSE) +theme_bw()+
+  scale_colour_grey(name="Study Removed\n") + ylab("Scaled coefficient estimate")
+ggsave("figure/jackknife-epi-scaled.pdf", width = 6, height = 6)
 
 # Life Habit Model Detrended
-jackknifed_coefs_fun(covModel.Epifaunal.rma.detrend, habitDataGood, robust=F) +theme_bw()+
-  scale_colour_grey(name="Study Removed\n")
+#jackknifed_coefs_fun(covModel.Epifaunal.rma.detrend, habitDataGood, robust=F) +theme_bw()+
+  #scale_colour_grey(name="Study Removed\n")
 
 ## @knitr funnelPlots
 funnel(broad.rma, main="Funnel Plot for Geographic Range (Broad to Narrow) Analysis")
