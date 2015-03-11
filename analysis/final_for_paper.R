@@ -434,3 +434,38 @@ jackknifed_coefs_fun(covModel.Epifaunal.rma.time.covarite.scaled, habitDataGood,
 dev.off()
 
 
+### Make component + residual plots for all predictors for SOM:
+
+pretty_names <- data.frame(
+  pretty = c("Extinction rate", "Acidification", "d18O", "d34S", "d13C"),
+  ugly = c("cent.extinction", "cent.OA", "cent.d18O", "cent.d34S", "cent.d13C"),
+  unscaled_names = c("BC.extinction.rate.PBDB3", "OA", "mean_d18O.prok", "mean_d34S.prok", "mean_d13C.prok"))
+
+cr1 <- lapply(1:5, function(i) {
+  this_coef <- as.character(pretty_names$ugly[i])
+  marginalLine(
+    covModel.Broad.RMA, this_coef,
+    broadDataExtinction, robust=FALSE,
+    xAdd=mean(broadDataExtinction[,names(broadDataExtinction) == pretty_names$unscaled_names[i]], na.rm = TRUE)) +
+  theme_bw(base_size = 13) +
+  xlab(pretty_names$pretty[i]) +
+  ylab(paste("Intercept + Component + \nResidual for", pretty_names$pretty[i]))
+  })
+pdf("figure/comp-res-broad.pdf", width = 12, height = 12)
+gridExtra::grid.arrange(cr1[[1]], cr1[[2]], cr1[[3]], cr1[[4]], cr1[[5]])
+dev.off()
+
+
+cr1 <- lapply(1:4, function(i) {
+  this_coef <- as.character(pretty_names$ugly[i])
+  marginalLine(
+    covModel.Epifaunal.rma, this_coef,
+    habitDataGood, robust=FALSE,
+    xAdd=mean(habitDataGood[,names(habitDataGood) == pretty_names$unscaled_names[i]], na.rm = TRUE)) +
+  theme_bw(base_size = 13) +
+  xlab(pretty_names$pretty[i]) +
+  ylab(paste("Intercept + Component + \nResidual for", pretty_names$pretty[i]))
+  })
+pdf("figure/comp-res-epi.pdf", width = 12, height = 8)
+gridExtra::grid.arrange(cr1[[1]], cr1[[2]], cr1[[3]], cr1[[4]])
+dev.off()
